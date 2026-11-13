@@ -1,0 +1,31 @@
+
+[build]
+  command = "pnpm build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+[build.processing.html]
+  pretty_urls = false
+
+[[headers]]
+  for = "/_next/static/*"
+
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+
+[context.branch-deploy]
+  command = "pnpm build && cp ./config/netlify/staging-headers ./out/_headers"
+
+[context.deploy-preview]
+  command = "pnpm build && cp ./config/netlify/staging-headers ./out/_headers"

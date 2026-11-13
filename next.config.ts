@@ -1,16 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
+  output: "export",
+  trailingSlash: false,
+  reactStrictMode: true,
+  poweredByHeader: false,
+
+  images: {
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+
+    deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
+    imageSizes: [96, 160, 256, 384],
+    qualities: [75, 80],
   },
 };
 
