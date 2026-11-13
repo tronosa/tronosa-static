@@ -1,0 +1,12 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "about": "About us",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "Common": {
+    "readMore": "Read more",
+    "back": "Back"
+  }
+}

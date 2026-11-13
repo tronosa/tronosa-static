@@ -1,13 +1,10 @@
 
 [build]
   command = "pnpm build"
-  publish = "out"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "24"
-
-[build.processing.html]
-  pretty_urls = false
 
 [[headers]]
   for = "/_next/static/*"
@@ -23,9 +20,3 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
-
-[context.branch-deploy]
-  command = "pnpm build && cp ./config/netlify/staging-headers ./out/_headers"
-
-[context.deploy-preview]
-  command = "pnpm build && cp ./config/netlify/staging-headers ./out/_headers"
