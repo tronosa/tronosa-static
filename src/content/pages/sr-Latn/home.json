@@ -10,10 +10,23 @@
   "content": {
     "sections": [
       {
+        "id": "home-hero",
         "type": "hero",
         "content": {
           "title": "Tronoša",
-          "description": "Prirodna izvorska voda"
+          "subtitle": "Prirodna izvorska voda",
+          "description": "Ponesi prirodu."
+        }
+      },
+      {
+        "id": "home-introduction",
+        "type": "text",
+        "content": {
+          "heading": "Upoznajte Tronošu",
+          "paragraphs": [
+            "Dobro došli na našu stranicu.",
+            "Otkrijte priču o prirodnoj izvorskoj vodi Tronoša."
+          ]
         }
       }
     ]

@@ -3,17 +3,30 @@
   "slug": "",
   "seo": {
     "title": "Tronoša | Natural Spring Water",
-    "description": "Tronoša natural spring water.",
+    "description": "Discover Tronoša natural spring water and the story behind its origins.",
     "index": true,
     "follow": true
   },
   "content": {
     "sections": [
       {
+        "id": "home-hero",
         "type": "hero",
         "content": {
           "title": "Tronoša",
-          "description": "Natural spring water"
+          "subtitle": "Natural Spring Water",
+          "description": "Take nature with you."
+        }
+      },
+      {
+        "id": "home-introduction",
+        "type": "text",
+        "content": {
+          "heading": "Discover Tronoša",
+          "paragraphs": [
+            "Welcome to Tronoša.",
+            "Explore the story behind Tronoša natural spring water."
+          ]
         }
       }
     ]

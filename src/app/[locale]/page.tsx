@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import { getPage } from "@/lib/content/get-page";
+import { SectionRenderer } from "@/components/sections/section-renderer";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -40,12 +41,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <main>
-      {page.content.sections.map((section, index) => (
-        <section key={`${section.type}-${index}`}>
-          <h1>{section.content.title}</h1>
-          <p>{section.content.description}</p>
-        </section>
-      ))}
+      <SectionRenderer sections={page.content.sections} />
     </main>
   );
 }

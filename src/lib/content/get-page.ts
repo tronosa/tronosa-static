@@ -3,31 +3,8 @@ import "server-only";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-import { z } from "zod";
-
 import { routing } from "@/i18n/routing";
-
-const pageSchema = z.object({
-  id: z.string(),
-  slug: z.string(),
-  seo: z.object({
-    title: z.string(),
-    description: z.string(),
-    index: z.boolean(),
-    follow: z.boolean(),
-  }),
-  content: z.object({
-    sections: z.array(
-      z.object({
-        type: z.string(),
-        content: z.object({
-          title: z.string(),
-          description: z.string(),
-        }),
-      }),
-    ),
-  }),
-});
+import { pageSchema } from "@/content/schemas/page.schema";
 
 type Locale = (typeof routing.locales)[number];
 
