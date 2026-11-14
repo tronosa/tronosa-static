@@ -11,6 +11,7 @@ describe("Application environment", () => {
         NETLIFY: "true",
         CONTEXT: "production",
         SITE_URL: siteUrl,
+        SEO_INDEXING_ENABLED: "true",
       }).isIndexable,
     ).toBe(true);
   });
@@ -47,6 +48,7 @@ describe("Application environment", () => {
         NETLIFY: "true",
         CONTEXT: "production",
         SITE_URL: "http://example.com",
+        SEO_INDEXING_ENABLED: "true",
       }),
     ).toThrow("must use HTTPS");
   });

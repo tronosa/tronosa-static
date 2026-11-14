@@ -2,6 +2,7 @@ type EnvironmentVariables = {
   NETLIFY?: string;
   CONTEXT?: string;
   SITE_URL?: string;
+  SEO_INDEXING_ENABLED?: string;
 };
 
 type Environment = {
@@ -15,6 +16,7 @@ export function getEnvironment(
     NETLIFY: process.env.NETLIFY,
     CONTEXT: process.env.CONTEXT,
     SITE_URL: process.env.SITE_URL,
+    SEO_INDEXING_ENABLED: process.env.SEO_INDEXING_ENABLED,
   },
 ): Environment {
   const isProduction = env.NETLIFY === "true" && env.CONTEXT === "production";
@@ -48,6 +50,6 @@ export function getEnvironment(
   return {
     siteUrl: url.origin,
     isProduction,
-    isIndexable: isProduction,
+    isIndexable: isProduction && env.SEO_INDEXING_ENABLED === "true",
   };
 }

@@ -23,6 +23,7 @@ describe("SEO routes", () => {
     vi.stubEnv("NETLIFY", "true");
     vi.stubEnv("CONTEXT", "production");
     vi.stubEnv("SITE_URL", "https://example.com");
+    vi.stubEnv("SEO_INDEXING_ENABLED", "true");
 
     const routes = sitemap();
     const urls = routes.map((route) => route.url);
