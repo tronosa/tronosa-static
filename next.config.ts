@@ -16,6 +16,27 @@ const nextConfig: NextConfig = {
     imageSizes: [96, 160, 256, 384],
     qualities: [75, 80],
   },
+
+  async headers() {
+    const isProduction =
+      process.env.NETLIFY === "true" && process.env.CONTEXT === "production";
+
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          ...(!isProduction
+            ? [
+                {
+                  key: "X-Robots-Tag",
+                  value: "noindex, nofollow, noarchive",
+                },
+              ]
+            : []),
+        ],
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

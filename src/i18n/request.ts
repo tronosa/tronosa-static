@@ -5,11 +5,6 @@ import { locale as getRootLocale } from "next/root-params";
 
 import { routing } from "./routing";
 
-const dictionaries = {
-  "sr-Latn": () => import("@/dictionaries/sr-Latn.json"),
-  en: () => import("@/dictionaries/en.json"),
-};
-
 export default getRequestConfig(async () => {
   const locale = await getRootLocale();
 
@@ -19,6 +14,6 @@ export default getRequestConfig(async () => {
 
   return {
     locale,
-    messages: (await dictionaries[locale]()).default,
+    messages: (await import(`../dictionaries/${locale}.json`)).default,
   };
 });

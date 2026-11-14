@@ -3,32 +3,28 @@
   "slug": "",
   "seo": {
     "title": "Tronoša | Prirodna izvorska voda",
-    "description": "Tronoša prirodna izvorska voda.",
-    "index": true,
-    "follow": true
+    "description": "Upoznajte prirodnu izvorsku vodu Tronoša, njeno poreklo i prirodno okruženje.",
+    "canonical": null,
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "openGraph": {
+      "title": "Tronoša | Prirodna izvorska voda",
+      "description": "Otkrijte prirodu Tronoše.",
+      "image": {
+        "src": "/assets/og/home.webp",
+        "alt": "Tronoša prirodna izvorska voda",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    "twitter": {
+      "card": "summary_large_image"
+    },
+    "structuredData": []
   },
   "content": {
-    "sections": [
-      {
-        "id": "home-hero",
-        "type": "hero",
-        "content": {
-          "title": "Tronoša",
-          "subtitle": "Prirodna izvorska voda",
-          "description": "Ponesi prirodu."
-        }
-      },
-      {
-        "id": "home-introduction",
-        "type": "text",
-        "content": {
-          "heading": "Upoznajte Tronošu",
-          "paragraphs": [
-            "Dobro došli na našu stranicu.",
-            "Otkrijte priču o prirodnoj izvorskoj vodi Tronoša."
-          ]
-        }
-      }
-    ]
+    "sections": []
   }
 }

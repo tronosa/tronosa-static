@@ -2,14 +2,28 @@ import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 
-import { routing } from "@/i18n/routing";
-
-import { getPage } from "@/lib/content/get-page";
 import { SectionRenderer } from "@/components/sections/section-renderer";
+import { JsonLd } from "@/components/seo/json-ld";
+
+import { getContentById, type Locale } from "@/lib/content/registry";
+
+import { routing } from "@/i18n/routing";
+import { createSeoMetadata } from "@/lib/seo/metadata";
+import { createStructuredData } from "@/lib/seo/structured-data";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+function getHomePage(locale: Locale) {
+  const entry = getContentById("page", locale, "home");
+
+  if (!entry || entry.kind !== "page") {
+    notFound();
+  }
+
+  return entry;
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -18,16 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     notFound();
   }
 
-  const { seo } = await getPage(locale, "home");
-
-  return {
-    title: seo.title,
-    description: seo.description,
-    robots: {
-      index: seo.index,
-      follow: seo.follow,
-    },
-  };
+  return createSeoMetadata(getHomePage(locale));
 }
 
 export default async function HomePage({ params }: Props) {
@@ -37,11 +42,15 @@ export default async function HomePage({ params }: Props) {
     notFound();
   }
 
-  const page = await getPage(locale, "home");
+  const entry = getHomePage(locale);
 
   return (
-    <main>
-      <SectionRenderer sections={page.content.sections} />
-    </main>
+    <>
+      <JsonLd data={await createStructuredData(entry)} />
+
+      <main>
+        <SectionRenderer sections={entry.data.content.sections} />
+      </main>
+    </>
   );
 }

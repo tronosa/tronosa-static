@@ -1,0 +1,13 @@
+{
+  "id": "blog",
+  "slug": "blog",
+  "seo": {
+    "title": "Blog | Tronoša",
+    "description": "News, stories and insights from Tronoša.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": []
+  }
+}
