@@ -1,0 +1,12 @@
+{
+  "Navigation": {
+    "home": "Početna",
+    "about": "O nama",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "Common": {
+    "readMore": "Pročitaj više",
+    "back": "Nazad"
+  }
+}
