@@ -15,5 +15,8 @@ export function getSeoConfig() {
 export function absoluteUrl(path: string): string {
   const { siteUrl } = getEnvironment();
 
-  return new URL(path, `${siteUrl}/`).toString();
+  const normalizedPath =
+    path === "" || path === "/" ? "/" : `/${path.replace(/^\/+|\/+$/g, "")}`;
+
+  return new URL(normalizedPath, `${siteUrl}/`).toString();
 }

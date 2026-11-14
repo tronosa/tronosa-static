@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   reactStrictMode: true,
   poweredByHeader: false,
+  allowedDevOrigins: ["127.0.0.1"],
 
   images: {
     loader: "custom",

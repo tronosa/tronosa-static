@@ -25,6 +25,27 @@
     "structuredData": []
   },
   "content": {
-    "sections": []
+    "sections": [
+      {
+        "id": "home-hero",
+        "type": "hero",
+        "content": {
+          "title": "Tronoša",
+          "subtitle": "Prirodna izvorska voda",
+          "description": "Oseti prirodu sa sobom."
+        }
+      },
+      {
+        "id": "home-introduction",
+        "type": "text",
+        "content": {
+          "heading": "Otkrijte Tronošu",
+          "paragraphs": [
+            "Dobrodošli u Tronošu.",
+            "Istražite priču iza Tronoše, prirodne izvorske vode."
+          ]
+        }
+      }
+    ]
   }
 }

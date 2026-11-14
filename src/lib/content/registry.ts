@@ -15,6 +15,8 @@ export type { Locale } from "@/i18n/config";
 import type { Article } from "@/content/schemas/article.schema";
 import type { Page } from "@/content/schemas/page.schema";
 
+const RESERVED_SLUGS = new Set(["api", "blog", "_next", "_vercel"]);
+
 export type ContentKind = "page" | "article";
 
 export type ContentEntry =
@@ -53,9 +55,10 @@ function readCollection(
 
   return filenames.map((filename) => {
     const filePath = path.join(directory, filename);
-    const raw: unknown = JSON.parse(readFileSync(filePath, "utf8"));
 
     try {
+      const raw: unknown = JSON.parse(readFileSync(filePath, "utf8"));
+
       if (folder === "pages") {
         return {
           kind: "page" as const,
@@ -70,9 +73,52 @@ function readCollection(
         data: articleSchema.parse(raw),
       };
     } catch (error) {
-      throw new Error(`Invalid content: ${filePath}`, { cause: error });
+      throw new Error(`Invalid content: ${filePath}`, {
+        cause: error,
+      });
     }
   });
+}
+
+function validateSections(entry: ContentEntry): void {
+  const ids = new Set<string>();
+
+  for (const section of entry.data.content.sections) {
+    if (ids.has(section.id)) {
+      throw new Error(
+        `Duplicate section ID "${section.id}" in ` +
+          `${entry.locale}/${entry.data.id}`,
+      );
+    }
+
+    ids.add(section.id);
+  }
+}
+
+function validateSlug(entry: ContentEntry): void {
+  const { id, slug } = entry.data;
+
+  if (entry.kind === "page" && id === "home") {
+    if (slug !== "") {
+      throw new Error(`Home page must have an empty slug: ${entry.locale}`);
+    }
+
+    return;
+  }
+
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    throw new Error(`Invalid slug "${slug}" in ${entry.locale}/${id}`);
+  }
+
+  if (entry.kind === "page") {
+    if (id === "blog" && slug !== "blog") {
+      throw new Error(`Blog listing must use slug "blog": ${entry.locale}`);
+    }
+
+    if (id !== "blog" && RESERVED_SLUGS.has(slug)) {
+      throw new Error(`Reserved page slug "${slug}" in ${entry.locale}/${id}`);
+    }
+  }
 }
 
 export const getContentRegistry = cache((): ContentEntry[] => {
@@ -85,6 +131,9 @@ export const getContentRegistry = cache((): ContentEntry[] => {
   const paths = new Set<string>();
 
   for (const entry of entries) {
+    validateSections(entry);
+    validateSlug(entry);
+
     const identity = `${entry.kind}:${entry.locale}:${entry.data.id}`;
 
     if (identities.has(identity)) {

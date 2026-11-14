@@ -19,10 +19,8 @@ export function createSeoMetadata(entry: ContentEntry): Metadata {
   const index = isIndexable && isPublished && seo.index;
   const follow = isIndexable && isPublished && seo.follow;
 
-  const canonical = new URL(
-    seo.canonical || getContentPath(entry),
-    `${config.url}/`,
-  );
+  const canonicalPath = seo.canonical || getContentPath(entry);
+  const canonical = new URL(absoluteUrl(canonicalPath));
 
   if (canonical.origin !== config.url || canonical.search || canonical.hash) {
     throw new Error(`Invalid canonical URL for ${entry.data.id}`);
@@ -65,7 +63,8 @@ export function createSeoMetadata(entry: ContentEntry): Metadata {
 
     alternates: {
       canonical: canonical.toString(),
-      ...(index &&
+      ...(isPublished &&
+        seo.index &&
         !seo.canonical && {
           languages: getLanguageAlternates(entry),
         }),
