@@ -14,8 +14,7 @@ import { createStructuredData } from "./structured-data";
 import { getContentUrl } from "./urls";
 
 beforeAll(() => {
-  vi.stubEnv("NETLIFY", "true");
-  vi.stubEnv("CONTEXT", "production");
+  vi.stubEnv("APP_ENV", "production");
   vi.stubEnv("SITE_URL", "https://example.com");
   vi.stubEnv("SEO_INDEXING_ENABLED", "true");
 });
