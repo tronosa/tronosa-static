@@ -28,6 +28,7 @@ export function generateStaticParams() {
       (entry) =>
         entry.kind === "page" &&
         entry.data.id !== "home" &&
+        entry.data.id !== "blog" &&
         !entry.data.slug.includes("/"),
     )
     .map((entry) => ({
