@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
+import { getEnvironment } from "./src/lib/environment";
+
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
@@ -19,21 +21,20 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
-    const isProduction =
-      process.env.NETLIFY === "true" && process.env.CONTEXT === "production";
+    const { isIndexable } = getEnvironment();
+
+    if (isIndexable) {
+      return [];
+    }
 
     return [
       {
         source: "/:path*",
         headers: [
-          ...(!isProduction
-            ? [
-                {
-                  key: "X-Robots-Tag",
-                  value: "noindex, nofollow, noarchive",
-                },
-              ]
-            : []),
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, nofollow, noarchive",
+          },
         ],
       },
     ];

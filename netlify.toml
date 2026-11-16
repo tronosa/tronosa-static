@@ -5,7 +5,25 @@
 
 [build.environment]
   NODE_VERSION = "24"
+  APP_ENV = "staging"
 
+# Production deployment: main
+[context.production.environment]
+  APP_ENV = "production"
+
+# Branch deployments: develop and other enabled branches
+[context.branch-deploy.environment]
+  APP_ENV = "staging"
+
+# Pull request deployment previews
+[context.deploy-preview.environment]
+  APP_ENV = "staging"
+
+# Local development through Netlify Dev
+[context.dev.environment]
+  APP_ENV = "development"
+
+# Cache Next.js fingerprinted static assets
 [[headers]]
   for = "/_next/static/*"
 
@@ -13,6 +31,7 @@
     Cache-Control = "public, max-age=31536000, immutable"
     X-Content-Type-Options = "nosniff"
 
+# Global security headers
 [[headers]]
   for = "/*"
 
