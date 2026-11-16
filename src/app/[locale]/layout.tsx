@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";
+import { fontSans } from "@/lib/fonts";
 
 type Props = {
   children: ReactNode;
@@ -27,7 +28,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={fontSans.variable}>
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
