@@ -1,17 +1,21 @@
 import Image from "next/image";
 
 import type { HeroProps } from "./hero.schema";
+import { Container } from "@/components/ui/Container";
+import { Typography } from "@/components/ui/Typography";
 
 export function Hero({ title, subtitle, description, image }: HeroProps) {
   return (
     <section aria-labelledby="hero-heading">
-      <div>
+      <Container size="default" gutter="default">
         <div>
-          {subtitle && <p>{subtitle}</p>}
+          {subtitle && <Typography>{subtitle}</Typography>}
 
-          <h1 id="hero-heading">{title}</h1>
+          <Typography as="h1" variant="h1" id="hero-heading">
+            {title}
+          </Typography>
 
-          {description && <p>{description}</p>}
+          {description && <Typography>{description}</Typography>}
         </div>
 
         {image && (
@@ -24,7 +28,7 @@ export function Hero({ title, subtitle, description, image }: HeroProps) {
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         )}
-      </div>
+      </Container>
     </section>
   );
 }
