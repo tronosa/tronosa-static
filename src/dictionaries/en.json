@@ -8,5 +8,27 @@
   "Common": {
     "readMore": "Read more",
     "back": "Back"
+  },
+  "Header": {
+    "brand": {
+      "homeLabel": "Tronoša — Home page"
+    },
+    "navigation": {
+      "ariaLabel": "Main navigation"
+    },
+    "mobileMenu": {
+      "openLabel": "Open menu",
+      "closeLabel": "Close menu",
+      "title": "Navigation"
+    },
+    "languageSwitcher": {
+      "label": "Select language",
+      "currentLanguage": "Current language: {language}",
+      "switchTo": "Switch language to {language}"
+    },
+    "languages": {
+      "sr-Latn": "Serbian",
+      "en": "English"
+    }
   }
 }

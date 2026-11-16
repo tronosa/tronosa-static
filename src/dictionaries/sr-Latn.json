@@ -8,5 +8,27 @@
   "Common": {
     "readMore": "Pročitaj više",
     "back": "Nazad"
+  },
+  "Header": {
+    "brand": {
+      "homeLabel": "Tronoša — Početna stranica"
+    },
+    "navigation": {
+      "ariaLabel": "Glavna navigacija"
+    },
+    "mobileMenu": {
+      "openLabel": "Otvori meni",
+      "closeLabel": "Zatvori meni",
+      "title": "Navigacija"
+    },
+    "languageSwitcher": {
+      "label": "Izbor jezika",
+      "currentLanguage": "Trenutni jezik: {language}",
+      "switchTo": "Promeni jezik na {language}"
+    },
+    "languages": {
+      "sr-Latn": "Srpski",
+      "en": "English"
+    }
   }
 }

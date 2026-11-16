@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 
 import "../globals.css";
 import { fontSans } from "@/lib/fonts";
+import { Header } from "@/components/navigation/Header";
 
 type Props = {
   children: ReactNode;
@@ -28,9 +29,17 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={locale} className={fontSans.variable}>
+    <html
+      lang={locale}
+      className={fontSans.variable}
+      data-scroll-behavior="smooth"
+    >
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          {" "}
+          <Header />
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
