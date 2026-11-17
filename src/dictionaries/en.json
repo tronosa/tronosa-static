@@ -8,5 +8,37 @@
   "Common": {
     "readMore": "Read more",
     "back": "Back"
+  },
+  "Header": {
+    "brand": {
+      "homeLabel": "Tronoša — Home page",
+      "logo": {
+        "src": "/assets/logo/logo.webp",
+        "alt": "Tronoša — Natural spring water"
+      }
+    },
+    "navigation": {
+      "ariaLabel": "Main navigation"
+    },
+    "mobileMenu": {
+      "openLabel": "Open menu",
+      "closeLabel": "Close menu",
+      "title": "Navigation"
+    },
+    "languageSwitcher": {
+      "label": "Select language",
+      "currentLanguage": "Current language: {language}",
+      "switchTo": "Switch language to {language}"
+    },
+    "languages": {
+      "sr-Cyrl": "Српски (ћирилица)",
+      "sr-Latn": "Srpski (latinica)",
+      "en": "English"
+    },
+    "languageShortLabels": {
+      "sr-Cyrl": "СР",
+      "sr-Latn": "SR",
+      "en": "EN"
+    }
   }
 }

@@ -1,12 +1,16 @@
-export const locales = ["sr-Latn", "en"] as const;
+export const locales = ["sr-Cyrl", "sr-Latn", "en"] as const;
 
 export type Locale = (typeof locales)[number];
 
-export const defaultLocale: Locale = "sr-Latn";
+export const defaultLocale: Locale = "sr-Cyrl";
 
 export const localeConfig = {
+  "sr-Cyrl": {
+    name: "Српски (ћирилица)",
+    openGraphLocale: "sr_RS",
+  },
   "sr-Latn": {
-    name: "Srpski",
+    name: "Srpski (latinica)",
     openGraphLocale: "sr_RS",
   },
   en: {

@@ -8,5 +8,37 @@
   "Common": {
     "readMore": "Pročitaj više",
     "back": "Nazad"
+  },
+  "Header": {
+    "brand": {
+      "homeLabel": "Tronoša — Početna stranica",
+      "logo": {
+        "src": "/assets/logo/logo.webp",
+        "alt": "Tronoša — prirodna izvorska voda"
+      }
+    },
+    "navigation": {
+      "ariaLabel": "Glavna navigacija"
+    },
+    "mobileMenu": {
+      "openLabel": "Otvori meni",
+      "closeLabel": "Zatvori meni",
+      "title": "Navigacija"
+    },
+    "languageSwitcher": {
+      "label": "Izbor jezika",
+      "currentLanguage": "Trenutni jezik: {language}",
+      "switchTo": "Promeni jezik na {language}"
+    },
+    "languages": {
+      "sr-Cyrl": "Српски (ћирилица)",
+      "sr-Latn": "Srpski (latinica)",
+      "en": "English"
+    },
+    "languageShortLabels": {
+      "sr-Cyrl": "СР",
+      "sr-Latn": "SR",
+      "en": "EN"
+    }
   }
 }

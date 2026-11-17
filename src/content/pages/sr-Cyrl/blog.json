@@ -1,0 +1,13 @@
+{
+  "id": "blog",
+  "slug": "blog",
+  "seo": {
+    "title": "Блог | Троноша",
+    "description": "Новости, приче и занимљивости из света Троноше.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": []
+  }
+}

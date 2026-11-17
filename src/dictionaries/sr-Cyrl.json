@@ -1,0 +1,44 @@
+{
+  "Navigation": {
+    "home": "Почетна",
+    "about": "О нама",
+    "blog": "Блог",
+    "contact": "Контакт"
+  },
+  "Common": {
+    "readMore": "Прочитај више",
+    "back": "Назад"
+  },
+  "Header": {
+    "brand": {
+      "homeLabel": "Троноша — Почетна страница",
+      "logo": {
+        "src": "/assets/logo/logo.webp",
+        "alt": "Троноша — природна изворска вода"
+      }
+    },
+    "navigation": {
+      "ariaLabel": "Главна навигација"
+    },
+    "mobileMenu": {
+      "openLabel": "Отвори мени",
+      "closeLabel": "Затвори мени",
+      "title": "Навигација"
+    },
+    "languageSwitcher": {
+      "label": "Избор језика",
+      "currentLanguage": "Тренутни језик: {language}",
+      "switchTo": "Промени језик на {language}"
+    },
+    "languages": {
+      "sr-Cyrl": "Српски (ћирилица)",
+      "sr-Latn": "Srpski (latinica)",
+      "en": "English"
+    },
+    "languageShortLabels": {
+      "sr-Cyrl": "СР",
+      "sr-Latn": "SR",
+      "en": "EN"
+    }
+  }
+}
