@@ -1,60 +1,67 @@
+import type { CSSProperties } from "react";
+
 import { Container } from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
 import { cn } from "@/lib/cn";
+
+import { StatsBannerMosaic } from "./StatsBannerMosaic";
+import { statsBannerThemes } from "./stats-banner.theme";
+
 import {
   statsBannerVariants,
   statsBannerContentVariants,
   statsBannerGridVariants,
+  statsBannerItemVariants,
   statsBannerValueVariants,
 } from "./stats-banner.variants";
+
 import type { StatsBannerProps } from "./types";
 
 export function StatsBanner({
   title,
   description,
   statistics,
+  theme = "forest",
   className,
 }: StatsBannerProps) {
+  const palette = statsBannerThemes[theme];
+
+  const style = {
+    "--stats-bg": palette.background,
+    "--stats-fg": palette.foreground,
+    "--stats-border": palette.border,
+  } as CSSProperties;
+
   return (
     <section
       aria-label={title}
+      data-stats-theme={theme}
+      style={style}
       className={cn(statsBannerVariants(), className)}
     >
-      <svg
-        aria-hidden="true"
-        focusable="false"
-        viewBox="0 0 1000 400"
-        preserveAspectRatio="xMidYMid slice"
-        className="pointer-events-none absolute inset-0 size-full opacity-25"
-      >
-        <path d="M0 400 250 0 500 400Z" className="fill-brand-sage" />
-        <path d="M250 0 750 0 500 400Z" className="fill-brand-mineral" />
-        <path d="M500 400 750 0 1000 400Z" className="fill-brand-sage" />
-        <path d="M750 0 1000 0 1000 400Z" className="fill-brand-bronze" />
-        <path d="M0 0 250 0 0 400Z" className="fill-brand-forest" />
-      </svg>
-      <div aria-hidden="true" className="absolute inset-0 bg-brand-forest/45" />
+      <StatsBannerMosaic theme={theme} />
+
       <Container size="wide">
         <div className={statsBannerContentVariants()}>
           <div className="max-w-xl space-y-4">
-            <Typography as="h2" variant="h2" className="text-white">
+            <Typography as="h2" variant="h2" className="text-(--stats-fg)">
               {title}
             </Typography>
+
             {description && (
-              <Typography as="p" className="text-white/90">
+              <Typography as="p" className="text-(--stats-fg)">
                 {description}
               </Typography>
             )}
           </div>
+
           <dl className={statsBannerGridVariants()}>
             {statistics.map((statistic, index) => (
-              <div
-                key={index}
-                className="flex min-w-0 flex-col gap-3 border-t border-white/30 pt-5"
-              >
-                <dt className="order-2 text-sm text-white/90 md:text-base">
+              <div key={index} className={statsBannerItemVariants()}>
+                <dt className="order-2 text-sm md:text-base">
                   {statistic.label}
                 </dt>
+
                 <dd className={cn(statsBannerValueVariants(), "order-1")}>
                   {statistic.value}
                 </dd>

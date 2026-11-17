@@ -138,20 +138,158 @@
         }
       },
       {
-        "id": "home-stats-banner",
+        "id": "stats-banner-mosaic",
         "type": "stats-banner",
         "content": {
-          "title": "Naša priča kroz brojke",
-          "description": "Prostor za potvrđene rezultate kompanije.",
+          "theme": "mosaic",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
           "statistics": [
-            {
-              "value": "—",
-              "label": "Prodatih boca u 2025. godini"
-            },
-            {
-              "value": "—",
-              "label": "Poslovnih partnera"
-            }
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-forest",
+        "type": "stats-banner",
+        "content": {
+          "theme": "forest",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-sage",
+        "type": "stats-banner",
+        "content": {
+          "theme": "sage",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-mineral",
+        "type": "stats-banner",
+        "content": {
+          "theme": "mineral",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-bronze",
+        "type": "stats-banner",
+        "content": {
+          "theme": "bronze",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-stone",
+        "type": "stats-banner",
+        "content": {
+          "theme": "stone",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-ivory",
+        "type": "stats-banner",
+        "content": {
+          "theme": "ivory",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-graphite",
+        "type": "stats-banner",
+        "content": {
+          "theme": "graphite",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-surface",
+        "type": "stats-banner",
+        "content": {
+          "theme": "surface",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-violet",
+        "type": "stats-banner",
+        "content": {
+          "theme": "violet",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-peach",
+        "type": "stats-banner",
+        "content": {
+          "theme": "peach",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-coral",
+        "type": "stats-banner",
+        "content": {
+          "theme": "coral",
+          "title": "Priroda u brojevima",
+          "description": "Snaga prirode u svakoj kapi.",
+          "statistics": [
+            { "value": "100%", "label": "Prirodna voda" },
+            { "value": "24/7", "label": "Kontrola kvaliteta" }
           ]
         }
       },

@@ -121,20 +121,158 @@
         }
       },
       {
-        "id": "home-stats-banner",
+        "id": "stats-banner-mosaic",
         "type": "stats-banner",
         "content": {
-          "title": "Our story in numbers",
-          "description": "Space for verified company results.",
+          "theme": "mosaic",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
           "statistics": [
-            {
-              "value": "—",
-              "label": "Bottles sold in 2025"
-            },
-            {
-              "value": "—",
-              "label": "Business partners"
-            }
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-forest",
+        "type": "stats-banner",
+        "content": {
+          "theme": "forest",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-sage",
+        "type": "stats-banner",
+        "content": {
+          "theme": "sage",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-mineral",
+        "type": "stats-banner",
+        "content": {
+          "theme": "mineral",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-bronze",
+        "type": "stats-banner",
+        "content": {
+          "theme": "bronze",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-stone",
+        "type": "stats-banner",
+        "content": {
+          "theme": "stone",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-ivory",
+        "type": "stats-banner",
+        "content": {
+          "theme": "ivory",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-graphite",
+        "type": "stats-banner",
+        "content": {
+          "theme": "graphite",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-surface",
+        "type": "stats-banner",
+        "content": {
+          "theme": "surface",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-violet",
+        "type": "stats-banner",
+        "content": {
+          "theme": "violet",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-peach",
+        "type": "stats-banner",
+        "content": {
+          "theme": "peach",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
+          ]
+        }
+      },
+      {
+        "id": "stats-banner-coral",
+        "type": "stats-banner",
+        "content": {
+          "theme": "coral",
+          "title": "Nature in numbers",
+          "description": "The power of nature in every drop.",
+          "statistics": [
+            { "value": "100%", "label": "Natural water" },
+            { "value": "24/7", "label": "Quality control" }
           ]
         }
       },

@@ -41,7 +41,7 @@ export function SliderViewport({
     isLocked: false,
   });
 
-  const [speed, setSpeed] = useState(0);
+  const [speed, setSpeed] = useState(550);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -76,6 +76,11 @@ export function SliderViewport({
         slidesPerGroup={1}
         spaceBetween={16}
         speed={speed}
+        cssMode={false}
+        followFinger={true}
+        allowTouchMove={true}
+        virtualTranslate={false}
+        effect="slide"
         loop={false}
         watchOverflow
         grabCursor

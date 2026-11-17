@@ -1,8 +1,16 @@
 import { z } from "zod";
 
+import { statsBannerThemeNames } from "./stats-banner.theme";
+
+export const statsBannerThemeSchema = z.enum(statsBannerThemeNames);
+
 export const statsBannerContentSchema = z.object({
   title: z.string().trim().min(1),
+
   description: z.string().trim().min(1).optional(),
+
+  theme: statsBannerThemeSchema.default("forest"),
+
   statistics: z
     .array(
       z.object({
