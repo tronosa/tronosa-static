@@ -2,6 +2,8 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
+import { defaultLocale, locales } from "@/i18n/config";
+
 import {
   getContentById,
   getContentRegistry,
@@ -13,9 +15,11 @@ import { createSeoMetadata } from "./metadata";
 import { createStructuredData } from "./structured-data";
 import { getContentUrl } from "./urls";
 
+const SITE_URL = "https://example.com";
+
 beforeAll(() => {
   vi.stubEnv("APP_ENV", "production");
-  vi.stubEnv("SITE_URL", "https://example.com");
+  vi.stubEnv("SITE_URL", SITE_URL);
   vi.stubEnv("SEO_INDEXING_ENABLED", "true");
 });
 
@@ -30,44 +34,43 @@ describe("SEO content registry", () => {
     expect(entries.length).toBeGreaterThan(0);
   });
 
-  it("contains both localized home pages", () => {
-    expect(getContentById("page", "sr-Latn", "home")).toBeDefined();
-
-    expect(getContentById("page", "en", "home")).toBeDefined();
+  it.each(locales)("contains a localized home page for %s", (locale) => {
+    expect(getContentById("page", locale, "home")).toBeDefined();
   });
 
-  it("generates the correct canonical URLs", () => {
-    const sr = getContentById("page", "sr-Latn", "home");
-    const en = getContentById("page", "en", "home");
+  it.each(locales)("generates the correct canonical URL for %s", (locale) => {
+    const entry = getContentById("page", locale, "home");
 
-    expect(sr).toBeDefined();
-    expect(en).toBeDefined();
-
-    if (!sr || !en) return;
-
-    expect(getContentUrl(sr)).toBe("https://example.com/");
-
-    expect(getContentUrl(en)).toBe("https://example.com/en");
-  });
-
-  it("generates reciprocal hreflang links", () => {
-    const sr = getContentById("page", "sr-Latn", "home");
-    const en = getContentById("page", "en", "home");
-
-    if (!sr || !en) {
-      throw new Error("Missing localized home pages");
+    if (!entry) {
+      throw new Error(`Missing home page for locale: ${locale}`);
     }
 
-    const srAlternates = getLanguageAlternates(sr);
-    const enAlternates = getLanguageAlternates(en);
+    const expectedUrl =
+      locale === defaultLocale ? `${SITE_URL}/` : `${SITE_URL}/${locale}`;
 
-    expect(srAlternates).toEqual(enAlternates);
+    expect(getContentUrl(entry)).toBe(expectedUrl);
+  });
 
-    expect(srAlternates).toEqual({
-      "sr-Latn": "https://example.com/",
-      en: "https://example.com/en",
-      "x-default": "https://example.com/",
-    });
+  it.each(locales)("generates reciprocal hreflang links for %s", (locale) => {
+    const entry = getContentById("page", locale, "home");
+
+    if (!entry) {
+      throw new Error(`Missing home page for locale: ${locale}`);
+    }
+
+    const expectedAlternates = {
+      ...Object.fromEntries(
+        locales.map((supportedLocale) => [
+          supportedLocale,
+          supportedLocale === defaultLocale
+            ? `${SITE_URL}/`
+            : `${SITE_URL}/${supportedLocale}`,
+        ]),
+      ),
+      "x-default": `${SITE_URL}/`,
+    };
+
+    expect(getLanguageAlternates(entry)).toEqual(expectedAlternates);
   });
 
   it("provides metadata for every published page", () => {

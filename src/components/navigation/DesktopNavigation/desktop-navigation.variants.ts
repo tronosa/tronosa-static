@@ -13,7 +13,7 @@ export const desktopNavigationLinkVariants = cva(
     variants: {
       active: {
         true: "text-foreground",
-        false: "text-foreground-muted hover:text-foreground",
+        false: "hover:text-foreground-muted text-foreground",
       },
     },
     defaultVariants: {

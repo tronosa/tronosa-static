@@ -35,9 +35,9 @@ export async function DesktopNavigation({
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "pointer-events-none absolute inset-x-0 bottom-1 h-0.5",
+                    "pointer-events-none absolute inset-x-0 bottom-2 h-0.5",
                     "origin-center rounded-full bg-accent",
-                    "transition-transform duration-300 ease-out",
+                    "transition-transform origin-left duration-300 ease-out",
                     "motion-reduce:transition-none",
                     active
                       ? "scale-x-100"

@@ -11,7 +11,11 @@
   },
   "Header": {
     "brand": {
-      "homeLabel": "Tronoša — Home page"
+      "homeLabel": "Tronoša — Home page",
+      "logo": {
+        "src": "/assets/logo/logo.webp",
+        "alt": "Tronoša — Natural spring water"
+      }
     },
     "navigation": {
       "ariaLabel": "Main navigation"
@@ -27,8 +31,14 @@
       "switchTo": "Switch language to {language}"
     },
     "languages": {
-      "sr-Latn": "Serbian",
+      "sr-Cyrl": "Српски (ћирилица)",
+      "sr-Latn": "Srpski (latinica)",
       "en": "English"
+    },
+    "languageShortLabels": {
+      "sr-Cyrl": "СР",
+      "sr-Latn": "SR",
+      "en": "EN"
     }
   }
 }

@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const headerVariants = cva([
-  "relative z-50 w-full",
+  "absolute top-0 z-50 w-full",
   "bg-transparent",
   "py-4 md:py-6",
 ]);
@@ -13,7 +13,7 @@ export const headerInnerVariants = cva(
     "rounded-full",
     "border border-white/20",
     "bg-white/12",
-    "backdrop-blur-xl backdrop-saturate-150",
+    "backdrop-blur-sm backdrop-saturate-150",
     "shadow-[0_8px_32px_rgba(23,63,53,0.06)]",
     "transition-[background-color,box-shadow]",
     "duration-300 ease-in-out",
