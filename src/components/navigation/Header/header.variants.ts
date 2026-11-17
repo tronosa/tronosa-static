@@ -7,6 +7,11 @@ export const headerVariants = cva([
   "[body:has([data-video-hero],[data-image-hero])_&]:absolute",
   "[body:has([data-video-hero],[data-image-hero])_&]:top-0",
   "[body:has([data-video-hero],[data-image-hero])_&]:inset-x-0",
+  "[--nav-fg:var(--brand-forest)]",
+  "[--nav-hover:var(--brand-graphite)]",
+
+  "[body:has([data-video-hero],[data-image-hero])_&]:[--nav-fg:var(--brand-ivory)]",
+  "[body:has([data-video-hero],[data-image-hero])_&]:[--nav-hover:#ffffff]",
 ]);
 
 export const headerInnerVariants = cva(

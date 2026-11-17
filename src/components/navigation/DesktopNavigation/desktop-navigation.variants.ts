@@ -7,13 +7,14 @@ export const desktopNavigationLinkVariants = cva(
     "transition-colors duration-200",
     "focus-visible:outline-2",
     "focus-visible:outline-offset-4",
-    "focus-visible:outline-focus-ring",
+    "focus-visible:outline-(--nav-fg)",
+    "motion-reduce:transition-none",
   ],
   {
     variants: {
       active: {
-        true: "text-foreground",
-        false: "hover:text-foreground-muted text-foreground",
+        true: "text-(--nav-hover)",
+        false: "text-(--nav-fg) hover:text-(--nav-hover)",
       },
     },
     defaultVariants: {
