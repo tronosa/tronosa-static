@@ -1,0 +1,17 @@
+{
+  "id": "about",
+  "slug": "o-nama",
+  "seo": {
+    "title": "О нама | Троноша",
+    "description": "Упознајте Троношу, нашу причу, порекло и посвећеност природи.",
+    "canonical": null,
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "structuredData": []
+  },
+  "content": {
+    "sections": []
+  }
+}

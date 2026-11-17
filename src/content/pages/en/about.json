@@ -1,0 +1,17 @@
+{
+  "id": "about",
+  "slug": "about-us",
+  "seo": {
+    "title": "About Us | Tronoša",
+    "description": "Discover Tronoša, our story, origins and commitment to nature.",
+    "canonical": null,
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "structuredData": []
+  },
+  "content": {
+    "sections": []
+  }
+}
