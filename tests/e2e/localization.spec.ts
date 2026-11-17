@@ -1,30 +1,34 @@
 import { expect, test } from "@playwright/test";
 
+import { defaultLocale, locales } from "@/i18n/config";
+
 test.describe("Localized routing", () => {
-  test("renders Serbian at the root URL", async ({ page }) => {
+  test("renders the default locale at the root URL", async ({ page }) => {
     const response = await page.goto("/");
 
     expect(response?.status()).toBe(200);
 
-    await expect(page.locator("html")).toHaveAttribute("lang", "sr-Latn");
+    await expect(page.locator("html")).toHaveAttribute("lang", defaultLocale);
   });
 
-  test("renders English at /en", async ({ page }) => {
-    const response = await page.goto("/en");
+  for (const locale of locales.filter((locale) => locale !== defaultLocale)) {
+    test(`renders ${locale} at /${locale}`, async ({ page }) => {
+      const response = await page.goto(`/${locale}`);
 
-    expect(response?.status()).toBe(200);
+      expect(response?.status()).toBe(200);
 
-    await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  });
+      await expect(page.locator("html")).toHaveAttribute("lang", locale);
+    });
+  }
 
   test("redirects default locale prefix", async ({ page }) => {
-    await page.goto("/sr-Latn");
+    await page.goto(`/${defaultLocale}`);
 
     await expect(page).toHaveURL("/");
   });
 
   test("returns 404 for an unknown page", async ({ request }) => {
-    const response = await request.get("/unknown-page-123456");
+    const response = await request.get("/unknown-page");
 
     expect(response.status()).toBe(404);
   });

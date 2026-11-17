@@ -12,6 +12,34 @@
     "structuredData": []
   },
   "content": {
-    "sections": []
+    "sections": [
+      {
+        "id": "about-image-hero",
+        "type": "image-hero",
+        "content": {
+          "eyebrow": "Our story",
+          "title": "From the heart of nature.",
+          "description": "Discover the origins of Tronoša natural spring water.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1920,
+              "height": 1080
+            },
+            "tablet": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1024,
+              "height": 768
+            },
+            "mobile": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 720,
+              "height": 960
+            }
+          }
+        }
+      }
+    ]
   }
 }

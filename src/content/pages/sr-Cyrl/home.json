@@ -27,22 +27,210 @@
   "content": {
     "sections": [
       {
-        "id": "home-hero",
-        "type": "hero",
+        "id": "home-video-hero",
+        "type": "video-hero",
         "content": {
-          "title": "Троноша",
-          "subtitle": "Природна изворска вода",
-          "description": "Осети природу са собом."
+          "title": "Природа у свакој капи.",
+          "description": "Откријте природну изворску воду Троноша.",
+          "video": {
+            "src": "/assets/videos/placeholder.mp4",
+            "poster": "/assets/images/placeholder.jpg",
+            "type": "video/mp4"
+          },
+          "cta": {
+            "label": "Упознајте Троношу",
+            "pageId": "about"
+          },
+          "accessibility": {
+            "playLabel": "Покрени видео",
+            "pauseLabel": "Паузирај видео"
+          }
         }
       },
       {
-        "id": "home-introduction",
-        "type": "text",
+        "id": "home-card-slider",
+        "type": "card-slider",
         "content": {
-          "heading": "Откријте Троношу",
-          "paragraphs": [
-            "Добродошли у Троношу.",
-            "Истражите причу иза Троноше, природне изворске воде."
+          "title": "Природа чини разлику",
+          "description": "Откријте причу иза сваке капи.",
+          "cards": [
+            {
+              "kind": "text",
+              "title": "Порекло",
+              "headline": "Из срца природе",
+              "description": "Упознајте причу о нашем извору."
+            },
+            {
+              "kind": "image",
+              "title": "Извор",
+              "headline": "Троноша",
+              "description": "Прича о природној изворској води.",
+              "image": {
+                "alt": "",
+                "desktop": {
+                  "src": "/assets/images/placeholder.jpg",
+                  "width": 1200,
+                  "height": 1200
+                }
+              }
+            },
+            {
+              "kind": "text",
+              "title": "Квалитет",
+              "headline": "Пажња у сваком кораку",
+              "description": "Сазнајте више о нашем приступу."
+            },
+            {
+              "kind": "image",
+              "title": "Традиција",
+              "headline": "Прича која траје",
+              "description": "Упознајте нас ближе.",
+              "image": {
+                "alt": "",
+                "desktop": {
+                  "src": "/assets/images/placeholder.jpg",
+                  "width": 1200,
+                  "height": 1200
+                }
+              }
+            }
+          ],
+          "accessibility": {
+            "previousLabel": "Претходна картица",
+            "nextLabel": "Следећа картица",
+            "viewportLabel": "Картице о води Троноша"
+          }
+        }
+      },
+      {
+        "id": "home-feature-mosaic",
+        "type": "feature-mosaic",
+        "content": {
+          "title": "Више од воде",
+          "description": "Упознајте вредности које желимо да негујемо.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1200,
+              "height": 1200
+            }
+          },
+          "imagePosition": "left",
+          "cards": [
+            {
+              "title": "Природа",
+              "description": "Поштовање природног окружења."
+            },
+            {
+              "title": "Квалитет",
+              "description": "Пажња према сваком детаљу."
+            },
+            {
+              "title": "Традиција",
+              "description": "Веза са нашим пореклом."
+            },
+            {
+              "title": "Сарадња",
+              "description": "Заједничке вредности."
+            }
+          ]
+        }
+      },
+      {
+        "id": "home-stats-banner",
+        "type": "stats-banner",
+        "content": {
+          "title": "Наша прича кроз бројке",
+          "description": "Простор за потврђене резултате компаније.",
+          "statistics": [
+            {
+              "value": "—",
+              "label": "Продатих боца у 2025. години"
+            },
+            {
+              "value": "—",
+              "label": "Пословних партнера"
+            }
+          ]
+        }
+      },
+      {
+        "id": "home-partners-marquee",
+        "type": "partners-marquee",
+        "content": {
+          "title": "Заједно градимо поверење",
+          "description": "Сарадња заснована на заједничким вредностима и дугорочном поверењу.",
+          "partners": [
+            {
+              "name": "Партнер 01",
+              "logo": {
+                "src": "/assets/images/placeholder.jpg",
+                "width": 1200,
+                "height": 1200
+              }
+            },
+            {
+              "name": "Партнер 02",
+              "logo": {
+                "src": "/assets/images/placeholder.jpg",
+                "width": 1200,
+                "height": 1200
+              }
+            },
+            {
+              "name": "Партнер 03",
+              "logo": {
+                "src": "/assets/images/placeholder.jpg",
+                "width": 1200,
+                "height": 1200
+              }
+            },
+            {
+              "name": "Партнер 04",
+              "logo": {
+                "src": "/assets/images/placeholder.jpg",
+                "width": 1200,
+                "height": 1200
+              }
+            },
+            {
+              "name": "Партнер 05",
+              "logo": {
+                "src": "/assets/images/placeholder.jpg",
+                "width": 1200,
+                "height": 1200
+              }
+            },
+            {
+              "name": "Партнер 06",
+              "logo": {
+                "src": "/assets/images/placeholder.jpg",
+                "width": 1200,
+                "height": 1200
+              }
+            }
+          ],
+          "accessibility": {
+            "pauseLabel": "Паузирај анимацију логотипа"
+          }
+        }
+      },
+      {
+        "id": "home-faq",
+        "type": "faq",
+        "content": {
+          "title": "Често постављана питања",
+          "description": "Сазнајте више о води Троноша.",
+          "items": [
+            {
+              "question": "Како могу постати партнер?",
+              "answer": "За информације о пословној сарадњи контактирајте наш тим."
+            },
+            {
+              "question": "Како могу сазнати више о производима?",
+              "answer": "Додатне информације затражите путем контакт странице."
+            }
           ]
         }
       }

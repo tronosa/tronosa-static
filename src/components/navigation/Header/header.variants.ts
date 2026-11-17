@@ -1,9 +1,12 @@
 import { cva } from "class-variance-authority";
 
 export const headerVariants = cva([
-  "absolute top-0 z-50 w-full",
+  "relative z-50 w-full",
   "bg-transparent",
   "py-4 md:py-6",
+  "[body:has([data-video-hero],[data-image-hero])_&]:absolute",
+  "[body:has([data-video-hero],[data-image-hero])_&]:top-0",
+  "[body:has([data-video-hero],[data-image-hero])_&]:inset-x-0",
 ]);
 
 export const headerInnerVariants = cva(

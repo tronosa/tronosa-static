@@ -1,11 +1,21 @@
 import { z } from "zod";
 
-import { heroSchema } from "@/components/sections/hero/hero.schema";
-import { textSchema } from "@/components/sections/text/text.schema";
+import { videoHeroSectionSchema } from "@/components/sections/VideoHero/video-hero.schema";
+import { imageHeroSectionSchema } from "@/components/sections/ImageHero/image-hero.schema";
+import { cardSliderSectionSchema } from "@/components/sections/CardSlider/card-slider.schema";
+import { featureMosaicSectionSchema } from "@/components/sections/FeatureMosaic/feature-mosaic.schema";
+import { statsBannerSectionSchema } from "@/components/sections/StatsBanner/stats-banner.schema";
+import { partnersMarqueeSectionSchema } from "@/components/sections/PartnersMarquee/partners-marquee.schema";
+import { faqSectionSchema } from "@/components/sections/Faq/faq.schema";
 
 export const sectionSchema = z.discriminatedUnion("type", [
-  heroSchema,
-  textSchema,
+  videoHeroSectionSchema,
+  imageHeroSectionSchema,
+  cardSliderSectionSchema,
+  featureMosaicSectionSchema,
+  statsBannerSectionSchema,
+  partnersMarqueeSectionSchema,
+  faqSectionSchema,
 ]);
 
 export type Section = z.infer<typeof sectionSchema>;
