@@ -8,6 +8,7 @@ import { FeatureMosaic } from "./FeatureMosaic";
 import { StatsBanner } from "./StatsBanner";
 import { PartnersMarquee } from "./PartnersMarquee";
 import { Faq } from "./Faq";
+import { DistributionMap } from "./DistributionMap";
 
 type SectionByType<T extends SectionType> = Extract<Section, { type: T }>;
 
@@ -23,4 +24,5 @@ export const sectionRegistry = {
   "stats-banner": ({ content }) => <StatsBanner {...content} />,
   "partners-marquee": ({ content }) => <PartnersMarquee {...content} />,
   faq: ({ content }) => <Faq {...content} />,
+  "distribution-map": ({ content }) => <DistributionMap {...content} />,
 } satisfies SectionRegistry;

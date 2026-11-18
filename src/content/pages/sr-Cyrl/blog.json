@@ -8,6 +8,23 @@
     "follow": true
   },
   "content": {
-    "sections": []
+    "sections": [
+      {
+        "id": "blog-distribution-map",
+        "type": "distribution-map",
+        "content": {
+          "eyebrow": "Увек близу вас",
+          "title": "Пронађите Троношу у вашој близини.",
+          "description": "Истражите нашу мрежу продајних места, дистрибутера и пословних партнера.",
+          "initialView": {
+            "latitude": 44.15,
+            "longitude": 20.85,
+            "zoom": 6.5
+          },
+          "showLegend": true,
+          "showLocationList": true
+        }
+      }
+    ]
   }
 }

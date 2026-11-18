@@ -1,0 +1,330 @@
+[
+  {
+    "id": "tronosa-production",
+    "type": "production",
+    "title": "Tronoša – Production Facility",
+    "description": "The place where the journey of Tronoša natural water begins.",
+    "address": {
+      "city": "Tršić",
+      "postalCode": "15303",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.4842,
+      "longitude": 19.2648
+    },
+    "featured": true,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-new-belgrade",
+    "type": "distributor",
+    "title": "New Belgrade Distribution Centre",
+    "description": "Product distribution across the Belgrade area.",
+    "address": {
+      "street": "Bulevar Mihajla Pupina",
+      "city": "Belgrade",
+      "postalCode": "11070",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.8186,
+      "longitude": 20.4208
+    },
+    "featured": true,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-zemun",
+    "type": "retailer",
+    "title": "Zemun Retail Location",
+    "description": "A retail location offering Tronoša products.",
+    "address": {
+      "street": "Glavna",
+      "city": "Belgrade",
+      "postalCode": "11080",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.8458,
+      "longitude": 20.4113
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-vracar",
+    "type": "retailer",
+    "title": "Vračar Retail Location",
+    "description": "Discover Tronoša products in the heart of Belgrade.",
+    "address": {
+      "street": "Bulevar kralja Aleksandra",
+      "city": "Belgrade",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.8024,
+      "longitude": 20.4771
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-vozdovac",
+    "type": "retailer",
+    "title": "Voždovac Retail Location",
+    "address": {
+      "street": "Vojvode Stepe",
+      "city": "Belgrade",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.7751,
+      "longitude": 20.4784
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-dorcol",
+    "type": "partner",
+    "title": "Tronoša Partner – Dorćol",
+    "description": "A partner operating in the hospitality sector.",
+    "address": {
+      "city": "Belgrade",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.8248,
+      "longitude": 20.4641
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-banovo-brdo",
+    "type": "retailer",
+    "title": "Banovo Brdo Retail Location",
+    "address": {
+      "street": "Požeška",
+      "city": "Belgrade",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.7803,
+      "longitude": 20.4185
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "novi-sad-center",
+    "type": "retailer",
+    "title": "Novi Sad City Centre Retail Location",
+    "address": {
+      "city": "Novi Sad",
+      "postalCode": "21000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 45.2551,
+      "longitude": 19.8452
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "novi-sad-liman",
+    "type": "retailer",
+    "title": "Liman Retail Location",
+    "address": {
+      "street": "Bulevar cara Lazara",
+      "city": "Novi Sad",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 45.2389,
+      "longitude": 19.8371
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "novi-sad-distribution",
+    "type": "distributor",
+    "title": "Novi Sad Distribution Centre",
+    "description": "Product distribution across the Vojvodina region.",
+    "address": {
+      "city": "Novi Sad",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 45.2841,
+      "longitude": 19.8125
+    },
+    "featured": true,
+    "enabled": true
+  },
+  {
+    "id": "loznica",
+    "type": "retailer",
+    "title": "Loznica Retail Location",
+    "address": {
+      "city": "Loznica",
+      "postalCode": "15300",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.5308,
+      "longitude": 19.2258
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "sabac",
+    "type": "distributor",
+    "title": "Šabac Distribution Centre",
+    "address": {
+      "city": "Šabac",
+      "postalCode": "15000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.7467,
+      "longitude": 19.6901
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "valjevo",
+    "type": "retailer",
+    "title": "Valjevo Retail Location",
+    "address": {
+      "city": "Valjevo",
+      "postalCode": "14000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.2708,
+      "longitude": 19.8841
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "nis",
+    "type": "distributor",
+    "title": "Niš Distribution Centre",
+    "description": "Product distribution across southern Serbia.",
+    "address": {
+      "city": "Niš",
+      "postalCode": "18000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 43.3209,
+      "longitude": 21.8958
+    },
+    "featured": true,
+    "enabled": true
+  },
+  {
+    "id": "kragujevac",
+    "type": "retailer",
+    "title": "Kragujevac Retail Location",
+    "address": {
+      "city": "Kragujevac",
+      "postalCode": "34000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 44.0128,
+      "longitude": 20.9114
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "subotica",
+    "type": "retailer",
+    "title": "Subotica Retail Location",
+    "address": {
+      "city": "Subotica",
+      "postalCode": "24000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 46.1005,
+      "longitude": 19.6652
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "zrenjanin",
+    "type": "partner",
+    "title": "Tronoša Partner – Zrenjanin",
+    "address": {
+      "city": "Zrenjanin",
+      "postalCode": "23000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 45.3816,
+      "longitude": 20.3686
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "uzice",
+    "type": "retailer",
+    "title": "Užice Retail Location",
+    "address": {
+      "city": "Užice",
+      "postalCode": "31000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 43.8563,
+      "longitude": 19.8425
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "cacak",
+    "type": "retailer",
+    "title": "Čačak Retail Location",
+    "address": {
+      "city": "Čačak",
+      "postalCode": "32000",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 43.8914,
+      "longitude": 20.3497
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "zlatibor",
+    "type": "partner",
+    "title": "Tronoša Partner – Zlatibor",
+    "description": "A partner operating in the tourism and hospitality sector.",
+    "address": {
+      "city": "Zlatibor",
+      "postalCode": "31315",
+      "country": "Serbia"
+    },
+    "coordinates": {
+      "latitude": 43.7264,
+      "longitude": 19.6981
+    },
+    "featured": false,
+    "enabled": true
+  }
+]

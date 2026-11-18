@@ -1,0 +1,330 @@
+[
+  {
+    "id": "tronosa-production",
+    "type": "production",
+    "title": "Троноша – производни погон",
+    "description": "Место на којем започиње пут природне воде Троноша.",
+    "address": {
+      "city": "Тршић",
+      "postalCode": "15303",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.4842,
+      "longitude": 19.2648
+    },
+    "featured": true,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-new-belgrade",
+    "type": "distributor",
+    "title": "Дистрибутивни центар Нови Београд",
+    "description": "Дистрибуција производа на територији Београда.",
+    "address": {
+      "street": "Булевар Михајла Пупина",
+      "city": "Београд",
+      "postalCode": "11070",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.8186,
+      "longitude": 20.4208
+    },
+    "featured": true,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-zemun",
+    "type": "retailer",
+    "title": "Продајно место Земун",
+    "description": "Продајно место са доступним производима Троноша.",
+    "address": {
+      "street": "Главна",
+      "city": "Београд",
+      "postalCode": "11080",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.8458,
+      "longitude": 20.4113
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-vracar",
+    "type": "retailer",
+    "title": "Продајно место Врачар",
+    "description": "Пронађите производе Троноша у срцу Београда.",
+    "address": {
+      "street": "Булевар краља Александра",
+      "city": "Београд",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.8024,
+      "longitude": 20.4771
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-vozdovac",
+    "type": "retailer",
+    "title": "Продајно место Вождовац",
+    "address": {
+      "street": "Војводе Степе",
+      "city": "Београд",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.7751,
+      "longitude": 20.4784
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-dorcol",
+    "type": "partner",
+    "title": "Троноша партнер Дорћол",
+    "description": "Партнер у области угоститељства.",
+    "address": {
+      "city": "Београд",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.8248,
+      "longitude": 20.4641
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "belgrade-banovo-brdo",
+    "type": "retailer",
+    "title": "Продајно место Баново брдо",
+    "address": {
+      "street": "Пожешка",
+      "city": "Београд",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.7803,
+      "longitude": 20.4185
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "novi-sad-center",
+    "type": "retailer",
+    "title": "Продајно место Нови Сад – Центар",
+    "address": {
+      "city": "Нови Сад",
+      "postalCode": "21000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 45.2551,
+      "longitude": 19.8452
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "novi-sad-liman",
+    "type": "retailer",
+    "title": "Продајно место Лиман",
+    "address": {
+      "street": "Булевар цара Лазара",
+      "city": "Нови Сад",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 45.2389,
+      "longitude": 19.8371
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "novi-sad-distribution",
+    "type": "distributor",
+    "title": "Дистрибутивни центар Нови Сад",
+    "description": "Дистрибуција производа на територији Војводине.",
+    "address": {
+      "city": "Нови Сад",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 45.2841,
+      "longitude": 19.8125
+    },
+    "featured": true,
+    "enabled": true
+  },
+  {
+    "id": "loznica",
+    "type": "retailer",
+    "title": "Продајно место Лозница",
+    "address": {
+      "city": "Лозница",
+      "postalCode": "15300",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.5308,
+      "longitude": 19.2258
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "sabac",
+    "type": "distributor",
+    "title": "Дистрибутивни центар Шабац",
+    "address": {
+      "city": "Шабац",
+      "postalCode": "15000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.7467,
+      "longitude": 19.6901
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "valjevo",
+    "type": "retailer",
+    "title": "Продајно место Ваљево",
+    "address": {
+      "city": "Ваљево",
+      "postalCode": "14000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.2708,
+      "longitude": 19.8841
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "nis",
+    "type": "distributor",
+    "title": "Дистрибутивни центар Ниш",
+    "description": "Дистрибуција производа на југу Србије.",
+    "address": {
+      "city": "Ниш",
+      "postalCode": "18000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 43.3209,
+      "longitude": 21.8958
+    },
+    "featured": true,
+    "enabled": true
+  },
+  {
+    "id": "kragujevac",
+    "type": "retailer",
+    "title": "Продајно место Крагујевац",
+    "address": {
+      "city": "Крагујевац",
+      "postalCode": "34000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 44.0128,
+      "longitude": 20.9114
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "subotica",
+    "type": "retailer",
+    "title": "Продајно место Суботица",
+    "address": {
+      "city": "Суботица",
+      "postalCode": "24000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 46.1005,
+      "longitude": 19.6652
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "zrenjanin",
+    "type": "partner",
+    "title": "Троноша партнер Зрењанин",
+    "address": {
+      "city": "Зрењанин",
+      "postalCode": "23000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 45.3816,
+      "longitude": 20.3686
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "uzice",
+    "type": "retailer",
+    "title": "Продајно место Ужице",
+    "address": {
+      "city": "Ужице",
+      "postalCode": "31000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 43.8563,
+      "longitude": 19.8425
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "cacak",
+    "type": "retailer",
+    "title": "Продајно место Чачак",
+    "address": {
+      "city": "Чачак",
+      "postalCode": "32000",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 43.8914,
+      "longitude": 20.3497
+    },
+    "featured": false,
+    "enabled": true
+  },
+  {
+    "id": "zlatibor",
+    "type": "partner",
+    "title": "Троноша партнер Златибор",
+    "description": "Партнер у области туризма и угоститељства.",
+    "address": {
+      "city": "Златибор",
+      "postalCode": "31315",
+      "country": "Србија"
+    },
+    "coordinates": {
+      "latitude": 43.7264,
+      "longitude": 19.6981
+    },
+    "featured": false,
+    "enabled": true
+  }
+]
