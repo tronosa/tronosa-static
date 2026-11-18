@@ -19,6 +19,11 @@ export const showcaseProductSchema = z.object({
   }),
 });
 
+export const productShowcaseCTASchema = z.object({
+  label: z.string().trim().min(1),
+  pageId: z.string().trim().min(1),
+});
+
 export const productShowcaseContentSchema = z.object({
   eyebrow: z.string().optional(),
   title: z.string().min(1),
@@ -28,6 +33,8 @@ export const productShowcaseContentSchema = z.object({
   accessibility: z.object({
     selectorLabel: z.string().min(1),
   }),
+
+  cta: productShowcaseCTASchema.optional(),
 
   products: z
     .array(showcaseProductSchema)

@@ -1,14 +1,16 @@
 export { ProductShowcase } from "./ProductShowcase";
 
 export {
-  productShowcaseSectionSchema,
-  productShowcaseContentSchema,
   showcaseProductSchema,
+  productShowcaseCTASchema,
+  productShowcaseContentSchema,
+  productShowcaseSectionSchema,
 } from "./product-showcase.schema";
 
 export type {
-  ProductShowcaseProps,
+  ShowcaseProduct,
   ProductShowcaseContent,
   ProductShowcaseSection,
-  ShowcaseProduct,
+  ProductShowcaseProps,
+  ProductShowcaseCTAProps,
 } from "./types";

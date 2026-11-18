@@ -72,47 +72,90 @@
         }
       },
       {
-        "id": "products-showcase",
-        "type": "product-showcase",
+        "id": "products-experience",
+        "type": "product-experience",
         "content": {
-          "eyebrow": "From the heart of nature",
-          "title": "Purity in every drop.",
-          "description": "Natural refreshment for every moment of your day.",
-          "backgroundText": "TRONOŠA",
-          "accessibility": {
-            "selectorLabel": "Select bottle size"
+          "appearance": {
+            "backgroundColor": "#E5EEE7",
+            "secondaryBackgroundColor": "#DCEBF0",
+            "accentColor": "#244D39"
+          },
+          "reveal": {
+            "eyebrow": "From the heart of nature",
+            "title": "Purity in every drop.",
+            "backgroundText": "TRONOŠA",
+            "scrollLabel": "Discover more"
+          },
+          "composition": {
+            "eyebrow": "Natural balance",
+            "title": "Mineral composition.",
+            "description": "Discover the composition of Tronoša water.",
+            "minerals": []
+          },
+          "collection": {
+            "eyebrow": "The Tronoša collection",
+            "title": "For every moment.",
+            "description": "Choose the bottle that fits your lifestyle."
           },
           "products": [
             {
               "id": "water-330ml",
-              "title": "Refreshment on the go",
-              "description": "A convenient bottle designed to go wherever you do.",
+              "eyebrow": "Freedom to move",
+              "title": "Refreshment on the go.",
               "volume": "0.33 L",
+              "description": "A small bottle for life's big moments.",
+              "highlights": [
+                {
+                  "id": "compact",
+                  "title": "Compact by design",
+                  "description": "A convenient size that fits naturally into your day."
+                },
+                {
+                  "id": "accessibility",
+                  "title": "Always within reach",
+                  "description": "Natural refreshment wherever you go."
+                },
+                {
+                  "id": "movement",
+                  "title": "Made for movement",
+                  "description": "A companion for your everyday activities."
+                }
+              ],
               "image": {
                 "src": "/assets/products/water-330ml.webp",
-                "alt": "Tronoša water in a 330 millilitre bottle",
+                "alt": "Tronoša water 330 ml",
                 "width": 600,
                 "height": 1200
-              },
-              "appearance": {
-                "backgroundColor": "#E5EEE7",
-                "accentColor": "#244D39"
               }
             },
             {
               "id": "water-500ml",
-              "title": "Your everyday companion",
-              "description": "Natural refreshment for your everyday rhythm.",
+              "eyebrow": "At your own pace",
+              "title": "Your everyday companion.",
               "volume": "0.5 L",
+              "description": "Natural refreshment for every part of your day.",
+              "highlights": [
+                {
+                  "id": "everyday",
+                  "title": "For everyday moments",
+                  "description": "At home, at work or while travelling."
+                },
+                {
+                  "id": "practical",
+                  "title": "A practical format",
+                  "description": "A bottle designed around your daily routine."
+                },
+                {
+                  "id": "lifestyle",
+                  "title": "In tune with your lifestyle",
+                  "description": "Refreshment that naturally fits into your life."
+                }
+              ],
               "image": {
                 "src": "/assets/products/water-500ml.webp",
-                "alt": "Tronoša water in a 500 millilitre bottle",
+                "alt": "Tronoša water 500 ml",
                 "width": 600,
                 "height": 1200
-              },
-              "appearance": {
-                "backgroundColor": "#DCEBF0",
-                "accentColor": "#214C60"
               }
             }
           ]

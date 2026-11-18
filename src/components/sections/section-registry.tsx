@@ -10,6 +10,7 @@ import { PartnersMarquee } from "./PartnersMarquee";
 import { Faq } from "./Faq";
 import { DistributionMap } from "./DistributionMap";
 import { ProductShowcase } from "./ProductShowcase";
+import { ProductExperience } from "./ProductExperience";
 
 type SectionByType<T extends SectionType> = Extract<Section, { type: T }>;
 
@@ -27,4 +28,5 @@ export const sectionRegistry = {
   faq: ({ content }) => <Faq {...content} />,
   "distribution-map": ({ content }) => <DistributionMap {...content} />,
   "product-showcase": ({ content }) => <ProductShowcase {...content} />,
+  "product-experience": ({ content }) => <ProductExperience {...content} />,
 } satisfies SectionRegistry;

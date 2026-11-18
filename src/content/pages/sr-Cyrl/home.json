@@ -103,6 +103,57 @@
         }
       },
       {
+        "id": "products-showcase",
+        "type": "product-showcase",
+        "content": {
+          "eyebrow": "Из срца природе",
+          "title": "Чистоћа у свакој капи.",
+          "description": "Природно освежење за сваки тренутак вашег дана.",
+          "backgroundText": "ТРОНОША",
+          "accessibility": {
+            "selectorLabel": "Изаберите амбалажу"
+          },
+          "cta": {
+            "label": "Истражите",
+            "pageId": "products"
+          },
+          "products": [
+            {
+              "id": "water-330ml",
+              "title": "Освежење увек уз вас",
+              "description": "Практично паковање које је увек уз вас.",
+              "volume": "0,33 L",
+              "image": {
+                "src": "/assets/products/water-330ml.webp",
+                "alt": "Вода Троноша у амбалажи од 330 милилитара",
+                "width": 600,
+                "height": 1200
+              },
+              "appearance": {
+                "backgroundColor": "#E5EEE7",
+                "accentColor": "#244D39"
+              }
+            },
+            {
+              "id": "water-500ml",
+              "title": "Ваш свакодневни пратилац",
+              "description": "Природно освежење за ваш свакодневни ритам.",
+              "volume": "0,5 L",
+              "image": {
+                "src": "/assets/products/water-500ml.webp",
+                "alt": "Вода Троноша у амбалажи од 500 милилитара",
+                "width": 600,
+                "height": 1200
+              },
+              "appearance": {
+                "backgroundColor": "#DCEBF0",
+                "accentColor": "#214C60"
+              }
+            }
+          ]
+        }
+      },
+      {
         "id": "home-feature-mosaic",
         "type": "feature-mosaic",
         "content": {

@@ -72,47 +72,90 @@
         }
       },
       {
-        "id": "products-showcase",
-        "type": "product-showcase",
+        "id": "products-experience",
+        "type": "product-experience",
         "content": {
-          "eyebrow": "Из срца природе",
-          "title": "Чистоћа у свакој капи.",
-          "description": "Природно освежење за сваки тренутак вашег дана.",
-          "backgroundText": "ТРОНОША",
-          "accessibility": {
-            "selectorLabel": "Изаберите амбалажу"
+          "appearance": {
+            "backgroundColor": "#E5EEE7",
+            "secondaryBackgroundColor": "#DCEBF0",
+            "accentColor": "#244D39"
+          },
+          "reveal": {
+            "eyebrow": "Из срца природе",
+            "title": "Чистоћа у свакој капи.",
+            "backgroundText": "ТРОНОША",
+            "scrollLabel": "Откријте више"
+          },
+          "composition": {
+            "eyebrow": "Природна равнотежа",
+            "title": "Минерални састав.",
+            "description": "Упознајте састав воде Троноша.",
+            "minerals": []
+          },
+          "collection": {
+            "eyebrow": "Троноша колекција",
+            "title": "За сваки тренутак.",
+            "description": "Изаберите амбалажу која прати ваш ритам."
           },
           "products": [
             {
               "id": "water-330ml",
-              "title": "Освежење увек уз вас",
-              "description": "Практично паковање које је увек уз вас.",
+              "eyebrow": "Слобода покрета",
+              "title": "Освежење које вас прати.",
               "volume": "0,33 L",
+              "description": "Мали формат за велике тренутке.",
+              "highlights": [
+                {
+                  "id": "compact",
+                  "title": "Компактна амбалажа",
+                  "description": "Практична величина која се лако уклапа у ваш дан."
+                },
+                {
+                  "id": "accessibility",
+                  "title": "Увек надохват руке",
+                  "description": "Природно освежење где год да се налазите."
+                },
+                {
+                  "id": "movement",
+                  "title": "Створена за покрет",
+                  "description": "Пратилац ваших свакодневних активности."
+                }
+              ],
               "image": {
                 "src": "/assets/products/water-330ml.webp",
-                "alt": "Вода Троноша у амбалажи од 330 милилитара",
+                "alt": "Вода Троноша 330 мл",
                 "width": 600,
                 "height": 1200
-              },
-              "appearance": {
-                "backgroundColor": "#E5EEE7",
-                "accentColor": "#244D39"
               }
             },
             {
               "id": "water-500ml",
-              "title": "Ваш свакодневни пратилац",
-              "description": "Природно освежење за ваш свакодневни ритам.",
+              "eyebrow": "У вашем ритму",
+              "title": "Ваш свакодневни пратилац.",
               "volume": "0,5 L",
+              "description": "Природно освежење за сваки део вашег дана.",
+              "highlights": [
+                {
+                  "id": "everyday",
+                  "title": "За свакодневне тренутке",
+                  "description": "Код куће, на послу или током путовања."
+                },
+                {
+                  "id": "practical",
+                  "title": "Практичан формат",
+                  "description": "Амбалажа прилагођена вашој свакодневној рутини."
+                },
+                {
+                  "id": "lifestyle",
+                  "title": "У складу са вашим ритмом",
+                  "description": "Освежење које се природно уклапа у ваш живот."
+                }
+              ],
               "image": {
                 "src": "/assets/products/water-500ml.webp",
-                "alt": "Вода Троноша у амбалажи од 500 милилитара",
+                "alt": "Вода Троноша 500 мл",
                 "width": 600,
                 "height": 1200
-              },
-              "appearance": {
-                "backgroundColor": "#DCEBF0",
-                "accentColor": "#214C60"
               }
             }
           ]

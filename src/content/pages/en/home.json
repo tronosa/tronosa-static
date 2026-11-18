@@ -21,7 +21,7 @@
             "type": "video/mp4"
           },
           "cta": {
-            "label": "Discover Tronoša",
+            "label": "Discover",
             "pageId": "about"
           },
           "accessibility": {
@@ -83,6 +83,57 @@
             "nextLabel": "Next card",
             "viewportLabel": "Cards about Tronoša water"
           }
+        }
+      },
+      {
+        "id": "products-showcase",
+        "type": "product-showcase",
+        "content": {
+          "eyebrow": "From the heart of nature",
+          "title": "Purity in every drop.",
+          "description": "Natural refreshment for every moment of your day.",
+          "backgroundText": "TRONOŠA",
+          "accessibility": {
+            "selectorLabel": "Select bottle size"
+          },
+          "cta": {
+            "label": "Explore our products",
+            "pageId": "products"
+          },
+          "products": [
+            {
+              "id": "water-330ml",
+              "title": "Refreshment on the go",
+              "description": "A convenient bottle designed to go wherever you do.",
+              "volume": "0.33 L",
+              "image": {
+                "src": "/assets/products/water-330ml.webp",
+                "alt": "Tronoša water in a 330 millilitre bottle",
+                "width": 600,
+                "height": 1200
+              },
+              "appearance": {
+                "backgroundColor": "#E5EEE7",
+                "accentColor": "#244D39"
+              }
+            },
+            {
+              "id": "water-500ml",
+              "title": "Your everyday companion",
+              "description": "Natural refreshment for your everyday rhythm.",
+              "volume": "0.5 L",
+              "image": {
+                "src": "/assets/products/water-500ml.webp",
+                "alt": "Tronoša water in a 500 millilitre bottle",
+                "width": 600,
+                "height": 1200
+              },
+              "appearance": {
+                "backgroundColor": "#DCEBF0",
+                "accentColor": "#214C60"
+              }
+            }
+          ]
         }
       },
       {

@@ -2,11 +2,18 @@
 
 import { useId, useRef, useState, type CSSProperties } from "react";
 
-import { gsap, useGSAP } from "@/lib/animation/gsap";
-import { animationConfig } from "@/lib/animation/config";
+import { useGSAP } from "@/lib/animation/gsap";
+
+import { Section } from "@/components/ui/Section";
 
 import { ProductDisplay } from "./ProductDisplay";
 import { ProductSelector } from "./ProductSelector";
+import { ProductShowcaseCTA } from "./ProductShowcaseCTA";
+
+import {
+  animateProductShowcase,
+  type ProductShowcaseDirection,
+} from "./product-showcase.animations";
 
 import {
   productShowcaseVariants,
@@ -27,8 +34,10 @@ import {
   productShowcaseProductDescriptionVariants,
 } from "./product-showcase.variants";
 
-import type { ProductShowcaseProps } from "./types";
-import { Section } from "@/components/ui/Section";
+import type { ProductShowcaseClientProps } from "./types";
+import { Container } from "@/components/ui/Container";
+
+const PRODUCT_CHANGE_INTERVAL = 450;
 
 export function ProductShowcaseClient({
   eyebrow,
@@ -36,10 +45,16 @@ export function ProductShowcaseClient({
   description,
   backgroundText,
   accessibility,
+  cta,
   products,
-}: ProductShowcaseProps) {
+}: ProductShowcaseClientProps) {
   const headingId = useId();
+
   const containerRef = useRef<HTMLElement>(null);
+
+  const directionRef = useRef<ProductShowcaseDirection>(1);
+
+  const lastChangeRef = useRef(-Infinity);
 
   const [activeProductId, setActiveProductId] = useState(products[0]?.id ?? "");
 
@@ -50,74 +65,17 @@ export function ProductShowcaseClient({
 
   useGSAP(
     () => {
-      if (!hasInteracted) {
+      const container = containerRef.current;
+
+      if (!container || !hasInteracted) {
         return;
       }
 
-      const media = gsap.matchMedia();
+      const timeline = animateProductShowcase(container, directionRef.current);
 
-      media.add(
-        "(prefers-reduced-motion: no-preference)",
-        () => {
-          const timeline = gsap.timeline({
-            defaults: {
-              ease: animationConfig.ease.enter,
-              overwrite: "auto",
-            },
-          });
-
-          timeline
-            .fromTo(
-              '[data-product-image][data-active="true"]',
-              {
-                y: 30,
-                scale: 0.94,
-                rotation: -3,
-                opacity: 0.5,
-              },
-              {
-                y: 0,
-                scale: 1,
-                rotation: 0,
-                opacity: 1,
-                duration: 0.75,
-                clearProps: "transform,opacity",
-              },
-              0,
-            )
-            .fromTo(
-              "[data-product-information]",
-              {
-                y: 14,
-                opacity: 0.5,
-              },
-              {
-                y: 0,
-                opacity: 1,
-                duration: 0.5,
-                clearProps: "transform,opacity",
-              },
-              0.05,
-            )
-            .fromTo(
-              "[data-product-volume]",
-              {
-                y: 16,
-                opacity: 0.5,
-              },
-              {
-                y: 0,
-                opacity: 1,
-                duration: 0.6,
-                clearProps: "transform,opacity",
-              },
-              0.1,
-            );
-        },
-        containerRef,
-      );
-
-      return () => media.revert();
+      return () => {
+        timeline?.kill();
+      };
     },
     {
       scope: containerRef,
@@ -134,6 +92,26 @@ export function ProductShowcaseClient({
     if (id === activeProductId) {
       return;
     }
+
+    const now = performance.now();
+
+    if (now - lastChangeRef.current < PRODUCT_CHANGE_INTERVAL) {
+      return;
+    }
+
+    const currentIndex = products.findIndex(
+      (product) => product.id === activeProductId,
+    );
+
+    const nextIndex = products.findIndex((product) => product.id === id);
+
+    if (nextIndex === -1) {
+      return;
+    }
+
+    directionRef.current = nextIndex > currentIndex ? 1 : -1;
+
+    lastChangeRef.current = now;
 
     setHasInteracted(true);
     setActiveProductId(id);
@@ -166,62 +144,69 @@ export function ProductShowcaseClient({
         </div>
       )}
 
-      <div className={productShowcaseLayoutVariants()}>
-        <header className={productShowcaseHeaderVariants()}>
-          {eyebrow && (
-            <p className={productShowcaseEyebrowVariants()}>{eyebrow}</p>
-          )}
+      <Container size="wide">
+        <div className={productShowcaseLayoutVariants()}>
+          <header className={productShowcaseHeaderVariants()}>
+            {eyebrow && (
+              <p className={productShowcaseEyebrowVariants()}>{eyebrow}</p>
+            )}
 
-          <h2 id={headingId} className={productShowcaseTitleVariants()}>
-            {title}
-          </h2>
+            <h2 id={headingId} className={productShowcaseTitleVariants()}>
+              {title}
+            </h2>
 
-          {description && (
-            <p className={productShowcaseDescriptionVariants()}>
-              {description}
-            </p>
-          )}
-        </header>
+            {description && (
+              <p className={productShowcaseDescriptionVariants()}>
+                {description}
+              </p>
+            )}
+          </header>
 
-        <div className={productShowcaseDisplayContainerVariants()}>
-          <ProductDisplay
-            products={products}
-            activeProductId={activeProduct.id}
-          />
-        </div>
+          <div className={productShowcaseDisplayContainerVariants()}>
+            <ProductDisplay
+              products={products}
+              activeProductId={activeProduct.id}
+            />
+          </div>
 
-        <div className={productShowcaseSelectorContainerVariants()}>
-          <ProductSelector
-            products={products}
-            activeProductId={activeProduct.id}
-            label={accessibility.selectorLabel}
-            onChange={handleProductChange}
-          />
-        </div>
-
-        <div
-          aria-live="polite"
-          aria-atomic="true"
-          className={productShowcaseInformationContainerVariants()}
-        >
-          <div data-product-volume className={productShowcaseVolumeVariants()}>
-            {activeProduct.volume}
+          <div className={productShowcaseSelectorContainerVariants()}>
+            <ProductSelector
+              products={products}
+              activeProductId={activeProduct.id}
+              label={accessibility.selectorLabel}
+              onChange={handleProductChange}
+            />
           </div>
 
           <div
-            data-product-information
-            className={productShowcaseInformationVariants()}
+            aria-live="polite"
+            aria-atomic="true"
+            className={productShowcaseInformationContainerVariants()}
           >
-            <h3 className={productShowcaseProductTitleVariants()}>
-              {activeProduct.title}
-            </h3>
+            <div
+              data-product-volume
+              className={productShowcaseVolumeVariants()}
+            >
+              {activeProduct.volume}
+            </div>
 
-            <p className={productShowcaseProductDescriptionVariants()}>
-              {activeProduct.description}
-            </p>
+            <div
+              data-product-information
+              className={productShowcaseInformationVariants()}
+            >
+              <h3 className={productShowcaseProductTitleVariants()}>
+                {activeProduct.title}
+              </h3>
+
+              <p className={productShowcaseProductDescriptionVariants()}>
+                {activeProduct.description}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+
+        {cta && <ProductShowcaseCTA {...cta} />}
+      </Container>
     </Section>
   );
 }

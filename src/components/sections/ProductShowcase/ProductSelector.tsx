@@ -1,18 +1,16 @@
 "use client";
 
-import { useId } from "react";
 import Image from "next/image";
+import { useId } from "react";
 
 import {
   productSelectorVariants,
-  productSelectorLegendVariants,
   productSelectorOptionsVariants,
-  productSelectorOptionVariants,
-  productSelectorInputVariants,
   productSelectorCardVariants,
   productSelectorImageVariants,
   productSelectorVolumeVariants,
-} from "./product-showcase.variants";
+  productSelectorInputVariants,
+} from "./product-selector.variants";
 
 import type { ShowcaseProduct } from "./types";
 
@@ -32,15 +30,22 @@ export function ProductSelector({
   const groupId = useId();
 
   return (
-    <fieldset className={productSelectorVariants()}>
-      <legend className={productSelectorLegendVariants()}>{label}</legend>
-
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className={productSelectorVariants()}
+    >
       <div className={productSelectorOptionsVariants()}>
         {products.map((product) => {
-          const isActive = activeProductId === product.id;
+          const isActive = product.id === activeProductId;
 
           return (
-            <label key={product.id} className={productSelectorOptionVariants()}>
+            <label
+              key={product.id}
+              className={productSelectorCardVariants({
+                active: isActive,
+              })}
+            >
               <input
                 type="radio"
                 name={groupId}
@@ -50,31 +55,24 @@ export function ProductSelector({
                 className={productSelectorInputVariants()}
               />
 
-              <span
-                className={productSelectorCardVariants({
-                  active: isActive,
-                })}
-              >
-                <Image
-                  src={product.image.src}
-                  alt=""
-                  aria-hidden="true"
-                  width={product.image.width}
-                  height={product.image.height}
-                  sizes="64px"
-                  loading="lazy"
-                  draggable={false}
-                  className={productSelectorImageVariants()}
-                />
+              <Image
+                src={product.image.src}
+                alt=""
+                width={product.image.width}
+                height={product.image.height}
+                sizes="64px"
+                loading="lazy"
+                draggable={false}
+                className={productSelectorImageVariants()}
+              />
 
-                <span className={productSelectorVolumeVariants()}>
-                  {product.volume}
-                </span>
+              <span className={productSelectorVolumeVariants()}>
+                {product.volume}
               </span>
             </label>
           );
         })}
       </div>
-    </fieldset>
+    </div>
   );
 }
