@@ -10,6 +10,7 @@ import {
 } from "./partners-marquee.variants";
 import type { PartnersMarqueeProps } from "./types";
 import "./partners-marquee.css";
+import { Section } from "@/components/ui/Section";
 
 export function PartnersMarquee({
   title,
@@ -32,7 +33,8 @@ export function PartnersMarquee({
       </li>
     ));
   return (
-    <section
+    <Section
+      spacingType="padding"
       aria-label={title}
       className={cn(partnersMarqueeVariants(), className)}
     >
@@ -55,6 +57,6 @@ export function PartnersMarquee({
           )}
         </MarqueeViewport>
       </Container>
-    </section>
+    </Section>
   );
 }

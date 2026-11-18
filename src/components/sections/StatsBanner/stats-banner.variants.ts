@@ -4,7 +4,6 @@ export const statsBannerVariants = cva([
   "relative isolate overflow-hidden",
   "bg-(--stats-bg)",
   "text-(--stats-fg)",
-  "py-14 md:py-20",
 ]);
 
 export const statsBannerContentVariants = cva([

@@ -1,0 +1,178 @@
+{
+  "id": "products",
+  "slug": "products",
+  "seo": {
+    "title": "Products | Tronoša",
+    "description": "Discover the Tronoša natural water collection.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "products-image-hero",
+        "type": "image-hero",
+        "content": {
+          "eyebrow": "Our story",
+          "title": "From the heart of nature.",
+          "description": "Discover the origins of Tronoša natural spring water.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1920,
+              "height": 1080
+            },
+            "tablet": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1024,
+              "height": 768
+            },
+            "mobile": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 720,
+              "height": 960
+            }
+          }
+        }
+      },
+      {
+        "id": "home-feature-mosaic",
+        "type": "feature-mosaic",
+        "content": {
+          "title": "More than water",
+          "description": "Discover the values we aim to uphold.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1200,
+              "height": 1200
+            }
+          },
+          "imagePosition": "right",
+          "cards": [
+            {
+              "title": "Nature",
+              "description": "Respect for the natural environment."
+            },
+            {
+              "title": "Quality",
+              "description": "Attention to every detail."
+            },
+            {
+              "title": "Tradition",
+              "description": "A connection to our origins."
+            },
+            {
+              "title": "Collaboration",
+              "description": "Shared values."
+            }
+          ]
+        }
+      },
+      {
+        "id": "products-showcase",
+        "type": "product-showcase",
+        "content": {
+          "eyebrow": "From the heart of nature",
+          "title": "Purity in every drop.",
+          "description": "Natural refreshment for every moment of your day.",
+          "backgroundText": "TRONOŠA",
+          "accessibility": {
+            "selectorLabel": "Select bottle size"
+          },
+          "products": [
+            {
+              "id": "water-330ml",
+              "title": "Refreshment on the go",
+              "description": "A convenient bottle designed to go wherever you do.",
+              "volume": "0.33 L",
+              "image": {
+                "src": "/assets/products/water-330ml.webp",
+                "alt": "Tronoša water in a 330 millilitre bottle",
+                "width": 600,
+                "height": 1200
+              },
+              "appearance": {
+                "backgroundColor": "#E5EEE7",
+                "accentColor": "#244D39"
+              }
+            },
+            {
+              "id": "water-500ml",
+              "title": "Your everyday companion",
+              "description": "Natural refreshment for your everyday rhythm.",
+              "volume": "0.5 L",
+              "image": {
+                "src": "/assets/products/water-500ml.webp",
+                "alt": "Tronoša water in a 500 millilitre bottle",
+                "width": 600,
+                "height": 1200
+              },
+              "appearance": {
+                "backgroundColor": "#DCEBF0",
+                "accentColor": "#214C60"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "products-card-slider",
+        "type": "card-slider",
+        "content": {
+          "title": "Nature makes the difference",
+          "description": "Discover the story behind every drop.",
+          "cards": [
+            {
+              "kind": "text",
+              "title": "Origin",
+              "headline": "From the heart of nature",
+              "description": "Discover the story of our spring."
+            },
+            {
+              "kind": "image",
+              "title": "Spring",
+              "headline": "Tronoša",
+              "description": "A story of natural spring water.",
+              "image": {
+                "alt": "",
+                "desktop": {
+                  "src": "/assets/images/placeholder.jpg",
+                  "width": 1200,
+                  "height": 1200
+                }
+              }
+            },
+            {
+              "kind": "text",
+              "title": "Quality",
+              "headline": "Care at every step",
+              "description": "Learn more about our approach."
+            },
+            {
+              "kind": "image",
+              "title": "Tradition",
+              "headline": "A lasting story",
+              "description": "Get to know us better.",
+              "image": {
+                "alt": "",
+                "desktop": {
+                  "src": "/assets/images/placeholder.jpg",
+                  "width": 1200,
+                  "height": 1200
+                }
+              }
+            }
+          ],
+          "accessibility": {
+            "previousLabel": "Previous card",
+            "nextLabel": "Next card",
+            "viewportLabel": "Cards about Tronoša water"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -8,6 +8,7 @@ import { statsBannerSectionSchema } from "@/components/sections/StatsBanner/stat
 import { partnersMarqueeSectionSchema } from "@/components/sections/PartnersMarquee/partners-marquee.schema";
 import { faqSectionSchema } from "@/components/sections/Faq/faq.schema";
 import { distributionMapSectionSchema } from "@/components/sections/DistributionMap/distribution-map.schema";
+import { productShowcaseSectionSchema } from "@/components/sections/ProductShowcase/product-showcase.schema";
 
 export const sectionSchema = z.discriminatedUnion("type", [
   videoHeroSectionSchema,
@@ -18,6 +19,7 @@ export const sectionSchema = z.discriminatedUnion("type", [
   partnersMarqueeSectionSchema,
   faqSectionSchema,
   distributionMapSectionSchema,
+  productShowcaseSectionSchema,
 ]);
 
 export type Section = z.infer<typeof sectionSchema>;

@@ -21,6 +21,7 @@ import {
 } from "./image-hero.variants";
 
 import type { ImageHeroProps } from "./types";
+import { Section } from "@/components/ui/Section";
 
 export async function ImageHero({
   eyebrow,
@@ -58,7 +59,8 @@ export async function ImageHero({
   }
 
   return (
-    <section
+    <Section
+      spacing="none"
       data-image-hero
       className={cn(imageHeroVariants({ size }), className)}
     >
@@ -120,6 +122,6 @@ export async function ImageHero({
           )}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

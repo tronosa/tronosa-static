@@ -20,6 +20,7 @@ import {
 } from "./video-hero.variants";
 
 import type { VideoHeroProps } from "./types";
+import { Section } from "@/components/ui/Section";
 
 export async function VideoHero({
   title,
@@ -56,7 +57,11 @@ export async function VideoHero({
   }
 
   return (
-    <section data-video-hero className={cn(videoHeroVariants(), className)}>
+    <Section
+      spacing="none"
+      data-video-hero
+      className={cn(videoHeroVariants(), className)}
+    >
       <BackgroundVideo video={video} accessibility={accessibility} />
 
       <div
@@ -102,6 +107,6 @@ export async function VideoHero({
           )}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

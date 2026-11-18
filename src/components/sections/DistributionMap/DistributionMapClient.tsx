@@ -19,6 +19,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "./distribution-map.css";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
+import { Section } from "@/components/ui/Section";
 
 export function DistributionMapClient({
   locale,
@@ -119,10 +120,7 @@ export function DistributionMapClient({
   }
 
   return (
-    <section
-      aria-labelledby={headingId}
-      className={cn("distribution-map", "py-16 md:py-24")}
-    >
+    <Section aria-labelledby={headingId} className={cn("distribution-map")}>
       <Container>
         <header className="distribution-map__header">
           <span className="distribution-map__eyebrow">
@@ -250,6 +248,6 @@ export function DistributionMapClient({
           )}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

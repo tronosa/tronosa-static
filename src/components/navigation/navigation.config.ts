@@ -12,6 +12,10 @@ export const navigationItems = [
     translationKey: "blog",
   },
   {
+    id: "products",
+    translationKey: "products",
+  },
+  {
     id: "contact",
     translationKey: "contact",
   },

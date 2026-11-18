@@ -1,5 +1,4 @@
 import { cva } from "class-variance-authority";
-export const featureMosaicVariants = cva("py-16 md:py-24");
 export const featureMosaicHeaderVariants = cva(
   "mb-8 flex flex-col gap-4 lg:mb-12 lg:flex-row lg:items-end lg:justify-between lg:gap-12",
 );
@@ -7,7 +6,7 @@ export const featureMosaicGridVariants = cva(
   "grid min-w-0 gap-4 lg:grid-cols-2 lg:items-stretch",
 );
 export const featureMosaicImageVariants = cva(
-  "relative aspect-square min-w-0 overflow-hidden rounded-3xl bg-brand-stone lg:aspect-auto lg:min-h-[24rem]",
+  "relative aspect-square min-w-0 overflow-hidden rounded-3xl bg-brand-stone lg:aspect-auto lg:min-h-96",
   {
     variants: {
       imagePosition: { left: "lg:order-first", right: "lg:order-last" },

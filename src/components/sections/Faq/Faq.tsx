@@ -1,17 +1,16 @@
 import { Container } from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
 
-import { cn } from "@/lib/cn";
-
 import { FaqAccordion } from "./FaqAccordion";
 
-import { faqVariants, faqLayoutVariants } from "./faq.variants";
+import { faqLayoutVariants } from "./faq.variants";
 
 import type { FaqProps } from "./types";
+import { Section } from "@/components/ui/Section";
 
 export function Faq({ title, description, items, className }: FaqProps) {
   return (
-    <section aria-label={title} className={cn(faqVariants(), className)}>
+    <Section aria-label={title} className={className}>
       <Container size="wide">
         <div className={faqLayoutVariants()}>
           <div className="max-w-xl space-y-4">
@@ -29,6 +28,6 @@ export function Faq({ title, description, items, className }: FaqProps) {
           <FaqAccordion items={items} />
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

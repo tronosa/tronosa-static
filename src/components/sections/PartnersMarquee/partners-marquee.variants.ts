@@ -1,7 +1,5 @@
 import { cva } from "class-variance-authority";
-export const partnersMarqueeVariants = cva(
-  "overflow-hidden bg-surface-muted py-16 md:py-24",
-);
+export const partnersMarqueeVariants = cva("overflow-hidden bg-surface-muted");
 export const partnersMarqueeHeaderVariants = cva(
   "mx-auto mb-10 max-w-2xl space-y-4 text-center md:mb-14",
 );

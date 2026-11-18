@@ -1,7 +1,5 @@
 import { cva } from "class-variance-authority";
 
-export const faqVariants = cva("py-16 md:py-24");
-
 export const faqLayoutVariants = cva([
   "grid gap-8",
   "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]",

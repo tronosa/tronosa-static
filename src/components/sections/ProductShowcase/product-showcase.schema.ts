@@ -4,7 +4,6 @@ export const showcaseProductSchema = z.object({
   id: z.string().trim().min(1),
   title: z.string().trim().min(1),
   description: z.string().trim().min(1),
-
   volume: z.string().trim().min(1),
 
   image: z.object({

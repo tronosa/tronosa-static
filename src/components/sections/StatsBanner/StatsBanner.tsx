@@ -16,6 +16,7 @@ import {
 } from "./stats-banner.variants";
 
 import type { StatsBannerProps } from "./types";
+import { Section } from "@/components/ui/Section";
 
 export function StatsBanner({
   title,
@@ -33,7 +34,8 @@ export function StatsBanner({
   } as CSSProperties;
 
   return (
-    <section
+    <Section
+      spacingType="padding"
       aria-label={title}
       data-stats-theme={theme}
       style={style}
@@ -70,6 +72,6 @@ export function StatsBanner({
           </dl>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

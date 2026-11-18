@@ -1,7 +1,5 @@
 import { cva } from "class-variance-authority";
 
-export const cardSliderVariants = cva("py-16 md:py-24");
-
 export const cardSliderHeaderVariants = cva(
   "mb-8 max-w-3xl space-y-3 md:mb-12",
 );
