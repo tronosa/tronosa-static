@@ -1,3 +1,4 @@
+import { defaultLocale, locales } from "@/i18n/config";
 import { expect, test } from "@playwright/test";
 
 test.describe("Localized SEO", () => {
@@ -6,7 +7,7 @@ test.describe("Localized SEO", () => {
 
     expect(response?.status()).toBe(200);
 
-    await expect(page.locator("html")).toHaveAttribute("lang", "sr-Latn");
+    await expect(page.locator("html")).toHaveAttribute("lang", defaultLocale);
 
     await expect(page.locator("h1")).toHaveCount(1);
 
@@ -30,7 +31,7 @@ test.describe("Localized SEO", () => {
   });
 
   test("normalizes the default locale prefix", async ({ page }) => {
-    await page.goto("/sr-Latn");
+    await page.goto(`/${defaultLocale}`);
 
     await expect(page).toHaveURL("/");
   });
@@ -44,33 +45,37 @@ test.describe("Localized SEO", () => {
   });
 
   test("renders reciprocal language alternates", async ({ page }) => {
-    await page.goto("/");
+    const siteUrl = "https://example.com";
 
-    const alternates = page.locator('link[rel="alternate"][hreflang]');
-
-    const links = await alternates.evaluateAll((nodes) =>
-      nodes.map((node) => ({
-        language: node.getAttribute("hreflang"),
-        href: node.getAttribute("href"),
+    const expectedLinks = [
+      ...locales.map((locale) => ({
+        language: locale,
+        href: locale === defaultLocale ? siteUrl : `${siteUrl}/${locale}`,
       })),
-    );
+      {
+        language: "x-default",
+        href: siteUrl,
+      },
+    ];
 
-    expect(links).toEqual(
-      expect.arrayContaining([
-        {
-          language: "sr-Latn",
-          href: "https://example.com",
-        },
-        {
-          language: "en",
-          href: "https://example.com/en",
-        },
-        {
-          language: "x-default",
-          href: "https://example.com",
-        },
-      ]),
-    );
+    for (const locale of locales) {
+      const pathname = locale === defaultLocale ? "/" : `/${locale}`;
+
+      await page.goto(pathname);
+
+      const links = await page
+        .locator('link[rel="alternate"][hreflang]')
+        .evaluateAll((elements) =>
+          elements.map((element) => ({
+            language: element.getAttribute("hreflang"),
+            href: element.getAttribute("href"),
+          })),
+        );
+
+      expect(links).toHaveLength(expectedLinks.length);
+
+      expect(links).toEqual(expect.arrayContaining(expectedLinks));
+    }
   });
 
   test("renders valid JSON-LD", async ({ page }) => {

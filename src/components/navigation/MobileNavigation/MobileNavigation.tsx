@@ -1,18 +1,22 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 
 import { LanguageSwitcher } from "../LanguageSwitcher";
-import { navigationItems } from "../navigation.config";
 
 import { MobileNavigationDialog } from "./MobileNavigationDialog";
+import type { Locale } from "@/i18n/config";
 import { mobileNavigationLinkVariants } from "./mobile-navigation.variants";
+import { getNavigationItems } from "../navigation.server";
 
 export async function MobileNavigation() {
-  const [t, tHeader] = await Promise.all([
+  const [locale, t, tHeader] = await Promise.all([
+    getLocale(),
     getTranslations("Navigation"),
     getTranslations("Header"),
   ]);
+
+  const navigationItems = getNavigationItems(locale as Locale);
 
   return (
     <div className="flex items-center gap-3 lg:hidden">

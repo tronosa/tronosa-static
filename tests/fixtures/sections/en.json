@@ -1,0 +1,237 @@
+[
+  {
+    "id": "home-video-hero",
+    "type": "video-hero",
+    "content": {
+      "title": "Nature in every drop.",
+      "description": "Discover Tronoša natural spring water.",
+      "video": {
+        "src": "/assets/videos/placeholder.mp4",
+        "poster": "/assets/images/placeholder.png",
+        "type": "video/mp4"
+      },
+      "cta": {
+        "label": "Discover Tronoša",
+        "pageId": "about"
+      },
+      "accessibility": {
+        "playLabel": "Play video",
+        "pauseLabel": "Pause video"
+      }
+    }
+  },
+  {
+    "id": "about-image-hero",
+    "type": "image-hero",
+    "content": {
+      "eyebrow": "Our story",
+      "title": "From the heart of nature.",
+      "description": "Discover the origins of Tronoša natural spring water.",
+      "image": {
+        "alt": "",
+        "desktop": {
+          "src": "/assets/images/placeholder.png",
+          "width": 1920,
+          "height": 1080
+        },
+        "tablet": {
+          "src": "/assets/images/placeholder.png",
+          "width": 1024,
+          "height": 768
+        },
+        "mobile": {
+          "src": "/assets/images/placeholder.png",
+          "width": 720,
+          "height": 960
+        }
+      }
+    }
+  },
+  {
+    "id": "home-card-slider",
+    "type": "card-slider",
+    "content": {
+      "title": "Nature makes the difference",
+      "description": "Discover the story behind every drop.",
+      "cards": [
+        {
+          "kind": "text",
+          "title": "Origin",
+          "headline": "From the heart of nature",
+          "description": "Discover the story of our spring."
+        },
+        {
+          "kind": "image",
+          "title": "Spring",
+          "headline": "Tronoša",
+          "description": "A story of natural spring water.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.png",
+              "width": 1200,
+              "height": 1200
+            }
+          }
+        },
+        {
+          "kind": "text",
+          "title": "Quality",
+          "headline": "Care at every step",
+          "description": "Learn more about our approach."
+        },
+        {
+          "kind": "image",
+          "title": "Tradition",
+          "headline": "A lasting story",
+          "description": "Get to know us better.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.png",
+              "width": 1200,
+              "height": 1200
+            }
+          }
+        }
+      ],
+      "accessibility": {
+        "previousLabel": "Previous card",
+        "nextLabel": "Next card",
+        "viewportLabel": "Cards about Tronoša water"
+      }
+    }
+  },
+  {
+    "id": "home-feature-mosaic",
+    "type": "feature-mosaic",
+    "content": {
+      "title": "More than water",
+      "description": "Discover the values we aim to uphold.",
+      "image": {
+        "alt": "",
+        "desktop": {
+          "src": "/assets/images/placeholder.png",
+          "width": 1200,
+          "height": 1200
+        }
+      },
+      "imagePosition": "left",
+      "cards": [
+        {
+          "title": "Nature",
+          "description": "Respect for the natural environment."
+        },
+        {
+          "title": "Quality",
+          "description": "Attention to every detail."
+        },
+        {
+          "title": "Tradition",
+          "description": "A connection to our origins."
+        },
+        {
+          "title": "Collaboration",
+          "description": "Shared values."
+        }
+      ]
+    }
+  },
+  {
+    "id": "home-stats-banner",
+    "type": "stats-banner",
+    "content": {
+      "title": "Our story in numbers",
+      "description": "Space for verified company results.",
+      "statistics": [
+        {
+          "value": "—",
+          "label": "Bottles sold in 2025"
+        },
+        {
+          "value": "—",
+          "label": "Business partners"
+        }
+      ]
+    }
+  },
+  {
+    "id": "home-partners-marquee",
+    "type": "partners-marquee",
+    "content": {
+      "title": "Building trust together",
+      "description": "Collaboration based on shared values and long-term trust.",
+      "partners": [
+        {
+          "name": "Partner 01",
+          "logo": {
+            "src": "/assets/images/placeholder.png",
+            "width": 1200,
+            "height": 1200
+          }
+        },
+        {
+          "name": "Partner 02",
+          "logo": {
+            "src": "/assets/images/placeholder.png",
+            "width": 1200,
+            "height": 1200
+          }
+        },
+        {
+          "name": "Partner 03",
+          "logo": {
+            "src": "/assets/images/placeholder.png",
+            "width": 1200,
+            "height": 1200
+          }
+        },
+        {
+          "name": "Partner 04",
+          "logo": {
+            "src": "/assets/images/placeholder.png",
+            "width": 1200,
+            "height": 1200
+          }
+        },
+        {
+          "name": "Partner 05",
+          "logo": {
+            "src": "/assets/images/placeholder.png",
+            "width": 1200,
+            "height": 1200
+          }
+        },
+        {
+          "name": "Partner 06",
+          "logo": {
+            "src": "/assets/images/placeholder.png",
+            "width": 1200,
+            "height": 1200
+          }
+        }
+      ],
+      "accessibility": {
+        "pauseLabel": "Pause logo animation"
+      }
+    }
+  },
+  {
+    "id": "home-faq",
+    "type": "faq",
+    "content": {
+      "title": "Frequently asked questions",
+      "description": "Learn more about Tronoša water.",
+      "items": [
+        {
+          "question": "How can I become a partner?",
+          "answer": "Contact our team for information about business collaboration."
+        },
+        {
+          "question": "How can I learn more about the products?",
+          "answer": "Request further information through the contact page."
+        }
+      ]
+    }
+  }
+]

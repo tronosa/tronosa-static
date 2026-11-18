@@ -1,0 +1,75 @@
+[data-partners-list] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+[data-partners-marquee="animated"] [data-partners-track] {
+  display: flex;
+  width: max-content;
+  animation: tronosa-partner-marquee 36s linear infinite;
+}
+[data-partners-marquee="animated"] [data-partners-list] {
+  flex: none;
+  flex-wrap: nowrap;
+  padding-inline-end: 1rem;
+}
+[data-partners-marquee="animated"]
+  [data-partners-window]:hover
+  [data-partners-track],
+[data-partners-pause]:checked ~ [data-partners-window] [data-partners-track] {
+  animation-play-state: paused;
+}
+@keyframes tronosa-partner-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-partners-marquee="animated"] [data-partners-track] {
+    animation: none;
+    display: block;
+    width: 100%;
+  }
+  [data-partners-marquee="animated"] [data-partners-list="original"] {
+    flex-wrap: wrap;
+    padding-inline-end: 0;
+  }
+  [data-partners-list="duplicate"],
+  [data-partners-control],
+  [data-partners-pause] {
+    display: none !important;
+  }
+}
+/* Avoid empty gaps if the list is narrower than the viewport. */
+@media (min-width: 1280px) {
+  [data-partners-marquee="animated"] [data-partners-list] > li {
+    min-width: 15rem;
+  }
+}
+
+[data-partners-pause]:focus-visible ~ [data-partners-control] label {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+[data-partners-check] svg {
+  visibility: hidden;
+}
+[data-partners-pause]:checked
+  ~ [data-partners-control]
+  [data-partners-check]
+  svg {
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-partners-marquee="animated"] [data-partners-window] {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+  }
+}

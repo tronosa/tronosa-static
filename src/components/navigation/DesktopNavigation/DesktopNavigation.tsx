@@ -1,18 +1,24 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
 import { LanguageSwitcher } from "../LanguageSwitcher";
-import { navigationItems } from "../navigation.config";
+import { getNavigationItems } from "../navigation.server";
+import type { Locale } from "@/i18n/config";
 import { DesktopNavigationProps } from "./types";
 import { desktopNavigationLinkVariants } from "./desktop-navigation.variants";
 
 export async function DesktopNavigation({
   activePage,
 }: DesktopNavigationProps) {
-  const t = await getTranslations("Navigation");
-  const tHeader = await getTranslations("Header");
+  const [locale, t, tHeader] = await Promise.all([
+    getLocale(),
+    getTranslations("Navigation"),
+    getTranslations("Header"),
+  ]);
+
+  const navigationItems = getNavigationItems(locale as Locale);
 
   return (
     <nav
@@ -35,8 +41,8 @@ export async function DesktopNavigation({
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "pointer-events-none absolute inset-x-0 bottom-2 h-0.5",
-                    "origin-center rounded-full bg-accent",
+                    "pointer-events-none absolute inset-x-0 bottom-2 h-px",
+                    "origin-center rounded-full bg-(--nav-fg)",
                     "transition-transform origin-left duration-300 ease-out",
                     "motion-reduce:transition-none",
                     active

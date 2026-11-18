@@ -1,0 +1,221 @@
+{
+  "id": "products",
+  "slug": "proizvodi",
+  "seo": {
+    "title": "Производи | Троноша",
+    "description": "Откријте асортиман природне воде Троноша.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "products-image-hero",
+        "type": "image-hero",
+        "content": {
+          "eyebrow": "Наша прича",
+          "title": "Из срца природе.",
+          "description": "Упознајте порекло природне изворске воде Троноша.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1920,
+              "height": 1080
+            },
+            "tablet": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1024,
+              "height": 768
+            },
+            "mobile": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 720,
+              "height": 960
+            }
+          }
+        }
+      },
+      {
+        "id": "home-feature-mosaic",
+        "type": "feature-mosaic",
+        "content": {
+          "title": "Више од воде",
+          "description": "Упознајте вредности које желимо да негујемо.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1200,
+              "height": 1200
+            }
+          },
+          "imagePosition": "right",
+          "cards": [
+            {
+              "title": "Природа",
+              "description": "Поштовање природног окружења."
+            },
+            {
+              "title": "Квалитет",
+              "description": "Пажња према сваком детаљу."
+            },
+            {
+              "title": "Традиција",
+              "description": "Веза са нашим пореклом."
+            },
+            {
+              "title": "Сарадња",
+              "description": "Заједничке вредности."
+            }
+          ]
+        }
+      },
+      {
+        "id": "products-experience",
+        "type": "product-experience",
+        "content": {
+          "appearance": {
+            "backgroundColor": "#E5EEE7",
+            "secondaryBackgroundColor": "#DCEBF0",
+            "accentColor": "#244D39"
+          },
+          "reveal": {
+            "eyebrow": "Из срца природе",
+            "title": "Чистоћа у свакој капи.",
+            "backgroundText": "ТРОНОША",
+            "scrollLabel": "Откријте више"
+          },
+          "composition": {
+            "eyebrow": "Природна равнотежа",
+            "title": "Минерални састав.",
+            "description": "Упознајте састав воде Троноша.",
+            "minerals": []
+          },
+          "collection": {
+            "eyebrow": "Троноша колекција",
+            "title": "За сваки тренутак.",
+            "description": "Изаберите амбалажу која прати ваш ритам."
+          },
+          "products": [
+            {
+              "id": "water-330ml",
+              "eyebrow": "Слобода покрета",
+              "title": "Освежење које вас прати.",
+              "volume": "0,33 L",
+              "description": "Мали формат за велике тренутке.",
+              "highlights": [
+                {
+                  "id": "compact",
+                  "title": "Компактна амбалажа",
+                  "description": "Практична величина која се лако уклапа у ваш дан."
+                },
+                {
+                  "id": "accessibility",
+                  "title": "Увек надохват руке",
+                  "description": "Природно освежење где год да се налазите."
+                },
+                {
+                  "id": "movement",
+                  "title": "Створена за покрет",
+                  "description": "Пратилац ваших свакодневних активности."
+                }
+              ],
+              "image": {
+                "src": "/assets/products/water-330ml.webp",
+                "alt": "Вода Троноша 330 мл",
+                "width": 600,
+                "height": 1200
+              }
+            },
+            {
+              "id": "water-500ml",
+              "eyebrow": "У вашем ритму",
+              "title": "Ваш свакодневни пратилац.",
+              "volume": "0,5 L",
+              "description": "Природно освежење за сваки део вашег дана.",
+              "highlights": [
+                {
+                  "id": "everyday",
+                  "title": "За свакодневне тренутке",
+                  "description": "Код куће, на послу или током путовања."
+                },
+                {
+                  "id": "practical",
+                  "title": "Практичан формат",
+                  "description": "Амбалажа прилагођена вашој свакодневној рутини."
+                },
+                {
+                  "id": "lifestyle",
+                  "title": "У складу са вашим ритмом",
+                  "description": "Освежење које се природно уклапа у ваш живот."
+                }
+              ],
+              "image": {
+                "src": "/assets/products/water-500ml.webp",
+                "alt": "Вода Троноша 500 мл",
+                "width": 600,
+                "height": 1200
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "products-card-slider",
+        "type": "card-slider",
+        "content": {
+          "title": "Природа чини разлику",
+          "description": "Откријте причу иза сваке капи.",
+          "cards": [
+            {
+              "kind": "text",
+              "title": "Порекло",
+              "headline": "Из срца природе",
+              "description": "Упознајте причу о нашем извору."
+            },
+            {
+              "kind": "image",
+              "title": "Извор",
+              "headline": "Троноша",
+              "description": "Прича о природној изворској води.",
+              "image": {
+                "alt": "",
+                "desktop": {
+                  "src": "/assets/images/placeholder.jpg",
+                  "width": 1200,
+                  "height": 1200
+                }
+              }
+            },
+            {
+              "kind": "text",
+              "title": "Квалитет",
+              "headline": "Пажња у сваком кораку",
+              "description": "Сазнајте више о нашем приступу."
+            },
+            {
+              "kind": "image",
+              "title": "Традиција",
+              "headline": "Прича која траје",
+              "description": "Упознајте нас ближе.",
+              "image": {
+                "alt": "",
+                "desktop": {
+                  "src": "/assets/images/placeholder.jpg",
+                  "width": 1200,
+                  "height": 1200
+                }
+              }
+            }
+          ],
+          "accessibility": {
+            "previousLabel": "Претходна картица",
+            "nextLabel": "Следећа картица",
+            "viewportLabel": "Картице о води Троноша"
+          }
+        }
+      }
+    ]
+  }
+}

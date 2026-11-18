@@ -20,7 +20,11 @@ export async function Header({
   const t = await getTranslations("Header");
 
   return (
-    <header {...props} className={cn(headerVariants(), className)}>
+    <header
+      {...props}
+      data-site-header
+      className={cn(headerVariants(), className)}
+    >
       <Container size="wide">
         <div className={headerInnerVariants({ size })}>
           <Link

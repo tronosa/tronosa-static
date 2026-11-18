@@ -1,0 +1,45 @@
+{
+  "id": "about",
+  "slug": "o-nama",
+  "seo": {
+    "title": "O nama | Tronoša",
+    "description": "Upoznajte Tronošu, našu priču, poreklo i posvećenost prirodi.",
+    "canonical": null,
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "structuredData": []
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "about-image-hero",
+        "type": "image-hero",
+        "content": {
+          "eyebrow": "Naša priča",
+          "title": "Iz srca prirode.",
+          "description": "Upoznajte poreklo prirodne izvorske vode Tronoša.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1920,
+              "height": 1080
+            },
+            "tablet": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 1024,
+              "height": 768
+            },
+            "mobile": {
+              "src": "/assets/images/placeholder.jpg",
+              "width": 720,
+              "height": 960
+            }
+          }
+        }
+      }
+    ]
+  }
+}

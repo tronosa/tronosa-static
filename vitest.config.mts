@@ -11,12 +11,22 @@ export default defineConfig({
     include: [
       "src/**/*.{test,spec}.{ts,tsx}",
       "tests/integration/**/*.{test,spec}.{ts,tsx}",
+      "tests/unit/**/*.{test,spec}.{ts,tsx}",
     ],
 
     coverage: {
       provider: "v8",
+
       reporter: ["text", "html", "lcov"],
+
       exclude: ["src/**/*.d.ts", "src/app/**", "tests/**"],
+
+      thresholds: {
+        statements: 96,
+        branches: 90,
+        functions: 97,
+        lines: 96,
+      },
     },
   },
 });
