@@ -1,3 +1,5 @@
+import { getContentSecurityPolicyHeader } from "./csp";
+
 export interface SecurityHeader {
   key: string;
   value: string;
@@ -25,5 +27,7 @@ export function getSecurityHeaders(): SecurityHeader[] {
       key: "X-Permitted-Cross-Domain-Policies",
       value: "none",
     },
+
+    getContentSecurityPolicyHeader("report-only"),
   ];
 }

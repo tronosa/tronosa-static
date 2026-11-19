@@ -24,6 +24,7 @@
     "test:a11y": "playwright test --grep @a11y",
     "test:regression": "pnpm test:coverage && pnpm test:e2e",
     "test:security": "playwright test --grep @security",
+    "test:csp": "playwright test --grep @csp",
     "check:dependencies": "pnpm peers check",
     "check:security": "pnpm audit",
     "check:security:prod": "pnpm audit --prod",
