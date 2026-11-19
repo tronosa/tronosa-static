@@ -79,10 +79,6 @@ export function ProductExperienceMobile({
 
   const activeProductId = activeProduct?.id;
 
-  /*
-   * Animate product changes.
-   */
-
   useGSAP(
     () => {
       const container = containerRef.current;
@@ -112,10 +108,6 @@ export function ProductExperienceMobile({
     return null;
   }
 
-  /*
-   * Product navigation.
-   */
-
   function selectProduct(index: number) {
     if (index < 0 || index >= productCount || index === currentIndex) {
       return;
@@ -124,11 +116,6 @@ export function ProductExperienceMobile({
     directionRef.current = index > currentIndex ? 1 : -1;
 
     setActiveIndex(index);
-
-    /*
-     * Keep the selected product button visible
-     * without scrolling the entire document.
-     */
 
     const navigation = navigationRef.current;
 
@@ -154,10 +141,6 @@ export function ProductExperienceMobile({
       });
     }
   }
-
-  /*
-   * Horizontal swipe navigation.
-   */
 
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
     if (event.pointerType !== "touch" || !event.isPrimary || productCount < 2) {
@@ -211,8 +194,6 @@ export function ProductExperienceMobile({
         })}
       >
         <div className={mobileExperienceContainerVariants()}>
-          {/* Collection header */}
-
           <header
             data-mobile-header
             className={mobileExperienceHeaderVariants()}
@@ -230,8 +211,6 @@ export function ProductExperienceMobile({
               {String(productCount).padStart(2, "0")}
             </span>
           </header>
-
-          {/* Product stage */}
 
           <div
             onPointerDown={handlePointerDown}
@@ -284,15 +263,14 @@ export function ProductExperienceMobile({
                 alt={activeProduct.image.alt}
                 width={activeProduct.image.width}
                 height={activeProduct.image.height}
-                sizes="(max-width: 639px) 65vw, 320px"
-                loading="eager"
+                sizes="auto, 320px"
+                quality={80}
+                loading="lazy"
                 draggable={false}
                 className={mobileExperienceImageVariants()}
               />
             </div>
           </div>
-
-          {/* Product navigation */}
 
           {productCount > 1 && (
             <div

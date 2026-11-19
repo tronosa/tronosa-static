@@ -51,3 +51,10 @@ next-env.d.ts
 
 # Security reports
 reports/security/
+
+# Lighthouse CI
+.lighthouseci/
+reports/lighthouse/
+performance-diagnostics.json
+image-usage-audit.txt
+i18n-usage-audit.txt

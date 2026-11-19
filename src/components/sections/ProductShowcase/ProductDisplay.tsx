@@ -40,7 +40,7 @@ export function ProductDisplay({
 
       <div aria-hidden="true" className={productDisplayShadowVariants()} />
 
-      {products.map((product, index) => {
+      {products.map((product) => {
         const isActive = product.id === activeProductId;
 
         return (
@@ -58,8 +58,9 @@ export function ProductDisplay({
               alt={product.image.alt}
               width={product.image.width}
               height={product.image.height}
-              sizes="(max-width: 1023px) 80vw, 480px"
-              loading={index === 0 || isActive ? "eager" : "lazy"}
+              sizes="auto, 480px"
+              quality={80}
+              loading="lazy"
               draggable={false}
               className={productDisplayImageVariants()}
             />

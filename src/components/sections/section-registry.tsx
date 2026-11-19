@@ -1,32 +1,73 @@
+import "server-only";
+
 import type { ReactNode } from "react";
 
 import type { Section, SectionType } from "@/content/schemas/section.schema";
-import { VideoHero } from "./VideoHero";
-import { ImageHero } from "./ImageHero";
-import { CardSlider } from "./CardSlider";
-import { FeatureMosaic } from "./FeatureMosaic";
-import { StatsBanner } from "./StatsBanner";
-import { PartnersMarquee } from "./PartnersMarquee";
-import { Faq } from "./Faq";
-import { DistributionMap } from "./DistributionMap";
-import { ProductShowcase } from "./ProductShowcase";
-import { ProductExperience } from "./ProductExperience";
 
 type SectionByType<T extends SectionType> = Extract<Section, { type: T }>;
 
 type SectionRegistry = {
-  [T in SectionType]: (section: SectionByType<T>) => ReactNode;
+  [T in SectionType]: (section: SectionByType<T>) => Promise<ReactNode>;
 };
 
 export const sectionRegistry = {
-  "video-hero": ({ content }) => <VideoHero {...content} />,
-  "image-hero": ({ content }) => <ImageHero {...content} />,
-  "card-slider": ({ content }) => <CardSlider {...content} />,
-  "feature-mosaic": ({ content }) => <FeatureMosaic {...content} />,
-  "stats-banner": ({ content }) => <StatsBanner {...content} />,
-  "partners-marquee": ({ content }) => <PartnersMarquee {...content} />,
-  faq: ({ content }) => <Faq {...content} />,
-  "distribution-map": ({ content }) => <DistributionMap {...content} />,
-  "product-showcase": ({ content }) => <ProductShowcase {...content} />,
-  "product-experience": ({ content }) => <ProductExperience {...content} />,
+  "video-hero": async ({ content }) => {
+    const { VideoHero } = await import("./VideoHero");
+
+    return <VideoHero {...content} />;
+  },
+
+  "image-hero": async ({ content }) => {
+    const { ImageHero } = await import("./ImageHero");
+
+    return <ImageHero {...content} />;
+  },
+
+  "card-slider": async ({ content }) => {
+    const { CardSlider } = await import("./CardSlider");
+
+    return <CardSlider {...content} />;
+  },
+
+  "feature-mosaic": async ({ content }) => {
+    const { FeatureMosaic } = await import("./FeatureMosaic");
+
+    return <FeatureMosaic {...content} />;
+  },
+
+  "stats-banner": async ({ content }) => {
+    const { StatsBanner } = await import("./StatsBanner");
+
+    return <StatsBanner {...content} />;
+  },
+
+  "partners-marquee": async ({ content }) => {
+    const { PartnersMarquee } = await import("./PartnersMarquee");
+
+    return <PartnersMarquee {...content} />;
+  },
+
+  faq: async ({ content }) => {
+    const { Faq } = await import("./Faq");
+
+    return <Faq {...content} />;
+  },
+
+  "distribution-map": async ({ content }) => {
+    const { DistributionMap } = await import("./DistributionMap");
+
+    return <DistributionMap {...content} />;
+  },
+
+  "product-showcase": async ({ content }) => {
+    const { ProductShowcase } = await import("./ProductShowcase");
+
+    return <ProductShowcase {...content} />;
+  },
+
+  "product-experience": async ({ content }) => {
+    const { ProductExperience } = await import("./ProductExperience");
+
+    return <ProductExperience {...content} />;
+  },
 } satisfies SectionRegistry;

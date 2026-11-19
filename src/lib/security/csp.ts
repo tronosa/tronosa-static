@@ -18,6 +18,20 @@ type CspDirective =
 
 type CspDirectives = Record<CspDirective, readonly string[]>;
 
+function getVideoOrigins(): string[] {
+  const appId = process.env.UPLOADTHING_APP_ID?.trim();
+
+  if (!appId) {
+    return [];
+  }
+
+  if (!/^[a-z0-9-]+$/i.test(appId)) {
+    throw new Error("Invalid UploadThing application ID.");
+  }
+
+  return [`https://${appId}.ufs.sh`];
+}
+
 const directives: CspDirectives = {
   "default-src": ["'self'"],
 
@@ -37,7 +51,7 @@ const directives: CspDirectives = {
 
   "connect-src": ["'self'", "https://tiles.openfreemap.org"],
 
-  "media-src": ["'self'"],
+  "media-src": ["'self'", ...getVideoOrigins()],
 
   "worker-src": ["'self'", "blob:"],
 

@@ -41,7 +41,7 @@ export const mobileExperienceLabelVariants = cva([
 
 export const mobileExperienceCounterVariants = cva([
   "shrink-0 text-xs font-medium tabular-nums",
-  "opacity-60",
+  "opacity-90",
 ]);
 
 /* Product visual */
@@ -158,7 +158,7 @@ export const mobileExperienceContentVariants = cva(["relative pt-8 sm:pt-10"]);
 export const mobileExperienceEyebrowVariants = cva([
   "mb-3 text-[10px] font-semibold",
   "uppercase tracking-[0.2em]",
-  "opacity-75 sm:text-xs",
+  "opacity-90 sm:text-xs",
 ]);
 
 export const mobileExperienceTitleVariants = cva([
@@ -184,7 +184,7 @@ export const mobileExperienceHighlightVariants = cva([
 
 export const mobileExperienceHighlightIndexVariants = cva([
   "pt-0.5 text-xs font-medium",
-  "opacity-45 tabular-nums",
+  "opacity-90 tabular-nums",
 ]);
 
 export const mobileExperienceHighlightTitleVariants = cva([
@@ -192,7 +192,7 @@ export const mobileExperienceHighlightTitleVariants = cva([
 ]);
 
 export const mobileExperienceHighlightDescriptionVariants = cva([
-  "mt-1.5 text-sm leading-relaxed opacity-75",
+  "mt-1.5 text-sm leading-relaxed opacity-90",
 ]);
 
 /* Progress */

@@ -26,6 +26,10 @@
     "test:security": "playwright test --grep @security",
     "test:reliability": "playwright test --grep @reliability",
     "test:csp": "playwright test --grep @csp",
+    "test:performance": "lhci autorun",
+    "test:performance:collect": "lhci collect",
+    "test:performance:assert": "lhci assert",
+    "test:performance:report": "lhci upload",
     "check:dependencies": "pnpm peers check",
     "check:security": "pnpm audit",
     "check:security:prod": "pnpm audit --prod",
@@ -35,7 +39,8 @@
     "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm build:test",
     "verify:full": "pnpm verify && pnpm test:e2e && pnpm check:dependencies && pnpm check:git",
     "verify:security": "pnpm check:security:prod && pnpm check:security",
-    "prepare": "husky"
+    "prepare": "husky",
+    "analyze": "next experimental-analyze"
   },
   "dependencies": {
     "@gsap/react": "2.1.2",
@@ -57,6 +62,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@lhci/cli": "0.16.1",
     "@playwright/test": "^1.65.0",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "^24.19.2",

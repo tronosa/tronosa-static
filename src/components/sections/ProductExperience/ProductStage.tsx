@@ -46,8 +46,9 @@ export function ProductStage({ products }: ProductStageProps) {
               alt={product.image.alt}
               width={product.image.width}
               height={product.image.height}
-              sizes="(max-width: 1023px) 45vw, 400px"
-              loading={products.length <= 6 || index < 2 ? "eager" : "lazy"}
+              sizes="auto, 400px"
+              quality={80}
+              loading="lazy"
               draggable={false}
               className={experienceBottleImageVariants()}
             />

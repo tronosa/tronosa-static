@@ -60,7 +60,8 @@ export function ProductSelector({
                 alt=""
                 width={product.image.width}
                 height={product.image.height}
-                sizes="64px"
+                sizes="auto, 64px"
+                quality={65}
                 loading="lazy"
                 draggable={false}
                 className={productSelectorImageVariants()}

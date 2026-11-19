@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef, type CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 
 import { Section } from "@/components/ui/Section";
-import { useGSAP } from "@/lib/animation/gsap";
 
 import { ProductStage } from "./ProductStage";
 import { ProductReveal } from "./ProductReveal";
@@ -12,7 +11,7 @@ import { ProductComposition } from "./ProductComposition";
 import { ProductCollection } from "./ProductCollection";
 import { ProductExperienceMobile } from "./ProductExperienceMobile";
 
-import { createProductExperienceAnimation } from "./product-experience.animations";
+import { createMobileAnimation } from "./product-experience.mobile.animations";
 
 import {
   productExperienceVariants,
@@ -28,36 +27,132 @@ import {
 
 import type { ProductExperienceProps } from "./types";
 
+const DESKTOP_MEDIA_QUERY = "(min-width: 1024px) and (min-height: 760px)";
+
+const REDUCED_MOTION_MEDIA_QUERY = "(prefers-reduced-motion: reduce)";
+
 export function ProductExperienceClient(props: ProductExperienceProps) {
   const { appearance, reveal, composition, collection, products } = props;
 
+  const { backgroundColor, secondaryBackgroundColor } = appearance;
+
   const containerRef = useRef<HTMLElement>(null);
 
-  useGSAP(
-    () => {
-      const container = containerRef.current;
+  useEffect(() => {
+    const containerElement = containerRef.current;
 
-      if (!container) {
+    if (!containerElement) {
+      return;
+    }
+
+    const container: HTMLElement = containerElement;
+
+    const mobileElement = container.querySelector<HTMLElement>(
+      "[data-experience-mobile]",
+    );
+
+    if (!mobileElement) {
+      return;
+    }
+
+    const mobile: HTMLElement = mobileElement;
+
+    const desktopMedia = window.matchMedia(DESKTOP_MEDIA_QUERY);
+
+    const reducedMotionMedia = window.matchMedia(REDUCED_MOTION_MEDIA_QUERY);
+
+    let disposed = false;
+    let desktopControllerActive = false;
+    let requestId = 0;
+
+    let cleanupAnimation: (() => void) | undefined;
+
+    function cleanup() {
+      cleanupAnimation?.();
+      cleanupAnimation = undefined;
+    }
+
+    function removeMediaListeners() {
+      desktopMedia.removeEventListener("change", synchronize);
+      reducedMotionMedia.removeEventListener("change", synchronize);
+    }
+
+    function synchronize() {
+      if (disposed || desktopControllerActive) {
         return;
       }
 
-      return createProductExperienceAnimation(container, appearance);
-    },
-    {
-      scope: containerRef,
+      const currentRequestId = ++requestId;
 
-      dependencies: [
-        appearance.backgroundColor,
-        appearance.secondaryBackgroundColor,
-        products,
-        reveal,
-        composition,
-        collection,
-      ],
+      cleanup();
 
-      revertOnUpdate: true,
-    },
-  );
+      if (reducedMotionMedia.matches) {
+        return;
+      }
+
+      if (!desktopMedia.matches) {
+        cleanupAnimation = createMobileAnimation(mobile);
+
+        return;
+      }
+
+      void import("./product-experience.animations")
+        .then(({ createProductExperienceAnimation }) => {
+          if (disposed || currentRequestId !== requestId) {
+            return;
+          }
+
+          cleanupAnimation = createProductExperienceAnimation(container, {
+            backgroundColor,
+            secondaryBackgroundColor,
+          });
+
+          /*
+           * The desktop engine owns responsive
+           * behavior through gsap.matchMedia().
+           */
+
+          desktopControllerActive = true;
+
+          removeMediaListeners();
+        })
+        .catch((error: unknown) => {
+          if (disposed || currentRequestId !== requestId) {
+            return;
+          }
+
+          console.error(
+            "[ProductExperience] Animation initialization failed.",
+            error,
+          );
+
+          cleanupAnimation = createMobileAnimation(mobile);
+        });
+    }
+
+    desktopMedia.addEventListener("change", synchronize);
+
+    reducedMotionMedia.addEventListener("change", synchronize);
+
+    synchronize();
+
+    return () => {
+      disposed = true;
+
+      requestId++;
+
+      removeMediaListeners();
+
+      cleanup();
+    };
+  }, [
+    backgroundColor,
+    secondaryBackgroundColor,
+    products,
+    reveal,
+    composition,
+    collection,
+  ]);
 
   const styles = {
     "--experience-background": appearance.backgroundColor,

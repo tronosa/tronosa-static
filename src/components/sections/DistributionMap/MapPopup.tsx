@@ -4,7 +4,6 @@ import { useId } from "react";
 import Image from "next/image";
 
 import type { DistributionLocation } from "./types";
-
 import type { DistributionMapMessages } from "./distribution-map.i18n";
 
 import {
@@ -36,9 +35,10 @@ export function LocationImage({
       alt={location.image.alt}
       width={640}
       height={360}
+      sizes="auto, (max-width: 900px) 100vw, 300px"
+      quality={70}
       loading="lazy"
       decoding="async"
-      unoptimized
       className="distribution-map__image"
     />
   );

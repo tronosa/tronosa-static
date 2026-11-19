@@ -1,16 +1,22 @@
 import { Picture } from "@/components/media/Picture";
 import { Container } from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
+import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
+
 import { MarqueeViewport } from "./MarqueeViewport";
+
 import {
   partnersMarqueeVariants,
   partnersMarqueeHeaderVariants,
   partnerLogoVariants,
 } from "./partners-marquee.variants";
+
 import type { PartnersMarqueeProps } from "./types";
+
 import "./partners-marquee.css";
-import { Section } from "@/components/ui/Section";
+
+const PARTNER_LOGO_SIZES = "(min-width: 640px) 160px, 128px";
 
 export function PartnersMarquee({
   title,
@@ -27,11 +33,14 @@ export function PartnersMarquee({
           desktop={partner.logo}
           ratio="landscape"
           fit="contain"
-          sizes="160px"
+          sizes={PARTNER_LOGO_SIZES}
+          quality={80}
+          loading="lazy"
           className="w-32 sm:w-40"
         />
       </li>
     ));
+
   return (
     <Section
       spacingType="padding"
@@ -43,13 +52,16 @@ export function PartnersMarquee({
           <Typography as="h2" variant="h2">
             {title}
           </Typography>
+
           {description && <Typography as="p">{description}</Typography>}
         </div>
+
         <MarqueeViewport
           accessibility={accessibility}
           animated={partners.length >= 6}
         >
           <ul data-partners-list="original">{renderLogos(false)}</ul>
+
           {partners.length >= 6 && (
             <ul data-partners-list="duplicate" aria-hidden="true">
               {renderLogos(true)}

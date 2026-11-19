@@ -43,8 +43,9 @@ export async function Header({
               alt={t("brand.logo.alt")}
               width={60}
               height={60}
+              sizes="(min-width: 768px) 60px, 40px"
+              quality={80}
               loading="eager"
-              unoptimized
               className="size-10 object-contain md:size-15"
             />
           </Link>
