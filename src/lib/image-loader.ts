@@ -5,22 +5,33 @@ export default function imageLoader({
   width,
   quality,
 }: ImageLoaderProps): string {
-  // External URLs and static assets outside /assets/
-  // are returned without CDN transformations.
-  if (!src.startsWith("/assets/")) {
-    return src;
+  const endpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT?.trim();
+
+  const isAbsoluteUrl = /^https?:\/\//i.test(src);
+
+  const normalizedSrc = src.replace(/^\/+/, "").replace(/^assets\//, "");
+
+  // Use local assets when ImageKit is not configured.
+  if (!endpoint) {
+    if (isAbsoluteUrl) {
+      return src;
+    }
+
+    return `/assets/${normalizedSrc}`;
   }
 
-  // Local development uses original files.
-  if (process.env.NEXT_PUBLIC_IMAGE_CDN !== "netlify") {
-    return src;
+  const baseUrl = new URL(`${endpoint.replace(/\/+$/, "")}/`);
+
+  const url = isAbsoluteUrl ? new URL(src) : new URL(normalizedSrc, baseUrl);
+
+  if (
+    url.origin !== baseUrl.origin ||
+    !url.pathname.startsWith(baseUrl.pathname)
+  ) {
+    throw new Error(`Unsupported image source: ${src}`);
   }
 
-  const params = new URLSearchParams({
-    url: src,
-    w: String(width),
-    q: String(quality ?? 75),
-  });
+  url.searchParams.set("tr", `w-${width},q-${quality ?? 75}`);
 
-  return `/.netlify/images?${params.toString()}`;
+  return url.toString();
 }

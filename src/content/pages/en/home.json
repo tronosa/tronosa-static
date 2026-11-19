@@ -17,7 +17,7 @@
           "description": "Discover Tronoša natural spring water.",
           "video": {
             "src": "/assets/videos/placeholder.mp4",
-            "poster": "/assets/images/placeholder.jpg",
+            "poster": "/images/placeholder.jpg",
             "type": "video/mp4"
           },
           "cta": {
@@ -51,7 +51,7 @@
               "image": {
                 "alt": "",
                 "desktop": {
-                  "src": "/assets/images/placeholder.jpg",
+                  "src": "/images/placeholder.jpg",
                   "width": 1200,
                   "height": 1200
                 }
@@ -71,7 +71,7 @@
               "image": {
                 "alt": "",
                 "desktop": {
-                  "src": "/assets/images/placeholder.jpg",
+                  "src": "/images/placeholder.jpg",
                   "width": 1200,
                   "height": 1200
                 }
@@ -107,7 +107,7 @@
               "description": "A convenient bottle designed to go wherever you do.",
               "volume": "0.33 L",
               "image": {
-                "src": "/assets/products/water-330ml.webp",
+                "src": "/products/water-330ml.webp",
                 "alt": "Tronoša water in a 330 millilitre bottle",
                 "width": 600,
                 "height": 1200
@@ -123,7 +123,7 @@
               "description": "Natural refreshment for your everyday rhythm.",
               "volume": "0.5 L",
               "image": {
-                "src": "/assets/products/water-500ml.webp",
+                "src": "/products/water-500ml.webp",
                 "alt": "Tronoša water in a 500 millilitre bottle",
                 "width": 600,
                 "height": 1200
@@ -145,7 +145,7 @@
           "image": {
             "alt": "",
             "desktop": {
-              "src": "/assets/images/placeholder.jpg",
+              "src": "/images/placeholder.jpg",
               "width": 1200,
               "height": 1200
             }
@@ -337,7 +337,7 @@
             {
               "name": "Partner 01",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -345,7 +345,7 @@
             {
               "name": "Partner 02",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -353,7 +353,7 @@
             {
               "name": "Partner 03",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -361,7 +361,7 @@
             {
               "name": "Partner 04",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -369,7 +369,7 @@
             {
               "name": "Partner 05",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -377,7 +377,7 @@
             {
               "name": "Partner 06",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
