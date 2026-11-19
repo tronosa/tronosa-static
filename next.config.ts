@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 import { getEnvironment } from "./src/lib/environment";
+import { getSecurityHeaders } from "./src/lib/security/headers";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -14,6 +15,7 @@ const nextConfig: NextConfig = {
   images: {
     loader: "custom",
     loaderFile: "./src/lib/image-loader.ts",
+
     deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
     imageSizes: [96, 160, 256, 384],
     qualities: [75, 80],
@@ -22,18 +24,20 @@ const nextConfig: NextConfig = {
   async headers() {
     const { isIndexable } = getEnvironment();
 
-    if (isIndexable) {
-      return [];
-    }
-
     return [
       {
         source: "/:path*",
         headers: [
-          {
-            key: "X-Robots-Tag",
-            value: "noindex, nofollow, noarchive",
-          },
+          ...getSecurityHeaders(),
+
+          ...(!isIndexable
+            ? [
+                {
+                  key: "X-Robots-Tag",
+                  value: "noindex, nofollow, noarchive",
+                },
+              ]
+            : []),
         ],
       },
     ];

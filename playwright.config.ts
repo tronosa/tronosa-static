@@ -24,12 +24,16 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: `pnpm exec next dev -p ${port}`,
+    command: `pnpm start --port ${port}`,
     url: baseURL,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 120_000,
+
     env: {
+      NODE_ENV: "production",
+      APP_ENV: "staging",
       SITE_URL: "https://example.com",
+      NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT: "",
     },
   },
 });
