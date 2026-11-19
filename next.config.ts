@@ -5,10 +5,6 @@ import { getEnvironment } from "./src/lib/environment";
 
 const withNextIntl = createNextIntlPlugin();
 
-const isImageKitEnabled = Boolean(
-  process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
-);
-
 const nextConfig: NextConfig = {
   trailingSlash: false,
   reactStrictMode: true,
@@ -16,11 +12,8 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
 
   images: {
-    ...(isImageKitEnabled && {
-      loader: "custom",
-      loaderFile: "./src/lib/image-loader.ts",
-    }),
-
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
     deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
     imageSizes: [96, 160, 256, 384],
     qualities: [75, 80],
