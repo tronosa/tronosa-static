@@ -1,6 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { getSecurityHeaders } from "./headers";
+
+afterEach(() => {
+  vi.unstubAllEnvs();
+});
 
 describe("Security headers", () => {
   function getHeaders() {
@@ -58,5 +62,38 @@ describe("Security headers", () => {
       expect(key).not.toMatch(/[\r\n]/);
       expect(value).not.toMatch(/[\r\n]/);
     }
+  });
+
+  describe("CSP environment configuration", () => {
+    it("enforces CSP in production", () => {
+      vi.stubEnv("NODE_ENV", "production");
+
+      const headers = getHeaders();
+
+      expect(headers["content-security-policy"]).toBeDefined();
+
+      expect(headers["content-security-policy-report-only"]).toBeUndefined();
+    });
+
+    it.each(["development", "test"])(
+      "uses report-only CSP in %s",
+      (environment) => {
+        vi.stubEnv("NODE_ENV", environment);
+
+        const headers = getHeaders();
+
+        expect(headers["content-security-policy-report-only"]).toBeDefined();
+
+        expect(headers["content-security-policy"]).toBeUndefined();
+      },
+    );
+
+    it("does not weaken production CSP with unsafe eval", () => {
+      vi.stubEnv("NODE_ENV", "production");
+
+      expect(getHeaders()["content-security-policy"]).not.toContain(
+        "'unsafe-eval'",
+      );
+    });
   });
 });

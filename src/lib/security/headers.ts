@@ -6,6 +6,8 @@ export interface SecurityHeader {
 }
 
 export function getSecurityHeaders(): SecurityHeader[] {
+  const isProduction = process.env.NODE_ENV === "production";
+
   return [
     {
       key: "X-Content-Type-Options",
@@ -28,6 +30,6 @@ export function getSecurityHeaders(): SecurityHeader[] {
       value: "none",
     },
 
-    getContentSecurityPolicyHeader("report-only"),
+    getContentSecurityPolicyHeader(isProduction ? "enforce" : "report-only"),
   ];
 }
