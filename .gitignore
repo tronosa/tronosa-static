@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Vitest
 /coverage/
+
+# Security reports
+reports/security/

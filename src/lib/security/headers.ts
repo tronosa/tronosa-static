@@ -31,5 +31,14 @@ export function getSecurityHeaders(): SecurityHeader[] {
     },
 
     getContentSecurityPolicyHeader(isProduction ? "enforce" : "report-only"),
+
+    ...(process.env.APP_ENV === "production"
+      ? [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000",
+          },
+        ]
+      : []),
   ];
 }

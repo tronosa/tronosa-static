@@ -96,4 +96,23 @@ describe("Security headers", () => {
       );
     });
   });
+
+  describe("Strict Transport Security", () => {
+    it("enables HSTS in production", () => {
+      vi.stubEnv("APP_ENV", "production");
+
+      expect(getHeaders()["strict-transport-security"]).toBe(
+        "max-age=31536000",
+      );
+    });
+
+    it.each(["development", "staging", "test", undefined])(
+      "does not enable HSTS in %s",
+      (environment) => {
+        vi.stubEnv("APP_ENV", environment);
+
+        expect(getHeaders()["strict-transport-security"]).toBeUndefined();
+      },
+    );
+  });
 });

@@ -30,6 +30,8 @@
     "check:security": "pnpm audit",
     "check:security:prod": "pnpm audit --prod",
     "check:git": "git diff --check && git diff --cached --check",
+    "check:secrets": "gitleaks git --redact --no-banner",
+    "check:secrets:staged": "gitleaks git --staged --redact --no-banner",
     "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm build:test",
     "verify:full": "pnpm verify && pnpm test:e2e && pnpm check:dependencies && pnpm check:git",
     "verify:security": "pnpm check:security:prod && pnpm check:security",
