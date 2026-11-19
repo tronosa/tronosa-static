@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/cn";
+import { resolveImageUrl } from "@/lib/media/resolve-image-url";
 
 import { BackgroundVideoControls } from "./BackgroundVideoControls";
 
@@ -23,6 +24,13 @@ export function BackgroundVideo({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [playing, setPlaying] = useState(false);
+
+  const posterUrl = video.poster
+    ? resolveImageUrl(video.poster, {
+        width: 1920,
+        quality: 80,
+      })
+    : undefined;
 
   useEffect(() => {
     const element = videoRef.current;
@@ -80,7 +88,7 @@ export function BackgroundVideo({
         loop
         playsInline
         preload="none"
-        poster={video.poster}
+        poster={posterUrl}
         aria-hidden="true"
         tabIndex={-1}
         onPlay={() => setPlaying(true)}

@@ -33,7 +33,7 @@
           "title": "Priroda u svakoj kapi.",
           "description": "Otkrijte prirodnu izvorsku vodu Tronoša.",
           "video": {
-            "src": "/assets/videos/placeholder.mp4",
+            "src": "/videos/placeholder.mp4",
             "poster": "/images/placeholder.jpg",
             "type": "video/mp4"
           },

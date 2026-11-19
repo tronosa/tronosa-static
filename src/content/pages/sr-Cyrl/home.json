@@ -33,7 +33,7 @@
           "title": "Природа у свакој капи.",
           "description": "Откријте природну изворску воду Троноша.",
           "video": {
-            "src": "/assets/videos/placeholder.mp4",
+            "src": "/videos/placeholder.mp4",
             "poster": "/images/placeholder.jpg",
             "type": "video/mp4"
           },
