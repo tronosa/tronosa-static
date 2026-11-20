@@ -58,3 +58,6 @@ reports/lighthouse/
 performance-diagnostics.json
 image-usage-audit.txt
 i18n-usage-audit.txt
+
+# Reliability testing
+.k6/
