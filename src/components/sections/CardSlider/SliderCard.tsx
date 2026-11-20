@@ -9,6 +9,13 @@ import {
 
 import type { SliderCardContent } from "./types";
 
+const CARD_IMAGE_SIZES = [
+  "(min-width: 90rem) calc((90rem - 8rem) / 3)",
+  "(min-width: 1024px) calc((100vw - 8rem) / 3)",
+  "(min-width: 640px) calc((100vw - 5.25rem) / 2)",
+  "calc(100vw - 2.5rem)",
+].join(", ");
+
 export function SliderCard({ card }: { card: SliderCardContent }) {
   return (
     <article className={sliderCardVariants({ kind: card.kind })}>
@@ -17,7 +24,9 @@ export function SliderCard({ card }: { card: SliderCardContent }) {
           <Picture
             {...card.image}
             ratio="fill"
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            sizes={CARD_IMAGE_SIZES}
+            quality={75}
+            loading="lazy"
           />
 
           <div

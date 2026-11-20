@@ -12,6 +12,7 @@ export function Picture({
   tablet,
   mobile,
   sizes,
+  quality = 75,
   ratio = "auto",
   radius = "none",
   fit = "cover",
@@ -25,6 +26,7 @@ export function Picture({
   const commonProps = {
     alt,
     sizes,
+    quality,
     loading,
     fetchPriority,
     unoptimized,

@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.github
+.k6
+.netlify
+.lighthouseci
+coverage
+playwright-report
+test-results
+
+.env
+.env.*
+!.env.example
+
+*.log
+*.tsbuildinfo

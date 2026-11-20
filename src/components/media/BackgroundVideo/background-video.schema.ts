@@ -1,9 +1,14 @@
 import { z } from "zod";
 
-export const backgroundVideoSchema = z.object({
+export const backgroundVideoSourceSchema = z.object({
   src: z.string().trim().min(1),
-  poster: z.string().trim().min(1),
   type: z.enum(["video/mp4", "video/webm"]).default("video/mp4"),
+});
+
+export const backgroundVideoSchema = backgroundVideoSourceSchema.extend({
+  poster: z.string().trim().min(1),
+  tablet: backgroundVideoSourceSchema.optional(),
+  mobile: backgroundVideoSourceSchema.optional(),
 });
 
 export const backgroundVideoAccessibilitySchema = z.object({

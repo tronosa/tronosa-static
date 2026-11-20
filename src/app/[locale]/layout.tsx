@@ -35,8 +35,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       data-scroll-behavior="smooth"
     >
       <body>
-        <NextIntlClientProvider>
-          {" "}
+        <NextIntlClientProvider messages={null}>
           <Header />
           {children}
         </NextIntlClientProvider>

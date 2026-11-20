@@ -75,6 +75,7 @@ export function MapCanvas({
     let disposed = false;
     let started = false;
     let failed = false;
+    let hasEnteredViewport = false;
 
     let timeoutId: number | undefined;
 
@@ -102,6 +103,7 @@ export function MapCanvas({
         disposed ||
         started ||
         failed ||
+        !hasEnteredViewport ||
         !container ||
         container.clientWidth === 0 ||
         container.clientHeight === 0
@@ -186,7 +188,11 @@ export function MapCanvas({
       }
     }
 
-    const observer = new ResizeObserver(() => {
+    /*
+     * Observe container dimensions and preserve
+     * the existing map instance during layout changes.
+     */
+    const resizeObserver = new ResizeObserver(() => {
       if (
         disposed ||
         failed ||
@@ -203,16 +209,43 @@ export function MapCanvas({
       }
     });
 
-    observer.observe(container);
+    /*
+     * Defer MapLibre initialization until the map
+     * approaches the visible viewport.
+     */
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        if (
+          disposed ||
+          failed ||
+          !entries.some((entry) => entry.isIntersecting)
+        ) {
+          return;
+        }
 
-    void initialize();
+        hasEnteredViewport = true;
+
+        intersectionObserver.disconnect();
+
+        void initialize();
+      },
+      {
+        root: null,
+        rootMargin: "200px",
+        threshold: 0,
+      },
+    );
+
+    resizeObserver.observe(container);
+    intersectionObserver.observe(container);
 
     return () => {
       disposed = true;
 
       window.clearTimeout(timeoutId);
 
-      observer.disconnect();
+      resizeObserver.disconnect();
+      intersectionObserver.disconnect();
 
       map?.remove();
     };

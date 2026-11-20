@@ -2,37 +2,29 @@
 
 import { useState, useTransition } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { useLocale, useTranslations } from "next-intl";
 
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
-import { LanguageSwitcherDialogProps } from "./types";
+
+import type { Locale } from "@/i18n/config";
+import type { LanguageSwitcherDialogProps } from "./types";
 
 export function LanguageSwitcherDialog({
   routes,
+  locale,
+  languages,
+  currentShortLabel,
+  accessibleLabel,
+  title,
+  closeLabel,
 }: LanguageSwitcherDialogProps) {
-  const locale = useLocale();
-  const t = useTranslations("Header");
-
   const pathname = usePathname();
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const languageNames = t.raw("languages") as Record<string, string>;
-
-  const languageShortLabels = t.raw("languageShortLabels") as Record<
-    string,
-    string
-  >;
-
-  const currentShortLabel = languageShortLabels[locale] ?? locale;
-
-  const currentLanguage = languageNames[locale] ?? locale;
-
-  function changeLanguage(nextLocale: (typeof routing.locales)[number]) {
+  function changeLanguage(nextLocale: Locale) {
     if (nextLocale === locale) {
       setOpen(false);
       return;
@@ -62,9 +54,7 @@ export function LanguageSwitcherDialog({
         <button
           type="button"
           disabled={isPending}
-          aria-label={t("languageSwitcher.currentLanguage", {
-            language: currentLanguage,
-          })}
+          aria-label={accessibleLabel}
           className={cn(
             "group inline-flex h-9 w-20 shrink-0",
             "items-center justify-center gap-1.5",
@@ -149,13 +139,13 @@ export function LanguageSwitcherDialog({
         >
           <div className="mb-6 flex items-center justify-between gap-4">
             <Dialog.Title className="text-xl font-semibold text-foreground">
-              {t("languageSwitcher.label")}
+              {title}
             </Dialog.Title>
 
             <Dialog.Close asChild>
               <button
                 type="button"
-                aria-label={t("mobileMenu.closeLabel")}
+                aria-label={closeLabel}
                 className={cn(
                   "inline-flex size-10 shrink-0",
                   "items-center justify-center",
@@ -188,21 +178,17 @@ export function LanguageSwitcherDialog({
           </div>
 
           <div className="grid gap-2">
-            {routing.locales.map((availableLocale) => {
-              const active = availableLocale === locale;
-              const language =
-                languageNames[availableLocale] ?? availableLocale;
+            {languages.map((language) => {
+              const active = language.locale === locale;
 
               return (
                 <button
-                  key={availableLocale}
+                  key={language.locale}
                   type="button"
-                  lang={availableLocale}
+                  lang={language.locale}
                   aria-pressed={active}
-                  aria-label={t("languageSwitcher.switchTo", {
-                    language,
-                  })}
-                  onClick={() => changeLanguage(availableLocale)}
+                  aria-label={language.accessibleLabel}
+                  onClick={() => changeLanguage(language.locale)}
                   className={cn(
                     "group flex min-h-14 w-full",
                     "items-center justify-between gap-4",
@@ -218,7 +204,7 @@ export function LanguageSwitcherDialog({
                       : "border-border/70 bg-surface/60 text-foreground hover:border-accent/60 hover:bg-surface-muted",
                   )}
                 >
-                  <span className="font-medium">{language}</span>
+                  <span className="font-medium">{language.label}</span>
 
                   {active && (
                     <svg

@@ -1,15 +1,11 @@
 import { cva } from "class-variance-authority";
 
-/* Section */
-
 export const productShowcaseVariants = cva([
   "relative isolate overflow-hidden",
   "text-(--product-accent)",
   "transition-colors duration-700",
   "motion-reduce:transition-none",
 ]);
-
-/* Background */
 
 export const productShowcaseBackgroundVariants = cva([
   "pointer-events-none absolute inset-0 -z-10",
@@ -32,8 +28,6 @@ export const productShowcaseBackgroundTextVariants = cva([
   "text-white/45",
 ]);
 
-/* Layout */
-
 export const productShowcaseLayoutVariants = cva([
   "relative z-10",
   "grid w-full min-w-0",
@@ -41,8 +35,6 @@ export const productShowcaseLayoutVariants = cva([
   "gap-x-8 gap-y-8",
   "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)]",
 ]);
-
-/* Header */
 
 export const productShowcaseHeaderVariants = cva([
   "flex min-w-0 flex-col",
@@ -69,16 +61,12 @@ export const productShowcaseDescriptionVariants = cva([
   "sm:text-base",
 ]);
 
-/* Product display container */
-
 export const productShowcaseDisplayContainerVariants = cva([
   "relative w-full min-w-0",
   "flex items-center justify-center",
   "lg:col-start-2",
   "lg:row-start-1 lg:row-span-2",
 ]);
-
-/* Product display */
 
 export const productDisplayVariants = cva([
   "relative isolate",
@@ -142,8 +130,6 @@ export const productDisplayImageVariants = cva([
   "object-contain select-none",
 ]);
 
-/* Product selector container */
-
 export const productShowcaseSelectorContainerVariants = cva([
   "relative z-20",
   "flex w-full min-w-0",
@@ -152,8 +138,6 @@ export const productShowcaseSelectorContainerVariants = cva([
   "lg:row-start-1 lg:row-span-2",
   "lg:justify-end",
 ]);
-
-/* Product information */
 
 export const productShowcaseInformationContainerVariants = cva([
   "relative min-w-0",

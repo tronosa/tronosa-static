@@ -33,8 +33,8 @@
           "title": "Priroda u svakoj kapi.",
           "description": "Otkrijte prirodnu izvorsku vodu Tronoša.",
           "video": {
-            "src": "/assets/videos/placeholder.mp4",
-            "poster": "/assets/images/placeholder.jpg",
+            "src": "/videos/placeholder.mp4",
+            "poster": "/images/placeholder.jpg",
             "type": "video/mp4"
           },
           "cta": {
@@ -68,7 +68,7 @@
               "image": {
                 "alt": "",
                 "desktop": {
-                  "src": "/assets/images/placeholder.jpg",
+                  "src": "/images/placeholder.jpg",
                   "width": 1200,
                   "height": 1200
                 }
@@ -88,7 +88,7 @@
               "image": {
                 "alt": "",
                 "desktop": {
-                  "src": "/assets/images/placeholder.jpg",
+                  "src": "/images/placeholder.jpg",
                   "width": 1200,
                   "height": 1200
                 }
@@ -124,7 +124,7 @@
               "description": "Praktično pakovanje koje je uvek uz vas.",
               "volume": "0,33 L",
               "image": {
-                "src": "/assets/products/water-330ml.webp",
+                "src": "/products/water-330ml.webp",
                 "alt": "Voda Tronoša u ambalaži od 330 mililitara",
                 "width": 600,
                 "height": 1200
@@ -140,7 +140,7 @@
               "description": "Prirodno osveženje za vaš svakodnevni ritam.",
               "volume": "0,5 L",
               "image": {
-                "src": "/assets/products/water-500ml.webp",
+                "src": "/products/water-500ml.webp",
                 "alt": "Voda Tronoša u ambalaži od 500 mililitara",
                 "width": 600,
                 "height": 1200
@@ -162,7 +162,7 @@
           "image": {
             "alt": "",
             "desktop": {
-              "src": "/assets/images/placeholder.jpg",
+              "src": "/images/placeholder.jpg",
               "width": 1200,
               "height": 1200
             }
@@ -354,7 +354,7 @@
             {
               "name": "Partner 01",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -362,7 +362,7 @@
             {
               "name": "Partner 02",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -370,7 +370,7 @@
             {
               "name": "Partner 03",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -378,7 +378,7 @@
             {
               "name": "Partner 04",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -386,7 +386,7 @@
             {
               "name": "Partner 05",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }
@@ -394,7 +394,7 @@
             {
               "name": "Partner 06",
               "logo": {
-                "src": "/assets/images/placeholder.jpg",
+                "src": "/images/placeholder.jpg",
                 "width": 1200,
                 "height": 1200
               }

@@ -1,9 +1,15 @@
 import type { z } from "zod";
 import type { VariantProps } from "class-variance-authority";
 
-import type { pictureSchema, pictureSourceSchema } from "./picture.schema";
+import type {
+  pictureSchema,
+  pictureSourceSchema,
+  pictureQualitySchema,
+} from "./picture.schema";
 
 import type { pictureVariants, pictureImageVariants } from "./picture.variants";
+
+export type PictureQuality = z.infer<typeof pictureQualitySchema>;
 
 export type PictureSource = z.infer<typeof pictureSourceSchema>;
 
@@ -15,6 +21,7 @@ export type PictureProps = PictureContent &
     sizes: string;
     loading?: "eager" | "lazy";
     fetchPriority?: "high" | "low" | "auto";
+    quality?: PictureQuality;
     unoptimized?: boolean;
     className?: string;
     imageClassName?: string;

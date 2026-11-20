@@ -1,5 +1,7 @@
-echo "Running pre-commit quality gates..."
+echo "Running secret detection..."
+pnpm check:secrets:staged || exit 1
 
+echo "Running pre-commit quality gates..."
 pnpm verify:full || exit 1
 
 echo "All pre-commit quality gates passed."
