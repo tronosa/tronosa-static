@@ -296,15 +296,13 @@ export function ShareArticle({ url, title, labels }: ShareArticleProps) {
           </button>
         </div>
 
-        {copyStatus !== "idle" && (
-          <p
-            role="status"
-            aria-live="polite"
-            className="border-t border-border/70 px-3 pt-3 text-xs text-foreground"
-          >
-            {copyStatus === "success" ? labels.copied : labels.copyFailed}
-          </p>
-        )}
+        <span role="status" aria-live="polite" className="sr-only">
+          {copyStatus === "success"
+            ? labels.copied
+            : copyStatus === "error"
+              ? labels.copyFailed
+              : ""}
+        </span>
       </div>
     </>
   );

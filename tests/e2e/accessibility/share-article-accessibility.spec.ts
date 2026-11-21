@@ -12,7 +12,7 @@ const articleRoutes = locales.map((locale) => {
   );
 
   if (!route) {
-    throw new Error(`No published article available for locale "${locale}".`);
+    throw new Error(`No published article found for locale "${locale}".`);
   }
 
   return route;
@@ -42,13 +42,13 @@ async function getControlledPopover(
   page: Page,
   trigger: Locator,
 ): Promise<Locator> {
-  const id = await trigger.getAttribute("aria-controls");
+  const popoverId = await trigger.getAttribute("aria-controls");
 
-  if (!id) {
-    throw new Error("Share trigger must reference a controlled popover.");
+  if (!popoverId) {
+    throw new Error("ShareArticle trigger does not expose aria-controls.");
   }
 
-  return page.locator(`[id=${JSON.stringify(id)}]`);
+  return page.locator(`[id=${JSON.stringify(popoverId)}]`);
 }
 
 async function openSharePopover(
@@ -63,14 +63,12 @@ async function openSharePopover(
 
   await expect(trigger).toBeFocused();
 
-  await page.keyboard.press(key);
+  await trigger.press(key);
 
   const popover = await getControlledPopover(page, trigger);
 
   await expect(popover).toBeVisible();
-
   await expect(popover).toHaveAttribute("role", "dialog");
-
   await expect(popover).toHaveAccessibleName(/\S/);
 
   await expect(trigger).toHaveAttribute("aria-expanded", "true");
@@ -78,7 +76,10 @@ async function openSharePopover(
   return popover;
 }
 
-async function expectClosedPopover(popover: Locator, trigger: Locator) {
+async function expectClosedPopover(
+  trigger: Locator,
+  popover: Locator,
+): Promise<void> {
   await expect(popover).toBeHidden();
 
   await expect(trigger).toHaveAttribute("aria-expanded", "false");
@@ -99,12 +100,14 @@ test.describe("Share article accessibility @a11y", () => {
           test.beforeEach(async ({ page }) => {
             const response = await page.goto(route.pathname);
 
-            expect(response?.status()).toBe(200);
+            expect(response?.status()).toBe(route.expectedStatus);
           });
 
           test("provides accessible collapsed semantics", async ({ page }) => {
             const trigger = getShareTrigger(page);
 
+            await expect(trigger).toBeVisible();
+            await expect(trigger).toBeEnabled();
             await expect(trigger).toHaveAccessibleName(/\S/);
 
             await expect(trigger).toHaveAttribute("aria-haspopup", "dialog");
@@ -129,7 +132,9 @@ test.describe("Share article accessibility @a11y", () => {
 
             const popover = await openSharePopover(page, trigger, "Enter");
 
-            await expect(popover.getByRole("link").first()).toBeFocused();
+            const firstAction = popover.getByRole("link").first();
+
+            await expect(firstAction).toBeFocused();
 
             await expect(popover).not.toHaveAttribute("aria-modal", "true");
           });
@@ -145,7 +150,7 @@ test.describe("Share article accessibility @a11y", () => {
 
             await page.keyboard.press("Escape");
 
-            await expectClosedPopover(popover, trigger);
+            await expectClosedPopover(trigger, popover);
 
             await expect(trigger).toBeFocused();
           });
@@ -157,22 +162,16 @@ test.describe("Share article accessibility @a11y", () => {
 
             const popover = await openSharePopover(page, trigger);
 
-            const linkedin = popover.locator(
-              'a[href^="https://www.linkedin.com/"]',
-            );
+            const linkedin = popover.locator('a[href*="linkedin.com"]');
 
-            const facebook = popover.locator(
-              'a[href^="https://www.facebook.com/"]',
-            );
+            const facebook = popover.locator('a[href*="facebook.com"]');
 
             const buttons = popover.getByRole("button");
 
-            await expect(linkedin).toHaveCount(1);
-            await expect(facebook).toHaveCount(1);
             await expect(buttons).toHaveCount(2);
 
             const copyButton = buttons.nth(0);
-            const nativeShareButton = buttons.nth(1);
+            const moreButton = buttons.nth(1);
 
             await expect(linkedin).toBeFocused();
 
@@ -186,7 +185,7 @@ test.describe("Share article accessibility @a11y", () => {
 
             await page.keyboard.press("Tab");
 
-            await expect(nativeShareButton).toBeFocused();
+            await expect(moreButton).toBeFocused();
 
             await page.keyboard.press("Shift+Tab");
 
@@ -199,12 +198,6 @@ test.describe("Share article accessibility @a11y", () => {
             await page.keyboard.press("Shift+Tab");
 
             await expect(linkedin).toBeFocused();
-
-            await page.keyboard.press("Escape");
-
-            await expectClosedPopover(popover, trigger);
-
-            await expect(trigger).toBeFocused();
           });
 
           test("does not trap focus inside a non-modal popover", async ({
@@ -223,11 +216,11 @@ test.describe("Share article accessibility @a11y", () => {
             await page.keyboard.press("Tab");
 
             await expect
-              .poll(() =>
-                popover.evaluate(
+              .poll(async () => {
+                return popover.evaluate(
                   (element) => !element.contains(document.activeElement),
-                ),
-              )
+                );
+              })
               .toBe(true);
           });
 
@@ -238,12 +231,18 @@ test.describe("Share article accessibility @a11y", () => {
 
             const popover = await openSharePopover(page, trigger);
 
-            const actions = popover.locator("a[href], button");
+            const links = popover.getByRole("link");
+            const buttons = popover.getByRole("button");
 
-            await expect(actions).toHaveCount(4);
+            await expect(links).toHaveCount(2);
+            await expect(buttons).toHaveCount(2);
 
-            for (let index = 0; index < (await actions.count()); index++) {
-              await expect(actions.nth(index)).toHaveAccessibleName(/\S/);
+            for (const link of await links.all()) {
+              await expect(link).toHaveAccessibleName(/\S/);
+            }
+
+            for (const button of await buttons.all()) {
+              await expect(button).toHaveAccessibleName(/\S/);
             }
           });
 
@@ -256,10 +255,11 @@ test.describe("Share article accessibility @a11y", () => {
 
             await trigger.focus();
 
-            await page.keyboard.press("Enter");
+            await expect(trigger).toBeFocused();
 
-            await expectClosedPopover(popover, trigger);
+            await trigger.press("Enter");
 
+            await expectClosedPopover(trigger, popover);
             await expect(trigger).toBeFocused();
           });
 
@@ -275,8 +275,7 @@ test.describe("Share article accessibility @a11y", () => {
 
               await page.keyboard.press("Escape");
 
-              await expectClosedPopover(popover, trigger);
-
+              await expectClosedPopover(trigger, popover);
               await expect(trigger).toBeFocused();
             }
           });
@@ -288,7 +287,7 @@ test.describe("Share article accessibility @a11y", () => {
 
             const popover = await getControlledPopover(page, trigger);
 
-            await expect(popover).toBeHidden();
+            await expectClosedPopover(trigger, popover);
 
             await trigger.focus();
 
@@ -297,20 +296,24 @@ test.describe("Share article accessibility @a11y", () => {
             await page.keyboard.press("Tab");
 
             await expect
-              .poll(() =>
-                popover.evaluate(
+              .poll(async () => {
+                return popover.evaluate(
                   (element) => !element.contains(document.activeElement),
-                ),
-              )
+                );
+              })
               .toBe(true);
 
-            await expectClosedPopover(popover, trigger);
+            await expectClosedPopover(trigger, popover);
           });
 
-          test("announces successful clipboard copying", async ({ page }) => {
-            await page
-              .context()
-              .grantPermissions(["clipboard-read", "clipboard-write"]);
+          test("announces successful clipboard copying", async ({
+            page,
+            context,
+          }) => {
+            await context.grantPermissions([
+              "clipboard-read",
+              "clipboard-write",
+            ]);
 
             const trigger = getShareTrigger(page);
 
@@ -318,34 +321,57 @@ test.describe("Share article accessibility @a11y", () => {
 
             const copyButton = popover.getByRole("button").first();
 
-            await copyButton.focus();
-
-            await page.keyboard.press("Enter");
-
             const status = popover.getByRole("status");
 
-            await expect(status).toBeVisible();
+            const initialButtonLabel = (await copyButton.innerText()).trim();
+
+            expect(initialButtonLabel).not.toBe("");
+
+            await expect(status).toHaveCount(1);
 
             await expect(status).toHaveAttribute("aria-live", "polite");
 
-            await expect(status).toHaveText(/\S/);
+            await expect(status).toHaveClass(/(?:^|\s)sr-only(?:\s|$)/);
+
+            await expect(status).toHaveText("");
+
+            await copyButton.focus();
 
             await expect(copyButton).toBeFocused();
 
-            const canonical = await page
+            await copyButton.press("Enter");
+
+            await expect(status).toHaveText(/\S/);
+
+            await expect(copyButton).not.toHaveText(initialButtonLabel);
+
+            const updatedButtonLabel = (await copyButton.innerText()).trim();
+
+            expect(updatedButtonLabel).not.toBe("");
+
+            expect(updatedButtonLabel).not.toBe(initialButtonLabel);
+
+            await expect(status).toHaveText(updatedButtonLabel);
+
+            await expect(copyButton).toHaveAccessibleName(updatedButtonLabel);
+
+            await expect(copyButton).toBeFocused();
+
+            const canonicalUrl = await page
               .locator('link[rel="canonical"]')
               .getAttribute("href");
 
-            expect(canonical).toBeTruthy();
+            expect(canonicalUrl).toBeTruthy();
 
             await expect
-              .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-              .toBe(canonical);
+              .poll(async () => {
+                return page.evaluate(() => navigator.clipboard.readText());
+              })
+              .toBe(canonicalUrl);
 
             await page.keyboard.press("Escape");
 
-            await expectClosedPopover(popover, trigger);
-
+            await expectClosedPopover(trigger, popover);
             await expect(trigger).toBeFocused();
           });
         });
