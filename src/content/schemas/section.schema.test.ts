@@ -39,10 +39,6 @@ const articleSections = [
     type: "article-metadata",
   },
   {
-    id: "share-article",
-    type: "share-article",
-  },
-  {
     id: "related-posts",
     type: "related-posts",
   },

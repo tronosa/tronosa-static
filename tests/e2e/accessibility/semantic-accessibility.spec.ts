@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
-import { getContentTestRoutes, getNegativeTestRoutes } from "../shared/routes";
+import {
+  getContentTestRoutes,
+  getNegativeTestRoutes,
+} from "../../shared/routes";
 
 const contentRoutes = getContentTestRoutes();
 

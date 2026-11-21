@@ -95,6 +95,7 @@ export function MobileNavigationDialog({
 
       <Dialog.Portal>
         <Dialog.Content
+          aria-modal="true"
           aria-describedby={undefined}
           onCloseAutoFocus={handleCloseAutoFocus}
           onClickCapture={handleContentClick}

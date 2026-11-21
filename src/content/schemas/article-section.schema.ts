@@ -10,11 +10,6 @@ export const articleMetadataSectionSchema = z.strictObject({
   type: z.literal("article-metadata"),
 });
 
-export const shareArticleSectionSchema = z.strictObject({
-  id: sectionIdSchema,
-  type: z.literal("share-article"),
-});
-
 export const relatedPostsSectionSchema = z.strictObject({
   id: sectionIdSchema,
   type: z.literal("related-posts"),
@@ -32,7 +27,6 @@ export const articleSpecificSectionSchemas = [
   articleHeroSchema,
   articleImageSchema,
   articleMetadataSectionSchema,
-  shareArticleSectionSchema,
   relatedPostsSectionSchema,
 ] as const;
 

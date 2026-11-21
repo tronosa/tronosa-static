@@ -9,7 +9,6 @@ const SINGLETON_SECTION_TYPES = new Set<SectionType>([
   "source-closing",
   "article-hero",
   "article-metadata",
-  "share-article",
   "related-posts",
 ]);
 

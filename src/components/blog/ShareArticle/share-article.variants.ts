@@ -40,7 +40,3 @@ export const shareArticleIconVariants = cva([
   "rounded-lg bg-brand-forest/10",
   "text-brand-forest",
 ]);
-
-export const shareArticleSectionVariants = cva([
-  "flex w-full items-center justify-end",
-]);

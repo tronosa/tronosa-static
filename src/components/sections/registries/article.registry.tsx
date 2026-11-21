@@ -41,15 +41,6 @@ export const articleSectionRegistry = {
     );
   },
 
-  "share-article": async (_, context) => {
-    const { entry } = requireArticleContext(context);
-
-    const { ShareArticleSection } =
-      await import("@/components/blog/ShareArticle/ShareArticleSection");
-
-    return <ShareArticleSection entry={entry} />;
-  },
-
   "related-posts": async (section, context) => {
     const { entry } = requireArticleContext(context);
 
