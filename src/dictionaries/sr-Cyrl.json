@@ -10,6 +10,12 @@
     "readMore": "Прочитај више",
     "back": "Назад"
   },
+  "Accessibility": {
+    "skipToContent": "Пређите на главни садржај"
+  },
+  "NotFound": {
+    "description": "Страница није пронађена."
+  },
   "Header": {
     "brand": {
       "homeLabel": "Троноша — Почетна страница",

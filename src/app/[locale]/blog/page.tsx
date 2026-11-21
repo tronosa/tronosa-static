@@ -52,12 +52,7 @@ export default async function BlogPage({ params }: Props) {
     <>
       <JsonLd data={await createStructuredData(entry)} />
 
-      <main>
-        <SectionRenderer
-          sections={entry.data.content.sections}
-          context={entry}
-        />
-      </main>
+      <SectionRenderer sections={entry.data.content.sections} context={entry} />
     </>
   );
 }

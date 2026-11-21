@@ -10,6 +10,12 @@
     "readMore": "Read more",
     "back": "Back"
   },
+  "Accessibility": {
+    "skipToContent": "Skip to main content"
+  },
+  "NotFound": {
+    "description": "Page not found."
+  },
   "Header": {
     "brand": {
       "homeLabel": "Tronoša — Home page",

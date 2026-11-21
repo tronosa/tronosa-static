@@ -10,6 +10,12 @@
     "readMore": "Pročitaj više",
     "back": "Nazad"
   },
+  "Accessibility": {
+    "skipToContent": "Pređite na glavni sadržaj"
+  },
+  "NotFound": {
+    "description": "Stranica nije pronađena."
+  },
   "Header": {
     "brand": {
       "homeLabel": "Tronoša — Početna stranica",
