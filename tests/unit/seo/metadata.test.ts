@@ -55,7 +55,7 @@ describe("SEO metadata", () => {
       });
 
       expect(() => createSeoMetadata(entry)).toThrow(
-        "Invalid canonical URL for test-page",
+        `Invalid canonical URL for ${entry.locale}/${entry.data.id}`,
       );
     },
   );

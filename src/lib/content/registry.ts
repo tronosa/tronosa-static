@@ -7,13 +7,18 @@ import { cache } from "react";
 
 import { getContentPath } from "@/lib/seo/urls";
 
-import { articleSchema } from "@/content/schemas/article.schema";
-import { pageSchema } from "@/content/schemas/page.schema";
-import { locales, type Locale } from "@/i18n/config";
-export type { Locale } from "@/i18n/config";
+import { articleSchema, type Article } from "@/content/schemas/article.schema";
 
-import type { Article } from "@/content/schemas/article.schema";
-import type { Page } from "@/content/schemas/page.schema";
+import { pageSchema, type Page } from "@/content/schemas/page.schema";
+
+import { locales, type Locale } from "@/i18n/config";
+
+import {
+  validateSections,
+  validateSectionReferences,
+} from "./section-validation";
+
+export type { Locale } from "@/i18n/config";
 
 const RESERVED_SLUGS = new Set(["api", "blog", "_next", "_vercel"]);
 
@@ -30,6 +35,10 @@ export type ContentEntry =
       locale: Locale;
       data: Article;
     };
+
+export type PageEntry = Extract<ContentEntry, { kind: "page" }>;
+
+export type ArticleEntry = Extract<ContentEntry, { kind: "article" }>;
 
 const root = path.join(process.cwd(), "src", "content");
 
@@ -78,21 +87,6 @@ function readCollection(
       });
     }
   });
-}
-
-function validateSections(entry: ContentEntry): void {
-  const ids = new Set<string>();
-
-  for (const section of entry.data.content.sections) {
-    if (ids.has(section.id)) {
-      throw new Error(
-        `Duplicate section ID "${section.id}" in ` +
-          `${entry.locale}/${entry.data.id}`,
-      );
-    }
-
-    ids.add(section.id);
-  }
 }
 
 function validateSlug(entry: ContentEntry): void {
@@ -149,15 +143,9 @@ export const getContentRegistry = cache((): ContentEntry[] => {
     }
 
     paths.add(route);
-
-    if (
-      entry.kind === "page" &&
-      entry.data.id === "home" &&
-      entry.data.slug !== ""
-    ) {
-      throw new Error("Home page must have an empty slug");
-    }
   }
+
+  validateSectionReferences(entries);
 
   return entries;
 });
@@ -190,4 +178,61 @@ export function getPublishedContent(): ContentEntry[] {
   return getContentRegistry().filter(
     (entry) => entry.kind === "page" || entry.data.status === "published",
   );
+}
+
+export function getPublishedPosts(locale?: Locale): ArticleEntry[] {
+  return getContentRegistry()
+    .filter(
+      (entry): entry is ArticleEntry =>
+        entry.kind === "article" &&
+        entry.data.status === "published" &&
+        (locale === undefined || entry.locale === locale),
+    )
+    .sort(
+      (a, b) =>
+        Date.parse(b.data.publishedAt) - Date.parse(a.data.publishedAt) ||
+        a.data.id.localeCompare(b.data.id),
+    );
+}
+
+export function getPublishedPostBySlug(
+  locale: Locale,
+  slug: string,
+): ArticleEntry | undefined {
+  const entry = getContentBySlug("article", locale, slug);
+
+  if (entry?.kind !== "article" || entry.data.status !== "published") {
+    return undefined;
+  }
+
+  return entry;
+}
+
+export function getFeaturedPost(locale: Locale): ArticleEntry | undefined {
+  const posts = getPublishedPosts(locale);
+
+  return posts.find(({ data }) => data.featured) ?? posts[0];
+}
+
+export function getRelatedPosts(
+  locale: Locale,
+  slug: string,
+  limit = 3,
+): ArticleEntry[] {
+  const posts = getPublishedPosts(locale);
+
+  const current = posts.find(({ data }) => data.slug === slug);
+
+  if (!current) {
+    return [];
+  }
+
+  return posts
+    .filter(({ data }) => data.slug !== slug)
+    .sort(
+      (a, b) =>
+        Number(b.data.category === current.data.category) -
+        Number(a.data.category === current.data.category),
+    )
+    .slice(0, limit);
 }

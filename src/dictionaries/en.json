@@ -14,7 +14,7 @@
     "brand": {
       "homeLabel": "Tronoša — Home page",
       "logo": {
-        "src": "/assets/logo/logo.webp",
+        "src": "/logo/logo.webp",
         "alt": "Tronoša — Natural spring water"
       }
     },
@@ -40,6 +40,78 @@
       "sr-Cyrl": "СР",
       "sr-Latn": "SR",
       "en": "EN"
+    }
+  },
+  "Blog": {
+    "categories": {
+      "nature": "Nature",
+      "hydration": "Hydration",
+      "health": "Health",
+      "sustainability": "Sustainability",
+      "company": "Company",
+      "news": "News"
+    },
+    "readingTime": "{minutes} min read",
+    "publishedAt": "Published",
+    "author": "Author",
+    "share": {
+      "heading": "Share this article",
+      "share": "Share",
+      "copyLink": "Copy link",
+      "copied": "Link copied",
+      "copyFailed": "Unable to copy link",
+      "linkedin": "Share article on LinkedIn",
+      "facebook": "Share article on Facebook",
+      "more": "More apps"
+    },
+    "related": {
+      "eyebrow": "KEEP EXPLORING",
+      "title": "Related stories"
+    },
+    "index": {
+      "readArticle": "Read the story",
+      "opening": {
+        "eyebrow": "Tronoša — Journal",
+        "title": "<line>Nature.</line> <accent>Water.</accent> <line>Life.</line>",
+        "description": "Three worlds. Countless stories. A space to explore nature, water and everything that connects us.",
+        "caption": "A space for curiosity",
+        "image": {
+          "src": "/blog/natural-origin.webp",
+          "alt": ""
+        }
+      },
+      "featured": {
+        "eyebrow": "Featured story"
+      },
+      "explorer": {
+        "eyebrow": "Explore the journal",
+        "title": "A different perspective on the world.",
+        "description": "From natural springs to everyday habits. Discover stories that remind us of the value of water and the world around us.",
+        "mediaLabel": "Story"
+      },
+      "archive": {
+        "eyebrow": "Journal archive",
+        "title": "The story index.",
+        "description": "Continue exploring through more stories from our journal."
+      },
+      "closing": {
+        "eyebrow": "Back to the source",
+        "title": "Every story has a source.",
+        "description": "Discover Tronoša, our connection to nature and the values behind the stories we share.",
+        "cta": "Discover Tronoša"
+      },
+      "empty": {
+        "title": "New stories are on the way.",
+        "description": "We will soon be sharing stories about water, nature and everyday life."
+      }
+    },
+    "metadata": {
+      "label": "Article information",
+      "author": "Author",
+      "published": "Published",
+      "updated": "Updated",
+      "readingTime": "Reading time",
+      "readingDuration": "{minutes} min"
     }
   }
 }

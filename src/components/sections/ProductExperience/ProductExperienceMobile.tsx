@@ -2,13 +2,9 @@
 
 import Image from "next/image";
 
-import { useRef, useState, type PointerEvent } from "react";
-
-import { useGSAP } from "@/lib/animation/gsap";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 
 import { ProductComposition } from "./ProductComposition";
-
-import { animateMobileProduct } from "./product-experience.mobile.animations";
 
 import {
   mobileExperienceVariants,
@@ -79,30 +75,56 @@ export function ProductExperienceMobile({
 
   const activeProductId = activeProduct?.id;
 
-  useGSAP(
-    () => {
-      const container = containerRef.current;
+  useEffect(() => {
+    const container = containerRef.current;
 
-      if (!container || !activeProductId) {
-        return;
-      }
+    if (!container || !activeProductId) {
+      return;
+    }
 
-      const previousProduct = previousProductRef.current;
+    const previousProduct = previousProductRef.current;
 
-      previousProductRef.current = activeProductId;
+    previousProductRef.current = activeProductId;
 
-      if (previousProduct === null || previousProduct === activeProductId) {
-        return;
-      }
+    if (previousProduct === null || previousProduct === activeProductId) {
+      return;
+    }
 
-      return animateMobileProduct(container, directionRef.current);
-    },
-    {
-      scope: containerRef,
-      dependencies: [activeProductId],
-      revertOnUpdate: true,
-    },
-  );
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const direction = directionRef.current;
+
+    let disposed = false;
+
+    let cleanupAnimation: (() => void) | undefined;
+
+    void import("./product-experience.mobile.animations")
+      .then(({ animateMobileProduct }) => {
+        if (disposed || !container.isConnected) {
+          return;
+        }
+
+        cleanupAnimation = animateMobileProduct(container, direction);
+      })
+      .catch((error: unknown) => {
+        if (disposed) {
+          return;
+        }
+
+        console.error(
+          "[ProductExperienceMobile] Product animation failed.",
+          error,
+        );
+      });
+
+    return () => {
+      disposed = true;
+
+      cleanupAnimation?.();
+    };
+  }, [activeProductId]);
 
   if (!activeProduct) {
     return null;

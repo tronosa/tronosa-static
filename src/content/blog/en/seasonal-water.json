@@ -1,0 +1,217 @@
+{
+  "id": "seasonal-water",
+  "slug": "water-through-the-seasons",
+  "status": "published",
+  "createdAt": "2026-11-19T09:00:00+01:00",
+  "modifiedAt": "2026-11-19T09:00:00+01:00",
+  "publishedAt": "2026-11-19T09:00:00+01:00",
+  "category": "nature",
+  "featured": false,
+  "author": {
+    "type": "Organization",
+    "name": "Tronoša",
+    "url": "https://tronosa.com/"
+  },
+  "preview": {
+    "title": "Water and the Rhythm of Nature: A Journey Through the Seasons",
+    "description": "From spring rain to summer heat, water is part of the changes we see in nature and everyday life.",
+    "image": {
+      "src": "/blog/natural-origin.webp",
+      "alt": "A stream flowing through a forest in morning light",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "seo": {
+    "title": "Water Through the Seasons | Tronosa",
+    "description": "Explore how water moves through the seasons and why understanding the natural water cycle matters in everyday life.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "seasonal-water-hero",
+        "type": "article-hero",
+        "content": {
+          "backgroundText": "TRONOSA",
+          "appearance": {
+            "backgroundColor": "#193B52",
+            "accentColor": "#91BED8"
+          }
+        }
+      },
+      {
+        "id": "article-metadata",
+        "type": "article-metadata"
+      },
+      {
+        "id": "seasonal-water-intro",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Water appears in almost every natural landscape: clouds, soil, rivers, plants and the air around us. Its movement does not stop when the weather changes. What changes is how we notice it and the conditions in which it shapes the environment."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Spring: a season of renewal"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "As temperatures rise and rainfall becomes more frequent in many places, plants enter a period of active growth. Water in the soil helps roots absorb dissolved nutrients, while rain replenishes surface and underground reserves. How much remains available depends on local conditions, soil type and earlier weather patterns."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "seasonal-water-forest",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "A green woodland stream running over stones",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Water connects soil, plants and living communities within one natural system.",
+          "layout": "wide"
+        }
+      },
+      {
+        "id": "seasonal-water-summer",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Summer: the importance of balance"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "During warmer weather, evaporation often increases and people may need more water. That does not mean everyone should drink the same amount. Individual needs depend on activity, temperature and personal circumstances."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "A practical habit is keeping drinking water within reach throughout the day, especially when spending time outdoors."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Autumn and winter: the cycle continues"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Even without intense heat, water remains central to life. Rain, snow, runoff and infiltration into the soil are part of the broader cycle connecting the seasons."
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                [
+                  {
+                    "text": "Notice changes in the natural environment around you."
+                  }
+                ],
+                [
+                  {
+                    "text": "Use water responsibly throughout the year."
+                  }
+                ],
+                [
+                  {
+                    "text": "Distinguish general guidance from your individual needs."
+                  }
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "seasonal-water-end",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Nature never presses pause"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Understanding the water cycle reminds us that water is not an isolated product. It belongs to a complex natural environment. A more thoughtful relationship with it begins with awareness and everyday actions."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Learn more about the values behind our company on the "
+                },
+                {
+                  "type": "link",
+                  "text": "About us",
+                  "pageId": "about"
+                },
+                {
+                  "text": " page."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "related-posts",
+        "type": "related-posts",
+        "content": {
+          "limit": 3
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,8 @@
 import { defaultLocale, locales } from "@/i18n/config";
 import { expect, test } from "@playwright/test";
 
+const SITE_URL = "https://example.com";
+
 test.describe("Localized SEO", () => {
   test("renders the default locale at /", async ({ page }) => {
     const response = await page.goto("/");
@@ -13,7 +15,7 @@ test.describe("Localized SEO", () => {
 
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://example.com",
+      SITE_URL,
     );
   });
 
@@ -26,7 +28,7 @@ test.describe("Localized SEO", () => {
 
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://example.com/en",
+      `${SITE_URL}/en`,
     );
   });
 
@@ -44,37 +46,45 @@ test.describe("Localized SEO", () => {
     expect(response.status()).toBe(404);
   });
 
-  test("renders reciprocal language alternates", async ({ page }) => {
-    const siteUrl = "https://example.com";
-
-    const expectedLinks = [
-      ...locales.map((locale) => ({
-        language: locale,
-        href: locale === defaultLocale ? siteUrl : `${siteUrl}/${locale}`,
-      })),
-      {
-        language: "x-default",
-        href: siteUrl,
-      },
-    ];
-
+  test("preserves localized canonical URLs outside production", async ({
+    page,
+  }) => {
     for (const locale of locales) {
       const pathname = locale === defaultLocale ? "/" : `/${locale}`;
 
-      await page.goto(pathname);
+      const expectedCanonical =
+        locale === defaultLocale ? SITE_URL : `${SITE_URL}/${locale}`;
 
-      const links = await page
-        .locator('link[rel="alternate"][hreflang]')
-        .evaluateAll((elements) =>
-          elements.map((element) => ({
-            language: element.getAttribute("hreflang"),
-            href: element.getAttribute("href"),
-          })),
-        );
+      const response = await page.goto(pathname);
 
-      expect(links).toHaveLength(expectedLinks.length);
+      expect(response?.status()).toBe(200);
 
-      expect(links).toEqual(expect.arrayContaining(expectedLinks));
+      await expect(page.locator("html")).toHaveAttribute("lang", locale);
+
+      const canonical = page.locator('link[rel="canonical"]');
+
+      await expect(canonical).toHaveCount(1);
+
+      await expect(canonical).toHaveAttribute("href", expectedCanonical);
+    }
+  });
+
+  test("omits language alternates outside production", async ({ page }) => {
+    for (const locale of locales) {
+      const pathname = locale === defaultLocale ? "/" : `/${locale}`;
+
+      const response = await page.goto(pathname);
+
+      expect(response?.status()).toBe(200);
+
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+        "content",
+        /\bnoindex\b/,
+      );
+
+      await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(
+        0,
+      );
     }
   });
 
@@ -99,10 +109,26 @@ test.describe("Localized SEO", () => {
   });
 
   test("disables indexing outside production", async ({ page }) => {
-    await page.goto("/");
+    for (const locale of locales) {
+      const pathname = locale === defaultLocale ? "/" : `/${locale}`;
 
-    const robots = page.locator('meta[name="robots"]');
+      await page.goto(pathname);
 
-    await expect(robots).toHaveAttribute("content", /noindex/);
+      const robots = page.locator('meta[name="robots"]');
+
+      await expect(robots).toHaveCount(1);
+
+      await expect(robots).toHaveAttribute("content", /\bnoindex\b/);
+
+      await expect(robots).toHaveAttribute("content", /\bnofollow\b/);
+
+      const googleBot = page.locator('meta[name="googlebot"]');
+
+      await expect(googleBot).toHaveCount(1);
+
+      await expect(googleBot).toHaveAttribute("content", /\bnoindex\b/);
+
+      await expect(googleBot).toHaveAttribute("content", /\bnofollow\b/);
+    }
   });
 });

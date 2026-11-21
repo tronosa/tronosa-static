@@ -14,7 +14,7 @@
     "brand": {
       "homeLabel": "Tronoša — Početna stranica",
       "logo": {
-        "src": "/assets/logo/logo.webp",
+        "src": "/logo/logo.webp",
         "alt": "Tronoša — prirodna izvorska voda"
       }
     },
@@ -40,6 +40,78 @@
       "sr-Cyrl": "СР",
       "sr-Latn": "SR",
       "en": "EN"
+    }
+  },
+  "Blog": {
+    "categories": {
+      "nature": "Priroda",
+      "hydration": "Hidratacija",
+      "health": "Zdravlje",
+      "sustainability": "Održivost",
+      "company": "Kompanija",
+      "news": "Novosti"
+    },
+    "readingTime": "{minutes} min čitanja",
+    "publishedAt": "Objavljeno",
+    "author": "Autor",
+    "share": {
+      "heading": "Podelite članak",
+      "share": "Podeli",
+      "copyLink": "Kopiraj link",
+      "copied": "Link je kopiran",
+      "copyFailed": "Kopiranje nije uspelo",
+      "linkedin": "Podeli članak na LinkedIn-u",
+      "facebook": "Podeli članak na Facebook-u",
+      "more": "Ostale aplikacije"
+    },
+    "related": {
+      "eyebrow": "NASTAVITE SA ČITANJEM",
+      "title": "Povezane priče"
+    },
+    "index": {
+      "readArticle": "Pročitajte priču",
+      "opening": {
+        "eyebrow": "Tronoša — Žurnal",
+        "title": "<line>Priroda.</line> <accent>Voda.</accent> <line>Život.</line>",
+        "description": "Tri sveta. Bezbroj priča. Prostor za istraživanje prirode, vode i svega što nas povezuje.",
+        "caption": "Prostor za radoznalost",
+        "image": {
+          "src": "/blog/natural-origin.webp",
+          "alt": ""
+        }
+      },
+      "featured": {
+        "eyebrow": "Izdvojena priča"
+      },
+      "explorer": {
+        "eyebrow": "Istražite žurnal",
+        "title": "Svet iz drugačije perspektive.",
+        "description": "Od prirodnih izvora do svakodnevnih navika. Otkrijte priče koje nas podsećaju na vrednost vode i sveta koji nas okružuje.",
+        "mediaLabel": "Priča"
+      },
+      "archive": {
+        "eyebrow": "Arhiva žurnala",
+        "title": "Indeks priča.",
+        "description": "Nastavite istraživanje kroz ostale priče iz našeg žurnala."
+      },
+      "closing": {
+        "eyebrow": "Povratak izvoru",
+        "title": "Svaka priča ima svoj izvor.",
+        "description": "Upoznajte Tronošu, našu povezanost sa prirodom i vrednosti iz kojih nastaju priče koje delimo.",
+        "cta": "Upoznajte Tronošu"
+      },
+      "empty": {
+        "title": "Nove priče su na putu.",
+        "description": "Uskoro ćemo sa vama podeliti priče o vodi, prirodi i svakodnevnom životu."
+      }
+    },
+    "metadata": {
+      "label": "Informacije o članku",
+      "author": "Autor",
+      "published": "Objavljeno",
+      "updated": "Ažurirano",
+      "readingTime": "Vreme čitanja",
+      "readingDuration": "{minutes} min"
     }
   }
 }

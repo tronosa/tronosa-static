@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getEnvironment } from "@/lib/environment";
-import { absoluteUrl, getSeoConfig } from "@/lib/seo/config";
+import { absoluteUrl } from "@/lib/seo/config";
 
 export default function robots(): MetadataRoute.Robots {
   const { isIndexable } = getEnvironment();
@@ -22,6 +22,5 @@ export default function robots(): MetadataRoute.Robots {
       disallow: "/api/",
     },
     sitemap: absoluteUrl("/sitemap.xml"),
-    host: getSeoConfig().url,
   };
 }

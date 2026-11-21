@@ -43,7 +43,8 @@ export const imageHeroContentVariants = cva(
     "relative z-20",
     "flex min-w-0 flex-col",
     "gap-6 md:gap-8",
-    "pt-40 pb-12 md:pt-48 md:pb-20",
+    "pt-[var(--hero-content-offset)]",
+    "pb-12 md:pb-20",
   ],
   {
     variants: {
@@ -67,7 +68,7 @@ export const imageHeroTextVariants = cva([
 
 export const imageHeroEyebrowVariants = cva([
   "text-xs font-medium uppercase",
-  "tracking-[0.2em] text-white/80",
+  "tracking-[0.2em] text-white/95",
   "md:text-sm",
 ]);
 

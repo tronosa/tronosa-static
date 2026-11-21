@@ -1,0 +1,187 @@
+{
+  "id": "natural-origin",
+  "slug": "prirodno-poreklo",
+  "status": "published",
+  "createdAt": "2026-11-20T10:00:00+01:00",
+  "modifiedAt": "2026-11-20T10:00:00+01:00",
+  "publishedAt": "2026-11-20T10:00:00+01:00",
+  "category": "nature",
+  "featured": true,
+  "author": {
+    "type": "Organization",
+    "name": "Tronoša",
+    "url": "https://tronosa.com/"
+  },
+  "preview": {
+    "title": "Priroda oblikuje svaku kap",
+    "description": "Priča o vodi, njenom prirodnom poreklu i neraskidivoj vezi između čoveka i prirode.",
+    "image": {
+      "src": "/blog/natural-origin.webp",
+      "alt": "Šumski predeo okružen netaknutom prirodom",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "seo": {
+    "title": "Priroda oblikuje svaku kap | Tronoša",
+    "description": "Otkrijte priču o prirodnom poreklu vode Tronoša i njenoj povezanosti sa prirodom.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "natural-origin-hero",
+        "type": "article-hero",
+        "content": {
+          "backgroundText": "TRONOŠA",
+          "appearance": {
+            "backgroundColor": "#174B37",
+            "accentColor": "#A8C9AA"
+          }
+        }
+      },
+      {
+        "id": "article-metadata",
+        "type": "article-metadata"
+      },
+      {
+        "id": "natural-origin-introduction",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Svaka kap vode nosi svoju priču. Priču koja počinje daleko od svakodnevne užurbanosti, u okruženju prirode."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Za nas, "
+                },
+                {
+                  "text": "Tronoša",
+                  "bold": true,
+                  "color": "primary"
+                },
+                {
+                  "text": " predstavlja više od vode. Ona predstavlja povezanost čoveka sa prirodom."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Sve počinje u prirodi"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Naša filozofija je jednostavna: "
+                },
+                {
+                  "text": "sačuvati ono što nam priroda pruža.",
+                  "italic": true,
+                  "underline": true
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "children": [
+                {
+                  "text": "Vrednosti koje nas povezuju"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                [
+                  {
+                    "text": "Poštovanje prirode"
+                  }
+                ],
+                [
+                  {
+                    "text": "Odgovornost prema životnoj sredini"
+                  }
+                ],
+                [
+                  {
+                    "text": "Posvećenost kvalitetu"
+                  }
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Saznajte više o "
+                },
+                {
+                  "type": "link",
+                  "text": "našoj kompaniji",
+                  "pageId": "about"
+                },
+                {
+                  "text": " i vrednostima koje nas povezuju sa prirodom."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Više informacija o zdravlju i hidrataciji možete pronaći na "
+                },
+                {
+                  "type": "external-link",
+                  "text": "sajtu Svetske zdravstvene organizacije",
+                  "href": "https://www.who.int/",
+                  "newTab": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "forest-water-image",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "Voda koja protiče preko kamenja u prirodnom okruženju",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Voda je sastavni deo prirodnih procesa koji oblikuju naše okruženje.",
+          "layout": "wide"
+        }
+      },
+      {
+        "id": "related-posts",
+        "type": "related-posts",
+        "content": {
+          "limit": 3
+        }
+      }
+    ]
+  }
+}

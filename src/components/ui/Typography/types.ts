@@ -11,6 +11,7 @@ export type TypographyElement =
   | "h5"
   | "h6"
   | "p"
+  | "li"
   | "span"
   | "div"
   | "blockquote"

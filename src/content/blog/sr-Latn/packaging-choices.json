@@ -1,0 +1,213 @@
+{
+  "id": "packaging-choices",
+  "slug": "ambalaza-i-svakodnevne-odluke",
+  "status": "published",
+  "createdAt": "2026-11-21T09:00:00+01:00",
+  "modifiedAt": "2026-11-21T09:00:00+01:00",
+  "publishedAt": "2026-11-21T09:00:00+01:00",
+  "category": "sustainability",
+  "featured": false,
+  "author": {
+    "type": "Organization",
+    "name": "Tronoša",
+    "url": "https://tronosa.com/"
+  },
+  "preview": {
+    "title": "Ambalaža i naše svakodnevne odluke",
+    "description": "Od kupovine do odlaganja, mala pažnja prema ambalaži može postati deo odgovornijih navika.",
+    "image": {
+      "src": "/blog/natural-origin.webp",
+      "alt": "Višekratna torba i ambalaža složena za odvajanje otpada",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "seo": {
+    "title": "Ambalaža i odgovorne navike | Tronoša",
+    "description": "Kako da odgovornije postupamo sa ambalažom, razumemo lokalne mogućnosti reciklaže i smanjimo nepotreban otpad.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "packaging-choices-hero",
+        "type": "article-hero",
+        "content": {
+          "backgroundText": "TRONOŠA",
+          "appearance": {
+            "backgroundColor": "#344D32",
+            "accentColor": "#BACD96"
+          }
+        }
+      },
+      {
+        "id": "article-metadata",
+        "type": "article-metadata"
+      },
+      {
+        "id": "packaging-choices-intro",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Ambalaža ima praktičnu ulogu: štiti proizvod tokom transporta, skladištenja i upotrebe. Ipak, njena priča ne završava se kada potrošimo sadržaj. Način na koji postupamo sa praznom ambalažom utiče na to da li ona postaje otpad ili može ući u neki naredni tok obrade."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Šta zaista znači odgovornije postupanje?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Ne postoji jedan postupak koji je najbolji u svakoj situaciji. Mogućnost reciklaže zavisi od materijala, lokalne infrastrukture i pravila prikupljanja. Zbog toga je važno proveriti uputstva komunalnog sistema u svom mestu."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "packaging-choices-main",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "Odvojena ambalaža pripremljena za pravilno odlaganje",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Pravilno odvajanje otpada zavisi od lokalnog sistema sakupljanja i obrade.",
+          "layout": "wide"
+        }
+      },
+      {
+        "id": "packaging-choices-actions",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Tri pitanja pre nego što bacimo ambalažu"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                [
+                  {
+                    "text": "Da li ambalažu možemo ponovo upotrebiti na bezbedan način?"
+                  }
+                ],
+                [
+                  {
+                    "text": "U koju kategoriju otpada ovaj materijal spada prema lokalnim pravilima?"
+                  }
+                ],
+                [
+                  {
+                    "text": "Da li je ambalaža ispražnjena i pripremljena kako to zahtevaju lokalne smernice?"
+                  }
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Simbol na pakovanju može pomoći u prepoznavanju vrste materijala, ali sam po sebi ne garantuje da se taj predmet reciklira u svakom gradu."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Manje otpada počinje ranije"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Odgovornost se ne svodi samo na odlaganje. Pažljivo planiranje kupovine, izbegavanje nepotrebnih proizvoda i pravilno korišćenje onoga što već imamo mogu pomoći da smanjimo količinu otpada."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "packaging-choices-detail",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "Detalj prirodnog okruženja i drveća",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Odgovoran odnos prema materijalima deo je šire brige o našem okruženju.",
+          "layout": "reading"
+        }
+      },
+      {
+        "id": "packaging-choices-end",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Od pojedinačne navike do šire promene"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Navike pojedinaca imaju vrednost, ali održivije upravljanje otpadom zahteva i dostupnu infrastrukturu, jasne informacije i odgovornost proizvođača i drugih učesnika u lancu."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Briga o prirodi nije pitanje savršenstva. Počinje boljim razumevanjem mogućnosti koje zaista imamo i doslednim malim promenama."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "related-posts",
+        "type": "related-posts",
+        "content": {
+          "limit": 3
+        }
+      }
+    ]
+  }
+}

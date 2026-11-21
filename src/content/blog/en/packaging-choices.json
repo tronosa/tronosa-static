@@ -1,0 +1,213 @@
+{
+  "id": "packaging-choices",
+  "slug": "packaging-and-everyday-choices",
+  "status": "published",
+  "createdAt": "2026-11-21T09:00:00+01:00",
+  "modifiedAt": "2026-11-21T09:00:00+01:00",
+  "publishedAt": "2026-11-21T09:00:00+01:00",
+  "category": "sustainability",
+  "featured": false,
+  "author": {
+    "type": "Organization",
+    "name": "Tronoša",
+    "url": "https://tronosa.com/"
+  },
+  "preview": {
+    "title": "Packaging and the Choices We Make Every Day",
+    "description": "From shopping to disposal, small decisions about packaging can become part of more responsible habits.",
+    "image": {
+      "src": "/blog/natural-origin.webp",
+      "alt": "A reusable bag and packaging sorted for disposal",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "seo": {
+    "title": "Packaging and Responsible Habits | Tronosa",
+    "description": "Explore how to handle packaging responsibly, understand local recycling options and reduce unnecessary waste.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "packaging-choices-hero",
+        "type": "article-hero",
+        "content": {
+          "backgroundText": "TRONOSA",
+          "appearance": {
+            "backgroundColor": "#344D32",
+            "accentColor": "#BACD96"
+          }
+        }
+      },
+      {
+        "id": "article-metadata",
+        "type": "article-metadata"
+      },
+      {
+        "id": "packaging-choices-intro",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Packaging has a practical purpose: it protects products during transport, storage and use. But its story does not end when the contents are finished. What happens to empty packaging affects whether it becomes waste or can enter another processing stream."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "What does responsible handling really mean?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "There is no single best option for every situation. Whether something can be recycled depends on the material, local infrastructure and collection rules. That is why checking guidance from your local waste service matters."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "packaging-choices-main",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "Packaging separated and prepared for proper disposal",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Proper waste separation depends on local collection and processing systems.",
+          "layout": "wide"
+        }
+      },
+      {
+        "id": "packaging-choices-actions",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Three questions before throwing packaging away"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                [
+                  {
+                    "text": "Can the packaging safely be used again?"
+                  }
+                ],
+                [
+                  {
+                    "text": "Which waste category does this material belong to under local rules?"
+                  }
+                ],
+                [
+                  {
+                    "text": "Has it been emptied and prepared according to local guidance?"
+                  }
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "A symbol on a package can help identify a material, but it does not guarantee that an item will be recycled in every city."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Reducing waste starts earlier"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Responsibility does not begin at the recycling bin. Planning purchases, avoiding unnecessary products and making better use of what we already own may help reduce waste in the first place."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "packaging-choices-detail",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "A detail of trees and a natural landscape",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Responsible material use belongs to a broader commitment to our surroundings.",
+          "layout": "reading"
+        }
+      },
+      {
+        "id": "packaging-choices-end",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "From individual habits to wider change"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Individual choices matter, but more sustainable waste management also requires accessible infrastructure, clear information and responsibility across the supply chain."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Caring for nature is not about perfection. It starts with understanding the options genuinely available to us and making consistent, manageable changes."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "related-posts",
+        "type": "related-posts",
+        "content": {
+          "limit": 3
+        }
+      }
+    ]
+  }
+}

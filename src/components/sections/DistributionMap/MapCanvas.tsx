@@ -1,5 +1,7 @@
 "use client";
 
+import "maplibre-gl/dist/maplibre-gl.css";
+
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 

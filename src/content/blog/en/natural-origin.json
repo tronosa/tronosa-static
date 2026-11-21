@@ -1,0 +1,187 @@
+{
+  "id": "natural-origin",
+  "slug": "natural-origin",
+  "status": "published",
+  "createdAt": "2026-11-20T10:00:00+01:00",
+  "modifiedAt": "2026-11-20T10:00:00+01:00",
+  "publishedAt": "2026-11-20T10:00:00+01:00",
+  "category": "nature",
+  "featured": true,
+  "author": {
+    "type": "Organization",
+    "name": "Tronoša",
+    "url": "https://tronosa.com/"
+  },
+  "preview": {
+    "title": "Nature shapes every drop",
+    "description": "A story of water, its natural origin, and the enduring connection between people and nature.",
+    "image": {
+      "src": "/blog/natural-origin.webp",
+      "alt": "A forest landscape surrounded by untouched nature",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "seo": {
+    "title": "Nature shapes every drop | Tronosa",
+    "description": "Discover the story behind the natural origin of Tronosa water and its connection with nature.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "natural-origin-hero",
+        "type": "article-hero",
+        "content": {
+          "backgroundText": "TRONOSA",
+          "appearance": {
+            "backgroundColor": "#174B37",
+            "accentColor": "#A8C9AA"
+          }
+        }
+      },
+      {
+        "id": "article-metadata",
+        "type": "article-metadata"
+      },
+      {
+        "id": "natural-origin-introduction",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Every drop of water carries its own story. A story that begins far from the rush of everyday life, surrounded by nature."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "For us, "
+                },
+                {
+                  "text": "Tronosa",
+                  "bold": true,
+                  "color": "primary"
+                },
+                {
+                  "text": " represents more than water. It represents the connection between people and nature."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Everything begins in nature"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Our philosophy is simple: "
+                },
+                {
+                  "text": "preserve what nature provides.",
+                  "italic": true,
+                  "underline": true
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "children": [
+                {
+                  "text": "The values that connect us"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                [
+                  {
+                    "text": "Respect for nature"
+                  }
+                ],
+                [
+                  {
+                    "text": "Environmental responsibility"
+                  }
+                ],
+                [
+                  {
+                    "text": "Commitment to quality"
+                  }
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Learn more about "
+                },
+                {
+                  "type": "link",
+                  "text": "our company",
+                  "pageId": "about"
+                },
+                {
+                  "text": " and the values that connect us with nature."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "For more information about health and hydration, visit the "
+                },
+                {
+                  "type": "external-link",
+                  "text": "World Health Organization website",
+                  "href": "https://www.who.int/",
+                  "newTab": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "forest-water-image",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "Water flowing over rocks in a natural setting",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Water is an essential part of the natural processes shaping our environment.",
+          "layout": "wide"
+        }
+      },
+      {
+        "id": "related-posts",
+        "type": "related-posts",
+        "content": {
+          "limit": 3
+        }
+      }
+    ]
+  }
+}
