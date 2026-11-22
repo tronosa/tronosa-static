@@ -1,7 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useId, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -33,17 +32,24 @@ import {
 
 import type { ProductShowcaseClientProps } from "./types";
 
+type AnimationComponent =
+  typeof import("./ProductShowcaseAnimation").ProductShowcaseAnimation;
+
 const PRODUCT_CHANGE_INTERVAL = 450;
 
-const ProductShowcaseAnimation = dynamic(
-  () =>
-    import("./ProductShowcaseAnimation").then(
-      (module) => module.ProductShowcaseAnimation,
-    ),
-  {
-    ssr: false,
-  },
-);
+let animationModulePromise: Promise<AnimationComponent> | undefined;
+
+function loadAnimationComponent(): Promise<AnimationComponent> {
+  animationModulePromise ??= import("./ProductShowcaseAnimation")
+    .then((module) => module.ProductShowcaseAnimation)
+    .catch((error: unknown) => {
+      animationModulePromise = undefined;
+
+      throw error;
+    });
+
+  return animationModulePromise;
+}
 
 export function ProductShowcaseClient({
   eyebrow,
@@ -62,9 +68,21 @@ export function ProductShowcaseClient({
 
   const lastChangeRef = useRef(-Infinity);
 
+  const isLoadingAnimationRef = useRef(false);
+
+  const isMountedRef = useRef(false);
+
   const [activeProductId, setActiveProductId] = useState(products[0]?.id ?? "");
 
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [Animation, setAnimation] = useState<AnimationComponent | null>(null);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   const activeProduct =
     products.find(({ id }) => id === activeProductId) ?? products[0];
@@ -73,8 +91,8 @@ export function ProductShowcaseClient({
     return null;
   }
 
-  function handleProductChange(id: string) {
-    if (id === activeProductId) {
+  async function handleProductChange(id: string) {
+    if (id === activeProductId || isLoadingAnimationRef.current) {
       return;
     }
 
@@ -94,11 +112,46 @@ export function ProductShowcaseClient({
       return;
     }
 
-    directionRef.current = nextIndex > currentIndex ? 1 : -1;
+    const direction: ProductShowcaseDirection =
+      nextIndex > currentIndex ? 1 : -1;
 
-    lastChangeRef.current = now;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-    setHasInteracted(true);
+    if (!reducedMotion && !Animation) {
+      isLoadingAnimationRef.current = true;
+
+      try {
+        const component = await loadAnimationComponent();
+
+        if (!isMountedRef.current) {
+          return;
+        }
+
+        setAnimation(() => component);
+      } catch (error: unknown) {
+        if (!isMountedRef.current) {
+          return;
+        }
+
+        console.error(
+          "[ProductShowcase] Animation initialization failed.",
+          error,
+        );
+      } finally {
+        isLoadingAnimationRef.current = false;
+      }
+    }
+
+    if (!isMountedRef.current) {
+      return;
+    }
+
+    directionRef.current = direction;
+
+    lastChangeRef.current = performance.now();
+
     setActiveProductId(id);
   }
 
@@ -115,8 +168,8 @@ export function ProductShowcaseClient({
       style={appearance}
       className={productShowcaseVariants()}
     >
-      {hasInteracted && (
-        <ProductShowcaseAnimation
+      {Animation && (
+        <Animation
           containerRef={containerRef}
           activeProductId={activeProduct.id}
           directionRef={directionRef}
