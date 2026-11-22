@@ -1,8 +1,9 @@
 import { getLocalePrefix } from "@/i18n/config";
+
 import type { Locale } from "@/i18n/config";
 import type { ContentEntry } from "@/lib/content/registry";
 
-import { absoluteUrl } from "./config";
+import { absoluteUrl, getSeoConfig } from "./config";
 
 function encodeSlug(slug: string): string {
   return slug.split("/").map(encodeURIComponent).join("/");
@@ -33,4 +34,39 @@ export function getLocaleHomeUrl(locale: Locale): string {
 
 export function getBlogUrl(locale: Locale): string {
   return absoluteUrl(`${getLocalePrefix(locale)}/blog`);
+}
+
+export function getCanonicalUrl(entry: ContentEntry): string {
+  const config = getSeoConfig();
+
+  const canonicalPath =
+    entry.data.seo.canonical?.trim() || getContentPath(entry);
+
+  const errorMessage = `Invalid canonical URL for ${entry.locale}/${entry.data.id}`;
+
+  let canonical: URL;
+
+  try {
+    canonical = new URL(absoluteUrl(canonicalPath));
+  } catch (error) {
+    throw new Error(errorMessage, {
+      cause: error,
+    });
+  }
+
+  const siteOrigin = new URL(config.url).origin;
+
+  if (
+    canonical.origin !== siteOrigin ||
+    canonical.search ||
+    canonical.hash ||
+    canonical.username ||
+    canonical.password
+  ) {
+    throw new Error(errorMessage);
+  }
+
+  canonical.pathname = canonical.pathname.replace(/\/+$/, "") || "/";
+
+  return canonical.toString();
 }

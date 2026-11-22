@@ -7,7 +7,10 @@ export function createWebPageSchema(entry: ContentEntry) {
   const url = getContentUrl(entry);
 
   return {
-    "@type": "WebPage",
+    "@type":
+      entry.kind === "page" && entry.data.id === "blog"
+        ? "CollectionPage"
+        : "WebPage",
     "@id": `${url}#webpage`,
     url,
     name: entry.data.seo.title,

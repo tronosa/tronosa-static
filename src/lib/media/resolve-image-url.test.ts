@@ -86,4 +86,154 @@ describe("Image URL resolver", () => {
       "Unsupported image source",
     );
   });
+
+  it.each([
+    "https://example.com/images/placeholder.jpg",
+    "http://example.com/images/placeholder.jpg",
+  ])("preserves absolute image URLs without a CDN endpoint: %s", (src) => {
+    vi.stubEnv(ENV_KEY, undefined);
+
+    expect(resolveImageUrl(src)).toBe(src);
+  });
+
+  it("preserves absolute image URLs without applying local transformations", () => {
+    vi.stubEnv(ENV_KEY, undefined);
+
+    const src = "https://example.com/images/placeholder.jpg?v=2";
+
+    expect(
+      resolveImageUrl(src, {
+        width: 1920,
+        quality: 80,
+      }),
+    ).toBe(src);
+  });
+
+  it.each(["", "   "])(
+    "falls back to local assets when the CDN endpoint is empty",
+    (endpoint) => {
+      vi.stubEnv(ENV_KEY, endpoint);
+
+      expect(resolveImageUrl("/images/placeholder.jpg")).toBe(
+        "/assets/images/placeholder.jpg",
+      );
+    },
+  );
+
+  it("normalizes whitespace around the CDN endpoint", () => {
+    vi.stubEnv(ENV_KEY, `  ${ENDPOINT}  `);
+
+    expect(resolveImageUrl("/images/placeholder.jpg")).toBe(
+      `${ENDPOINT}/images/placeholder.jpg`,
+    );
+  });
+
+  it.each(["/", "//", "///"])(
+    "normalizes trailing slashes in the CDN endpoint: %s",
+    (suffix) => {
+      vi.stubEnv(ENV_KEY, `${ENDPOINT}${suffix}`);
+
+      expect(resolveImageUrl("/images/placeholder.jpg")).toBe(
+        `${ENDPOINT}/images/placeholder.jpg`,
+      );
+    },
+  );
+
+  it.each([
+    "/images/placeholder.jpg",
+    "images/placeholder.jpg",
+    "/assets/images/placeholder.jpg",
+    "assets/images/placeholder.jpg",
+  ])("normalizes asset paths for CDN requests: %s", (src) => {
+    expect(resolveImageUrl(src)).toBe(`${ENDPOINT}/images/placeholder.jpg`);
+  });
+
+  it("accepts an absolute URL from the configured CDN endpoint", () => {
+    const src = `${ENDPOINT}/images/placeholder.jpg`;
+
+    expect(resolveImageUrl(src)).toBe(src);
+  });
+
+  it("applies transformations to an absolute CDN URL", () => {
+    const src = `${ENDPOINT}/images/placeholder.jpg`;
+
+    const result = resolveImageUrl(src, {
+      width: 640,
+      quality: 85,
+    });
+
+    const url = new URL(result);
+
+    expect(url.pathname).toBe("/tronosa/images/placeholder.jpg");
+    expect(url.searchParams.get("tr")).toBe("w-640,q-85");
+  });
+
+  it("replaces existing transformations when new ones are provided", () => {
+    const src = `${ENDPOINT}/images/placeholder.jpg?tr=w-320,q-60`;
+
+    const result = resolveImageUrl(src, {
+      width: 1280,
+      quality: 85,
+    });
+
+    const url = new URL(result);
+
+    expect(url.searchParams.get("tr")).toBe("w-1280,q-85");
+    expect(url.searchParams.getAll("tr")).toHaveLength(1);
+  });
+
+  it("preserves unrelated query parameters when applying transformations", () => {
+    const src = `${ENDPOINT}/images/placeholder.jpg?v=2&tr=w-320&format=webp`;
+
+    const result = resolveImageUrl(src, {
+      width: 1280,
+      quality: 90,
+    });
+
+    const url = new URL(result);
+
+    expect(url.searchParams.get("v")).toBe("2");
+    expect(url.searchParams.get("format")).toBe("webp");
+    expect(url.searchParams.get("tr")).toBe("w-1280,q-90");
+  });
+
+  it("preserves URL fragments when applying transformations", () => {
+    const src = `${ENDPOINT}/images/placeholder.jpg#preview`;
+
+    const result = resolveImageUrl(src, {
+      width: 640,
+    });
+
+    const url = new URL(result);
+
+    expect(url.hash).toBe("#preview");
+    expect(url.searchParams.get("tr")).toBe("w-640,q-75");
+  });
+
+  it.each([
+    "https://ik.imagekit.io/another-project/image.jpg",
+    "https://ik.imagekit.io/tronosa-backup/image.jpg",
+    "https://ik.imagekit.io/tronosaproject/image.jpg",
+  ])("rejects CDN URLs outside the configured project path: %s", (src) => {
+    expect(() => resolveImageUrl(src)).toThrow("Unsupported image source");
+  });
+
+  it.each([
+    "https://example.com/tronosa/image.jpg",
+    "http://ik.imagekit.io/tronosa/image.jpg",
+    "https://ik.imagekit.io.example.com/tronosa/image.jpg",
+    "https://ik.imagekit.io:8443/tronosa/image.jpg",
+  ])("rejects CDN URLs with an unexpected origin: %s", (src) => {
+    expect(() => resolveImageUrl(src)).toThrow("Unsupported image source");
+  });
+
+  it.each([
+    "../image.jpg",
+    "images/../../image.jpg",
+    "%2e%2e/image.jpg",
+    "images/%2e%2e/%2e%2e/image.jpg",
+    `${ENDPOINT}/../image.jpg`,
+  ])("rejects traversal outside the configured CDN path: %s", (src) => {
+    expect(() => resolveImageUrl(src)).toThrow("Unsupported image source");
+  });
 });

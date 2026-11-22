@@ -1,8 +1,11 @@
 import { getContentById } from "@/lib/content/registry";
 
-import type { Locale } from "@/i18n/config";
-import type { Page } from "@/content/schemas/page.schema";
+import {
+  standardPageSchema,
+  type StandardPage,
+} from "@/content/schemas/page.schema";
 
+import type { Locale } from "@/i18n/config";
 import type { ContentEntry } from "@/lib/content/registry";
 
 export const SITE_URL = "https://example.com";
@@ -11,8 +14,8 @@ export type PageEntry = Extract<ContentEntry, { kind: "page" }>;
 
 interface CreatePageEntryOptions {
   locale?: Locale;
-  data?: Partial<Page>;
-  seo?: Partial<Page["seo"]>;
+  data?: Partial<StandardPage>;
+  seo?: Partial<StandardPage["seo"]>;
 }
 
 export function createPageEntry({
@@ -26,16 +29,18 @@ export function createPageEntry({
     throw new Error(`Missing home page fixture for locale: ${locale}`);
   }
 
+  const standardPage = standardPageSchema.parse(fixture.data);
+
   return {
     kind: "page",
     locale,
     data: {
-      ...structuredClone(fixture.data),
+      ...structuredClone(standardPage),
       id: "test-page",
       slug: "test-page",
       ...data,
       seo: {
-        ...structuredClone(fixture.data.seo),
+        ...structuredClone(standardPage.seo),
         title: "Test page",
         description: "Test page description",
         index: true,

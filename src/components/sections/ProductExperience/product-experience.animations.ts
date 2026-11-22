@@ -135,9 +135,6 @@ export function createProductExperienceAnimation(
 
       const y = (ratio: number) => viewport.clientHeight * ratio;
 
-      const getPinOffset = () =>
-        Math.max(0, window.innerHeight - viewport.clientHeight);
-
       const getCenteredIndex = (index: number) =>
         index - (productCount - 1) / 2;
 
@@ -270,7 +267,7 @@ export function createProductExperienceAnimation(
         scrollTrigger: {
           trigger: viewport,
 
-          start: () => `top ${getPinOffset()}px`,
+          start: "top top",
 
           end: () => `+=${viewport.clientHeight * timelineDuration * 0.44}`,
 

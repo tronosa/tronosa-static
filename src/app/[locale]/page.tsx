@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
+
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 
 import { SectionRenderer } from "@/components/sections/section-renderer";
 import { JsonLd } from "@/components/seo/json-ld";
 
+import { routing } from "@/i18n/routing";
+
 import { getContentById, type Locale } from "@/lib/content/registry";
 
-import { routing } from "@/i18n/routing";
 import { createSeoMetadata } from "@/lib/seo/metadata";
 import { createStructuredData } from "@/lib/seo/structured-data";
 
 type Props = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{
+    locale: string;
+  }>;
 };
 
 function getHomePage(locale: Locale) {
@@ -48,9 +52,7 @@ export default async function HomePage({ params }: Props) {
     <>
       <JsonLd data={await createStructuredData(entry)} />
 
-      <main>
-        <SectionRenderer sections={entry.data.content.sections} />
-      </main>
+      <SectionRenderer sections={entry.data.content.sections} />
     </>
   );
 }

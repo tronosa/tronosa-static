@@ -1,19 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useId, useRef, useState, type CSSProperties } from "react";
 
-import { useGSAP } from "@/lib/animation/gsap";
-
+import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
 import { ProductDisplay } from "./ProductDisplay";
 import { ProductSelector } from "./ProductSelector";
 import { ProductShowcaseCTA } from "./ProductShowcaseCTA";
 
-import {
-  animateProductShowcase,
-  type ProductShowcaseDirection,
-} from "./product-showcase.animations";
+import type { ProductShowcaseDirection } from "./product-showcase.animations";
 
 import {
   productShowcaseVariants,
@@ -35,9 +32,18 @@ import {
 } from "./product-showcase.variants";
 
 import type { ProductShowcaseClientProps } from "./types";
-import { Container } from "@/components/ui/Container";
 
 const PRODUCT_CHANGE_INTERVAL = 450;
+
+const ProductShowcaseAnimation = dynamic(
+  () =>
+    import("./ProductShowcaseAnimation").then(
+      (module) => module.ProductShowcaseAnimation,
+    ),
+  {
+    ssr: false,
+  },
+);
 
 export function ProductShowcaseClient({
   eyebrow,
@@ -62,27 +68,6 @@ export function ProductShowcaseClient({
 
   const activeProduct =
     products.find(({ id }) => id === activeProductId) ?? products[0];
-
-  useGSAP(
-    () => {
-      const container = containerRef.current;
-
-      if (!container || !hasInteracted) {
-        return;
-      }
-
-      const timeline = animateProductShowcase(container, directionRef.current);
-
-      return () => {
-        timeline?.kill();
-      };
-    },
-    {
-      scope: containerRef,
-      dependencies: [activeProductId, hasInteracted],
-      revertOnUpdate: true,
-    },
-  );
 
   if (!activeProduct) {
     return null;
@@ -119,7 +104,6 @@ export function ProductShowcaseClient({
 
   const appearance = {
     "--product-background": activeProduct.appearance.backgroundColor,
-
     "--product-accent": activeProduct.appearance.accentColor,
   } as CSSProperties;
 
@@ -131,6 +115,14 @@ export function ProductShowcaseClient({
       style={appearance}
       className={productShowcaseVariants()}
     >
+      {hasInteracted && (
+        <ProductShowcaseAnimation
+          containerRef={containerRef}
+          activeProductId={activeProduct.id}
+          directionRef={directionRef}
+        />
+      )}
+
       <div aria-hidden="true" className={productShowcaseBackgroundVariants()} />
 
       {backgroundText && (

@@ -1,10 +1,14 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useCallback, useId, useRef, useState } from "react";
 
-import { LocationDirectory } from "./LocationDirectory";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { cn } from "@/lib/cn";
 
-import { MapCanvas, type MapStatus } from "./MapCanvas";
+import { LocationDirectory } from "./LocationDirectory";
+import type { MapStatus } from "./MapCanvas";
 
 import { getMapMessages } from "./distribution-map.i18n";
 import { DEFAULT_MAP_VIEW } from "./distribution-map.utils";
@@ -15,11 +19,14 @@ import type {
   DistributionMapView,
 } from "./types";
 
-import "maplibre-gl/dist/maplibre-gl.css";
 import "./distribution-map.css";
-import { Container } from "@/components/ui/Container";
-import { cn } from "@/lib/cn";
-import { Section } from "@/components/ui/Section";
+
+const MapCanvas = dynamic(
+  () => import("./MapCanvas").then((module) => module.MapCanvas),
+  {
+    ssr: false,
+  },
+);
 
 export function DistributionMapClient({
   locale,

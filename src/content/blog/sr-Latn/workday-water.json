@@ -1,0 +1,210 @@
+{
+  "id": "workday-water",
+  "slug": "voda-tokom-radnog-dana",
+  "status": "published",
+  "createdAt": "2026-11-20T09:00:00+01:00",
+  "modifiedAt": "2026-11-20T09:00:00+01:00",
+  "publishedAt": "2026-11-20T09:00:00+01:00",
+  "category": "hydration",
+  "featured": false,
+  "author": {
+    "type": "Organization",
+    "name": "Tronoša",
+    "url": "https://tronosa.com/"
+  },
+  "preview": {
+    "title": "Voda tokom radnog dana: male pauze, bolje navike",
+    "description": "Kako da unos vode uklopimo u posao, sastanke i dane provedene za računarom.",
+    "image": {
+      "src": "/blog/natural-origin.webp",
+      "alt": "Čaša vode i sveska na radnom stolu pored prozora",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "seo": {
+    "title": "Hidratacija tokom radnog dana | Tronoša",
+    "description": "Praktične ideje za redovan unos vode tokom rada u kancelariji ili od kuće, bez rigidnih pravila i univerzalnih količina.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "workday-water-hero",
+        "type": "article-hero",
+        "content": {
+          "backgroundText": "TRONOŠA",
+          "appearance": {
+            "backgroundColor": "#234D65",
+            "accentColor": "#8CCDE3"
+          }
+        }
+      },
+      {
+        "id": "article-metadata",
+        "type": "article-metadata"
+      },
+      {
+        "id": "workday-water-intro",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Dani ispunjeni sastancima, porukama i obavezama mogu da prođu bez mnogo pauza. Dok se fokusiramo na posao, lako zanemarimo male potrebe koje se ponavljaju tokom dana. Dostupna voda i nekoliko jednostavnih podsetnika mogu pomoći da redovan unos tečnosti postane manje naporan."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Ne čekajte idealan trenutak"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Umesto da hidrataciju pretvorimo u još jedan zadatak, možemo je povezati sa aktivnostima koje već radimo. Na primer, naspite vodu pre početka rada, napravite kratku pauzu između sastanaka ili dopunite čašu uz obrok."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "workday-water-photo",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "Čaša vode na urednom radnom stolu",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Voda na dohvat ruke može biti jednostavan podsetnik tokom radnog dana.",
+          "layout": "medium"
+        }
+      },
+      {
+        "id": "workday-water-actions",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Tri praktična koraka"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                [
+                  {
+                    "text": "Na početku rada pripremite vodu na radnom mestu."
+                  }
+                ],
+                [
+                  {
+                    "text": "Iskoristite promenu zadatka kao trenutak da proverite da li ste žedni."
+                  }
+                ],
+                [
+                  {
+                    "text": "Prilagodite unos vode aktivnosti, temperaturi i sopstvenim potrebama."
+                  }
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Nema potrebe da se slepo pridržavate jednog broja čaša dnevno. Potrebe za vodom variraju i deo tečnosti unosimo kroz hranu i druga pića."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Pauze imaju i drugu vrednost"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Kratak odmor od ekrana može biti prilika da ustanemo, protegnemo se i promenimo položaj. Čaša vode ne rešava sve posledice dugog sedenja, ali može biti mali deo bolje organizovanog radnog dana."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "workday-water-end",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Doslednost je važnija od savršenstva"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Najbolja rutina je ona koju možemo da održimo. Jednostavne navike, prilagođene stvarnim obavezama, često su korisnije od ambicioznih pravila koja brzo napustimo."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Za više informacija o vodi i zdravlju, koristite proverene izvore poput "
+                },
+                {
+                  "type": "external-link",
+                  "text": "Svetske zdravstvene organizacije",
+                  "href": "https://www.who.int/",
+                  "newTab": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "related-posts",
+        "type": "related-posts",
+        "content": {
+          "limit": 3
+        }
+      }
+    ]
+  }
+}

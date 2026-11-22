@@ -11,8 +11,6 @@ import { ProductComposition } from "./ProductComposition";
 import { ProductCollection } from "./ProductCollection";
 import { ProductExperienceMobile } from "./ProductExperienceMobile";
 
-import { createMobileAnimation } from "./product-experience.mobile.animations";
-
 import {
   productExperienceVariants,
   experienceViewportVariants,
@@ -72,9 +70,36 @@ export function ProductExperienceClient(props: ProductExperienceProps) {
       cleanupAnimation = undefined;
     }
 
+    function isCurrentRequest(currentRequestId: number) {
+      return !disposed && currentRequestId === requestId;
+    }
+
     function removeMediaListeners() {
       desktopMedia.removeEventListener("change", synchronize);
+
       reducedMotionMedia.removeEventListener("change", synchronize);
+    }
+
+    async function initializeMobile(currentRequestId: number) {
+      try {
+        const { createMobileAnimation } =
+          await import("./product-experience.mobile.animations");
+
+        if (!isCurrentRequest(currentRequestId) || reducedMotionMedia.matches) {
+          return;
+        }
+
+        cleanupAnimation = createMobileAnimation(mobile);
+      } catch (error: unknown) {
+        if (!isCurrentRequest(currentRequestId)) {
+          return;
+        }
+
+        console.error(
+          "[ProductExperience] Mobile animation initialization failed.",
+          error,
+        );
+      }
     }
 
     function synchronize() {
@@ -91,14 +116,14 @@ export function ProductExperienceClient(props: ProductExperienceProps) {
       }
 
       if (!desktopMedia.matches) {
-        cleanupAnimation = createMobileAnimation(mobile);
+        void initializeMobile(currentRequestId);
 
         return;
       }
 
       void import("./product-experience.animations")
         .then(({ createProductExperienceAnimation }) => {
-          if (disposed || currentRequestId !== requestId) {
+          if (!isCurrentRequest(currentRequestId)) {
             return;
           }
 
@@ -117,7 +142,7 @@ export function ProductExperienceClient(props: ProductExperienceProps) {
           removeMediaListeners();
         })
         .catch((error: unknown) => {
-          if (disposed || currentRequestId !== requestId) {
+          if (!isCurrentRequest(currentRequestId)) {
             return;
           }
 
@@ -126,7 +151,7 @@ export function ProductExperienceClient(props: ProductExperienceProps) {
             error,
           );
 
-          cleanupAnimation = createMobileAnimation(mobile);
+          void initializeMobile(currentRequestId);
         });
     }
 
@@ -161,7 +186,7 @@ export function ProductExperienceClient(props: ProductExperienceProps) {
 
     "--experience-accent": appearance.accentColor,
 
-    "--experience-height": "calc(100svh - var(--site-header-height, 0px))",
+    "--experience-height": "100svh",
   } as CSSProperties;
 
   return (

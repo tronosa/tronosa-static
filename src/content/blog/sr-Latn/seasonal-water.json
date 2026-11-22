@@ -1,0 +1,217 @@
+{
+  "id": "seasonal-water",
+  "slug": "ritam-prirode-i-vode",
+  "status": "published",
+  "createdAt": "2026-11-19T09:00:00+01:00",
+  "modifiedAt": "2026-11-19T09:00:00+01:00",
+  "publishedAt": "2026-11-19T09:00:00+01:00",
+  "category": "nature",
+  "featured": false,
+  "author": {
+    "type": "Organization",
+    "name": "Tronoša",
+    "url": "https://tronosa.com/"
+  },
+  "preview": {
+    "title": "Voda i ritam prirode: šta nam godišnja doba otkrivaju",
+    "description": "Od prolećnih kiša do letnjih vrućina, voda prati promene u prirodi i našem svakodnevnom životu.",
+    "image": {
+      "src": "/blog/natural-origin.webp",
+      "alt": "Potok koji protiče kroz šumu u jutarnjoj svetlosti",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "seo": {
+    "title": "Voda i godišnja doba: prirodni ciklus | Tronoša",
+    "description": "Kako se uloga vode menja kroz godišnja doba i zašto je razumevanje prirodnog ciklusa važno za svakodnevni život.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "seasonal-water-hero",
+        "type": "article-hero",
+        "content": {
+          "backgroundText": "TRONOŠA",
+          "appearance": {
+            "backgroundColor": "#193B52",
+            "accentColor": "#91BED8"
+          }
+        }
+      },
+      {
+        "id": "article-metadata",
+        "type": "article-metadata"
+      },
+      {
+        "id": "seasonal-water-intro",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Voda je prisutna u gotovo svakom prizoru prirode: u oblacima, zemljištu, rekama, biljkama i vazduhu. Njeno kretanje ne prestaje kada se vreme promeni. Menjaju se uslovi u kojima je primećujemo i način na koji utiče na okruženje."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Proleće: vreme obnavljanja"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Sa porastom temperature i češćim padavinama, mnoge biljke ulaze u intenzivniji period rasta. Voda u zemljištu omogućava korenu da usvaja rastvorene hranljive materije, dok kiša dopunjava površinske i podzemne zalihe. Koliko vode ostaje dostupno zavisi od lokalnih uslova, vrste zemljišta i prethodnih vremenskih prilika."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "seasonal-water-forest",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "Zeleni šumski potok sa kamenjem",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Voda povezuje zemljište, biljke i životne zajednice u jednom prirodnom sistemu.",
+          "layout": "wide"
+        }
+      },
+      {
+        "id": "seasonal-water-summer",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Leto: važnost ravnoteže"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Tokom toplih dana isparavanje je često intenzivnije, a potreba ljudi za vodom može da raste. To ne znači da svako treba da pije istu količinu. Potrebe zavise od aktivnosti, temperature i individualnih okolnosti."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Praktična navika je da voda bude dostupna tokom dana, naročito kada duže boravimo napolju."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Jesen i zima: proces se nastavlja"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "I kada nema velikih vrućina, voda ostaje sastavni deo života. Padavine, sneg, oticanje i upijanje vode u zemljište deo su šireg kruženja koje povezuje godišnja doba."
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                [
+                  {
+                    "text": "Obratite pažnju na promene u prirodi oko sebe."
+                  }
+                ],
+                [
+                  {
+                    "text": "Koristite vodu odgovorno, bez obzira na sezonu."
+                  }
+                ],
+                [
+                  {
+                    "text": "Razlikujte opšte savete od potreba svog organizma."
+                  }
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "seasonal-water-end",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Priroda nema prekidač za pauzu"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Razumevanje prirodnog ciklusa podseća nas da voda nije izolovan proizvod, već deo složenog okruženja. Pažljiv odnos prema njoj počinje informisanošću i svakodnevnim postupcima."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Više o vrednostima koje predstavljamo pročitajte na stranici "
+                },
+                {
+                  "type": "link",
+                  "text": "O nama",
+                  "pageId": "about"
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "related-posts",
+        "type": "related-posts",
+        "content": {
+          "limit": 3
+        }
+      }
+    ]
+  }
+}

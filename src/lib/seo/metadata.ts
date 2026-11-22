@@ -6,25 +6,24 @@ import type { ContentEntry } from "@/lib/content/registry";
 
 import { getLanguageAlternates } from "./alternates";
 import { absoluteUrl, getSeoConfig } from "./config";
-import { getContentPath } from "./urls";
+import { getCanonicalUrl } from "./urls";
+
+import {
+  isPublished,
+  isSearchIndexingAllowed,
+  isCanonicalIndexable,
+} from "./indexability";
 
 export function createSeoMetadata(entry: ContentEntry): Metadata {
   const config = getSeoConfig();
   const { isIndexable } = getEnvironment();
   const { seo } = entry.data;
 
-  const isPublished =
-    entry.kind === "page" || entry.data.status === "published";
+  const index = isSearchIndexingAllowed(entry);
 
-  const index = isIndexable && isPublished && seo.index;
-  const follow = isIndexable && isPublished && seo.follow;
+  const follow = isIndexable && isPublished(entry) && seo.follow;
 
-  const canonicalPath = seo.canonical || getContentPath(entry);
-  const canonical = new URL(absoluteUrl(canonicalPath));
-
-  if (canonical.origin !== config.url || canonical.search || canonical.hash) {
-    throw new Error(`Invalid canonical URL for ${entry.data.id}`);
-  }
+  const canonical = getCanonicalUrl(entry);
 
   const title = seo.title;
   const description = seo.description;
@@ -32,7 +31,9 @@ export function createSeoMetadata(entry: ContentEntry): Metadata {
   const ogTitle = seo.openGraph?.title ?? title;
   const ogDescription = seo.openGraph?.description ?? description;
 
-  const ogImage = seo.openGraph?.image;
+  const ogImage =
+    seo.openGraph?.image ??
+    (entry.kind === "article" ? entry.data.preview.image : undefined);
 
   const images = ogImage
     ? [
@@ -48,7 +49,7 @@ export function createSeoMetadata(entry: ContentEntry): Metadata {
   const openGraph = {
     title: ogTitle,
     description: ogDescription,
-    url: canonical.toString(),
+    url: canonical,
     siteName: config.name,
     locale: localeConfig[entry.locale].openGraphLocale,
     images,
@@ -62,10 +63,10 @@ export function createSeoMetadata(entry: ContentEntry): Metadata {
     applicationName: config.name,
 
     alternates: {
-      canonical: canonical.toString(),
-      ...(isPublished &&
-        seo.index &&
-        !seo.canonical && {
+      canonical,
+
+      ...(index &&
+        isCanonicalIndexable(entry) && {
           languages: getLanguageAlternates(entry),
         }),
     },

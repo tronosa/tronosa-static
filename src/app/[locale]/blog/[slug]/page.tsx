@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
+
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/seo/json-ld";
 import { SectionRenderer } from "@/components/sections/section-renderer";
 
+import { routing } from "@/i18n/routing";
+
 import {
-  getContentBySlug,
-  getPublishedContent,
+  getPublishedPosts,
+  getPublishedPostBySlug,
   type Locale,
 } from "@/lib/content/registry";
 
-import { routing } from "@/i18n/routing";
 import { createSeoMetadata } from "@/lib/seo/metadata";
 import { createStructuredData } from "@/lib/seo/structured-data";
 
@@ -23,20 +25,18 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return getPublishedContent()
-    .filter(
-      (entry) => entry.kind === "article" && !entry.data.slug.includes("/"),
-    )
-    .map((entry) => ({
-      locale: entry.locale,
-      slug: entry.data.slug,
+  return getPublishedPosts()
+    .filter(({ data }) => !data.slug.includes("/"))
+    .map(({ locale, data }) => ({
+      locale,
+      slug: data.slug,
     }));
 }
 
 function getArticle(locale: Locale, slug: string) {
-  const entry = getContentBySlug("article", locale, slug);
+  const entry = getPublishedPostBySlug(locale, slug);
 
-  if (!entry || entry.kind !== "article" || entry.data.status !== "published") {
+  if (!entry) {
     notFound();
   }
 
@@ -66,11 +66,12 @@ export default async function BlogArticle({ params }: Props) {
     <>
       <JsonLd data={await createStructuredData(entry)} />
 
-      <main>
-        <article>
-          <SectionRenderer sections={entry.data.content.sections} />
-        </article>
-      </main>
+      <article>
+        <SectionRenderer
+          sections={entry.data.content.sections}
+          context={entry}
+        />
+      </article>
     </>
   );
 }

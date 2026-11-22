@@ -10,8 +10,12 @@ import { faqSectionSchema } from "@/components/sections/Faq/faq.schema";
 import { distributionMapSectionSchema } from "@/components/sections/DistributionMap/distribution-map.schema";
 import { productShowcaseSectionSchema } from "@/components/sections/ProductShowcase/product-showcase.schema";
 import { productExperienceSectionSchema } from "@/components/sections/ProductExperience/product-experience.schema";
+import { contentSectionSchema } from "@/components/sections/ContentSection/content-section.schema";
 
-export const sectionSchema = z.discriminatedUnion("type", [
+import { blogSpecificSectionSchemas } from "./blog-section.schema";
+import { articleSpecificSectionSchemas } from "./article-section.schema";
+
+export const sharedSectionSchemas = [
   videoHeroSectionSchema,
   imageHeroSectionSchema,
   cardSliderSectionSchema,
@@ -22,7 +26,46 @@ export const sectionSchema = z.discriminatedUnion("type", [
   distributionMapSectionSchema,
   productShowcaseSectionSchema,
   productExperienceSectionSchema,
+  contentSectionSchema,
+] as const;
+
+export const sharedSectionSchema = z.discriminatedUnion(
+  "type",
+  sharedSectionSchemas,
+);
+
+export const standardPageSectionSchema = sharedSectionSchema;
+
+export const blogSectionSchema = z.discriminatedUnion("type", [
+  ...sharedSectionSchemas,
+  ...blogSpecificSectionSchemas,
 ]);
 
+export const articleSectionSchema = z.discriminatedUnion("type", [
+  ...sharedSectionSchemas,
+  ...articleSpecificSectionSchemas,
+]);
+
+export const sectionSchema = z.discriminatedUnion("type", [
+  ...sharedSectionSchemas,
+  ...blogSpecificSectionSchemas,
+  ...articleSpecificSectionSchemas,
+]);
+
+export const allSectionSchema = sectionSchema;
+
+export type SharedSection = z.infer<typeof sharedSectionSchema>;
+
+export type StandardPageSection = z.infer<typeof standardPageSectionSchema>;
+
+export type BlogSection = z.infer<typeof blogSectionSchema>;
+
+export type ArticleSection = z.infer<typeof articleSectionSchema>;
+
 export type Section = z.infer<typeof sectionSchema>;
+
 export type SectionType = Section["type"];
+
+export type AllSection = Section;
+
+export type AllSectionType = SectionType;

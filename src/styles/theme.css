@@ -43,9 +43,20 @@
   --type-h4: clamp(1.125rem, 1.5vw, 1.375rem);
   --type-lead: clamp(1.125rem, 1.5vw, 1.25rem);
 
-  /* Shape */
   --radius-control: 0.5rem;
   --radius-card: 1rem;
+
+  --site-header-height-mobile: 88px;
+  --site-header-height-tablet: 104px;
+  --site-header-height-desktop: 104px;
+
+  --site-header-content-gap: 20px;
+
+  --site-header-height: var(--site-header-height-mobile);
+
+  --hero-content-offset: calc(
+    var(--site-header-height) + var(--site-header-content-gap)
+  );
 }
 
 @theme inline {
@@ -101,5 +112,17 @@
       opacity: 0;
       transform: translateY(-16px);
     }
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-header-height: var(--site-header-height-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --site-header-height: var(--site-header-height-desktop);
   }
 }

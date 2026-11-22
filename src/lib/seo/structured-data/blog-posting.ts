@@ -26,7 +26,7 @@ export function createBlogPostingSchema(
     inLanguage: entry.locale,
 
     author: {
-      "@type": "Person",
+      "@type": entry.data.author.type,
       name: article.author.name,
       ...(article.author.url && {
         url: article.author.url,

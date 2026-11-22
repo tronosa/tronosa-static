@@ -122,6 +122,7 @@ export function LanguageSwitcherDialog({
         />
 
         <Dialog.Content
+          aria-modal="true"
           aria-describedby={undefined}
           className={cn(
             "fixed left-1/2 top-1/2 z-101",

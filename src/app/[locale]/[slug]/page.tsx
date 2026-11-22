@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 
 import { SectionRenderer } from "@/components/sections/section-renderer";
 import { JsonLd } from "@/components/seo/json-ld";
+
+import { routing } from "@/i18n/routing";
 
 import {
   getContentBySlug,
@@ -11,7 +14,6 @@ import {
   type Locale,
 } from "@/lib/content/registry";
 
-import { routing } from "@/i18n/routing";
 import { createSeoMetadata } from "@/lib/seo/metadata";
 import { createStructuredData } from "@/lib/seo/structured-data";
 
@@ -70,9 +72,7 @@ export default async function ContentPage({ params }: Props) {
     <>
       <JsonLd data={await createStructuredData(entry)} />
 
-      <main>
-        <SectionRenderer sections={entry.data.content.sections} />
-      </main>
+      <SectionRenderer sections={entry.data.content.sections} />
     </>
   );
 }

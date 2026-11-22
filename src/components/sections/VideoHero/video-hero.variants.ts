@@ -2,7 +2,8 @@ import { cva } from "class-variance-authority";
 
 export const videoHeroVariants = cva([
   "relative isolate flex w-full flex-col justify-end",
-  "min-h-screen overflow-hidden",
+  "min-h-[85svh] md:min-h-[80svh]",
+  "overflow-hidden",
   "bg-brand-forest text-white",
 ]);
 
@@ -28,7 +29,8 @@ export const videoHeroContentVariants = cva(
     "relative z-20",
     "flex min-w-0 flex-col",
     "gap-6 md:gap-8",
-    "pt-40 pb-24 md:pt-48 md:pb-28",
+    "pt-[var(--hero-content-offset)]",
+    "pb-24 md:pb-28",
   ],
   {
     variants: {

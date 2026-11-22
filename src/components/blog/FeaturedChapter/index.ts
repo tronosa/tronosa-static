@@ -1,0 +1,1 @@
+export { FeaturedChapter } from "./FeaturedChapter";

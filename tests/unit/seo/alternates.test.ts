@@ -148,4 +148,199 @@ describe("Language alternates", () => {
 
     expect(getLanguageAlternates(entry)).not.toHaveProperty("x-default");
   });
+
+  it("returns no alternates when the requested entry is not indexable", () => {
+    const entry = createPageEntry({
+      seo: {
+        index: false,
+      },
+    });
+
+    const translations = locales.map((locale) => createPageEntry({ locale }));
+
+    publishedContentMock.mockReturnValue(translations);
+
+    expect(getLanguageAlternates(entry)).toEqual({});
+  });
+
+  it("does not access published content for a non-indexable entry", () => {
+    const entry = createPageEntry({
+      seo: {
+        index: false,
+      },
+    });
+
+    expect(getLanguageAlternates(entry)).toEqual({});
+
+    expect(publishedContentMock).not.toHaveBeenCalled();
+  });
+
+  it("returns no alternates when the requested entry has a different canonical URL", () => {
+    const entry = createPageEntry({
+      seo: {
+        canonical: "/another-page",
+      },
+    });
+
+    const translations = locales.map((locale) => createPageEntry({ locale }));
+
+    publishedContentMock.mockReturnValue(translations);
+
+    expect(getLanguageAlternates(entry)).toEqual({});
+
+    expect(publishedContentMock).not.toHaveBeenCalled();
+  });
+
+  it("accepts a custom canonical that matches the public content URL", () => {
+    const original = createPageEntry();
+
+    const entry = createPageEntry({
+      seo: {
+        canonical: getContentUrl(original),
+      },
+    });
+
+    publishedContentMock.mockReturnValue([entry]);
+
+    expect(getLanguageAlternates(entry)).toEqual({
+      [entry.locale]: getContentUrl(entry),
+    });
+  });
+
+  it("includes x-default when only the default locale is available", () => {
+    const entry = createPageEntry({
+      locale: defaultLocale,
+    });
+
+    publishedContentMock.mockReturnValue([entry]);
+
+    expect(getLanguageAlternates(entry)).toEqual({
+      [defaultLocale]: getContentUrl(entry),
+      "x-default": getContentUrl(entry),
+    });
+  });
+
+  it("uses the default locale URL as x-default regardless of the requested locale", () => {
+    const entry = createPageEntry({
+      locale: "en",
+    });
+
+    const defaultEntry = createPageEntry({
+      locale: defaultLocale,
+    });
+
+    publishedContentMock.mockReturnValue([entry, defaultEntry]);
+
+    expect(getLanguageAlternates(entry)).toEqual({
+      en: getContentUrl(entry),
+      [defaultLocale]: getContentUrl(defaultEntry),
+      "x-default": getContentUrl(defaultEntry),
+    });
+  });
+
+  it("does not use a non-canonical default translation as x-default", () => {
+    const entry = createPageEntry({
+      locale: "en",
+    });
+
+    const defaultEntry = createPageEntry({
+      locale: defaultLocale,
+      seo: {
+        canonical: "/another-page",
+      },
+    });
+
+    publishedContentMock.mockReturnValue([entry, defaultEntry]);
+
+    expect(getLanguageAlternates(entry)).toEqual({
+      en: getContentUrl(entry),
+    });
+  });
+
+  it("supports localized slugs for the same content identity", () => {
+    const entries = [
+      createPageEntry({
+        locale: "en",
+        data: {
+          id: "about",
+          slug: "about",
+        },
+      }),
+      createPageEntry({
+        locale: "sr-Cyrl",
+        data: {
+          id: "about",
+          slug: "o-nama",
+        },
+      }),
+      createPageEntry({
+        locale: "sr-Latn",
+        data: {
+          id: "about",
+          slug: "o-nama",
+        },
+      }),
+    ];
+
+    publishedContentMock.mockReturnValue(entries);
+
+    const expected = {
+      en: getContentUrl(entries[0]),
+      "sr-Cyrl": getContentUrl(entries[1]),
+      "sr-Latn": getContentUrl(entries[2]),
+      "x-default": getContentUrl(entries[1]),
+    };
+
+    for (const entry of entries) {
+      expect(getLanguageAlternates(entry)).toEqual(expected);
+    }
+  });
+
+  it("excludes content with the same slug but a different identity", () => {
+    const entry = createPageEntry({
+      locale: "en",
+      data: {
+        id: "about",
+        slug: "about",
+      },
+    });
+
+    const unrelatedEntry = createPageEntry({
+      locale: "sr-Latn",
+      data: {
+        id: "different-page",
+        slug: "about",
+      },
+    });
+
+    publishedContentMock.mockReturnValue([entry, unrelatedEntry]);
+
+    expect(getLanguageAlternates(entry)).toEqual({
+      en: getContentUrl(entry),
+    });
+  });
+
+  it("returns reciprocal alternates for every available translation", () => {
+    const entries = locales.map((locale) => createPageEntry({ locale }));
+
+    publishedContentMock.mockReturnValue(entries);
+
+    const expected = Object.fromEntries(
+      entries.map((entry) => [entry.locale, getContentUrl(entry)]),
+    );
+
+    const defaultEntry = entries.find(
+      (entry) => entry.locale === defaultLocale,
+    );
+
+    if (!defaultEntry) {
+      throw new Error("Expected a default locale translation");
+    }
+
+    expected["x-default"] = getContentUrl(defaultEntry);
+
+    for (const entry of entries) {
+      expect(getLanguageAlternates(entry)).toEqual(expected);
+    }
+  });
 });

@@ -10,19 +10,26 @@
   "content": {
     "sections": [
       {
-        "id": "blog-distribution-map",
-        "type": "distribution-map",
+        "id": "journal-opening",
+        "type": "journal-opening"
+      },
+      {
+        "id": "featured-chapter",
+        "type": "featured-chapter"
+      },
+      {
+        "id": "story-explorer",
+        "type": "story-explorer"
+      },
+      {
+        "id": "journal-index",
+        "type": "journal-index"
+      },
+      {
+        "id": "source-closing",
+        "type": "source-closing",
         "content": {
-          "eyebrow": "Always close to you",
-          "title": "Discover Tronoša near you.",
-          "description": "Explore our network of retail locations, distributors and business partners.",
-          "initialView": {
-            "latitude": 44.15,
-            "longitude": 20.85,
-            "zoom": 6.5
-          },
-          "showLegend": true,
-          "showLocationList": true
+          "pageId": "about"
         }
       }
     ]

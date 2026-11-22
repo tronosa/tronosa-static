@@ -2,20 +2,21 @@ import { defaultLocale } from "@/i18n/config";
 
 import { getPublishedContent, type ContentEntry } from "@/lib/content/registry";
 
+import { isCanonicalIndexable } from "./indexability";
 import { getContentUrl } from "./urls";
-
-function isIndexable(entry: ContentEntry): boolean {
-  return entry.data.seo.index && !entry.data.seo.canonical;
-}
 
 export function getLanguageAlternates(
   entry: ContentEntry,
 ): Record<string, string> {
+  if (!isCanonicalIndexable(entry)) {
+    return {};
+  }
+
   const translations = getPublishedContent().filter(
     (candidate) =>
       candidate.kind === entry.kind &&
       candidate.data.id === entry.data.id &&
-      isIndexable(candidate),
+      isCanonicalIndexable(candidate),
   );
 
   const languages = Object.fromEntries(

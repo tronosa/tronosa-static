@@ -7,6 +7,8 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import { fontSans } from "@/lib/fonts";
 import { Header } from "@/components/navigation/Header";
+import { SkipLink } from "@/components/navigation/SkipLink";
+import { Main } from "@/components/ui/Main";
 
 type Props = {
   children: ReactNode;
@@ -36,8 +38,9 @@ export default async function LocaleLayout({ children, params }: Props) {
     >
       <body>
         <NextIntlClientProvider messages={null}>
+          <SkipLink />
           <Header />
-          {children}
+          <Main>{children}</Main>
         </NextIntlClientProvider>
       </body>
     </html>

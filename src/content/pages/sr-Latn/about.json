@@ -39,6 +39,22 @@
             }
           }
         }
+      },
+      {
+        "id": "blog-distribution-map",
+        "type": "distribution-map",
+        "content": {
+          "eyebrow": "Uvek blizu vas",
+          "title": "Pronađite Tronošu u vašoj blizini.",
+          "description": "Istražite našu mrežu prodajnih mesta, distributera i poslovnih partnera.",
+          "initialView": {
+            "latitude": 44.15,
+            "longitude": 20.85,
+            "zoom": 6.5
+          },
+          "showLegend": true,
+          "showLocationList": true
+        }
       }
     ]
   }

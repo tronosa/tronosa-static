@@ -1,0 +1,187 @@
+{
+  "id": "natural-origin",
+  "slug": "prirodno-poreklo",
+  "status": "published",
+  "createdAt": "2026-11-20T10:00:00+01:00",
+  "modifiedAt": "2026-11-20T10:00:00+01:00",
+  "publishedAt": "2026-11-20T10:00:00+01:00",
+  "category": "nature",
+  "featured": true,
+  "author": {
+    "type": "Organization",
+    "name": "Tronoša",
+    "url": "https://tronosa.com/"
+  },
+  "preview": {
+    "title": "Природа обликује сваку кап",
+    "description": "Прича о води, њеном природном пореклу и нераскидивој вези између човека и природе.",
+    "image": {
+      "src": "/blog/natural-origin.webp",
+      "alt": "Шумски предео окружен нетакнутом природом",
+      "width": 1600,
+      "height": 1000
+    }
+  },
+  "seo": {
+    "title": "Природа обликује сваку кап | Троноша",
+    "description": "Откријте причу о природном пореклу воде Троноша и њеној повезаности са природом.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "natural-origin-hero",
+        "type": "article-hero",
+        "content": {
+          "backgroundText": "ТРОНОША",
+          "appearance": {
+            "backgroundColor": "#174B37",
+            "accentColor": "#A8C9AA"
+          }
+        }
+      },
+      {
+        "id": "article-metadata",
+        "type": "article-metadata"
+      },
+      {
+        "id": "natural-origin-introduction",
+        "type": "content-section",
+        "content": {
+          "width": "narrow",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Свака кап воде носи своју причу. Причу која почиње далеко од свакодневне ужурбаности, у окружењу природе."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "За нас, "
+                },
+                {
+                  "text": "Троноша",
+                  "bold": true,
+                  "color": "primary"
+                },
+                {
+                  "text": " представља више од воде. Она представља повезаност човека са природом."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Све почиње у природи"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Наша филозофија је једноставна: "
+                },
+                {
+                  "text": "сачувати оно што нам природа пружа.",
+                  "italic": true,
+                  "underline": true
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "children": [
+                {
+                  "text": "Вредности које нас повезују"
+                }
+              ]
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                [
+                  {
+                    "text": "Поштовање природе"
+                  }
+                ],
+                [
+                  {
+                    "text": "Одговорност према животној средини"
+                  }
+                ],
+                [
+                  {
+                    "text": "Посвећеност квалитету"
+                  }
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Сазнајте више о "
+                },
+                {
+                  "type": "link",
+                  "text": "нашој компанији",
+                  "pageId": "about"
+                },
+                {
+                  "text": " и вредностима које нас повезују са природом."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Више информација о здрављу и хидратацији можете пронаћи на "
+                },
+                {
+                  "type": "external-link",
+                  "text": "сајту Светске здравствене организације",
+                  "href": "https://www.who.int/",
+                  "newTab": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "forest-water-image",
+        "type": "article-image",
+        "content": {
+          "src": "/blog/natural-origin.webp",
+          "alt": "Вода која протиче преко камења у природном окружењу",
+          "width": 1600,
+          "height": 1000,
+          "caption": "Вода је саставни део природних процеса који обликују наше окружење.",
+          "layout": "wide"
+        }
+      },
+      {
+        "id": "related-posts",
+        "type": "related-posts",
+        "content": {
+          "limit": 3
+        }
+      }
+    ]
+  }
+}

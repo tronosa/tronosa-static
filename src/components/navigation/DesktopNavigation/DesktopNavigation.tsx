@@ -1,17 +1,13 @@
 import { getLocale, getTranslations } from "next-intl/server";
 
-import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/cn";
+import type { Locale } from "@/i18n/config";
 
 import { LanguageSwitcher } from "../LanguageSwitcher";
-import { getNavigationItems } from "../navigation.server";
-import type { Locale } from "@/i18n/config";
-import { DesktopNavigationProps } from "./types";
-import { desktopNavigationLinkVariants } from "./desktop-navigation.variants";
+import { NavigationLink } from "../NavigationLink";
 
-export async function DesktopNavigation({
-  activePage,
-}: DesktopNavigationProps) {
+import { getNavigationItems } from "../navigation.server";
+
+export async function DesktopNavigation() {
   const [locale, t, tHeader] = await Promise.all([
     getLocale(),
     getTranslations("Navigation"),
@@ -26,34 +22,17 @@ export async function DesktopNavigation({
       className="hidden items-center gap-8 lg:flex"
     >
       <ul className="flex items-center gap-7">
-        {navigationItems.map((item) => {
-          const active = activePage === item.id;
-
-          return (
-            <li key={item.id}>
-              <Link
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={desktopNavigationLinkVariants({ active })}
-              >
-                {t(item.translationKey)}
-
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    "pointer-events-none absolute inset-x-0 bottom-2 h-px",
-                    "origin-center rounded-full bg-(--nav-fg)",
-                    "transition-transform origin-left duration-300 ease-out",
-                    "motion-reduce:transition-none",
-                    active
-                      ? "scale-x-100"
-                      : "scale-x-0 group-hover:scale-x-100",
-                  )}
-                />
-              </Link>
-            </li>
-          );
-        })}
+        {navigationItems.map((item) => (
+          <li key={item.id}>
+            <NavigationLink
+              href={item.href}
+              relatedPaths={item.relatedPaths}
+              variant="desktop"
+            >
+              {t(item.translationKey)}
+            </NavigationLink>
+          </li>
+        ))}
       </ul>
 
       <LanguageSwitcher />
