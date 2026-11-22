@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 import { articleHeroSchema } from "@/components/sections/ArticleHero/article-hero.schema";
 import { articleImageSchema } from "@/components/sections/ArticleImage/article-image.schema";

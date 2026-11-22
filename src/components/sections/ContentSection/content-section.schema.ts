@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 import { richTextSchema } from "@/content/schemas/rich-text.schema";
 

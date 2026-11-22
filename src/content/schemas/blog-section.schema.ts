@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 const sectionIdSchema = z.string().regex(/^[a-z0-9-]+$/);
 

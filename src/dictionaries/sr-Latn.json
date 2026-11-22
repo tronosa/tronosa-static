@@ -119,5 +119,58 @@
       "readingTime": "Vreme čitanja",
       "readingDuration": "{minutes} min"
     }
+  },
+  "ContactForm": {
+    "captcha": {
+      "label": "Sigurnosna provera",
+      "required": "Molimo vas da završite sigurnosnu proveru.",
+      "expired": "Sigurnosna provera je istekla. Molimo vas da je ponovite.",
+      "error": "Sigurnosna provera trenutno nije dostupna. Pokušajte ponovo."
+    },
+    "fields": {
+      "name": {
+        "label": "Ime i prezime",
+        "placeholder": "Unesite ime i prezime"
+      },
+      "email": {
+        "label": "Email adresa",
+        "placeholder": "ime@primer.com"
+      },
+      "subject": {
+        "label": "Naslov poruke",
+        "placeholder": "Tema vašeg upita"
+      },
+      "message": {
+        "label": "Poruka",
+        "placeholder": "Kako možemo da vam pomognemo?"
+      }
+    },
+    "validation": {
+      "name": {
+        "tooShort": "Unesite najmanje 2 karaktera.",
+        "tooLong": "Unesite najviše 100 karaktera."
+      },
+      "email": {
+        "invalid": "Unesite ispravnu email adresu.",
+        "tooLong": "Email adresa je predugačka."
+      },
+      "subject": {
+        "tooShort": "Unesite najmanje 3 karaktera.",
+        "tooLong": "Unesite najviše 150 karaktera.",
+        "invalid": "Unesite ispravan naslov poruke."
+      },
+      "message": {
+        "tooShort": "Unesite najmanje 10 karaktera.",
+        "tooLong": "Unesite najviše 3000 karaktera."
+      }
+    },
+    "submit": "Pošaljite poruku",
+    "submitting": "Slanje poruke...",
+    "success": "Vaša poruka je uspešno prosleđena. Hvala što ste nas kontaktirali.",
+    "error": "Nismo mogli da potvrdimo slanje poruke. Pokušajte ponovo kasnije.",
+    "rateLimited": "Previše zahteva. Pokušajte ponovo kasnije.",
+    "unavailable": "Kontakt forma trenutno nije dostupna.",
+    "required": "Proverite označena polja.",
+    "privacy": "Podatke koje unesete koristićemo za odgovor na vaš upit."
   }
 }

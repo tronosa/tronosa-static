@@ -70,4 +70,9 @@ export const sharedSectionRegistry = {
 
     return <ContentSection {...section.content} />;
   },
+  "contact-form": async (section) => {
+    const { ContactForm } = await import("../ContactForm");
+
+    return <ContactForm {...section.content} />;
+  },
 } satisfies SectionRegistry<SharedSection>;

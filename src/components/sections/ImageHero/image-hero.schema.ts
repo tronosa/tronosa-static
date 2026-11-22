@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 import { pictureSchema } from "@/components/media/Picture/picture.schema";
 

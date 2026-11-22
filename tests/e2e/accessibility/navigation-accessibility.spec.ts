@@ -1,91 +1,141 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
-import type { Locator } from "@playwright/test";
+import type { Locale } from "@/i18n/config";
+
+import {
+  getContentTestRoutes,
+  getNegativeTestRoutes,
+} from "../../shared/routes";
 
 type CurrentValue = "page" | "location";
 
-interface NavigationScenario {
-  pathname: string;
+type NavigationPageId = "home" | "about" | "products" | "blog" | "contact";
+
+type NavigationExpectation = {
   label: string;
   current: CurrentValue;
+} | null;
+
+const NAVIGATION_LABELS = {
+  "sr-Cyrl": {
+    home: "Почетна",
+    about: "О нама",
+    products: "Производи",
+    blog: "Блог",
+    contact: "Контакт",
+  },
+  "sr-Latn": {
+    home: "Početna",
+    about: "O nama",
+    products: "Proizvodi",
+    blog: "Blog",
+    contact: "Kontakt",
+  },
+  en: {
+    home: "Home",
+    about: "About us",
+    products: "Products",
+    blog: "Blog",
+    contact: "Contact",
+  },
+} as const satisfies Record<Locale, Record<NavigationPageId, string>>;
+
+const MOBILE_MENU_LABELS = {
+  "sr-Cyrl": "Отвори мени",
+  "sr-Latn": "Otvori meni",
+  en: "Open menu",
+} as const satisfies Record<Locale, string>;
+
+const contentRoutes = getContentTestRoutes();
+
+const negativeRoutes = getNegativeTestRoutes(contentRoutes);
+
+type ContentRoute = (typeof contentRoutes)[number];
+
+function isNavigationPageId(id: string): id is NavigationPageId {
+  return Object.hasOwn(NAVIGATION_LABELS.en, id);
 }
 
-const navigationScenarios: NavigationScenario[] = [
-  {
-    pathname: "/",
-    label: "Почетна",
-    current: "page",
-  },
-  {
-    pathname: "/o-nama",
-    label: "О нама",
-    current: "page",
-  },
-  {
-    pathname: "/proizvodi",
-    label: "Производи",
-    current: "page",
-  },
-  {
-    pathname: "/blog",
-    label: "Блог",
-    current: "page",
-  },
-  {
-    pathname: "/blog/prirodno-poreklo",
-    label: "Блог",
-    current: "location",
-  },
-  {
-    pathname: "/sr-Latn",
-    label: "Početna",
-    current: "page",
-  },
-  {
-    pathname: "/sr-Latn/o-nama",
-    label: "O nama",
-    current: "page",
-  },
-  {
-    pathname: "/sr-Latn/proizvodi",
-    label: "Proizvodi",
-    current: "page",
-  },
-  {
-    pathname: "/sr-Latn/blog",
-    label: "Blog",
-    current: "page",
-  },
-  {
-    pathname: "/en",
-    label: "Home",
-    current: "page",
-  },
-  {
-    pathname: "/en/about-us",
-    label: "About us",
-    current: "page",
-  },
-  {
-    pathname: "/en/products",
-    label: "Products",
-    current: "page",
-  },
-  {
-    pathname: "/en/blog",
-    label: "Blog",
-    current: "page",
-  },
-];
+function getExpectedNavigation(route: ContentRoute): NavigationExpectation {
+  const labels = NAVIGATION_LABELS[route.locale];
 
-const unknownRoutes = [
-  "/unknown-page-123456",
-  "/sr-Latn/unknown-page-123456",
-  "/en/unknown-page-123456",
-  "/blog/unknown-article-123456",
-  "/sr-Latn/blog/unknown-article-123456",
-  "/en/blog/unknown-article-123456",
-];
+  if (route.kind === "article") {
+    return {
+      label: labels.blog,
+      current: "location",
+    };
+  }
+
+  if (!isNavigationPageId(route.id)) {
+    return null;
+  }
+
+  return {
+    label: labels[route.id],
+    current: "page",
+  };
+}
+
+const navigationScenarios = contentRoutes.map((route) => ({
+  ...route,
+  navigation: getExpectedNavigation(route),
+}));
+
+function getRequiredPageRoute(
+  id: NavigationPageId,
+  locale: Locale,
+): ContentRoute {
+  const route = contentRoutes.find(
+    (entry) =>
+      entry.kind === "page" && entry.id === id && entry.locale === locale,
+  );
+
+  if (!route) {
+    throw new Error(`Missing navigation page "${id}" for locale "${locale}".`);
+  }
+
+  return route;
+}
+
+const englishHome = getRequiredPageRoute("home", "en");
+
+const englishAbout = getRequiredPageRoute("about", "en");
+
+const englishProducts = getRequiredPageRoute("products", "en");
+
+const englishBlog = getRequiredPageRoute("blog", "en");
+
+async function navigateToRoute(
+  page: Page,
+  pathname: string,
+  expectedStatus = 200,
+) {
+  const response = await page.goto(pathname);
+
+  expect(response?.status()).toBe(expectedStatus);
+}
+
+function getDesktopNavigation(page: Page): Locator {
+  return page.locator("[data-site-header]").getByRole("navigation");
+}
+
+async function openMobileNavigation(
+  page: Page,
+  locale: Locale,
+): Promise<Locator> {
+  await page
+    .getByRole("button", {
+      name: MOBILE_MENU_LABELS[locale],
+      exact: true,
+    })
+    .click();
+
+  const dialog = page.getByRole("dialog");
+
+  await expect(dialog).toBeVisible();
+
+  return dialog.getByRole("navigation");
+}
 
 async function expectCurrentNavigation(
   navigation: Locator,
@@ -103,6 +153,8 @@ async function expectCurrentNavigation(
     exact: true,
   });
 
+  await expect(activeLink).toHaveCount(1);
+
   await expect(activeLink).toHaveAttribute("aria-current", current);
 
   const inactiveLinks = navigation.locator("a:not([aria-current])");
@@ -110,6 +162,31 @@ async function expectCurrentNavigation(
   const totalLinks = await navigation.getByRole("link").count();
 
   await expect(inactiveLinks).toHaveCount(totalLinks - 1);
+}
+
+async function expectNoCurrentNavigation(navigation: Locator) {
+  await expect(navigation).toHaveCount(1);
+
+  await expect(navigation.getByRole("link").first()).toBeVisible();
+
+  await expect(navigation.locator("a[aria-current]")).toHaveCount(0);
+}
+
+async function expectNavigationState(
+  navigation: Locator,
+  expectation: NavigationExpectation,
+) {
+  if (!expectation) {
+    await expectNoCurrentNavigation(navigation);
+
+    return;
+  }
+
+  await expectCurrentNavigation(
+    navigation,
+    expectation.label,
+    expectation.current,
+  );
 }
 
 test.describe("Navigation accessibility @a11y", () => {
@@ -121,119 +198,143 @@ test.describe("Navigation accessibility @a11y", () => {
       },
     });
 
-    for (const { pathname, label, current } of navigationScenarios) {
-      test(`identifies current navigation on ${pathname}`, async ({ page }) => {
-        const response = await page.goto(pathname);
+    for (const scenario of navigationScenarios) {
+      test(`identifies current navigation on ${scenario.pathname}`, async ({
+        page,
+      }) => {
+        await navigateToRoute(page, scenario.pathname, scenario.expectedStatus);
 
-        expect(response?.status()).toBe(200);
+        const navigation = getDesktopNavigation(page);
 
-        const navigation = page
-          .locator("[data-site-header]")
-          .getByRole("navigation");
-
-        await expectCurrentNavigation(navigation, label, current);
+        await expectNavigationState(navigation, scenario.navigation);
       });
     }
 
-    for (const pathname of unknownRoutes) {
-      test(`does not activate navigation on ${pathname}`, async ({ page }) => {
-        const response = await page.goto(pathname);
+    for (const route of negativeRoutes) {
+      test(`does not activate navigation on ${route.pathname}`, async ({
+        page,
+      }) => {
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
-        expect(response?.status()).toBe(404);
-
-        const navigation = page
-          .locator("[data-site-header]")
-          .getByRole("navigation");
-
-        await expect(navigation).toHaveCount(1);
-
-        await expect(navigation.locator("a[aria-current]")).toHaveCount(0);
+        await expectNoCurrentNavigation(getDesktopNavigation(page));
       });
     }
 
     test("updates the current link after client-side navigation", async ({
       page,
     }) => {
-      await page.goto("/en");
+      await navigateToRoute(
+        page,
+        englishHome.pathname,
+        englishHome.expectedStatus,
+      );
 
-      const navigation = page
-        .locator("[data-site-header]")
-        .getByRole("navigation");
+      const navigation = getDesktopNavigation(page);
 
-      await expectCurrentNavigation(navigation, "Home", "page");
+      await expectCurrentNavigation(
+        navigation,
+        NAVIGATION_LABELS.en.home,
+        "page",
+      );
 
       await navigation
         .getByRole("link", {
-          name: "About us",
+          name: NAVIGATION_LABELS.en.about,
           exact: true,
         })
         .click();
 
-      await expect(page).toHaveURL("/en/about-us");
+      await expect(page).toHaveURL(englishAbout.pathname);
 
-      await expectCurrentNavigation(navigation, "About us", "page");
+      await expectCurrentNavigation(
+        navigation,
+        NAVIGATION_LABELS.en.about,
+        "page",
+      );
 
       await navigation
         .getByRole("link", {
-          name: "Blog",
+          name: NAVIGATION_LABELS.en.blog,
           exact: true,
         })
         .click();
 
-      await expect(page).toHaveURL("/en/blog");
+      await expect(page).toHaveURL(englishBlog.pathname);
 
-      await expectCurrentNavigation(navigation, "Blog", "page");
+      await expectCurrentNavigation(
+        navigation,
+        NAVIGATION_LABELS.en.blog,
+        "page",
+      );
     });
 
     test("updates the current link after browser back navigation", async ({
       page,
     }) => {
-      await page.goto("/en");
+      await navigateToRoute(
+        page,
+        englishHome.pathname,
+        englishHome.expectedStatus,
+      );
 
-      const navigation = page
-        .locator("[data-site-header]")
-        .getByRole("navigation");
+      const navigation = getDesktopNavigation(page);
 
       await navigation
         .getByRole("link", {
-          name: "Products",
+          name: NAVIGATION_LABELS.en.products,
           exact: true,
         })
         .click();
 
-      await expect(page).toHaveURL("/en/products");
+      await expect(page).toHaveURL(englishProducts.pathname);
 
-      await expectCurrentNavigation(navigation, "Products", "page");
+      await expectCurrentNavigation(
+        navigation,
+        NAVIGATION_LABELS.en.products,
+        "page",
+      );
 
       await page.goBack();
 
-      await expect(page).toHaveURL("/en");
+      await expect(page).toHaveURL(englishHome.pathname);
 
-      await expectCurrentNavigation(navigation, "Home", "page");
+      await expectCurrentNavigation(
+        navigation,
+        NAVIGATION_LABELS.en.home,
+        "page",
+      );
     });
 
     test("preserves active navigation with query parameters", async ({
       page,
     }) => {
-      await page.goto("/en/products?source=test");
+      await navigateToRoute(
+        page,
+        `${englishProducts.pathname}?source=test`,
+        englishProducts.expectedStatus,
+      );
 
-      const navigation = page
-        .locator("[data-site-header]")
-        .getByRole("navigation");
-
-      await expectCurrentNavigation(navigation, "Products", "page");
+      await expectCurrentNavigation(
+        getDesktopNavigation(page),
+        NAVIGATION_LABELS.en.products,
+        "page",
+      );
     });
 
     test("preserves active navigation with a URL fragment", async ({
       page,
     }) => {
-      await page.goto("/en/products#main-content");
+      await navigateToRoute(
+        page,
+        `${englishProducts.pathname}#main-content`,
+        englishProducts.expectedStatus,
+      );
 
-      const navigation = page
-        .locator("[data-site-header]")
-        .getByRole("navigation");
-
-      await expectCurrentNavigation(navigation, "Products", "page");
+      await expectCurrentNavigation(
+        getDesktopNavigation(page),
+        NAVIGATION_LABELS.en.products,
+        "page",
+      );
     });
   });
 
@@ -247,113 +348,68 @@ test.describe("Navigation accessibility @a11y", () => {
       hasTouch: true,
     });
 
-    const mobileScenarios = [
-      {
-        pathname: "/",
-        openLabel: "Отвори мени",
-        label: "Почетна",
-        current: "page",
-      },
-      {
-        pathname: "/sr-Latn/proizvodi",
-        openLabel: "Otvori meni",
-        label: "Proizvodi",
-        current: "page",
-      },
-      {
-        pathname: "/en/about-us",
-        openLabel: "Open menu",
-        label: "About us",
-        current: "page",
-      },
-      {
-        pathname: "/blog/prirodno-poreklo",
-        openLabel: "Отвори мени",
-        label: "Блог",
-        current: "location",
-      },
-    ] as const;
-
-    for (const { pathname, openLabel, label, current } of mobileScenarios) {
-      test(`identifies current mobile navigation on ${pathname}`, async ({
+    for (const scenario of navigationScenarios) {
+      test(`identifies current mobile navigation on ${scenario.pathname}`, async ({
         page,
       }) => {
-        const response = await page.goto(pathname);
+        await navigateToRoute(page, scenario.pathname, scenario.expectedStatus);
 
-        expect(response?.status()).toBe(200);
+        const navigation = await openMobileNavigation(page, scenario.locale);
 
-        await page
-          .getByRole("button", {
-            name: openLabel,
-            exact: true,
-          })
-          .click();
-
-        const dialog = page.getByRole("dialog");
-
-        await expect(dialog).toBeVisible();
-
-        const navigation = dialog.getByRole("navigation");
-
-        await expectCurrentNavigation(navigation, label, current);
+        await expectNavigationState(navigation, scenario.navigation);
       });
     }
 
     test("updates mobile navigation after selecting another page", async ({
       page,
     }) => {
-      await page.goto("/en");
+      await navigateToRoute(
+        page,
+        englishHome.pathname,
+        englishHome.expectedStatus,
+      );
 
-      const openMenu = page.getByRole("button", {
-        name: "Open menu",
-        exact: true,
-      });
-
-      await openMenu.click();
+      const navigation = await openMobileNavigation(page, "en");
 
       const dialog = page.getByRole("dialog");
-      const navigation = dialog.getByRole("navigation");
 
-      await expectCurrentNavigation(navigation, "Home", "page");
+      await expectCurrentNavigation(
+        navigation,
+        NAVIGATION_LABELS.en.home,
+        "page",
+      );
 
       await navigation
         .getByRole("link", {
-          name: "Products",
+          name: NAVIGATION_LABELS.en.products,
           exact: true,
         })
         .click();
 
-      await expect(page).toHaveURL("/en/products");
+      await expect(page).toHaveURL(englishProducts.pathname);
 
-      await expect(dialog).not.toBeVisible();
+      await expect(dialog).toBeHidden();
 
-      await openMenu.click();
+      const reopenedNavigation = await openMobileNavigation(page, "en");
 
-      await expect(dialog).toBeVisible();
-
-      await expectCurrentNavigation(navigation, "Products", "page");
+      await expectCurrentNavigation(
+        reopenedNavigation,
+        NAVIGATION_LABELS.en.products,
+        "page",
+      );
     });
 
-    test("does not activate mobile navigation on an unknown page", async ({
-      page,
-    }) => {
-      const response = await page.goto("/en/unknown-page-123456");
+    for (const route of negativeRoutes) {
+      test(`does not activate mobile navigation on ${route.pathname}`, async ({
+        page,
+      }) => {
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
-      expect(response?.status()).toBe(404);
+        const navigation = await openMobileNavigation(page, route.locale);
 
-      await page
-        .getByRole("button", {
-          name: "Open menu",
-          exact: true,
-        })
-        .click();
-
-      const navigation = page.getByRole("dialog").getByRole("navigation");
-
-      await expect(navigation).toHaveCount(1);
-
-      await expect(navigation.locator("a[aria-current]")).toHaveCount(0);
-    });
+        await expectNoCurrentNavigation(navigation);
+      });
+    }
   });
 
   test.describe("Server-rendered navigation", () => {
@@ -365,19 +421,31 @@ test.describe("Navigation accessibility @a11y", () => {
       },
     });
 
-    for (const { pathname, label, current } of navigationScenarios) {
-      test(`preserves current navigation without JavaScript on ${pathname}`, async ({
+    for (const scenario of navigationScenarios) {
+      test(`preserves current navigation without JavaScript on ${scenario.pathname}`, async ({
         page,
       }) => {
-        const response = await page.goto(pathname);
+        await navigateToRoute(page, scenario.pathname, scenario.expectedStatus);
 
-        expect(response?.status()).toBe(200);
+        await expectNavigationState(
+          getDesktopNavigation(page),
+          scenario.navigation,
+        );
+      });
+    }
 
-        const navigation = page
-          .locator("[data-site-header]")
-          .getByRole("navigation");
+    for (const route of negativeRoutes) {
+      test(`does not activate navigation without JavaScript on ${route.pathname}`, async ({
+        page,
+      }) => {
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
-        await expectCurrentNavigation(navigation, label, current);
+        test.fail(
+          true,
+          "A11Y-013: Header navigation is missing from localized 404 responses when JavaScript is disabled.",
+        );
+
+        await expectNoCurrentNavigation(getDesktopNavigation(page));
       });
     }
   });

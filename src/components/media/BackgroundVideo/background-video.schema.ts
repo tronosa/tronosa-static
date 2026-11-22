@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 export const backgroundVideoSourceSchema = z.object({
   src: z.string().trim().min(1),

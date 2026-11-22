@@ -215,6 +215,15 @@
             "viewportLabel": "Kartice o vodi Tronoša"
           }
         }
+      },
+      {
+        "id": "contact-form",
+        "type": "contact-form",
+        "content": {
+          "eyebrow": "Kontaktirajte nas",
+          "title": "Za svaku priliku. Za svako pitanje.",
+          "description": "Želite da saznate više o našim proizvodima, dostupnim pakovanjima ili mogućnostima distribucije? Pišite nam. Naš tim je tu da vam pruži sve potrebne informacije."
+        }
       }
     ]
   }

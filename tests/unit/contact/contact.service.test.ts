@@ -16,6 +16,10 @@ const validSubmission = {
   message: "I am interested in distributing your products.",
 };
 
+const validOptions = {
+  captchaToken: "test-captcha-token",
+};
+
 const fetchMock = vi.fn<typeof fetch>();
 
 function createResponse(body: unknown, status = 200): Response {
@@ -50,7 +54,7 @@ describe("Contact submission service", () => {
         }),
       );
 
-      const result = await submitContactForm(validSubmission);
+      const result = await submitContactForm(validSubmission, validOptions);
 
       expect(result).toEqual({
         success: true,
@@ -66,7 +70,9 @@ describe("Contact submission service", () => {
         }),
       );
 
-      await submitContactForm(validSubmission);
+      await submitContactForm(validSubmission, validOptions);
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
 
       expect(fetchMock).toHaveBeenCalledWith(
         CONTACT_API_URL,
@@ -93,20 +99,24 @@ describe("Contact submission service", () => {
         }),
       );
 
-      await submitContactForm(validSubmission);
+      await submitContactForm(validSubmission, validOptions);
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        CONTACT_API_URL,
-        expect.objectContaining({
-          body: JSON.stringify({
-            access_key: accessKey,
-            name: validSubmission.name,
-            email: validSubmission.email,
-            subject: validSubmission.subject,
-            message: validSubmission.message,
-          }),
-        }),
-      );
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      const request = fetchMock.mock.calls[0]?.[1];
+
+      expect(request?.body).toEqual(expect.any(String));
+
+      const payload = JSON.parse(String(request?.body));
+
+      expect(payload).toStrictEqual({
+        access_key: accessKey,
+        name: validSubmission.name,
+        email: validSubmission.email,
+        subject: validSubmission.subject,
+        message: validSubmission.message,
+        "h-captcha-response": validOptions.captchaToken,
+      });
     });
 
     it("normalizes fields before sending the request", async () => {
@@ -116,22 +126,29 @@ describe("Contact submission service", () => {
         }),
       );
 
-      await submitContactForm({
-        name: `  ${validSubmission.name}  `,
-        email: `  ${validSubmission.email}  `,
-        subject: `  ${validSubmission.subject}  `,
-        message: `  ${validSubmission.message}  `,
-      });
-
-      expect(fetchMock).toHaveBeenCalledWith(
-        CONTACT_API_URL,
-        expect.objectContaining({
-          body: JSON.stringify({
-            access_key: accessKey,
-            ...validSubmission,
-          }),
-        }),
+      await submitContactForm(
+        {
+          name: `  ${validSubmission.name}  `,
+          email: `  ${validSubmission.email}  `,
+          subject: `  ${validSubmission.subject}  `,
+          message: `  ${validSubmission.message}  `,
+        },
+        validOptions,
       );
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      const request = fetchMock.mock.calls[0]?.[1];
+
+      expect(request?.body).toEqual(expect.any(String));
+
+      const payload = JSON.parse(String(request?.body));
+
+      expect(payload).toStrictEqual({
+        access_key: accessKey,
+        ...validSubmission,
+        "h-captcha-response": validOptions.captchaToken,
+      });
     });
 
     it("accepts additional provider response metadata", async () => {
@@ -145,18 +162,25 @@ describe("Contact submission service", () => {
         }),
       );
 
-      await expect(submitContactForm(validSubmission)).resolves.toEqual({
+      await expect(
+        submitContactForm(validSubmission, validOptions),
+      ).resolves.toEqual({
         success: true,
       });
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
   });
 
   describe("Input validation", () => {
     it("rejects invalid submissions without calling the provider", async () => {
-      const result = await submitContactForm({
-        ...validSubmission,
-        email: "invalid-email",
-      });
+      const result = await submitContactForm(
+        {
+          ...validSubmission,
+          email: "invalid-email",
+        },
+        validOptions,
+      );
 
       expect(result).toEqual({
         success: false,
@@ -167,10 +191,13 @@ describe("Contact submission service", () => {
     });
 
     it("rejects unexpected submission fields", async () => {
-      const result = await submitContactForm({
-        ...validSubmission,
-        recipient: "attacker@example.com",
-      });
+      const result = await submitContactForm(
+        {
+          ...validSubmission,
+          recipient: "attacker@example.com",
+        },
+        validOptions,
+      );
 
       expect(result).toEqual({
         success: false,
@@ -181,7 +208,7 @@ describe("Contact submission service", () => {
     });
 
     it("rejects malformed payloads", async () => {
-      const result = await submitContactForm(null);
+      const result = await submitContactForm(null, validOptions);
 
       expect(result).toEqual({
         success: false,
@@ -196,7 +223,7 @@ describe("Contact submission service", () => {
     it("rejects submissions when the access key is missing", async () => {
       vi.stubEnv("NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY", undefined);
 
-      expect(await submitContactForm(validSubmission)).toEqual({
+      expect(await submitContactForm(validSubmission, validOptions)).toEqual({
         success: false,
         code: "configuration-error",
       });
@@ -207,7 +234,7 @@ describe("Contact submission service", () => {
     it("rejects submissions when the access key is invalid", async () => {
       vi.stubEnv("NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY", "invalid-key");
 
-      expect(await submitContactForm(validSubmission)).toEqual({
+      expect(await submitContactForm(validSubmission, validOptions)).toEqual({
         success: false,
         code: "configuration-error",
       });
@@ -224,20 +251,25 @@ describe("Contact submission service", () => {
         }),
       );
 
-      await submitContactForm(validSubmission, {
-        captchaToken: "test-captcha-token",
+      const result = await submitContactForm(validSubmission, validOptions);
+
+      expect(result).toEqual({
+        success: true,
       });
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        CONTACT_API_URL,
-        expect.objectContaining({
-          body: JSON.stringify({
-            access_key: accessKey,
-            ...validSubmission,
-            "h-captcha-response": "test-captcha-token",
-          }),
-        }),
-      );
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      const request = fetchMock.mock.calls[0]?.[1];
+
+      expect(request?.body).toEqual(expect.any(String));
+
+      const payload = JSON.parse(String(request?.body));
+
+      expect(payload).toStrictEqual({
+        access_key: accessKey,
+        ...validSubmission,
+        "h-captcha-response": validOptions.captchaToken,
+      });
     });
 
     it("trims surrounding whitespace from the CAPTCHA token", async () => {
@@ -247,20 +279,27 @@ describe("Contact submission service", () => {
         }),
       );
 
-      await submitContactForm(validSubmission, {
+      const result = await submitContactForm(validSubmission, {
         captchaToken: "  test-token  ",
       });
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        CONTACT_API_URL,
-        expect.objectContaining({
-          body: JSON.stringify({
-            access_key: accessKey,
-            ...validSubmission,
-            "h-captcha-response": "test-token",
-          }),
-        }),
-      );
+      expect(result).toEqual({
+        success: true,
+      });
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      const request = fetchMock.mock.calls[0]?.[1];
+
+      expect(request?.body).toEqual(expect.any(String));
+
+      const payload = JSON.parse(String(request?.body));
+
+      expect(payload).toStrictEqual({
+        access_key: accessKey,
+        ...validSubmission,
+        "h-captcha-response": "test-token",
+      });
     });
 
     it.each(["", " ", "\n"])(
@@ -279,20 +318,44 @@ describe("Contact submission service", () => {
       },
     );
 
-    it("omits the CAPTCHA field when no token is provided", async () => {
+    it("rejects submissions without CAPTCHA options", async () => {
+      const result = await submitContactForm(validSubmission);
+
+      expect(result).toEqual({
+        success: false,
+        code: "verification-failed",
+      });
+
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("rejects submissions without a CAPTCHA token", async () => {
+      const result = await submitContactForm(validSubmission, {});
+
+      expect(result).toEqual({
+        success: false,
+        code: "verification-failed",
+      });
+
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("handles CAPTCHA rejection by the provider", async () => {
       fetchMock.mockResolvedValueOnce(
         createResponse({
-          success: true,
+          success: false,
+          message: "Invalid CAPTCHA token",
         }),
       );
 
-      await submitContactForm(validSubmission);
+      const result = await submitContactForm(validSubmission, validOptions);
 
-      const request = fetchMock.mock.calls[0]?.[1];
+      expect(result).toEqual({
+        success: false,
+        code: "submission-failed",
+      });
 
-      const payload = JSON.parse(String(request?.body));
-
-      expect(payload).not.toHaveProperty("h-captcha-response");
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -307,10 +370,12 @@ describe("Contact submission service", () => {
         ),
       );
 
-      expect(await submitContactForm(validSubmission)).toEqual({
+      expect(await submitContactForm(validSubmission, validOptions)).toEqual({
         success: false,
         code: "rate-limited",
       });
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
 
     it.each([500, 502, 503, 504])(
@@ -325,10 +390,12 @@ describe("Contact submission service", () => {
           ),
         );
 
-        expect(await submitContactForm(validSubmission)).toEqual({
+        expect(await submitContactForm(validSubmission, validOptions)).toEqual({
           success: false,
           code: "service-unavailable",
         });
+
+        expect(fetchMock).toHaveBeenCalledTimes(1);
       },
     );
 
@@ -344,10 +411,12 @@ describe("Contact submission service", () => {
           ),
         );
 
-        expect(await submitContactForm(validSubmission)).toEqual({
+        expect(await submitContactForm(validSubmission, validOptions)).toEqual({
           success: false,
           code: "submission-failed",
         });
+
+        expect(fetchMock).toHaveBeenCalledTimes(1);
       },
     );
   });
@@ -361,10 +430,12 @@ describe("Contact submission service", () => {
         }),
       );
 
-      expect(await submitContactForm(validSubmission)).toEqual({
+      expect(await submitContactForm(validSubmission, validOptions)).toEqual({
         success: false,
         code: "submission-failed",
       });
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
 
     it.each([
@@ -373,14 +444,16 @@ describe("Contact submission service", () => {
       { status: "success" },
       { success: "true" },
       { success: 1 },
-      [],
+      [[]],
     ])("rejects malformed provider responses: %j", async (body) => {
       fetchMock.mockResolvedValueOnce(createResponse(body));
 
-      expect(await submitContactForm(validSubmission)).toEqual({
+      expect(await submitContactForm(validSubmission, validOptions)).toEqual({
         success: false,
         code: "submission-failed",
       });
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
 
     it("handles non-JSON provider responses", async () => {
@@ -393,10 +466,12 @@ describe("Contact submission service", () => {
         }),
       );
 
-      expect(await submitContactForm(validSubmission)).toEqual({
+      expect(await submitContactForm(validSubmission, validOptions)).toEqual({
         success: false,
         code: "network-error",
       });
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -404,16 +479,23 @@ describe("Contact submission service", () => {
     it("handles network failures", async () => {
       fetchMock.mockRejectedValueOnce(new TypeError("Failed to fetch"));
 
-      expect(await submitContactForm(validSubmission)).toEqual({
+      expect(await submitContactForm(validSubmission, validOptions)).toEqual({
         success: false,
         code: "network-error",
       });
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
 
     it("does not automatically retry a failed submission", async () => {
       fetchMock.mockRejectedValueOnce(new TypeError("Failed to fetch"));
 
-      await submitContactForm(validSubmission);
+      const result = await submitContactForm(validSubmission, validOptions);
+
+      expect(result).toEqual({
+        success: false,
+        code: "network-error",
+      });
 
       expect(fetchMock).toHaveBeenCalledTimes(1);
     });
@@ -434,16 +516,32 @@ describe("Contact submission service", () => {
           }),
       );
 
-      const submission = submitContactForm(validSubmission);
+      const submission = submitContactForm(validSubmission, validOptions);
 
-      await vi.advanceTimersByTimeAsync(CONTACT_REQUEST_TIMEOUT_MS);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      const signal = fetchMock.mock.calls[0]?.[1]?.signal;
+
+      expect(signal).toBeInstanceOf(AbortSignal);
+
+      expect(signal?.aborted).toBe(false);
+
+      expect(vi.getTimerCount()).toBe(1);
+
+      await vi.advanceTimersByTimeAsync(CONTACT_REQUEST_TIMEOUT_MS - 1);
+
+      expect(signal?.aborted).toBe(false);
+
+      await vi.advanceTimersByTimeAsync(1);
 
       expect(await submission).toEqual({
         success: false,
         code: "network-error",
       });
 
-      expect(fetchMock.mock.calls[0]?.[1]?.signal?.aborted).toBe(true);
+      expect(signal?.aborted).toBe(true);
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
 
       expect(vi.getTimerCount()).toBe(0);
     });
@@ -457,9 +555,23 @@ describe("Contact submission service", () => {
         }),
       );
 
-      await submitContactForm(validSubmission);
+      const submission = submitContactForm(validSubmission, validOptions);
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      expect(vi.getTimerCount()).toBe(1);
+
+      expect(await submission).toEqual({
+        success: true,
+      });
 
       expect(vi.getTimerCount()).toBe(0);
+
+      const signal = fetchMock.mock.calls[0]?.[1]?.signal;
+
+      await vi.advanceTimersByTimeAsync(CONTACT_REQUEST_TIMEOUT_MS);
+
+      expect(signal?.aborted).toBe(false);
     });
 
     it("clears the timeout after a failed request", async () => {
@@ -467,9 +579,24 @@ describe("Contact submission service", () => {
 
       fetchMock.mockRejectedValueOnce(new TypeError("Failed to fetch"));
 
-      await submitContactForm(validSubmission);
+      const submission = submitContactForm(validSubmission, validOptions);
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      expect(vi.getTimerCount()).toBe(1);
+
+      expect(await submission).toEqual({
+        success: false,
+        code: "network-error",
+      });
 
       expect(vi.getTimerCount()).toBe(0);
+
+      const signal = fetchMock.mock.calls[0]?.[1]?.signal;
+
+      await vi.advanceTimersByTimeAsync(CONTACT_REQUEST_TIMEOUT_MS);
+
+      expect(signal?.aborted).toBe(false);
     });
   });
 });

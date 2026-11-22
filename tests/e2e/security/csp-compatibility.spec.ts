@@ -1,5 +1,10 @@
 import { expect, test } from "@playwright/test";
 
+import {
+  getContentTestRoutes,
+  getNegativeTestRoutes,
+} from "../../shared/routes";
+
 interface CspViolation {
   blockedURI: string;
   effectiveDirective: string;
@@ -13,48 +18,62 @@ declare global {
   }
 }
 
-const routes = [
-  "/",
-  "/en",
-  "/sr-Latn",
-  "/proizvodi",
-  "/en/products",
-  "/sr-Latn/proizvodi",
-  "/o-nama",
-  "/en/about-us",
-  "/sr-Latn/o-nama",
-  "/blog",
-  "/en/blog",
-  "/sr-Latn/blog",
-];
+const contentRoutes = getContentTestRoutes();
+
+const negativeRoutes = getNegativeTestRoutes(contentRoutes);
+
+const routes = [...contentRoutes, ...negativeRoutes];
 
 test.describe("CSP compatibility @security @csp", () => {
   for (const route of routes) {
-    test(`does not violate CSP on ${route}`, async ({ page }) => {
-      const violations: CspViolation[] = [];
+    test.describe(route.pathname, () => {
+      test("loads without CSP violations", async ({ page }) => {
+        const violations: CspViolation[] = [];
 
-      await page.exposeFunction(
-        "reportCspViolation",
-        (violation: CspViolation) => {
-          violations.push(violation);
-        },
-      );
+        await page.exposeFunction(
+          "reportCspViolation",
+          (violation: CspViolation) => {
+            violations.push(violation);
+          },
+        );
 
-      await page.addInitScript(() => {
-        document.addEventListener("securitypolicyviolation", (event) => {
-          void window.reportCspViolation({
-            blockedURI: event.blockedURI,
-            effectiveDirective: event.effectiveDirective,
-            disposition: event.disposition,
-            sourceFile: event.sourceFile,
+        await page.addInitScript(() => {
+          document.addEventListener("securitypolicyviolation", (event) => {
+            void window.reportCspViolation({
+              blockedURI: event.blockedURI,
+
+              effectiveDirective: event.effectiveDirective,
+
+              disposition: event.disposition,
+
+              sourceFile: event.sourceFile,
+            });
           });
         });
+
+        const response = await page.goto(route.pathname);
+
+        expect(response?.status()).toBe(route.expectedStatus);
+
+        await page.waitForLoadState("load");
+
+        await expect(page.locator("main")).toHaveCount(1);
+
+        await expect(page.locator("main")).toBeVisible();
+
+        expect(
+          violations,
+          JSON.stringify(
+            {
+              pathname: route.pathname,
+              locale: route.locale,
+              violations,
+            },
+            null,
+            2,
+          ),
+        ).toEqual([]);
       });
-
-      await page.goto(route);
-      await page.waitForLoadState("load");
-
-      expect(violations, JSON.stringify(violations, null, 2)).toEqual([]);
     });
   }
 });

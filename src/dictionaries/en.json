@@ -119,5 +119,58 @@
       "readingTime": "Reading time",
       "readingDuration": "{minutes} min"
     }
+  },
+  "ContactForm": {
+    "captcha": {
+      "label": "Security verification",
+      "required": "Please complete the security verification.",
+      "expired": "Security verification has expired. Please complete it again.",
+      "error": "Security verification is temporarily unavailable. Please try again."
+    },
+    "fields": {
+      "name": {
+        "label": "Full name",
+        "placeholder": "Enter your full name"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "name@example.com"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Subject of your inquiry"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "How can we help you?"
+      }
+    },
+    "validation": {
+      "name": {
+        "tooShort": "Enter at least 2 characters.",
+        "tooLong": "Enter no more than 100 characters."
+      },
+      "email": {
+        "invalid": "Enter a valid email address.",
+        "tooLong": "The email address is too long."
+      },
+      "subject": {
+        "tooShort": "Enter at least 3 characters.",
+        "tooLong": "Enter no more than 150 characters.",
+        "invalid": "Enter a valid subject."
+      },
+      "message": {
+        "tooShort": "Enter at least 10 characters.",
+        "tooLong": "Enter no more than 3000 characters."
+      }
+    },
+    "submit": "Send message",
+    "submitting": "Sending message...",
+    "success": "Your message has been submitted successfully. Thank you for contacting us.",
+    "error": "We could not confirm that your message was submitted. Please try again later.",
+    "rateLimited": "Too many requests. Please try again later.",
+    "unavailable": "The contact form is temporarily unavailable.",
+    "required": "Please review the highlighted fields.",
+    "privacy": "The information you provide will be used to respond to your inquiry."
   }
 }

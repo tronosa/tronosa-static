@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 import { CONTACT_LIMITS } from "./contact.constants";
 

@@ -18,6 +18,13 @@ type CspDirective =
 
 type CspDirectives = Record<CspDirective, readonly string[]>;
 
+const HCAPTCHA_ORIGINS = [
+  "https://hcaptcha.com",
+  "https://*.hcaptcha.com",
+] as const;
+
+const WEB3FORMS_ORIGIN = "https://api.web3forms.com";
+
 function getVideoOrigins(): string[] {
   const appId = process.env.UPLOADTHING_APP_ID?.trim();
 
@@ -35,9 +42,9 @@ function getVideoOrigins(): string[] {
 const directives: CspDirectives = {
   "default-src": ["'self'"],
 
-  "script-src": ["'self'", "'unsafe-inline'"],
+  "script-src": ["'self'", "'unsafe-inline'", ...HCAPTCHA_ORIGINS],
 
-  "style-src": ["'self'", "'unsafe-inline'"],
+  "style-src": ["'self'", "'unsafe-inline'", ...HCAPTCHA_ORIGINS],
 
   "img-src": [
     "'self'",
@@ -49,7 +56,12 @@ const directives: CspDirectives = {
 
   "font-src": ["'self'"],
 
-  "connect-src": ["'self'", "https://tiles.openfreemap.org"],
+  "connect-src": [
+    "'self'",
+    "https://tiles.openfreemap.org",
+    WEB3FORMS_ORIGIN,
+    ...HCAPTCHA_ORIGINS,
+  ],
 
   "media-src": ["'self'", ...getVideoOrigins()],
 
@@ -57,7 +69,7 @@ const directives: CspDirectives = {
 
   "object-src": ["'none'"],
 
-  "frame-src": ["'none'"],
+  "frame-src": [...HCAPTCHA_ORIGINS],
 
   "frame-ancestors": ["'none'"],
 

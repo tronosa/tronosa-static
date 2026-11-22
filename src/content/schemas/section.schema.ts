@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 import { videoHeroSectionSchema } from "@/components/sections/VideoHero/video-hero.schema";
 import { imageHeroSectionSchema } from "@/components/sections/ImageHero/image-hero.schema";
@@ -11,6 +11,7 @@ import { distributionMapSectionSchema } from "@/components/sections/Distribution
 import { productShowcaseSectionSchema } from "@/components/sections/ProductShowcase/product-showcase.schema";
 import { productExperienceSectionSchema } from "@/components/sections/ProductExperience/product-experience.schema";
 import { contentSectionSchema } from "@/components/sections/ContentSection/content-section.schema";
+import { contactFormSectionSchema } from "@/components/sections/ContactForm/contact-form.schema";
 
 import { blogSpecificSectionSchemas } from "./blog-section.schema";
 import { articleSpecificSectionSchemas } from "./article-section.schema";
@@ -27,6 +28,7 @@ export const sharedSectionSchemas = [
   productShowcaseSectionSchema,
   productExperienceSectionSchema,
   contentSectionSchema,
+  contactFormSectionSchema,
 ] as const;
 
 export const sharedSectionSchema = z.discriminatedUnion(

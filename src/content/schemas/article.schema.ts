@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 import { articleSectionSchema } from "./section.schema";
 import { seoSchema } from "./seo.schema";

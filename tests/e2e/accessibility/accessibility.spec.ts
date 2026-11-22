@@ -1,46 +1,77 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
-import type { Page } from "@playwright/test";
+import { defaultLocale, locales, type Locale } from "@/i18n/config";
+
+import {
+  getContentTestRoutes,
+  getNegativeTestRoutes,
+} from "../../shared/routes";
 
 const MAIN_CONTENT_ID = "main-content";
+
 const SKIP_LINK_SELECTOR = 'a[href="#main-content"]';
 
-const localizedRoutes = [
-  {
-    pathname: "/",
-    locale: "sr-Cyrl",
-    label: "Пређите на главни садржај",
-  },
-  {
-    pathname: "/sr-Latn",
-    locale: "sr-Latn",
-    label: "Pređite na glavni sadržaj",
-  },
-  {
-    pathname: "/en",
-    locale: "en",
-    label: "Skip to main content",
-  },
-] as const;
+const contentRoutes = getContentTestRoutes();
 
-const contentRoutes = [
-  "/",
-  "/en",
-  "/sr-Latn",
-  "/proizvodi",
-  "/en/products",
-  "/sr-Latn/proizvodi",
-  "/o-nama",
-  "/en/about-us",
-  "/sr-Latn/o-nama",
-  "/blog",
-  "/en/blog",
-  "/sr-Latn/blog",
-  "/blog/prirodno-poreklo",
-] as const;
+const negativeRoutes = getNegativeTestRoutes(contentRoutes);
+
+const articleRoutes = contentRoutes.filter((route) => route.kind === "article");
+
+const SKIP_LINK_LABELS = {
+  "sr-Cyrl": "Пређите на главни садржај",
+  "sr-Latn": "Pređite na glavni sadržaj",
+  en: "Skip to main content",
+} as const satisfies Record<Locale, string>;
+
+const NOT_FOUND_DESCRIPTIONS = {
+  "sr-Cyrl": "Страница није пронађена.",
+  "sr-Latn": "Stranica nije pronađena.",
+  en: "Page not found.",
+} as const satisfies Record<Locale, string>;
+
+const localizedRoutes = locales.map((locale) => {
+  const route = contentRoutes.find(
+    (entry) =>
+      entry.kind === "page" && entry.id === "home" && entry.locale === locale,
+  );
+
+  if (!route) {
+    throw new Error(`Home route is missing for locale "${locale}".`);
+  }
+
+  return {
+    ...route,
+    label: SKIP_LINK_LABELS[locale],
+  };
+});
+
+const defaultHomeRoute = localizedRoutes.find(
+  (route) => route.locale === defaultLocale,
+);
+
+if (!defaultHomeRoute) {
+  throw new Error("Default locale home route is missing.");
+}
+
+const defaultHomePathname = defaultHomeRoute.pathname;
+
+const nonHomeRoutes = contentRoutes.filter(
+  (route) => route.kind !== "page" || route.id !== "home",
+);
+
+async function navigateToRoute(
+  page: Page,
+  pathname: string,
+  expectedStatus: number = 200,
+) {
+  const response = await page.goto(pathname);
+
+  expect(response?.status()).toBe(expectedStatus);
+}
 
 async function expectSkipNavigation(page: Page) {
   const skipLink = page.locator(SKIP_LINK_SELECTOR);
+
   const main = page.locator(`main#${MAIN_CONTENT_ID}`);
 
   await expect(skipLink).toHaveCount(1);
@@ -58,7 +89,9 @@ async function expectSkipNavigation(page: Page) {
   const bounds = await skipLink.boundingBox();
 
   expect(bounds).not.toBeNull();
+
   expect(bounds?.width ?? 0).toBeGreaterThan(1);
+
   expect(bounds?.height ?? 0).toBeGreaterThan(1);
 
   await page.keyboard.press("Enter");
@@ -70,13 +103,11 @@ async function expectSkipNavigation(page: Page) {
 
 test.describe("Global accessibility @a11y", () => {
   test.describe("Main content landmark", () => {
-    for (const pathname of contentRoutes) {
-      test(`renders a unique main landmark on ${pathname}`, async ({
+    for (const route of contentRoutes) {
+      test(`renders a unique main landmark on ${route.pathname}`, async ({
         page,
       }) => {
-        const response = await page.goto(pathname);
-
-        expect(response?.status()).toBe(200);
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
         const main = page.getByRole("main");
 
@@ -94,47 +125,54 @@ test.describe("Global accessibility @a11y", () => {
       });
     }
 
-    test("preserves the semantic article landmark", async ({ page }) => {
-      const response = await page.goto("/blog/prirodno-poreklo");
+    for (const route of articleRoutes) {
+      test(`preserves the semantic article landmark on ${route.pathname}`, async ({
+        page,
+      }) => {
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
-      expect(response?.status()).toBe(200);
+        const main = page.getByRole("main");
 
-      const main = page.getByRole("main");
+        await expect(main).toHaveCount(1);
 
-      await expect(main).toHaveCount(1);
-
-      await expect(main.locator(":scope > article")).toHaveCount(1);
-    });
+        await expect(main.locator(":scope > article")).toHaveCount(1);
+      });
+    }
   });
 
   test.describe("Localized skip navigation", () => {
-    for (const { pathname, locale, label } of localizedRoutes) {
-      test(`renders the localized skip link for ${locale}`, async ({
+    for (const route of localizedRoutes) {
+      test(`renders the localized skip link for ${route.locale}`, async ({
         page,
       }) => {
-        await page.goto(pathname);
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
-        await expect(page.locator("html")).toHaveAttribute("lang", locale);
+        await expect(page.locator("html")).toHaveAttribute(
+          "lang",
+          route.locale,
+        );
 
         const skipLink = page.locator(SKIP_LINK_SELECTOR);
 
         await expect(skipLink).toHaveCount(1);
 
-        await expect(skipLink).toHaveAccessibleName(label);
+        await expect(skipLink).toHaveAccessibleName(route.label);
       });
 
-      test(`focuses the skip link first for ${locale}`, async ({ page }) => {
-        await page.goto(pathname);
+      test(`focuses the skip link first for ${route.locale}`, async ({
+        page,
+      }) => {
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
         await page.keyboard.press("Tab");
 
         await expect(page.locator(SKIP_LINK_SELECTOR)).toBeFocused();
       });
 
-      test(`moves keyboard focus to main content for ${locale}`, async ({
+      test(`moves keyboard focus to main content for ${route.locale}`, async ({
         page,
       }) => {
-        await page.goto(pathname);
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
         await expectSkipNavigation(page);
       });
@@ -143,19 +181,21 @@ test.describe("Global accessibility @a11y", () => {
 
   test.describe("Skip link visibility", () => {
     test("is visually concealed before receiving focus", async ({ page }) => {
-      await page.goto("/");
+      await navigateToRoute(page, defaultHomePathname);
 
       const skipLink = page.locator(SKIP_LINK_SELECTOR);
 
       const bounds = await skipLink.boundingBox();
 
       expect(bounds).not.toBeNull();
+
       expect(bounds?.width ?? 0).toBeLessThanOrEqual(1);
+
       expect(bounds?.height ?? 0).toBeLessThanOrEqual(1);
     });
 
     test("becomes visible after receiving keyboard focus", async ({ page }) => {
-      await page.goto("/");
+      await navigateToRoute(page, defaultHomePathname);
 
       await page.keyboard.press("Tab");
 
@@ -168,22 +208,17 @@ test.describe("Global accessibility @a11y", () => {
       const bounds = await skipLink.boundingBox();
 
       expect(bounds).not.toBeNull();
+
       expect(bounds?.width ?? 0).toBeGreaterThan(1);
+
       expect(bounds?.height ?? 0).toBeGreaterThan(1);
     });
   });
 
   test.describe("Content-specific skip navigation", () => {
-    for (const pathname of [
-      "/o-nama",
-      "/proizvodi",
-      "/blog",
-      "/blog/prirodno-poreklo",
-    ]) {
-      test(`skips navigation on ${pathname}`, async ({ page }) => {
-        const response = await page.goto(pathname);
-
-        expect(response?.status()).toBe(200);
+    for (const route of nonHomeRoutes) {
+      test(`skips navigation on ${route.pathname}`, async ({ page }) => {
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
         await expectSkipNavigation(page);
       });
@@ -200,11 +235,15 @@ test.describe("Global accessibility @a11y", () => {
       hasTouch: true,
     });
 
-    test("supports keyboard skip navigation on mobile", async ({ page }) => {
-      await page.goto("/");
+    for (const route of localizedRoutes) {
+      test(`supports keyboard skip navigation on mobile for ${route.locale}`, async ({
+        page,
+      }) => {
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
-      await expectSkipNavigation(page);
-    });
+        await expectSkipNavigation(page);
+      });
+    }
   });
 
   test.describe("JavaScript-independent navigation", () => {
@@ -212,48 +251,28 @@ test.describe("Global accessibility @a11y", () => {
       javaScriptEnabled: false,
     });
 
-    for (const { pathname, locale } of localizedRoutes) {
-      test(`supports skip navigation without JavaScript for ${locale}`, async ({
+    for (const route of contentRoutes) {
+      test(`supports skip navigation without JavaScript on ${route.pathname}`, async ({
         page,
       }) => {
-        await page.goto(pathname);
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
         await expectSkipNavigation(page);
       });
     }
-
-    test("supports article skip navigation without JavaScript", async ({
-      page,
-    }) => {
-      await page.goto("/blog/prirodno-poreklo");
-
-      await expectSkipNavigation(page);
-    });
   });
 
   test.describe("Not found accessibility", () => {
-    const notFoundRoutes = [
-      {
-        pathname: "/unknown-page-123456",
-        description: "Страница није пронађена.",
-      },
-      {
-        pathname: "/sr-Latn/unknown-page-123456",
-        description: "Stranica nije pronađena.",
-      },
-      {
-        pathname: "/en/unknown-page-123456",
-        description: "Page not found.",
-      },
-    ] as const;
-
-    for (const { pathname, description } of notFoundRoutes) {
-      test(`renders an accessible not found page on ${pathname}`, async ({
+    for (const route of negativeRoutes) {
+      test(`renders an accessible not found page on ${route.pathname}`, async ({
         page,
       }) => {
-        const response = await page.goto(pathname);
+        await navigateToRoute(page, route.pathname, route.expectedStatus);
 
-        expect(response?.status()).toBe(404);
+        await expect(page.locator("html")).toHaveAttribute(
+          "lang",
+          route.locale,
+        );
 
         await expect(page.getByRole("main")).toHaveCount(1);
 
@@ -266,9 +285,11 @@ test.describe("Global accessibility @a11y", () => {
         ).toHaveCount(1);
 
         await expect(
-          page.getByRole("main").getByText(description, {
-            exact: true,
-          }),
+          page
+            .getByRole("main")
+            .getByText(NOT_FOUND_DESCRIPTIONS[route.locale], {
+              exact: true,
+            }),
         ).toBeVisible();
 
         await expectSkipNavigation(page);

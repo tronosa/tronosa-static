@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 import {
   CONTACT_API_URL,
@@ -42,7 +42,7 @@ export async function submitContactForm(
 
   const captchaToken = options.captchaToken?.trim();
 
-  if (options.captchaToken !== undefined && !captchaToken) {
+  if (!captchaToken) {
     return {
       success: false,
       code: "verification-failed",
@@ -77,7 +77,7 @@ export async function submitContactForm(
         subject: submission.data.subject,
         message: submission.data.message,
 
-        ...(captchaToken ? { "h-captcha-response": captchaToken } : {}),
+        "h-captcha-response": captchaToken,
       }),
     });
 
