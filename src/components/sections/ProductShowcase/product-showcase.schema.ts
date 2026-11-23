@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 export const showcaseProductSchema = z.object({
   id: z.string().trim().min(1),

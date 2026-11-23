@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 export const pictureQualitySchema = z.union([
   z.literal(60),

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 
 export const experienceImageSchema = z.object({
   src: z.string().min(1),

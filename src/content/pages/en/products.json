@@ -215,6 +215,15 @@
             "viewportLabel": "Cards about Tronoša water"
           }
         }
+      },
+      {
+        "id": "contact-form",
+        "type": "contact-form",
+        "content": {
+          "eyebrow": "Get in touch",
+          "title": "For every occasion. For every question.",
+          "description": "Interested in learning more about our products, available packaging or distribution opportunities? Get in touch with us. Our team is here to provide all the information you need."
+        }
       }
     ]
   }

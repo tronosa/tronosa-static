@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@/lib/validation/zod";
 import { pictureSourceSchema } from "@/components/media/Picture/picture.schema";
 export const partnersMarqueeContentSchema = z.object({
   title: z.string().trim().min(1),
