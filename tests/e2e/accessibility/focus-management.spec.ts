@@ -6,6 +6,8 @@ const homeRoutes = getContentTestRoutes().filter(
   (route) => route.kind === "page" && route.id === "home",
 );
 
+const SITE_HEADER_SELECTOR = "[data-site-header]";
+
 const desktopViewport = {
   width: 1440,
   height: 900,
@@ -16,17 +18,23 @@ const mobileViewport = {
   height: 844,
 };
 
+function getSiteHeader(page: Page): Locator {
+  return page.locator(SITE_HEADER_SELECTOR);
+}
+
+function getDesktopNavigation(page: Page): Locator {
+  return getSiteHeader(page).getByRole("navigation");
+}
+
 function getLanguageSwitcherTrigger(page: Page): Locator {
-  return page
-    .locator("[data-site-header]")
+  return getSiteHeader(page)
     .locator('button[aria-haspopup="dialog"]:not([aria-hidden="true"])')
     .filter({ visible: true })
     .first();
 }
 
 function getMobileNavigationTrigger(page: Page): Locator {
-  return page
-    .locator("[data-site-header]")
+  return getSiteHeader(page)
     .locator('button[aria-haspopup="dialog"]:not([aria-hidden="true"])')
     .filter({ visible: true })
     .last();
@@ -40,8 +48,41 @@ async function expectFocusWithin(dialog: Locator) {
     .toBe(true);
 }
 
+async function expectNoHiddenFocusedElement(page: Page) {
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const active = document.activeElement;
+
+        if (
+          !active ||
+          active === document.body ||
+          active === document.documentElement
+        ) {
+          return false;
+        }
+
+        if (!(active instanceof HTMLElement)) {
+          return false;
+        }
+
+        const styles = getComputedStyle(active);
+
+        return (
+          active.getClientRects().length === 0 ||
+          styles.display === "none" ||
+          styles.visibility === "hidden" ||
+          styles.visibility === "collapse" ||
+          active.closest('[aria-hidden="true"], [inert]') !== null
+        );
+      }),
+    )
+    .toBe(false);
+}
+
 async function openDialogWithKeyboard(page: Page, trigger: Locator) {
   await expect(trigger).toBeVisible();
+
   await expect(trigger).toBeEnabled();
 
   await trigger.focus();
@@ -53,7 +94,9 @@ async function openDialogWithKeyboard(page: Page, trigger: Locator) {
   const dialog = page.getByRole("dialog");
 
   await expect(dialog).toHaveCount(1);
+
   await expect(dialog).toBeVisible();
+
   await expect(dialog).toHaveAccessibleName(/\S/);
 
   await expectFocusWithin(dialog);
@@ -104,7 +147,9 @@ async function expectEscapeDismissal(
   await page.keyboard.press("Escape");
 
   await expect(dialog).toBeHidden();
+
   await expect(trigger).toBeFocused();
+
   await expect(trigger).toHaveAttribute("aria-expanded", "false");
 }
 
@@ -270,53 +315,67 @@ test.describe("Focus management @a11y", () => {
       }) => {
         await page.goto(route.pathname);
 
+        const header = getSiteHeader(page);
+
+        await expect(header).toHaveCount(1);
+
         const trigger = getMobileNavigationTrigger(page);
 
-        const dialog = await openDialogWithKeyboard(page, trigger);
+        const dialog =
+          await test.step("Open mobile navigation using keyboard", async () => {
+            const mobileDialog = await openDialogWithKeyboard(page, trigger);
 
-        await page.setViewportSize(desktopViewport);
+            await expect(mobileDialog).toHaveAttribute("aria-modal", "true");
 
-        await expect(dialog).toBeHidden();
+            await expect(mobileDialog.getByRole("navigation")).toHaveCount(1);
 
-        await expect(page.getByRole("navigation")).toHaveCount(1);
+            await expect(trigger).toHaveAttribute("aria-expanded", "true");
 
-        await expect(getLanguageSwitcherTrigger(page)).toBeVisible();
+            return mobileDialog;
+          });
 
-        const hiddenFocusedElement = await page.evaluate(() => {
-          const active = document.activeElement;
+        await test.step("Resize viewport to desktop", async () => {
+          await page.setViewportSize(desktopViewport);
 
-          if (
-            !active ||
-            active === document.body ||
-            active === document.documentElement
-          ) {
-            return false;
-          }
+          await expect(dialog).toBeHidden();
 
-          if (!(active instanceof HTMLElement)) {
-            return false;
-          }
+          await expect(page.getByRole("dialog")).toHaveCount(0);
 
-          return (
-            active.getClientRects().length === 0 ||
-            getComputedStyle(active).visibility === "hidden"
-          );
+          const desktopNavigation = getDesktopNavigation(page);
+
+          await expect(desktopNavigation).toHaveCount(1);
+
+          await expect(desktopNavigation).toBeVisible();
+
+          await expect(getLanguageSwitcherTrigger(page)).toBeVisible();
+
+          await expectNoHiddenFocusedElement(page);
         });
 
-        expect(hiddenFocusedElement).toBe(false);
+        await test.step("Return to mobile viewport", async () => {
+          await page.setViewportSize(mobileViewport);
 
-        await page.setViewportSize(mobileViewport);
+          await expect(getDesktopNavigation(page)).toHaveCount(0);
 
-        const mobileTrigger = getMobileNavigationTrigger(page);
+          await expect(page.getByRole("dialog")).toHaveCount(0);
 
-        await expect(mobileTrigger).toBeVisible();
+          const mobileTrigger = getMobileNavigationTrigger(page);
 
-        const reopenedDialog = await openDialogWithKeyboard(
-          page,
-          mobileTrigger,
-        );
+          await expect(mobileTrigger).toBeVisible();
 
-        await expectEscapeDismissal(page, reopenedDialog, mobileTrigger);
+          await expect(mobileTrigger).toBeEnabled();
+
+          await expect(mobileTrigger).toHaveAttribute("aria-expanded", "false");
+
+          await expectNoHiddenFocusedElement(page);
+
+          const reopenedDialog = await openDialogWithKeyboard(
+            page,
+            mobileTrigger,
+          );
+
+          await expectEscapeDismissal(page, reopenedDialog, mobileTrigger);
+        });
       });
     }
   });

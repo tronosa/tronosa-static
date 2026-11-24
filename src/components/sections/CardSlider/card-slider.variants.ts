@@ -1,12 +1,21 @@
 import { cva } from "class-variance-authority";
 
-export const cardSliderHeaderVariants = cva(
-  "mb-8 max-w-3xl space-y-3 md:mb-12",
-);
+export const cardSliderHeaderVariants = cva([
+  "mb-8 max-w-3xl",
+  "flex flex-col gap-3",
+  "md:mb-12",
+]);
+
+export const cardSliderEyebrowVariants = cva([
+  "text-xs font-semibold uppercase",
+  "tracking-[0.18em] text-foreground-bronze",
+  "md:text-sm",
+]);
 
 export const sliderCardVariants = cva(
   [
-    "relative isolate flex aspect-square w-full min-w-0",
+    "relative isolate flex h-full w-full min-w-0",
+    "min-h-96 sm:min-h-108 lg:min-h-120",
     "flex-col justify-between overflow-hidden",
     "rounded-2xl p-5 sm:p-6 lg:p-7",
   ],
@@ -22,15 +31,25 @@ export const sliderCardVariants = cva(
 
 export const sliderCardContentVariants = cva([
   "relative z-10 mt-auto min-w-0",
-  "space-y-2 wrap-break-word",
+  "flex flex-col gap-3",
+  "wrap-break-word",
 ]);
 
-export const sliderCardScrollVariants = cva([
-  "min-h-0 flex-1 overflow-y-auto",
-  "overscroll-y-auto scrollbar-thin",
+export const sliderCardBodyVariants = cva([
+  "relative z-10 flex min-w-0 flex-1 flex-col",
+  "justify-between gap-8",
+]);
+
+export const sliderCardCtaVariants = cva([
+  "inline-flex min-h-11 max-w-full items-center",
+  "self-start gap-2 font-medium underline underline-offset-4",
+  "transition-opacity duration-200",
+  "hover:opacity-75",
+  "focus-visible:rounded-sm",
   "focus-visible:outline-2",
-  "focus-visible:-outline-offset-2",
+  "focus-visible:outline-offset-4",
   "focus-visible:outline-current",
+  "motion-reduce:transition-none",
 ]);
 
 export const sliderControlVariants = cva([

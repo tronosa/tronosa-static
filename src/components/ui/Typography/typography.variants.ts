@@ -20,7 +20,7 @@ export const typographyVariants = cva("font-sans", {
       muted: "text-foreground-muted",
       primary: "text-primary",
       accent: "text-brand-forest",
-      bronze: "text-brand-bronze",
+      bronze: "text-foreground-bronze",
       inverse: "text-primary-foreground",
     },
 

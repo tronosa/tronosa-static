@@ -6,7 +6,7 @@ import { LocationImage, LocationInformation } from "./MapPopup";
 
 import type { DistributionLocation } from "./types";
 
-import type { DistributionMapMessages } from "./distribution-map.i18n";
+import type { DistributionMapMessages } from "./types";
 
 interface LocationDirectoryProps {
   locations: DistributionLocation[];
@@ -76,7 +76,7 @@ export function LocationDirectory({
 
                     <span>
                       {location.address.city}
-                      {" · "}
+                      {" Â· "}
                       {messages[location.type]}
                     </span>
                   </span>

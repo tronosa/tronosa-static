@@ -24,7 +24,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: `pnpm start --port ${port}`,
+    command: `pnpm start:test --port ${port}`,
     url: baseURL,
     reuseExistingServer: false,
     timeout: 120_000,
@@ -33,7 +33,8 @@ export default defineConfig({
       NODE_ENV: "production",
       APP_ENV: "staging",
       SITE_URL: "https://example.com",
-      NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT: "",
+      NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT:
+        "https://ik.imagekit.io/tronosastaging",
     },
   },
 });

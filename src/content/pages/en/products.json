@@ -19,17 +19,17 @@
           "image": {
             "alt": "",
             "desktop": {
-              "src": "/images/placeholder.jpg",
+              "src": "/images/placeholder.webp",
               "width": 1920,
               "height": 1080
             },
             "tablet": {
-              "src": "/images/placeholder.jpg",
+              "src": "/images/placeholder.webp",
               "width": 1024,
               "height": 768
             },
             "mobile": {
-              "src": "/images/placeholder.jpg",
+              "src": "/images/placeholder.webp",
               "width": 720,
               "height": 960
             }
@@ -45,7 +45,7 @@
           "image": {
             "alt": "",
             "desktop": {
-              "src": "/images/placeholder.jpg",
+              "src": "/images/placeholder.webp",
               "width": 1200,
               "height": 1200
             }
@@ -122,7 +122,7 @@
                 }
               ],
               "image": {
-                "src": "/products/water-330ml.webp",
+                "src": "/products/still-water-330ml.webp",
                 "alt": "Tronoša water 330 ml",
                 "width": 600,
                 "height": 1200
@@ -152,7 +152,7 @@
                 }
               ],
               "image": {
-                "src": "/products/water-500ml.webp",
+                "src": "/products/still-water-500ml.webp",
                 "alt": "Tronoša water 500 ml",
                 "width": 600,
                 "height": 1200
@@ -182,7 +182,7 @@
               "image": {
                 "alt": "",
                 "desktop": {
-                  "src": "/images/placeholder.jpg",
+                  "src": "/images/placeholder.webp",
                   "width": 1200,
                   "height": 1200
                 }
@@ -202,7 +202,7 @@
               "image": {
                 "alt": "",
                 "desktop": {
-                  "src": "/images/placeholder.jpg",
+                  "src": "/images/placeholder.webp",
                   "width": 1200,
                   "height": 1200
                 }

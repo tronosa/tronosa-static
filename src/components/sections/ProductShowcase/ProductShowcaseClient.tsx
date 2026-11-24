@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import dynamic from "next/dynamic";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -9,7 +17,13 @@ import { ProductDisplay } from "./ProductDisplay";
 import { ProductSelector } from "./ProductSelector";
 import { ProductShowcaseCTA } from "./ProductShowcaseCTA";
 
+import type { ProductShowcaseClientProps } from "./types";
 import type { ProductShowcaseDirection } from "./product-showcase.animations";
+
+import {
+  productCategorySelectorVariants,
+  productCategoryButtonVariants,
+} from "./product-category-selector.variants";
 
 import {
   productShowcaseVariants,
@@ -30,25 +44,26 @@ import {
   productShowcaseProductDescriptionVariants,
 } from "./product-showcase.variants";
 
-import type { ProductShowcaseClientProps } from "./types";
-
-type AnimationComponent =
-  typeof import("./ProductShowcaseAnimation").ProductShowcaseAnimation;
-
 const PRODUCT_CHANGE_INTERVAL = 450;
+const PRELOAD_MARGIN = "350px 0px";
 
-let animationModulePromise: Promise<AnimationComponent> | undefined;
+const ProductShowcaseAnimation = dynamic(
+  () =>
+    import("./ProductShowcaseAnimation").then(
+      (module) => module.ProductShowcaseAnimation,
+    ),
+  {
+    ssr: false,
+  },
+);
 
-function loadAnimationComponent(): Promise<AnimationComponent> {
-  animationModulePromise ??= import("./ProductShowcaseAnimation")
-    .then((module) => module.ProductShowcaseAnimation)
-    .catch((error: unknown) => {
-      animationModulePromise = undefined;
+type ProductSelection = {
+  categoryId: string;
+  productId: string;
+};
 
-      throw error;
-    });
-
-  return animationModulePromise;
+function isReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 export function ProductShowcaseClient({
@@ -58,101 +73,230 @@ export function ProductShowcaseClient({
   backgroundText,
   accessibility,
   cta,
-  products,
+  categories,
 }: ProductShowcaseClientProps) {
   const headingId = useId();
-
   const containerRef = useRef<HTMLElement>(null);
 
   const directionRef = useRef<ProductShowcaseDirection>(1);
-
   const lastChangeRef = useRef(-Infinity);
 
-  const isLoadingAnimationRef = useRef(false);
+  const firstCategory = categories[0];
+  const firstProduct = firstCategory?.products[0];
 
-  const isMountedRef = useRef(false);
+  const initialCategoryId = firstCategory?.id ?? "";
+  const initialProductId = firstProduct?.id ?? "";
 
-  const [activeProductId, setActiveProductId] = useState(products[0]?.id ?? "");
+  const [activeCategoryId, setActiveCategoryId] = useState(initialCategoryId);
 
-  const [Animation, setAnimation] = useState<AnimationComponent | null>(null);
+  const [activeProductId, setActiveProductId] = useState(initialProductId);
 
-  useEffect(() => {
-    isMountedRef.current = true;
+  const [shouldLoadAnimation, setShouldLoadAnimation] = useState(false);
 
-    return () => {
-      isMountedRef.current = false;
-    };
-  }, []);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  const animationReadyRef = useRef(false);
+
+  const currentSelectionRef = useRef<ProductSelection>({
+    categoryId: initialCategoryId,
+    productId: initialProductId,
+  });
+
+  const pendingSelectionRef = useRef<ProductSelection | null>(null);
+
+  const activeCategory =
+    categories.find((category) => category.id === activeCategoryId) ??
+    firstCategory;
+
+  const products = activeCategory?.products ?? [];
 
   const activeProduct =
-    products.find(({ id }) => id === activeProductId) ?? products[0];
+    products.find((product) => product.id === activeProductId) ?? products[0];
 
-  if (!activeProduct) {
-    return null;
-  }
+  useEffect(() => {
+    const container = containerRef.current;
 
-  async function handleProductChange(id: string) {
-    if (id === activeProductId || isLoadingAnimationRef.current) {
+    if (
+      !container ||
+      isReducedMotion() ||
+      !("IntersectionObserver" in window)
+    ) {
       return;
     }
 
-    const now = performance.now();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) {
+          return;
+        }
 
-    if (now - lastChangeRef.current < PRODUCT_CHANGE_INTERVAL) {
-      return;
-    }
-
-    const currentIndex = products.findIndex(
-      (product) => product.id === activeProductId,
+        setShouldLoadAnimation(true);
+        observer.disconnect();
+      },
+      {
+        rootMargin: PRELOAD_MARGIN,
+        threshold: 0,
+      },
     );
 
-    const nextIndex = products.findIndex((product) => product.id === id);
+    observer.observe(container);
 
-    if (nextIndex === -1) {
-      return;
-    }
+    return () => observer.disconnect();
+  }, []);
 
-    const direction: ProductShowcaseDirection =
-      nextIndex > currentIndex ? 1 : -1;
+  const commitSelection = useCallback(
+    (nextSelection: ProductSelection) => {
+      const nextCategory = categories.find(
+        (category) => category.id === nextSelection.categoryId,
+      );
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (!reducedMotion && !Animation) {
-      isLoadingAnimationRef.current = true;
-
-      try {
-        const component = await loadAnimationComponent();
-
-        if (!isMountedRef.current) {
-          return;
-        }
-
-        setAnimation(() => component);
-      } catch (error: unknown) {
-        if (!isMountedRef.current) {
-          return;
-        }
-
-        console.error(
-          "[ProductShowcase] Animation initialization failed.",
-          error,
-        );
-      } finally {
-        isLoadingAnimationRef.current = false;
+      if (!nextCategory) {
+        return;
       }
-    }
 
-    if (!isMountedRef.current) {
+      const nextProduct = nextCategory.products.find(
+        (product) => product.id === nextSelection.productId,
+      );
+
+      if (!nextProduct) {
+        return;
+      }
+
+      const previous = currentSelectionRef.current;
+
+      if (
+        previous.categoryId === nextSelection.categoryId &&
+        previous.productId === nextSelection.productId
+      ) {
+        return;
+      }
+
+      if (previous.categoryId !== nextSelection.categoryId) {
+        const previousIndex = categories.findIndex(
+          (category) => category.id === previous.categoryId,
+        );
+
+        const nextIndex = categories.findIndex(
+          (category) => category.id === nextSelection.categoryId,
+        );
+
+        directionRef.current = nextIndex > previousIndex ? 1 : -1;
+      } else {
+        const previousIndex = nextCategory.products.findIndex(
+          (product) => product.id === previous.productId,
+        );
+
+        const nextIndex = nextCategory.products.findIndex(
+          (product) => product.id === nextSelection.productId,
+        );
+
+        directionRef.current = nextIndex > previousIndex ? 1 : -1;
+      }
+
+      currentSelectionRef.current = nextSelection;
+
+      setHasInteracted(true);
+      setActiveCategoryId(nextSelection.categoryId);
+      setActiveProductId(nextSelection.productId);
+    },
+    [categories],
+  );
+
+  const requestSelection = useCallback(
+    (nextSelection: ProductSelection) => {
+      const current = currentSelectionRef.current;
+
+      if (
+        current.categoryId === nextSelection.categoryId &&
+        current.productId === nextSelection.productId
+      ) {
+        pendingSelectionRef.current = null;
+        return;
+      }
+
+      const category = categories.find(
+        (item) => item.id === nextSelection.categoryId,
+      );
+
+      if (
+        !category?.products.some(
+          (product) => product.id === nextSelection.productId,
+        )
+      ) {
+        return;
+      }
+
+      const now = performance.now();
+
+      if (now - lastChangeRef.current < PRODUCT_CHANGE_INTERVAL) {
+        return;
+      }
+
+      lastChangeRef.current = now;
+
+      if (isReducedMotion()) {
+        pendingSelectionRef.current = null;
+        commitSelection(nextSelection);
+        return;
+      }
+
+      if (!animationReadyRef.current) {
+        pendingSelectionRef.current = nextSelection;
+        setShouldLoadAnimation(true);
+        return;
+      }
+
+      pendingSelectionRef.current = null;
+      commitSelection(nextSelection);
+    },
+    [categories, commitSelection],
+  );
+
+  const handleCategoryChange = useCallback(
+    (categoryId: string) => {
+      const category = categories.find((item) => item.id === categoryId);
+
+      const product = category?.products[0];
+
+      if (!category || !product) {
+        return;
+      }
+
+      requestSelection({
+        categoryId: category.id,
+        productId: product.id,
+      });
+    },
+    [categories, requestSelection],
+  );
+
+  const handleProductChange = useCallback(
+    (productId: string) => {
+      requestSelection({
+        categoryId: currentSelectionRef.current.categoryId,
+        productId,
+      });
+    },
+    [requestSelection],
+  );
+
+  const handleAnimationReady = useCallback(() => {
+    if (animationReadyRef.current) {
       return;
     }
 
-    directionRef.current = direction;
+    animationReadyRef.current = true;
 
-    lastChangeRef.current = performance.now();
+    const pending = pendingSelectionRef.current;
+    pendingSelectionRef.current = null;
 
-    setActiveProductId(id);
+    if (pending) {
+      commitSelection(pending);
+    }
+  }, [commitSelection]);
+
+  if (!activeCategory || !activeProduct) {
+    return null;
   }
 
   const appearance = {
@@ -168,11 +312,13 @@ export function ProductShowcaseClient({
       style={appearance}
       className={productShowcaseVariants()}
     >
-      {Animation && (
-        <Animation
+      {shouldLoadAnimation && (
+        <ProductShowcaseAnimation
           containerRef={containerRef}
           activeProductId={activeProduct.id}
           directionRef={directionRef}
+          enabled={hasInteracted}
+          onReady={handleAnimationReady}
         />
       )}
 
@@ -190,6 +336,26 @@ export function ProductShowcaseClient({
       )}
 
       <Container size="wide">
+        <div
+          role="group"
+          aria-label={accessibility.categorySelectorLabel}
+          className={productCategorySelectorVariants()}
+        >
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              type="button"
+              aria-pressed={category.id === activeCategory.id}
+              onClick={() => handleCategoryChange(category.id)}
+              className={productCategoryButtonVariants({
+                active: category.id === activeCategory.id,
+              })}
+            >
+              {category.label}
+            </button>
+          ))}
+        </div>
+
         <div className={productShowcaseLayoutVariants()}>
           <header className={productShowcaseHeaderVariants()}>
             {eyebrow && (

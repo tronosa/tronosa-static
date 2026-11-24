@@ -1,5 +1,3 @@
-import type { CSSProperties } from "react";
-
 import { hasLocale } from "next-intl";
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 
@@ -32,7 +30,6 @@ export async function ArticleHero({
   article,
   title,
   backgroundText,
-  appearance,
 }: ArticleHeroProps) {
   const locale = await getLocale();
 
@@ -65,11 +62,6 @@ export async function ArticleHero({
     throw new Error(`Invalid share URL for article "${article.id}".`);
   }
 
-  const appearanceStyle = {
-    "--article-background": appearance.backgroundColor,
-    "--article-accent": appearance.accentColor,
-  } as CSSProperties;
-
   const headingId = `${article.id}-heading`;
 
   const formattedDate = format.dateTime(new Date(article.publishedAt), {
@@ -84,7 +76,6 @@ export async function ArticleHero({
       spacingType="padding"
       aria-labelledby={headingId}
       data-article-hero="true"
-      style={appearanceStyle}
       className={articleHeroVariants()}
     >
       <ArticleHeroBackground backgroundText={backgroundText} />

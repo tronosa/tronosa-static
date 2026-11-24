@@ -16,7 +16,7 @@
     "title": "Ambalaža i naše svakodnevne odluke",
     "description": "Od kupovine do odlaganja, mala pažnja prema ambalaži može postati deo odgovornijih navika.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "Višekratna torba i ambalaža složena za odvajanje otpada",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "packaging-choices-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "TRONOŠA",
-          "appearance": {
-            "backgroundColor": "#344D32",
-            "accentColor": "#BACD96"
-          }
+          "backgroundText": "TRONOŠA"
         }
       },
       {
@@ -83,7 +79,7 @@
         "id": "packaging-choices-main",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "Odvojena ambalaža pripremljena za pravilno odlaganje",
           "width": 1600,
           "height": 1000,
@@ -159,7 +155,7 @@
         "id": "packaging-choices-detail",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "Detalj prirodnog okruženja i drveća",
           "width": 1600,
           "height": 1000,

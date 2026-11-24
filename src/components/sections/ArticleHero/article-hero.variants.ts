@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const articleHeroVariants = cva([
   "relative isolate overflow-hidden",
-  "bg-[var(--article-background)] text-white",
+  "bg-brand-mineral-deep text-white",
 ]);
 
 export const articleHeroContentVariants = cva([
@@ -59,7 +59,7 @@ export const articleHeroRingVariants = cva([
   "absolute left-1/2 top-1/2",
   "-translate-x-1/2 -translate-y-1/2",
   "rounded-full border",
-  "border-[var(--article-accent)] opacity-20",
+  "border-brand-mineral opacity-20",
 ]);
 
 export const articleHeroBackgroundTextContainerVariants = cva([

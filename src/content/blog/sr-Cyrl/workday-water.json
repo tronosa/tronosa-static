@@ -16,7 +16,7 @@
     "title": "Вода током радног дана: мале паузе, боље навике",
     "description": "Како да унос воде уклопимо у посао, састанке и дане проведене за рачунаром.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "Чаша воде и свеска на радном столу поред прозора",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "workday-water-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "ТРОНОША",
-          "appearance": {
-            "backgroundColor": "#234D65",
-            "accentColor": "#8CCDE3"
-          }
+          "backgroundText": "ТРОНОША"
         }
       },
       {
@@ -83,7 +79,7 @@
         "id": "workday-water-photo",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "Чаша воде на уредном радном столу",
           "width": 1600,
           "height": 1000,

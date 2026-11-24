@@ -1,16 +1,24 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useId, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
 
 import { LocationDirectory } from "./LocationDirectory";
+import { MapPreview } from "./MapPreview";
+
 import type { MapStatus } from "./MapCanvas";
 
-import { getMapMessages } from "./distribution-map.i18n";
 import { DEFAULT_MAP_VIEW } from "./distribution-map.utils";
 
 import type {
@@ -21,15 +29,23 @@ import type {
 
 import "./distribution-map.css";
 
+const DESKTOP_MEDIA_QUERY = "(min-width: 1024px)";
+
 const MapCanvas = dynamic(
   () => import("./MapCanvas").then((module) => module.MapCanvas),
   {
     ssr: false,
+    loading: () => (
+      <div className="distribution-map__map-area" aria-hidden="true">
+        <div className="distribution-map__status">
+          <span className="distribution-map__loader" />
+        </div>
+      </div>
+    ),
   },
 );
 
 export function DistributionMapClient({
-  locale,
   eyebrow,
   title,
   description,
@@ -37,38 +53,64 @@ export function DistributionMapClient({
   initialView,
   showLegend,
   showLocationList,
+  messages,
 }: DistributionMapClientProps) {
   const headingId = useId();
   const mapPanelId = useId();
   const directoryPanelId = useId();
 
   const mapPanelRef = useRef<HTMLDivElement>(null);
-
   const triggerRef = useRef<HTMLElement | null>(null);
 
   const [view, setView] = useState<DistributionMapView>("map");
-
   const [status, setStatus] = useState<MapStatus>("loading");
+  const [mapActivated, setMapActivated] = useState(false);
 
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>(
     null,
   );
-
-  const messages = getMapMessages(locale);
 
   const mapView = initialView ?? DEFAULT_MAP_VIEW;
 
   const selectedLocation =
     locations.find((location) => location.id === selectedLocationId) ?? null;
 
-  const locationTypes = [
-    ...new Set(locations.map((location) => location.type)),
-  ];
+  const locationTypes = useMemo(
+    () => [...new Set(locations.map((location) => location.type))],
+    [locations],
+  );
+
+  useEffect(() => {
+    const desktopMedia = window.matchMedia(DESKTOP_MEDIA_QUERY);
+
+    function synchronizeActivation() {
+      if (desktopMedia.matches) {
+        setMapActivated(true);
+      }
+    }
+
+    synchronizeActivation();
+
+    desktopMedia.addEventListener("change", synchronizeActivation);
+
+    return () => {
+      desktopMedia.removeEventListener("change", synchronizeActivation);
+    };
+  }, []);
+
+  const handleMapActivation = useCallback(() => {
+    mapPanelRef.current?.focus({
+      preventScroll: true,
+    });
+
+    setMapActivated(true);
+  }, []);
 
   const handleSelect = useCallback(
     (location: DistributionLocation, trigger: HTMLElement) => {
       triggerRef.current = trigger;
 
+      setMapActivated(true);
       setSelectedLocationId(location.id);
       setView("map");
 
@@ -128,7 +170,7 @@ export function DistributionMapClient({
 
   return (
     <Section aria-labelledby={headingId} className={cn("distribution-map")}>
-      <Container>
+      <Container size="wide">
         <header className="distribution-map__header">
           <span className="distribution-map__eyebrow">
             {eyebrow ?? messages.eyebrow}
@@ -187,6 +229,7 @@ export function DistributionMapClient({
                 stroke="currentColor"
                 strokeWidth="1.7"
                 strokeLinecap="round"
+                strokeLinejoin="round"
                 aria-hidden="true"
               >
                 <path d="M8 6h13M8 12h13M8 18h13" />
@@ -217,20 +260,29 @@ export function DistributionMapClient({
               ref={mapPanelRef}
               role="region"
               aria-label={messages.map}
+              aria-busy={mapActivated && status === "loading"}
               tabIndex={-1}
+              data-map-activated={mapActivated}
               className="distribution-map__map-panel"
             >
-              <MapCanvas
-                key={`${mapView.latitude}:${mapView.longitude}:${mapView.zoom}`}
-                locations={locations}
-                initialView={mapView}
-                selectedLocation={selectedLocation}
-                messages={messages}
-                status={status}
-                onSelect={handleSelect}
-                onClose={handleClose}
-                onStatusChange={setStatus}
-              />
+              {mapActivated ? (
+                <MapCanvas
+                  key={`${mapView.latitude}:${mapView.longitude}:${mapView.zoom}`}
+                  locations={locations}
+                  initialView={mapView}
+                  selectedLocation={selectedLocation}
+                  messages={messages}
+                  status={status}
+                  onSelect={handleSelect}
+                  onClose={handleClose}
+                  onStatusChange={setStatus}
+                />
+              ) : (
+                <MapPreview
+                  messages={messages.activation}
+                  onActivate={handleMapActivation}
+                />
+              )}
             </div>
           </div>
 

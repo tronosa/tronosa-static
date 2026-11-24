@@ -17,18 +17,18 @@ describe("Next.js image loader", () => {
 
   it("delegates image resolution to the media resolver", () => {
     const expectedUrl =
-      "https://ik.imagekit.io/tronosa/images/placeholder.jpg?tr=w-640,q-75";
+      "https://ik.imagekit.io/tronosa/images/placeholder.webp?tr=w-640,q-75";
 
     mockedResolveImageUrl.mockReturnValue(expectedUrl);
 
     const result = imageLoader({
-      src: "/images/placeholder.jpg",
+      src: "/images/placeholder.webp",
       width: 640,
       quality: 75,
     });
 
     expect(mockedResolveImageUrl).toHaveBeenCalledExactlyOnceWith(
-      "/images/placeholder.jpg",
+      "/images/placeholder.webp",
       {
         width: 640,
         quality: 75,
@@ -39,15 +39,15 @@ describe("Next.js image loader", () => {
   });
 
   it("delegates without an explicit quality", () => {
-    mockedResolveImageUrl.mockReturnValue("/assets/images/placeholder.jpg");
+    mockedResolveImageUrl.mockReturnValue("/assets/images/placeholder.webp");
 
     imageLoader({
-      src: "/images/placeholder.jpg",
+      src: "/images/placeholder.webp",
       width: 1080,
     });
 
     expect(mockedResolveImageUrl).toHaveBeenCalledExactlyOnceWith(
-      "/images/placeholder.jpg",
+      "/images/placeholder.webp",
       {
         width: 1080,
         quality: undefined,
@@ -56,12 +56,12 @@ describe("Next.js image loader", () => {
   });
 
   it("returns the resolved local asset URL", () => {
-    const expectedUrl = "/assets/images/placeholder.jpg";
+    const expectedUrl = "/assets/images/placeholder.webp";
 
     mockedResolveImageUrl.mockReturnValue(expectedUrl);
 
     const result = imageLoader({
-      src: "/images/placeholder.jpg",
+      src: "/images/placeholder.webp",
       width: 640,
     });
 

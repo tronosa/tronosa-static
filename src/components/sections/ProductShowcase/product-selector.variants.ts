@@ -11,11 +11,10 @@ export const productSelectorOptionsVariants = cva([
 
 export const productSelectorCardVariants = cva(
   [
-    "relative flex shrink-0 flex-col",
-    "items-center justify-center",
-    "w-20 min-h-28",
-    "sm:w-24 sm:min-h-32",
-    "gap-2 rounded-2xl border p-3",
+    "relative block shrink-0",
+    "h-32 w-20",
+    "sm:h-36 sm:w-24",
+    "rounded-2xl border",
     "cursor-pointer select-none",
     "transition-colors duration-300",
     "focus-within:outline-2",
@@ -35,14 +34,21 @@ export const productSelectorCardVariants = cva(
   },
 );
 
+export const productSelectorImageContainerVariants = cva([
+  "absolute inset-x-2 top-3 bottom-9",
+  "flex items-center justify-center",
+  "overflow-hidden",
+]);
+
 export const productSelectorImageVariants = cva([
-  "h-16 w-auto max-w-full",
-  "sm:h-20",
+  "block h-full w-auto max-w-full",
   "object-contain select-none",
 ]);
 
 export const productSelectorVolumeVariants = cva([
-  "text-xs font-medium",
+  "absolute bottom-3 inset-x-0",
+  "flex h-5 items-center justify-center",
+  "text-xs font-medium leading-none",
   "whitespace-nowrap tabular-nums",
 ]);
 

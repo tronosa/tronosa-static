@@ -16,7 +16,7 @@
     "title": "Packaging and the Choices We Make Every Day",
     "description": "From shopping to disposal, small decisions about packaging can become part of more responsible habits.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "A reusable bag and packaging sorted for disposal",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "packaging-choices-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "TRONOSA",
-          "appearance": {
-            "backgroundColor": "#344D32",
-            "accentColor": "#BACD96"
-          }
+          "backgroundText": "TRONOSA"
         }
       },
       {
@@ -83,7 +79,7 @@
         "id": "packaging-choices-main",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "Packaging separated and prepared for proper disposal",
           "width": 1600,
           "height": 1000,
@@ -159,7 +155,7 @@
         "id": "packaging-choices-detail",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "A detail of trees and a natural landscape",
           "width": 1600,
           "height": 1000,

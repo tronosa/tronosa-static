@@ -46,7 +46,12 @@ export function StatsBanner({
       <Container size="wide">
         <div className={statsBannerContentVariants()}>
           <div className="max-w-xl space-y-4">
-            <Typography as="h2" variant="h2" className="text-(--stats-fg)">
+            <Typography
+              as="h2"
+              variant="h2"
+              weight="medium"
+              className="text-(--stats-fg)"
+            >
               {title}
             </Typography>
 

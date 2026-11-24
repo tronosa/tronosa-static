@@ -6,6 +6,8 @@ import {
 } from "@/components/media/BackgroundVideo/background-video.schema";
 
 export const videoHeroContentSchema = z.object({
+  eyebrow: z.string().trim().min(1).optional(),
+
   title: z.string().trim().min(1),
 
   description: z.string().trim().min(1).optional(),

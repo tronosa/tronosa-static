@@ -1,10 +1,13 @@
 import { Picture } from "@/components/media/Picture";
 import { Typography } from "@/components/ui/Typography";
 
+import { Link } from "@/i18n/navigation";
+
 import {
   sliderCardVariants,
+  sliderCardBodyVariants,
   sliderCardContentVariants,
-  sliderCardScrollVariants,
+  sliderCardCtaVariants,
 } from "./card-slider.variants";
 
 import type { SliderCardContent } from "./types";
@@ -16,7 +19,12 @@ const CARD_IMAGE_SIZES = [
   "calc(100vw - 2.5rem)",
 ].join(", ");
 
-export function SliderCard({ card }: { card: SliderCardContent }) {
+type SliderCardProps = {
+  card: SliderCardContent;
+  ctaHref?: string;
+};
+
+export function SliderCard({ card, ctaHref }: SliderCardProps) {
   return (
     <article className={sliderCardVariants({ kind: card.kind })}>
       {card.kind === "image" && (
@@ -36,38 +44,40 @@ export function SliderCard({ card }: { card: SliderCardContent }) {
         </>
       )}
 
-      <div
-        tabIndex={0}
-        className={`relative z-10 ${sliderCardScrollVariants()}`}
-      >
-        <div className="flex min-h-full flex-col justify-between gap-4">
+      <div className={sliderCardBodyVariants()}>
+        <Typography
+          as="h3"
+          weight="medium"
+          className="shrink-0 text-inherit wrap-break-word"
+        >
+          {card.title}
+        </Typography>
+
+        <div className={sliderCardContentVariants()}>
           <Typography
-            as="h3"
+            as="p"
             weight="medium"
-            className="shrink-0 text-inherit wrap-break-word"
+            variant="h3"
+            className="text-inherit"
           >
-            {card.title}
+            {card.headline}
           </Typography>
 
-          <div className={sliderCardContentVariants()}>
+          {card.description && (
             <Typography
               as="p"
-              weight="medium"
-              className="text-2xl leading-tight text-inherit sm:text-3xl md:text-4xl"
+              variant="small"
+              className="text-inherit opacity-90"
             >
-              {card.headline}
+              {card.description}
             </Typography>
+          )}
 
-            {card.description && (
-              <Typography
-                as="p"
-                variant="small"
-                className="text-inherit opacity-90"
-              >
-                {card.description}
-              </Typography>
-            )}
-          </div>
+          {card.cta && ctaHref && (
+            <Link href={ctaHref} className={sliderCardCtaVariants()}>
+              {card.cta.label}
+            </Link>
+          )}
         </div>
       </div>
     </article>

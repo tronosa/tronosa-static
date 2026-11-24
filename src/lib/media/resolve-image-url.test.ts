@@ -15,26 +15,26 @@ afterEach(() => {
 
 describe("Image URL resolver", () => {
   it("resolves CDN images without transformations", () => {
-    expect(resolveImageUrl("/images/placeholder.jpg")).toBe(
-      `${ENDPOINT}/images/placeholder.jpg`,
+    expect(resolveImageUrl("/images/placeholder.webp")).toBe(
+      `${ENDPOINT}/images/placeholder.webp`,
     );
   });
 
   it("resolves optimized video posters", () => {
-    const result = resolveImageUrl("/images/placeholder.jpg", {
+    const result = resolveImageUrl("/images/placeholder.webp", {
       width: 1920,
       quality: 80,
     });
 
     const url = new URL(result);
 
-    expect(url.pathname).toBe("/tronosa/images/placeholder.jpg");
+    expect(url.pathname).toBe("/tronosa/images/placeholder.webp");
 
     expect(url.searchParams.get("tr")).toBe("w-1920,q-80");
   });
 
   it("uses default transformation quality", () => {
-    const result = resolveImageUrl("/images/placeholder.jpg", {
+    const result = resolveImageUrl("/images/placeholder.webp", {
       width: 1080,
     });
 
@@ -42,37 +42,37 @@ describe("Image URL resolver", () => {
   });
 
   it("preserves existing transformations when none are provided", () => {
-    const src = `${ENDPOINT}/images/placeholder.jpg?tr=w-640`;
+    const src = `${ENDPOINT}/images/placeholder.webp?tr=w-640`;
 
     expect(resolveImageUrl(src)).toBe(src);
   });
 
   it("preserves existing query parameters", () => {
-    const result = resolveImageUrl("/images/placeholder.jpg?v=2");
+    const result = resolveImageUrl("/images/placeholder.webp?v=2");
 
     expect(new URL(result).searchParams.get("v")).toBe("2");
   });
 
   it.each([
-    "/images/placeholder.jpg",
-    "images/placeholder.jpg",
-    "/assets/images/placeholder.jpg",
-    "assets/images/placeholder.jpg",
+    "/images/placeholder.webp",
+    "images/placeholder.webp",
+    "/assets/images/placeholder.webp",
+    "assets/images/placeholder.webp",
   ])("resolves local assets: %s", (src) => {
     vi.stubEnv(ENV_KEY, undefined);
 
-    expect(resolveImageUrl(src)).toBe("/assets/images/placeholder.jpg");
+    expect(resolveImageUrl(src)).toBe("/assets/images/placeholder.webp");
   });
 
   it("resolves local video posters without CDN transformations", () => {
     vi.stubEnv(ENV_KEY, undefined);
 
     expect(
-      resolveImageUrl("/images/placeholder.jpg", {
+      resolveImageUrl("/images/placeholder.webp", {
         width: 1920,
         quality: 80,
       }),
-    ).toBe("/assets/images/placeholder.jpg");
+    ).toBe("/assets/images/placeholder.webp");
   });
 
   it("rejects untrusted CDN sources", () => {
@@ -88,8 +88,8 @@ describe("Image URL resolver", () => {
   });
 
   it.each([
-    "https://example.com/images/placeholder.jpg",
-    "http://example.com/images/placeholder.jpg",
+    "https://example.com/images/placeholder.webp",
+    "http://example.com/images/placeholder.webp",
   ])("preserves absolute image URLs without a CDN endpoint: %s", (src) => {
     vi.stubEnv(ENV_KEY, undefined);
 
@@ -99,7 +99,7 @@ describe("Image URL resolver", () => {
   it("preserves absolute image URLs without applying local transformations", () => {
     vi.stubEnv(ENV_KEY, undefined);
 
-    const src = "https://example.com/images/placeholder.jpg?v=2";
+    const src = "https://example.com/images/placeholder.webp?v=2";
 
     expect(
       resolveImageUrl(src, {
@@ -114,8 +114,8 @@ describe("Image URL resolver", () => {
     (endpoint) => {
       vi.stubEnv(ENV_KEY, endpoint);
 
-      expect(resolveImageUrl("/images/placeholder.jpg")).toBe(
-        "/assets/images/placeholder.jpg",
+      expect(resolveImageUrl("/images/placeholder.webp")).toBe(
+        "/assets/images/placeholder.webp",
       );
     },
   );
@@ -123,8 +123,8 @@ describe("Image URL resolver", () => {
   it("normalizes whitespace around the CDN endpoint", () => {
     vi.stubEnv(ENV_KEY, `  ${ENDPOINT}  `);
 
-    expect(resolveImageUrl("/images/placeholder.jpg")).toBe(
-      `${ENDPOINT}/images/placeholder.jpg`,
+    expect(resolveImageUrl("/images/placeholder.webp")).toBe(
+      `${ENDPOINT}/images/placeholder.webp`,
     );
   });
 
@@ -133,29 +133,29 @@ describe("Image URL resolver", () => {
     (suffix) => {
       vi.stubEnv(ENV_KEY, `${ENDPOINT}${suffix}`);
 
-      expect(resolveImageUrl("/images/placeholder.jpg")).toBe(
-        `${ENDPOINT}/images/placeholder.jpg`,
+      expect(resolveImageUrl("/images/placeholder.webp")).toBe(
+        `${ENDPOINT}/images/placeholder.webp`,
       );
     },
   );
 
   it.each([
-    "/images/placeholder.jpg",
-    "images/placeholder.jpg",
-    "/assets/images/placeholder.jpg",
-    "assets/images/placeholder.jpg",
+    "/images/placeholder.webp",
+    "images/placeholder.webp",
+    "/assets/images/placeholder.webp",
+    "assets/images/placeholder.webp",
   ])("normalizes asset paths for CDN requests: %s", (src) => {
-    expect(resolveImageUrl(src)).toBe(`${ENDPOINT}/images/placeholder.jpg`);
+    expect(resolveImageUrl(src)).toBe(`${ENDPOINT}/images/placeholder.webp`);
   });
 
   it("accepts an absolute URL from the configured CDN endpoint", () => {
-    const src = `${ENDPOINT}/images/placeholder.jpg`;
+    const src = `${ENDPOINT}/images/placeholder.webp`;
 
     expect(resolveImageUrl(src)).toBe(src);
   });
 
   it("applies transformations to an absolute CDN URL", () => {
-    const src = `${ENDPOINT}/images/placeholder.jpg`;
+    const src = `${ENDPOINT}/images/placeholder.webp`;
 
     const result = resolveImageUrl(src, {
       width: 640,
@@ -164,12 +164,12 @@ describe("Image URL resolver", () => {
 
     const url = new URL(result);
 
-    expect(url.pathname).toBe("/tronosa/images/placeholder.jpg");
+    expect(url.pathname).toBe("/tronosa/images/placeholder.webp");
     expect(url.searchParams.get("tr")).toBe("w-640,q-85");
   });
 
   it("replaces existing transformations when new ones are provided", () => {
-    const src = `${ENDPOINT}/images/placeholder.jpg?tr=w-320,q-60`;
+    const src = `${ENDPOINT}/images/placeholder.webp?tr=w-320,q-60`;
 
     const result = resolveImageUrl(src, {
       width: 1280,
@@ -183,7 +183,7 @@ describe("Image URL resolver", () => {
   });
 
   it("preserves unrelated query parameters when applying transformations", () => {
-    const src = `${ENDPOINT}/images/placeholder.jpg?v=2&tr=w-320&format=webp`;
+    const src = `${ENDPOINT}/images/placeholder.webp?v=2&tr=w-320&format=webp`;
 
     const result = resolveImageUrl(src, {
       width: 1280,
@@ -198,7 +198,7 @@ describe("Image URL resolver", () => {
   });
 
   it("preserves URL fragments when applying transformations", () => {
-    const src = `${ENDPOINT}/images/placeholder.jpg#preview`;
+    const src = `${ENDPOINT}/images/placeholder.webp#preview`;
 
     const result = resolveImageUrl(src, {
       width: 640,

@@ -75,4 +75,9 @@ export const sharedSectionRegistry = {
 
     return <ContactForm {...section.content} />;
   },
+  "editorial-media": async (section) => {
+    const { EditorialMedia } = await import("../EditorialMedia");
+
+    return <EditorialMedia {...section.content} />;
+  },
 } satisfies SectionRegistry<SharedSection>;

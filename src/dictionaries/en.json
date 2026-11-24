@@ -6,6 +6,24 @@
     "products": "Products",
     "contact": "Contact"
   },
+  "Footer": {
+    "brand": "TRONOŠA",
+    "eyebrow": "TRONOŠA NATURAL SPRING WATER",
+    "title": "Bold and refreshing.",
+    "description": "Water with a clear origin and distinctive freshness. Straight from nature, with character.",
+    "explore": "Explore",
+    "more": "More information",
+    "rights": "All rights reserved.",
+    "copyright": "© {year} Tronoša. {rights}",
+    "home": "Home",
+    "about": "About us",
+    "products": "Products",
+    "blog": "Blog",
+    "contact": "Contact",
+    "ctaEyebrow": "BUSINESS PARTNERSHIPS",
+    "ctaTitle": "Let's start a conversation.",
+    "ctaLabel": "Contact us"
+  },
   "Common": {
     "readMore": "Read more",
     "back": "Back"
@@ -14,7 +32,12 @@
     "skipToContent": "Skip to main content"
   },
   "NotFound": {
-    "description": "Page not found."
+    "eyebrow": "ERROR 404",
+    "title": "Page not found.",
+    "description": "The page you're looking for doesn't exist or has moved. Return to the homepage or explore our stories.",
+    "navigationLabel": "Page not found navigation",
+    "home": "Back to homepage",
+    "blog": "Explore our stories"
   },
   "Header": {
     "brand": {
@@ -82,7 +105,7 @@
         "description": "Three worlds. Countless stories. A space to explore nature, water and everything that connects us.",
         "caption": "A space for curiosity",
         "image": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": ""
         }
       },
@@ -172,5 +195,41 @@
     "unavailable": "The contact form is temporarily unavailable.",
     "required": "Please review the highlighted fields.",
     "privacy": "The information you provide will be used to respond to your inquiry."
+  },
+  "DistributionMap": {
+    "eyebrow": "Our network",
+    "title": "Always close to you",
+    "description": "Discover our distribution and retail network.",
+    "retailer": "Retail location",
+    "distributor": "Distributor",
+    "production": "Production facility",
+    "partner": "Partner",
+    "map": "Map",
+    "list": "Locations",
+    "view": "Display mode",
+    "count": "Number of locations",
+    "legend": "Location types",
+    "details": "Location details",
+    "showOnMap": "Show on map",
+    "directions": "Get directions",
+    "close": "Close",
+    "phone": "Phone",
+    "email": "Email",
+    "website": "Website",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "resetMap": "Reset map view",
+    "loading": "Loading map...",
+    "unavailable": "The map is currently unavailable.",
+    "empty": "No locations are currently available.",
+    "attribution": "Map attribution",
+    "gestureWindows": "Use Ctrl + scroll to zoom the map",
+    "gestureMac": "Use ⌘ + scroll to zoom the map",
+    "gestureMobile": "Use two fingers to move the map",
+    "activation": {
+      "title": "Explore our locations",
+      "description": "Find your nearest location on the interactive map.",
+      "button": "Load interactive map"
+    }
   }
 }

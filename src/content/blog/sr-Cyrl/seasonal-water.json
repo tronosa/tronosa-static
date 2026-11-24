@@ -16,7 +16,7 @@
     "title": "Вода и ритам природе: шта нам годишња доба откривају",
     "description": "Од пролећних киша до летњих врућина, вода прати промене у природи и нашем свакодневном животу.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "Поток који протиче кроз шуму у јутарњој светлости",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "seasonal-water-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "ТРОНОША",
-          "appearance": {
-            "backgroundColor": "#193B52",
-            "accentColor": "#91BED8"
-          }
+          "backgroundText": "ТРОНОША"
         }
       },
       {
@@ -83,7 +79,7 @@
         "id": "seasonal-water-forest",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "Зелени шумски поток са камењем",
           "width": 1600,
           "height": 1000,

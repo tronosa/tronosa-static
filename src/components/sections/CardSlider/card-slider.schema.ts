@@ -1,20 +1,40 @@
 import { z } from "@/lib/validation/zod";
+
 import { pictureSchema } from "@/components/media/Picture/picture.schema";
+
+const cardCtaSchema = z.object({
+  label: z.string().trim().min(1),
+  pageId: z.string().trim().min(1),
+});
 
 const cardFields = {
   title: z.string().trim().min(1),
   headline: z.string().trim().min(1),
   description: z.string().trim().min(1).optional(),
+  cta: cardCtaSchema.optional(),
 };
 
 export const sliderCardSchema = z.discriminatedUnion("kind", [
-  z.object({ kind: z.literal("text"), ...cardFields }),
-  z.object({ kind: z.literal("image"), ...cardFields, image: pictureSchema }),
+  z.object({
+    kind: z.literal("text"),
+    ...cardFields,
+  }),
+  z.object({
+    kind: z.literal("image"),
+    ...cardFields,
+    image: pictureSchema,
+  }),
 ]);
+
 export const cardSliderContentSchema = z.object({
+  eyebrow: z.string().trim().min(1).optional(),
+
   title: z.string().trim().min(1),
+
   description: z.string().trim().min(1).optional(),
+
   cards: z.array(sliderCardSchema).min(1),
+
   accessibility: z.object({
     previousLabel: z.string().trim().min(1),
     nextLabel: z.string().trim().min(1),

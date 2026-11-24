@@ -43,12 +43,12 @@ export const experienceGlowVariants = cva([
 ]);
 
 export const experienceBackgroundTextVariants = cva([
-  "pointer-events-none absolute top-1/2 left-1/2",
-  "-translate-x-1/2 -translate-y-1/2",
+  "pointer-events-none absolute inset-0",
+  "flex items-center justify-center",
   "whitespace-nowrap select-none",
   "font-bold leading-none tracking-[-0.08em]",
   "text-white/45",
-  "text-[clamp(5rem,18vw,24rem)]",
+  "text-[clamp(3rem,14vw,15rem)]",
 ]);
 
 /* Product stage */
@@ -283,103 +283,3 @@ export const experienceProgressBarVariants = cva([
   "h-full w-full origin-left",
   "scale-x-0 bg-current",
 ]);
-
-/* Mobile experience */
-
-export const mobileExperienceIntroVariants = cva([
-  "relative isolate overflow-hidden",
-  "px-6 pt-14 pb-12",
-  "text-center sm:px-10 sm:pt-20",
-]);
-
-export const mobileExperienceIntroHeaderVariants = cva([
-  "relative z-10 mx-auto max-w-xl",
-]);
-
-export const mobileExperienceCollectionVariants = cva([
-  "relative isolate mx-auto",
-  "flex flex-wrap items-end justify-center",
-  "max-w-160 gap-4 py-10",
-]);
-
-export const mobileExperienceCollectionItemVariants = cva([
-  "relative flex min-w-0",
-  "h-[clamp(10rem,55vw,22rem)]",
-  "w-[min(40%,10rem)]",
-  "items-end justify-center",
-]);
-
-export const mobileExperienceProductVariants = cva([
-  "relative isolate overflow-hidden",
-  "px-6 py-14 sm:px-10 sm:py-20",
-]);
-
-export const mobileExperienceProductHeaderVariants = cva([
-  "relative z-10 mx-auto max-w-xl",
-  "text-center",
-]);
-
-export const mobileExperienceProductVolumeVariants = cva([
-  "mb-3 text-sm font-semibold",
-  "tracking-[0.15em] tabular-nums",
-]);
-
-export const mobileExperienceVisualVariants = cva([
-  "relative isolate mx-auto flex",
-  "h-[clamp(16rem,75vw,28rem)]",
-  "w-full max-w-xl",
-  "items-center justify-center",
-  "my-8",
-]);
-
-export const mobileExperienceHaloVariants = cva([
-  "pointer-events-none absolute",
-  "aspect-square w-[85%] max-w-100",
-  "rounded-full",
-  "bg-[radial-gradient(circle,white,transparent_70%)]",
-  "opacity-70",
-]);
-
-export const mobileExperienceRingVariants = cva([
-  "pointer-events-none absolute",
-  "aspect-square w-[85%] max-w-100",
-  "rounded-full border border-white/70",
-]);
-
-export const mobileExperienceImageVariants = cva([
-  "relative h-full w-auto max-w-full",
-  "object-contain select-none",
-]);
-
-export const mobileExperienceBackgroundTextVariants = cva([
-  "pointer-events-none absolute inset-0",
-  "flex items-center justify-center",
-  "overflow-hidden whitespace-nowrap",
-  "font-bold tracking-[-0.07em]",
-  "text-[clamp(3rem,15vw,10rem)]",
-  "text-white/55 select-none",
-]);
-
-export const mobileExperienceDetailsVariants = cva([
-  "relative z-10 mx-auto max-w-xl",
-  "rounded-3xl border border-white/70",
-  "bg-white/50 p-6 sm:p-8",
-]);
-
-export const mobileExperienceDescriptionVariants = cva([
-  "text-base leading-relaxed",
-]);
-
-export const mobileExperienceHighlightsVariants = cva(["flex flex-col gap-4"]);
-
-export const mobileExperienceHighlightVariants = cva([
-  "border-b border-current/10 pb-4",
-  "last:border-b-0 last:pb-0",
-]);
-
-export const mobileExperienceCompositionVariants = cva([
-  "px-6 sm:px-10",
-  "bg-(--experience-secondary-background)",
-]);
-
-export const mobileExperienceEndingVariants = cva(["px-6 sm:px-10"]);

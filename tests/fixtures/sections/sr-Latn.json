@@ -7,7 +7,7 @@
       "description": "Otkrijte prirodnu izvorsku vodu Tronoša.",
       "video": {
         "src": "/videos/placeholder.mp4",
-        "poster": "/images/placeholder.jpg",
+        "poster": "/images/placeholder.webp",
         "type": "video/mp4"
       },
       "cta": {

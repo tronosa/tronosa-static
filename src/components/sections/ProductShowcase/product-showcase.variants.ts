@@ -16,16 +16,15 @@ export const productShowcaseBackgroundVariants = cva([
 
 export const productShowcaseBackgroundTextContainerVariants = cva([
   "pointer-events-none absolute inset-0 -z-10",
-  "flex items-center justify-center",
-  "overflow-hidden",
+  "flex items-center justify-center overflow-hidden",
 ]);
 
 export const productShowcaseBackgroundTextVariants = cva([
   "select-none whitespace-nowrap",
-  "text-[clamp(3rem,19vw,24rem)]",
+  "text-[clamp(3rem,14vw,15rem)]",
   "font-bold leading-none",
   "tracking-[-0.08em]",
-  "text-white/45",
+  "text-white/30",
 ]);
 
 export const productShowcaseLayoutVariants = cva([
@@ -33,7 +32,7 @@ export const productShowcaseLayoutVariants = cva([
   "grid w-full min-w-0",
   "grid-cols-1 items-center",
   "gap-x-8 gap-y-8",
-  "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)]",
+  "lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1.2fr)_minmax(0,0.8fr)]",
 ]);
 
 export const productShowcaseHeaderVariants = cva([
@@ -43,23 +42,55 @@ export const productShowcaseHeaderVariants = cva([
   "lg:items-start lg:text-left",
 ]);
 
-export const productShowcaseEyebrowVariants = cva([
-  "mb-4 text-xs font-semibold",
-  "uppercase tracking-[0.18em]",
-]);
+export const productShowcaseEyebrowVariants = cva(["mb-4 uppercase"]);
 
-export const productShowcaseTitleVariants = cva([
-  "text-balance",
-  "text-[clamp(2rem,4vw,4.5rem)]",
-  "font-medium leading-[1.06]",
-  "tracking-[-0.045em]",
-]);
+export const productShowcaseTitleVariants = cva(["max-w-2xl text-balance"]);
 
 export const productShowcaseDescriptionVariants = cva([
-  "mt-5 max-w-md",
-  "text-sm leading-relaxed",
-  "sm:text-base",
+  "mt-5 max-w-2xl lg:max-w-xl",
 ]);
+
+export const productCategorySelectorVariants = cva([
+  "relative z-20 w-full min-w-0",
+  "mb-8 md:mb-10",
+]);
+
+export const productCategorySelectorLabelVariants = cva(["sr-only"]);
+
+export const productCategorySelectorListVariants = cva([
+  "flex flex-wrap items-center justify-center",
+  "gap-2 md:gap-3",
+]);
+
+export const productCategorySelectorButtonVariants = cva(
+  [
+    "inline-flex min-h-11 items-center justify-center",
+    "rounded-full border px-4 py-2",
+    "text-sm font-medium",
+    "cursor-pointer",
+    "transition-[background-color,color,border-color] duration-200",
+    "focus-visible:outline-2",
+    "focus-visible:outline-offset-2",
+    "focus-visible:outline-current",
+    "motion-reduce:transition-none",
+  ],
+  {
+    variants: {
+      active: {
+        true: ["border-current", "bg-(--product-accent)", "text-white"],
+        false: [
+          "border-current/30",
+          "bg-transparent",
+          "text-current",
+          "hover:border-current",
+        ],
+      },
+    },
+    defaultVariants: {
+      active: false,
+    },
+  },
+);
 
 export const productShowcaseDisplayContainerVariants = cva([
   "relative w-full min-w-0",
@@ -115,7 +146,7 @@ export const productDisplayItemVariants = cva(
   {
     variants: {
       active: {
-        true: ["z-10 visible opacity-100"],
+        true: "z-10 visible opacity-100",
         false: ["z-0 invisible opacity-0", "pointer-events-none"],
       },
     },
@@ -155,18 +186,9 @@ export const productShowcaseVolumeVariants = cva([
 ]);
 
 export const productShowcaseInformationVariants = cva([
-  "mt-5 flex min-w-0 flex-col",
-  "gap-3",
+  "mt-5 flex min-w-0 flex-col gap-3",
 ]);
 
-export const productShowcaseProductTitleVariants = cva([
-  "text-xl font-medium",
-  "leading-tight tracking-tight",
-  "sm:text-2xl",
-]);
+export const productShowcaseProductTitleVariants = cva(["max-w-lg"]);
 
-export const productShowcaseProductDescriptionVariants = cva([
-  "max-w-sm",
-  "text-sm leading-relaxed",
-  "sm:text-base",
-]);
+export const productShowcaseProductDescriptionVariants = cva(["max-w-sm"]);

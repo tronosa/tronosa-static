@@ -3,6 +3,7 @@ import { getLocale } from "next-intl/server";
 import { BackgroundVideo } from "@/components/media/BackgroundVideo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 import { Typography } from "@/components/ui/Typography";
 
 import { locales } from "@/i18n/config";
@@ -20,9 +21,9 @@ import {
 } from "./video-hero.variants";
 
 import type { VideoHeroProps } from "./types";
-import { Section } from "@/components/ui/Section";
 
 export async function VideoHero({
+  eyebrow,
   title,
   description,
   video,
@@ -72,6 +73,12 @@ export async function VideoHero({
       <Container size="wide">
         <div className={videoHeroContentVariants({ align })}>
           <div className={videoHeroTextVariants()}>
+            {eyebrow && (
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/90 md:text-sm">
+                {eyebrow}
+              </p>
+            )}
+
             <Typography
               as="h1"
               variant="display"

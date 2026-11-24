@@ -4,7 +4,7 @@ import { useId } from "react";
 import Image from "next/image";
 
 import type { DistributionLocation } from "./types";
-import type { DistributionMapMessages } from "./distribution-map.i18n";
+import type { DistributionMapMessages } from "./types";
 
 import {
   formatLocationAddress,

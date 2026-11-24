@@ -52,6 +52,7 @@ export function LanguageSwitcherDialog({
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button
+          data-language-switcher
           type="button"
           disabled={isPending}
           aria-label={accessibleLabel}

@@ -11,6 +11,10 @@ const MAIN_CONTENT_ID = "main-content";
 
 const SKIP_LINK_SELECTOR = 'a[href="#main-content"]';
 
+const NOT_FOUND_SELECTOR = "[data-not-found-page]";
+
+const NOT_FOUND_HEADING_ID = "not-found-heading";
+
 const contentRoutes = getContentTestRoutes();
 
 const negativeRoutes = getNegativeTestRoutes(contentRoutes);
@@ -23,11 +27,44 @@ const SKIP_LINK_LABELS = {
   en: "Skip to main content",
 } as const satisfies Record<Locale, string>;
 
-const NOT_FOUND_DESCRIPTIONS = {
-  "sr-Cyrl": "Страница није пронађена.",
-  "sr-Latn": "Stranica nije pronađena.",
-  en: "Page not found.",
-} as const satisfies Record<Locale, string>;
+type NotFoundContent = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  navigationLabel: string;
+  home: string;
+  blog: string;
+};
+
+const NOT_FOUND_CONTENT = {
+  "sr-Cyrl": {
+    eyebrow: "ГРЕШКА 404",
+    title: "Страница није пронађена.",
+    description:
+      "Изгледа да страница коју тражите не постоји или је променила адресу. Вратите се на почетну или истражите наше приче.",
+    navigationLabel: "Навигација са странице која није пронађена",
+    home: "Назад на почетну",
+    blog: "Истражите приче",
+  },
+  "sr-Latn": {
+    eyebrow: "GREŠKA 404",
+    title: "Stranica nije pronađena.",
+    description:
+      "Izgleda da stranica koju tražite ne postoji ili je promenila adresu. Vratite se na početnu ili istražite naše priče.",
+    navigationLabel: "Navigacija sa stranice koja nije pronađena",
+    home: "Nazad na početnu",
+    blog: "Istražite priče",
+  },
+  en: {
+    eyebrow: "ERROR 404",
+    title: "Page not found.",
+    description:
+      "The page you're looking for doesn't exist or has moved. Return to the homepage or explore our stories.",
+    navigationLabel: "Page not found navigation",
+    home: "Back to homepage",
+    blog: "Explore our stories",
+  },
+} as const satisfies Record<Locale, NotFoundContent>;
 
 const localizedRoutes = locales.map((locale) => {
   const route = contentRoutes.find(
@@ -264,6 +301,22 @@ test.describe("Global accessibility @a11y", () => {
 
   test.describe("Not found accessibility", () => {
     for (const route of negativeRoutes) {
+      const content = NOT_FOUND_CONTENT[route.locale];
+
+      const homeRoute = contentRoutes.find(
+        (entry) =>
+          entry.kind === "page" &&
+          entry.id === "home" &&
+          entry.locale === route.locale,
+      );
+
+      const blogRoute = contentRoutes.find(
+        (entry) =>
+          entry.kind === "page" &&
+          entry.id === "blog" &&
+          entry.locale === route.locale,
+      );
+
       test(`renders an accessible not found page on ${route.pathname}`, async ({
         page,
       }) => {
@@ -274,23 +327,118 @@ test.describe("Global accessibility @a11y", () => {
           route.locale,
         );
 
-        await expect(page.getByRole("main")).toHaveCount(1);
+        const main = page.getByRole("main");
+
+        await expect(main).toHaveCount(1);
+
+        const notFound = main.locator(NOT_FOUND_SELECTOR);
+
+        await expect(notFound).toHaveCount(1);
+
+        await expect(notFound).toBeVisible();
+
+        await expect(notFound).toHaveAttribute(
+          "aria-labelledby",
+          NOT_FOUND_HEADING_ID,
+        );
+
+        await expect(notFound).toHaveAccessibleName(content.title);
+
+        const heading = notFound.getByRole("heading", {
+          level: 1,
+          name: content.title,
+          exact: true,
+        });
+
+        await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+
+        await expect(heading).toHaveCount(1);
+
+        await expect(heading).toBeVisible();
+
+        await expect(heading).toHaveAttribute("id", NOT_FOUND_HEADING_ID);
 
         await expect(
-          page.getByRole("heading", {
-            level: 1,
+          page.locator(`[id="${NOT_FOUND_HEADING_ID}"]`),
+        ).toHaveCount(1);
+
+        const errorCode = notFound
+          .locator('span[aria-hidden="true"]')
+          .filter({ hasText: /^404$/ });
+
+        await expect(errorCode).toHaveCount(1);
+
+        await expect(errorCode).toBeVisible();
+
+        await expect(
+          notFound.getByRole("heading", {
             name: "404",
             exact: true,
           }),
-        ).toHaveCount(1);
+        ).toHaveCount(0);
 
         await expect(
-          page
-            .getByRole("main")
-            .getByText(NOT_FOUND_DESCRIPTIONS[route.locale], {
-              exact: true,
-            }),
+          notFound.getByText(content.eyebrow, {
+            exact: true,
+          }),
         ).toBeVisible();
+
+        await expect(
+          notFound.getByText(content.description, {
+            exact: true,
+          }),
+        ).toBeVisible();
+
+        const navigation = notFound.getByRole("navigation", {
+          name: content.navigationLabel,
+          exact: true,
+        });
+
+        if (homeRoute || blogRoute) {
+          await expect(navigation).toHaveCount(1);
+
+          await expect(navigation).toBeVisible();
+        } else {
+          await expect(navigation).toHaveCount(0);
+        }
+
+        if (homeRoute) {
+          const homeLink = navigation.getByRole("link", {
+            name: content.home,
+            exact: true,
+          });
+
+          await expect(homeLink).toHaveCount(1);
+
+          await expect(homeLink).toBeVisible();
+
+          const href = await homeLink.getAttribute("href");
+
+          expect(href).not.toBeNull();
+
+          expect(
+            new URL(href!, page.url()).pathname.replace(/\/+$/, "") || "/",
+          ).toBe(homeRoute.pathname.replace(/\/+$/, "") || "/");
+        }
+
+        if (blogRoute) {
+          const blogLink = navigation.getByRole("link", {
+            name: content.blog,
+            exact: true,
+          });
+
+          await expect(blogLink).toHaveCount(1);
+
+          await expect(blogLink).toBeVisible();
+
+          const href = await blogLink.getAttribute("href");
+
+          expect(href).not.toBeNull();
+
+          expect(
+            new URL(href!, page.url()).pathname.replace(/\/+$/, "") || "/",
+          ).toBe(blogRoute.pathname.replace(/\/+$/, "") || "/");
+        }
 
         await expectSkipNavigation(page);
       });

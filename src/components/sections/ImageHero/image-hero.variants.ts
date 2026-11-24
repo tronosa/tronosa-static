@@ -2,9 +2,13 @@ import { cva } from "class-variance-authority";
 
 export const imageHeroVariants = cva(
   [
-    "relative isolate flex w-full",
+    "relative isolate flex",
+    "min-h-[85svh] md:min-h-[80svh]",
     "flex-col justify-end overflow-hidden",
     "bg-brand-forest text-white",
+    "mx-3 mt-1.25 w-auto rounded-3xl",
+    "md:mx-6 md:rounded-4xl",
+    "lg:mx-10",
   ],
   {
     variants: {

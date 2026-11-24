@@ -9,10 +9,7 @@ import type { Map as MapLibreMap, Marker } from "maplibre-gl";
 
 import { MapPopup } from "./MapPopup";
 
-import {
-  getMapLibreMessages,
-  type DistributionMapMessages,
-} from "./distribution-map.i18n";
+import { getMapLibreMessages } from "./maplibre.messages";
 
 import {
   MAP_STYLE_URL,
@@ -20,7 +17,11 @@ import {
   prefersReducedMotion,
 } from "./distribution-map.utils";
 
-import type { DistributionLocation, DistributionMapInitialView } from "./types";
+import type {
+  DistributionLocation,
+  DistributionMapInitialView,
+  DistributionMapMessages,
+} from "./types";
 
 export type MapStatus = "loading" | "ready" | "error";
 

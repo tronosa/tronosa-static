@@ -16,7 +16,7 @@
     "title": "Nature shapes every drop",
     "description": "A story of water, its natural origin, and the enduring connection between people and nature.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "A forest landscape surrounded by untouched nature",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "natural-origin-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "TRONOSA",
-          "appearance": {
-            "backgroundColor": "#174B37",
-            "accentColor": "#A8C9AA"
-          }
+          "backgroundText": "TRONOSA"
         }
       },
       {
@@ -167,7 +163,7 @@
         "id": "forest-water-image",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "Water flowing over rocks in a natural setting",
           "width": 1600,
           "height": 1000,

@@ -41,7 +41,6 @@ export function StoryExplorerItem({
         <Link
           href={`/blog/${slug}`}
           prefetch={false}
-          aria-labelledby={`${titleId} ${readId}`}
           className={storyExplorerItemLinkVariants()}
         >
           <span

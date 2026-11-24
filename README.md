@@ -839,7 +839,7 @@ The default article image layout is wide.
   "id": "natural-source-image",
   "type": "article-image",
   "content": {
-    "src": "/assets/blog/natural-origin.webp",
+    "src": "/assets/images/placeholder.webp",
     "alt": "Natural spring water source",
     "width": 1200,
     "height": 800,

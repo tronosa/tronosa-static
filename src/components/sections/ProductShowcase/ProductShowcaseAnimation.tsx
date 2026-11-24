@@ -1,6 +1,6 @@
 "use client";
 
-import type { RefObject } from "react";
+import { useEffect, type RefObject } from "react";
 
 import { useGSAP } from "@/lib/animation/gsap";
 
@@ -13,15 +13,23 @@ type ProductShowcaseAnimationProps = {
   containerRef: RefObject<HTMLElement | null>;
   activeProductId: string;
   directionRef: RefObject<ProductShowcaseDirection>;
+  enabled: boolean;
+  onReady: () => void;
 };
 
 export function ProductShowcaseAnimation({
   containerRef,
   activeProductId,
   directionRef,
+  enabled,
+  onReady,
 }: ProductShowcaseAnimationProps) {
   useGSAP(
     () => {
+      if (!enabled) {
+        return;
+      }
+
       const container = containerRef.current;
 
       if (!container) {
@@ -36,10 +44,14 @@ export function ProductShowcaseAnimation({
     },
     {
       scope: containerRef,
-      dependencies: [activeProductId],
+      dependencies: [activeProductId, enabled],
       revertOnUpdate: true,
     },
   );
+
+  useEffect(() => {
+    onReady();
+  }, [onReady]);
 
   return null;
 }
