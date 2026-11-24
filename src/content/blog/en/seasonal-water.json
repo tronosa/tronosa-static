@@ -16,7 +16,7 @@
     "title": "Water and the Rhythm of Nature: A Journey Through the Seasons",
     "description": "From spring rain to summer heat, water is part of the changes we see in nature and everyday life.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "A stream flowing through a forest in morning light",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "seasonal-water-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "TRONOSA",
-          "appearance": {
-            "backgroundColor": "#193B52",
-            "accentColor": "#91BED8"
-          }
+          "backgroundText": "TRONOSA"
         }
       },
       {
@@ -83,7 +79,7 @@
         "id": "seasonal-water-forest",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "A green woodland stream running over stones",
           "width": 1600,
           "height": 1000,

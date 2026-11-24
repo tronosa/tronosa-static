@@ -28,9 +28,11 @@ export function BackgroundVideo({
 }: BackgroundVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const posterRef = useRef<HTMLImageElement>(null);
 
   const playbackIntentRef = useRef<PlaybackIntent>("auto");
   const synchronizeRef = useRef<(() => void) | null>(null);
+  const posterReadyRef = useRef(false);
 
   const [playing, setPlaying] = useState(false);
   const [hasVideoFrame, setHasVideoFrame] = useState(false);
@@ -47,7 +49,9 @@ export function BackgroundVideo({
     const tabletMedia = window.matchMedia(TABLET_QUERY);
     const reducedMotionMedia = window.matchMedia(REDUCED_MOTION_QUERY);
 
+    let disposed = false;
     let isVisible = false;
+    let documentReady = document.readyState === "complete";
     let activeSource: string | undefined;
 
     element.muted = true;
@@ -65,13 +69,17 @@ export function BackgroundVideo({
     }
 
     function synchronizePlayback() {
-      if (!element) {
+      if (disposed || !element) {
         return;
       }
 
       const intent = playbackIntentRef.current;
 
+      const canStart =
+        intent === "play" || (documentReady && posterReadyRef.current);
+
       const shouldPlay =
+        canStart &&
         isVisible &&
         !document.hidden &&
         intent !== "pause" &&
@@ -88,28 +96,26 @@ export function BackgroundVideo({
         element.pause();
 
         activeSource = source.src;
+
+        setHasVideoFrame(false);
+
         element.src = source.src;
       }
 
       if (element.paused) {
         void element.play().catch(() => {
-          // Autoplay or media playback may be unavailable.
+          // Keep the poster visible if playback is unavailable.
         });
       }
     }
 
     synchronizeRef.current = synchronizePlayback;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        isVisible = entries.some((entry) => entry.isIntersecting);
+    function handleDocumentLoad() {
+      documentReady = true;
 
-        synchronizePlayback();
-      },
-      {
-        threshold: 0,
-      },
-    );
+      synchronizePlayback();
+    }
 
     function handleMotionPreferenceChange() {
       if (reducedMotionMedia.matches) {
@@ -119,17 +125,68 @@ export function BackgroundVideo({
       synchronizePlayback();
     }
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries.some(
+          (entry) => entry.isIntersecting && entry.intersectionRatio > 0,
+        );
+
+        synchronizePlayback();
+      },
+      {
+        threshold: 0,
+      },
+    );
+
     observer.observe(container);
+
+    if (!documentReady) {
+      window.addEventListener("load", handleDocumentLoad, {
+        once: true,
+      });
+    }
+
+    /*
+     * Handle posters that finished loading before
+     * the component's effect was initialized.
+     */
+    const poster = posterRef.current;
+
+    if (poster?.complete) {
+      if (poster.naturalWidth > 0) {
+        void poster
+          .decode()
+          .catch(() => {
+            // A decode failure must not block video playback.
+          })
+          .then(() => {
+            if (disposed) {
+              return;
+            }
+
+            posterReadyRef.current = true;
+
+            synchronizePlayback();
+          });
+      } else {
+        posterReadyRef.current = true;
+      }
+    }
 
     document.addEventListener("visibilitychange", synchronizePlayback);
 
     mobileMedia.addEventListener("change", synchronizePlayback);
+
     tabletMedia.addEventListener("change", synchronizePlayback);
 
     reducedMotionMedia.addEventListener("change", handleMotionPreferenceChange);
 
     return () => {
+      disposed = true;
+
       observer.disconnect();
+
+      window.removeEventListener("load", handleDocumentLoad);
 
       document.removeEventListener("visibilitychange", synchronizePlayback);
 
@@ -149,6 +206,12 @@ export function BackgroundVideo({
       element.load();
     };
   }, [video]);
+
+  function handlePosterReady() {
+    posterReadyRef.current = true;
+
+    synchronizeRef.current?.();
+  }
 
   function togglePlayback() {
     const element = videoRef.current;
@@ -172,6 +235,7 @@ export function BackgroundVideo({
       className={cn(backgroundVideoVariants(), className)}
     >
       <Image
+        ref={posterRef}
         src={video.poster}
         alt=""
         fill
@@ -179,13 +243,14 @@ export function BackgroundVideo({
         quality={65}
         loading="eager"
         fetchPriority="high"
+        onLoad={handlePosterReady}
+        onError={handlePosterReady}
         className={backgroundVideoMediaVariants()}
       />
 
       <video
         ref={videoRef}
         muted
-        loop
         playsInline
         preload="none"
         aria-hidden="true"

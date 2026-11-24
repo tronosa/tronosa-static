@@ -12,6 +12,7 @@ import { productShowcaseSectionSchema } from "@/components/sections/ProductShowc
 import { productExperienceSectionSchema } from "@/components/sections/ProductExperience/product-experience.schema";
 import { contentSectionSchema } from "@/components/sections/ContentSection/content-section.schema";
 import { contactFormSectionSchema } from "@/components/sections/ContactForm/contact-form.schema";
+import { editorialMediaSectionSchema } from "@/components/sections/EditorialMedia/editorial-media.schema";
 
 import { blogSpecificSectionSchemas } from "./blog-section.schema";
 import { articleSpecificSectionSchemas } from "./article-section.schema";
@@ -29,6 +30,7 @@ export const sharedSectionSchemas = [
   productExperienceSectionSchema,
   contentSectionSchema,
   contactFormSectionSchema,
+  editorialMediaSectionSchema,
 ] as const;
 
 export const sharedSectionSchema = z.discriminatedUnion(

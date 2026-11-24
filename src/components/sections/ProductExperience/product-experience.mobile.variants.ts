@@ -85,15 +85,15 @@ export const mobileExperienceBackgroundTextVariants = cva([
   "overflow-hidden whitespace-nowrap",
   "font-bold select-none leading-none",
   "tracking-[-0.08em]",
-  "text-[clamp(4rem,19vw,10rem)]",
+  "text-[clamp(4rem,14vw,7rem)]",
   "text-white/60",
 ]);
 
 export const mobileExperienceWatermarkVariants = cva([
   "pointer-events-none absolute bottom-5 left-0",
-  "text-[clamp(4rem,18vw,8rem)]",
+  "text-[clamp(3rem,14vw,4rem)]",
   "font-light leading-none tracking-[-0.07em]",
-  "opacity-15 tabular-nums select-none",
+  "tabular-nums select-none",
 ]);
 
 export const mobileExperienceBottleVariants = cva([

@@ -5,6 +5,7 @@
   --brand-forest: #173f35;
   --brand-sage: #47675a;
   --brand-mineral: #6b9692;
+  --brand-mineral-deep: #246b68;
   --brand-stone: #eae5d8;
   --brand-bronze: #ac815a;
   --brand-ivory: #f8f6ef;
@@ -14,6 +15,7 @@
   --background: var(--brand-ivory);
   --foreground: var(--brand-graphite);
   --foreground-muted: var(--brand-sage);
+  --foreground-bronze: #805b3b;
 
   --surface: #fffdf8;
   --surface-muted: var(--brand-stone);
@@ -60,11 +62,12 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-roboto), Arial, sans-serif;
+  --font-sans: var(--font-montserrat), Arial, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-bronze: var(--foreground-bronze);
 
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
@@ -82,6 +85,7 @@
   --color-brand-forest: var(--brand-forest);
   --color-brand-sage: var(--brand-sage);
   --color-brand-mineral: var(--brand-mineral);
+  --color-brand-mineral-deep: var(--brand-mineral-deep);
   --color-brand-stone: var(--brand-stone);
   --color-brand-bronze: var(--brand-bronze);
   --color-brand-ivory: var(--brand-ivory);

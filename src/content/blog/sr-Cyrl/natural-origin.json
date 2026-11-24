@@ -16,7 +16,7 @@
     "title": "Природа обликује сваку кап",
     "description": "Прича о води, њеном природном пореклу и нераскидивој вези између човека и природе.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "Шумски предео окружен нетакнутом природом",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "natural-origin-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "ТРОНОША",
-          "appearance": {
-            "backgroundColor": "#174B37",
-            "accentColor": "#A8C9AA"
-          }
+          "backgroundText": "ТРОНОША"
         }
       },
       {
@@ -167,7 +163,7 @@
         "id": "forest-water-image",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "Вода која протиче преко камења у природном окружењу",
           "width": 1600,
           "height": 1000,

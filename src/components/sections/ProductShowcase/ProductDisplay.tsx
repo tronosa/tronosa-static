@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 import {
   productDisplayVariants,
@@ -16,10 +19,40 @@ interface ProductDisplayProps {
   activeProductId: string;
 }
 
+function ActiveProductImage({ product }: { product: ShowcaseProduct }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return null;
+  }
+
+  return (
+    <Image
+      src={product.image.src}
+      alt={product.image.alt}
+      width={product.image.width}
+      height={product.image.height}
+      sizes="(max-width: 1023px) 80vw, 480px"
+      quality={80}
+      loading="lazy"
+      decoding="async"
+      draggable={false}
+      className={productDisplayImageVariants()}
+      onError={() => setHasError(true)}
+    />
+  );
+}
+
 export function ProductDisplay({
   products,
   activeProductId,
 }: ProductDisplayProps) {
+  const product = products.find((item) => item.id === activeProductId);
+
+  if (!product) {
+    return null;
+  }
+
   return (
     <div className={productDisplayVariants()}>
       <div aria-hidden="true" className={productDisplayHaloVariants()} />
@@ -40,33 +73,16 @@ export function ProductDisplay({
 
       <div aria-hidden="true" className={productDisplayShadowVariants()} />
 
-      {products.map((product) => {
-        const isActive = product.id === activeProductId;
-
-        return (
-          <div
-            key={product.id}
-            data-product-image
-            data-active={isActive}
-            aria-hidden={!isActive}
-            className={productDisplayItemVariants({
-              active: isActive,
-            })}
-          >
-            <Image
-              src={product.image.src}
-              alt={product.image.alt}
-              width={product.image.width}
-              height={product.image.height}
-              sizes="auto, 480px"
-              quality={80}
-              loading="lazy"
-              draggable={false}
-              className={productDisplayImageVariants()}
-            />
-          </div>
-        );
-      })}
+      <div
+        key={product.id}
+        data-product-image
+        data-active="true"
+        className={productDisplayItemVariants({
+          active: true,
+        })}
+      >
+        <ActiveProductImage product={product} />
+      </div>
     </div>
   );
 }

@@ -1,9 +1,11 @@
 import { cva } from "class-variance-authority";
 
 export const videoHeroVariants = cva([
-  "relative isolate flex w-full flex-col justify-end",
+  "relative isolate flex flex-col justify-end",
   "min-h-[85svh] md:min-h-[80svh]",
-  "overflow-hidden",
+  "mx-3 mt-1.25 w-auto overflow-hidden rounded-3xl",
+  "md:mx-6 md:rounded-4xl",
+  "lg:mx-10",
   "bg-brand-forest text-white",
 ]);
 

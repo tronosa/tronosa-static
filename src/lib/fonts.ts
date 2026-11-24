@@ -1,8 +1,8 @@
-import { Roboto } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
-export const fontSans = Roboto({
+export const fontSans = Montserrat({
   subsets: ["latin", "latin-ext", "cyrillic"],
   display: "swap",
   preload: false,
-  variable: "--font-roboto",
+  variable: "--font-montserrat",
 });

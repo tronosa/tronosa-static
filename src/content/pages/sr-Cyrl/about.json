@@ -23,17 +23,17 @@
           "image": {
             "alt": "",
             "desktop": {
-              "src": "/images/placeholder.jpg",
+              "src": "/images/placeholder.webp",
               "width": 1920,
               "height": 1080
             },
             "tablet": {
-              "src": "/images/placeholder.jpg",
+              "src": "/images/placeholder.webp",
               "width": 1024,
               "height": 768
             },
             "mobile": {
-              "src": "/images/placeholder.jpg",
+              "src": "/images/placeholder.webp",
               "width": 720,
               "height": 960
             }

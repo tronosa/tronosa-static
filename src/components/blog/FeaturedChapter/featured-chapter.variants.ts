@@ -81,6 +81,7 @@ export const featuredChapterMediaFrameVariants = cva([
   "group-hover:border-white/60",
   "motion-reduce:transition-none",
 ]);
+
 export const featuredChapterMediaFooterVariants = cva([
   "flex items-center justify-between",
   "gap-4 py-3",
@@ -119,7 +120,7 @@ export const featuredChapterNumberVariants = cva([
   "shrink-0 font-medium leading-[0.85]",
   "text-[clamp(4rem,7vw,7rem)]",
   "tracking-[-0.08em]",
-  "text-brand-bronze/35",
+  "text-brand-bronze",
   "tabular-nums",
 ]);
 

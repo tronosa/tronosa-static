@@ -7,6 +7,7 @@ export const richTextInlineVariants = cva("", {
       primary: "text-primary",
       secondary: "text-secondary",
       accent: "text-accent",
+      bronze: "text-foreground-bronze",
     },
     underline: {
       true: "underline underline-offset-4",

@@ -16,7 +16,7 @@
     "title": "Water During the Workday: Small Breaks, Better Habits",
     "description": "Simple ways to make drinking water part of meetings, desk work and busy days.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "A glass of water and a notebook on a desk near a window",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "workday-water-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "TRONOSA",
-          "appearance": {
-            "backgroundColor": "#234D65",
-            "accentColor": "#8CCDE3"
-          }
+          "backgroundText": "TRONOSA"
         }
       },
       {
@@ -83,7 +79,7 @@
         "id": "workday-water-photo",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "A glass of water on a tidy desk",
           "width": 1600,
           "height": 1000,

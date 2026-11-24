@@ -2,10 +2,24 @@
   "id": "home",
   "slug": "",
   "seo": {
-    "title": "Tronoša | Natural Spring Water",
-    "description": "Discover Tronoša natural spring water and the story behind its origins.",
+    "title": "Tronoša – Natural Spring Water with Character",
+    "description": "Discover Tronoša natural spring water from the Devet Jugovića spring. Explore our products, origins, stories and business partnership opportunities.",
+    "canonical": null,
     "index": true,
-    "follow": true
+    "follow": true,
+    "openGraph": {
+      "title": "Tronoša – Natural Spring Water with Character",
+      "description": "Discover Tronoša natural spring water from the Devet Jugovića spring. Explore our products, origins, stories and business partnership opportunities.",
+      "image": {
+        "src": "/assets/og/home.webp",
+        "alt": "Tronoša natural spring water",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    "twitter": {
+      "card": "summary_large_image"
+    }
   },
   "content": {
     "sections": [
@@ -13,379 +27,505 @@
         "id": "home-video-hero",
         "type": "video-hero",
         "content": {
-          "title": "Nature in every drop.",
-          "description": "Discover Tronoša natural spring water.",
+          "title": "Crisp and refreshing.",
+          "description": "Spring water with a clear origin and distinctive freshness. Straight from nature, with character.",
           "video": {
-            "src": "/videos/placeholder.mp4",
-            "poster": "/images/placeholder.jpg",
-            "type": "video/mp4"
+            "src": "https://ik.imagekit.io/tronosastaging/videos/tronosa-hero-balanced.mp4",
+            "poster": "/images/h-hero-thumbnail.webp",
+            "type": "video/mp4",
+            "mobile": {
+              "src": "https://ik.imagekit.io/tronosastaging/videos/tronosa-hero-mobile.mp4",
+              "type": "video/mp4"
+            },
+            "tablet": {
+              "src": "https://ik.imagekit.io/tronosastaging/videos/tronosa-hero-tablet.mp4",
+              "type": "video/mp4"
+            }
           },
           "cta": {
-            "label": "Discover",
+            "label": "Discover Tronoša",
             "pageId": "about"
           },
           "accessibility": {
             "playLabel": "Play video",
             "pauseLabel": "Pause video"
-          }
+          },
+          "eyebrow": "TRONOŠA NATURAL SPRING WATER"
         }
       },
       {
-        "id": "home-card-slider",
-        "type": "card-slider",
+        "id": "home-source-feeling",
+        "type": "editorial-media",
         "content": {
-          "title": "Nature makes the difference",
-          "description": "Discover the story behind every drop.",
-          "cards": [
-            {
-              "kind": "text",
-              "title": "Origin",
-              "headline": "From the heart of nature",
-              "description": "Discover the story of our spring."
-            },
-            {
-              "kind": "image",
-              "title": "Spring",
-              "headline": "Tronoša",
-              "description": "A story of natural spring water.",
-              "image": {
-                "alt": "",
-                "desktop": {
-                  "src": "/images/placeholder.jpg",
-                  "width": 1200,
-                  "height": 1200
-                }
-              }
-            },
-            {
-              "kind": "text",
-              "title": "Quality",
-              "headline": "Care at every step",
-              "description": "Learn more about our approach."
-            },
-            {
-              "kind": "image",
-              "title": "Tradition",
-              "headline": "A lasting story",
-              "description": "Get to know us better.",
-              "image": {
-                "alt": "",
-                "desktop": {
-                  "src": "/images/placeholder.jpg",
-                  "width": 1200,
-                  "height": 1200
-                }
-              }
-            }
+          "eyebrow": "FRESHNESS TO REMEMBER",
+          "title": "Like stopping for a moment beside a spring.",
+          "paragraphs": [
+            "There is a special kind of freshness we remember from a natural spring. That moment when we stop, take a drink and enjoy the simple feeling of refreshment.",
+            "That is the experience that inspires Tronoša. Natural spring water whose refreshing taste invites you to take another sip."
           ],
-          "accessibility": {
-            "previousLabel": "Previous card",
-            "nextLabel": "Next card",
-            "viewportLabel": "Cards about Tronoša water"
-          }
+          "media": {
+            "kind": "gallery",
+            "images": [
+              {
+                "alt": "Jug Bogdan Spring in its natural surroundings",
+                "desktop": {
+                  "src": "/images/jug-bogdan-spring.webp",
+                  "width": 1200,
+                  "height": 900
+                }
+              },
+              {
+                "alt": "A wide view of the natural landscape surrounding the spring",
+                "desktop": {
+                  "src": "/images/tronosa-natural-landscape.webp",
+                  "width": 1200,
+                  "height": 900
+                }
+              }
+            ],
+            "accessibility": {
+              "label": "Photographs of the natural surroundings",
+              "playLabel": "Start photo slideshow",
+              "pauseLabel": "Pause photo slideshow",
+              "previousLabel": "Previous photograph",
+              "nextLabel": "Next photograph"
+            }
+          },
+          "mediaPosition": "right"
         }
       },
       {
         "id": "products-showcase",
         "type": "product-showcase",
         "content": {
-          "eyebrow": "From the heart of nature",
-          "title": "Purity in every drop.",
-          "description": "Natural refreshment for every moment of your day.",
+          "eyebrow": "OUR PRODUCTS",
+          "title": "Tronoša – water for every day and every occasion.",
+          "description": "From small bottles that fit easily into your bag to larger sizes for home, work and shared moments. Find the Tronoša that fits your everyday rhythm.",
           "backgroundText": "TRONOŠA",
           "accessibility": {
-            "selectorLabel": "Select bottle size"
+            "categorySelectorLabel": "Select a water category",
+            "selectorLabel": "Select a water bottle size"
           },
           "cta": {
-            "label": "Explore our products",
+            "label": "Explore all products",
             "pageId": "products"
           },
-          "products": [
+          "categories": [
             {
-              "id": "water-330ml",
-              "title": "Refreshment on the go",
-              "description": "A convenient bottle designed to go wherever you do.",
-              "volume": "0.33 L",
-              "image": {
-                "src": "/products/water-330ml.webp",
-                "alt": "Tronoša water in a 330 millilitre bottle",
-                "width": 600,
-                "height": 1200
-              },
-              "appearance": {
-                "backgroundColor": "#E5EEE7",
-                "accentColor": "#244D39"
-              }
+              "id": "still",
+              "label": "Still Water",
+              "products": [
+                {
+                  "id": "still-500ml",
+                  "title": "Still Water",
+                  "description": "The refreshing taste of natural spring water, in a size that suits you.",
+                  "volume": "0.5 L",
+                  "image": {
+                    "src": "/products/still-water-500ml.webp",
+                    "alt": "Tronoša still spring water in a 500 ml bottle",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-750ml",
+                  "title": "Still Water",
+                  "description": "The refreshing taste of natural spring water, in a size that suits you.",
+                  "volume": "0.75 L",
+                  "image": {
+                    "src": "/products/still-water-750ml.webp",
+                    "alt": "Tronoša still spring water in a 750 ml bottle",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-880ml",
+                  "title": "Still Water",
+                  "description": "The refreshing taste of natural spring water, in a size that suits you.",
+                  "volume": "0.88 L",
+                  "image": {
+                    "src": "/products/still-water-880ml.webp",
+                    "alt": "Tronoša still spring water in an 880 ml bottle",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-1500ml",
+                  "title": "Still Water",
+                  "description": "The refreshing taste of natural spring water, in a size that suits you.",
+                  "volume": "1.5 L",
+                  "image": {
+                    "src": "/products/still-water-1500ml.webp",
+                    "alt": "Tronoša still spring water in a 1.5 litre bottle",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-6000ml",
+                  "title": "Still Water",
+                  "description": "The refreshing taste of natural spring water, in a size that suits you.",
+                  "volume": "6 L",
+                  "image": {
+                    "src": "/products/still-water-6000ml.webp",
+                    "alt": "Tronoša still spring water in a 6 litre container",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-18900ml",
+                  "title": "Still Water",
+                  "description": "The refreshing taste of natural spring water, in a size that suits you.",
+                  "volume": "18.9 L",
+                  "image": {
+                    "src": "/products/still-water-189000ml.webp",
+                    "alt": "Tronoša still spring water in an 18.9 litre container",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                }
+              ]
             },
             {
-              "id": "water-500ml",
-              "title": "Your everyday companion",
-              "description": "Natural refreshment for your everyday rhythm.",
-              "volume": "0.5 L",
-              "image": {
-                "src": "/products/water-500ml.webp",
-                "alt": "Tronoša water in a 500 millilitre bottle",
-                "width": 600,
-                "height": 1200
-              },
-              "appearance": {
-                "backgroundColor": "#DCEBF0",
-                "accentColor": "#214C60"
-              }
+              "id": "sparkling",
+              "label": "Sparkling Water",
+              "products": [
+                {
+                  "id": "sparkling-500ml",
+                  "title": "Sparkling Water",
+                  "description": "For moments that call for a little extra sparkle.",
+                  "volume": "0.5 L",
+                  "image": {
+                    "src": "/products/sparkling-water-500ml.webp",
+                    "alt": "Tronoša sparkling water in a 500 ml bottle",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#DCEBF0",
+                    "accentColor": "#214C60"
+                  }
+                },
+                {
+                  "id": "sparkling-750ml",
+                  "title": "Sparkling Water",
+                  "description": "For moments that call for a little extra sparkle.",
+                  "volume": "0.75 L",
+                  "image": {
+                    "src": "/products/sparkling-water-750ml.webp",
+                    "alt": "Tronoša sparkling water in a 750 ml bottle",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#DCEBF0",
+                    "accentColor": "#214C60"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "moja-boca",
+              "label": "Moja Boca",
+              "products": [
+                {
+                  "id": "moja-boca-330ml",
+                  "title": "Moja Boca",
+                  "description": "A refreshing choice for little ones.",
+                  "volume": "0.33 L",
+                  "image": {
+                    "src": "/products/still-water-330ml.webp",
+                    "alt": "Tronoša Moja Boca water in a 330 ml bottle",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#FFF0DD",
+                    "accentColor": "#79512C"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "sport",
+              "label": "Tronoša Sport",
+              "products": [
+                {
+                  "id": "sport-880ml",
+                  "title": "Tronoša Sport",
+                  "description": "Natural hydration for the adventurous.",
+                  "volume": "0.88 L",
+                  "image": {
+                    "src": "/products/tronosa-sport-880ml.webp",
+                    "alt": "Tronoša Sport water in an 880 ml bottle",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#DDEBE7",
+                    "accentColor": "#245A50"
+                  }
+                }
+              ]
             }
           ]
         }
       },
       {
-        "id": "home-feature-mosaic",
-        "type": "feature-mosaic",
+        "id": "home-origin-story",
+        "type": "editorial-media",
         "content": {
-          "title": "More than water",
-          "description": "Discover the values we aim to uphold.",
-          "image": {
-            "alt": "",
-            "desktop": {
-              "src": "/images/placeholder.jpg",
-              "width": 1200,
-              "height": 1200
+          "eyebrow": "OUR STORY",
+          "title": "Every spring has a story to tell.",
+          "paragraphs": [
+            "Tronoša's story begins in a region where nature and heritage meet in a mystical way. At the Devet Jugovića spring, in the village of Korenita near Loznica, stories of water still murmur, as it finds its way to your table even today, seven centuries after the stone fountain was built.",
+            "The spring's name echoes ancient legends, while the surrounding region preserves a rich cultural and natural heritage. It is precisely this origin that gives Tronoša its distinctive and strong character."
+          ],
+          "mediaPosition": "left",
+          "media": {
+            "kind": "image",
+            "image": {
+              "alt": "Devet Jugovića spring near Loznica, Serbia",
+              "desktop": {
+                "src": "/images/jug-bogdan-spring.webp",
+                "width": 1600,
+                "height": 1200
+              }
             }
           },
-          "imagePosition": "left",
-          "cards": [
+          "cta": {
+            "label": "Discover our story",
+            "pageId": "about"
+          }
+        }
+      },
+      {
+        "id": "home-quality-production",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
             {
-              "title": "Nature",
-              "description": "Respect for the natural environment."
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "FROM THE SPRING TO YOU",
+                  "color": "bronze"
+                }
+              ]
             },
             {
-              "title": "Quality",
-              "description": "Attention to every detail."
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "An origin we respect. Quality we care for."
+                }
+              ]
             },
             {
-              "title": "Tradition",
-              "description": "A connection to our origins."
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Our work begins with respect for the water and the place it comes from. It continues with care throughout production, bottling and quality control, so that Tronoša reaches you with properties that meet the prescribed standards, while preserving all the qualities and richness that nature gives us."
+                }
+              ]
             },
             {
-              "title": "Collaboration",
-              "description": "Shared values."
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Behind every package are people, processes and a responsibility towards the product that bears our name."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "text": "Learn more about our water",
+                  "pageId": "about"
+                }
+              ]
             }
           ]
         }
       },
       {
-        "id": "stats-banner-mosaic",
-        "type": "stats-banner",
+        "id": "home-business-partners",
+        "type": "card-slider",
         "content": {
-          "theme": "mosaic",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-forest",
-        "type": "stats-banner",
-        "content": {
-          "theme": "forest",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-sage",
-        "type": "stats-banner",
-        "content": {
-          "theme": "sage",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-mineral",
-        "type": "stats-banner",
-        "content": {
-          "theme": "mineral",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-bronze",
-        "type": "stats-banner",
-        "content": {
-          "theme": "bronze",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-stone",
-        "type": "stats-banner",
-        "content": {
-          "theme": "stone",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-ivory",
-        "type": "stats-banner",
-        "content": {
-          "theme": "ivory",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-graphite",
-        "type": "stats-banner",
-        "content": {
-          "theme": "graphite",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-surface",
-        "type": "stats-banner",
-        "content": {
-          "theme": "surface",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-violet",
-        "type": "stats-banner",
-        "content": {
-          "theme": "violet",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-peach",
-        "type": "stats-banner",
-        "content": {
-          "theme": "peach",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-coral",
-        "type": "stats-banner",
-        "content": {
-          "theme": "coral",
-          "title": "Nature in numbers",
-          "description": "The power of nature in every drop.",
-          "statistics": [
-            { "value": "100%", "label": "Natural water" },
-            { "value": "24/7", "label": "Quality control" }
-          ]
-        }
-      },
-      {
-        "id": "home-partners-marquee",
-        "type": "partners-marquee",
-        "content": {
-          "title": "Building trust together",
-          "description": "Collaboration based on shared values and long-term trust.",
-          "partners": [
+          "eyebrow": "FOR PARTNERS",
+          "title": "Good cooperation has its source.",
+          "description": "Tronoša is also here for business opportunities — from hospitality establishments to companies and partners who want water under their own brand. Discover the possibilities for cooperation.",
+          "cards": [
             {
-              "name": "Partner 01",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
+              "kind": "text",
+              "title": "HoReCa",
+              "headline": "For restaurants, hotels and hospitality establishments.",
+              "cta": {
+                "label": "For Hospitality",
+                "pageId": "about"
               }
             },
             {
-              "name": "Partner 02",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
+              "kind": "text",
+              "title": "Private Label",
+              "headline": "Water with your brand's label, subject to agreed possibilities.",
+              "cta": {
+                "label": "Private Label",
+                "pageId": "about"
               }
             },
             {
-              "name": "Partner 03",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
-              }
-            },
-            {
-              "name": "Partner 04",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
-              }
-            },
-            {
-              "name": "Partner 05",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
-              }
-            },
-            {
-              "name": "Partner 06",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
+              "kind": "text",
+              "title": "Companies and Distribution",
+              "headline": "For business premises, events and distribution partners.",
+              "cta": {
+                "label": "Business Cooperation",
+                "pageId": "about"
               }
             }
           ],
           "accessibility": {
-            "pauseLabel": "Pause logo animation"
+            "previousLabel": "Previous card",
+            "nextLabel": "Next card",
+            "viewportLabel": "Business cooperation opportunities"
           }
+        }
+      },
+      {
+        "id": "home-values",
+        "type": "editorial-media",
+        "content": {
+          "eyebrow": "OUR VALUES",
+          "title": "We preserve what matters.",
+          "paragraphs": [
+            "We believe that the value of a region lies in its nature, knowledge, culture and people. That is why we want to be part of initiatives that nurture these values and pass them on."
+          ],
+          "mediaPosition": "right",
+          "media": {
+            "kind": "image",
+            "image": {
+              "alt": "An initiative dedicated to preserving nature, culture and the values of the local community",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1600,
+                "height": 1000
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "home-stories",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "STORIES FROM THE SPRING",
+                  "color": "bronze"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "There is still so much more to tell."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "About water, nature, heritage and people who leave their mark through their ideas and actions. Discover the stories that inspire us."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "text": "Read our stories",
+                  "pageId": "blog"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "home-stats",
+        "type": "stats-banner",
+        "content": {
+          "theme": "mineral",
+          "title": "Tronoša in Numbers",
+          "description": "Behind every sip are our origins, experience and dedication.",
+          "statistics": [
+            {
+              "value": "XX+",
+              "label": "Years of experience"
+            },
+            {
+              "value": "XX",
+              "label": "Packaging options"
+            },
+            {
+              "value": "XXX",
+              "label": "Hourly production capacity"
+            },
+            {
+              "value": "XX",
+              "label": "Cities where Tronoša is available"
+            }
+          ]
+        }
+      },
+      {
+        "id": "home-where-to-buy",
+        "type": "distribution-map",
+        "content": {
+          "eyebrow": "WHERE TO BUY",
+          "title": "Tronoša is closer than you think.",
+          "description": "Find retail locations where Tronoša is available and choose the bottle size that suits you.",
+          "showLegend": true,
+          "showLocationList": true
         }
       },
       {

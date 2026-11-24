@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useId } from "react";
+import { useId, useState } from "react";
 
 import {
   productSelectorVariants,
   productSelectorOptionsVariants,
   productSelectorCardVariants,
+  productSelectorImageContainerVariants,
   productSelectorImageVariants,
   productSelectorVolumeVariants,
   productSelectorInputVariants,
@@ -19,6 +20,29 @@ interface ProductSelectorProps {
   activeProductId: string;
   label: string;
   onChange: (id: string) => void;
+}
+
+function ProductThumbnail({ product }: { product: ShowcaseProduct }) {
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <div aria-hidden="true" className={productSelectorImageContainerVariants()}>
+      {!hasError && (
+        <Image
+          src={product.image.src}
+          alt=""
+          width={product.image.width}
+          height={product.image.height}
+          sizes="64px"
+          quality={65}
+          loading="lazy"
+          draggable={false}
+          className={productSelectorImageVariants()}
+          onError={() => setHasError(true)}
+        />
+      )}
+    </div>
+  );
 }
 
 export function ProductSelector({
@@ -52,22 +76,16 @@ export function ProductSelector({
                 value={product.id}
                 checked={isActive}
                 onChange={() => onChange(product.id)}
+                aria-label={`${product.title}, ${product.volume}`}
                 className={productSelectorInputVariants()}
               />
 
-              <Image
-                src={product.image.src}
-                alt=""
-                width={product.image.width}
-                height={product.image.height}
-                sizes="auto, 64px"
-                quality={65}
-                loading="lazy"
-                draggable={false}
-                className={productSelectorImageVariants()}
-              />
+              <ProductThumbnail product={product} />
 
-              <span className={productSelectorVolumeVariants()}>
+              <span
+                aria-hidden="true"
+                className={productSelectorVolumeVariants()}
+              >
                 {product.volume}
               </span>
             </label>

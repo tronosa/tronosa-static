@@ -6,6 +6,24 @@
     "products": "Proizvodi",
     "contact": "Kontakt"
   },
+  "Footer": {
+    "brand": "TRONOŠA",
+    "eyebrow": "PRIRODNA IZVORSKA VODA TRONOŠA",
+    "title": "I britka i pitka.",
+    "description": "Voda jasnog porekla i prepoznatljive svežine. Direktno iz prirode, sa karakterom.",
+    "explore": "Istražite",
+    "more": "Više informacija",
+    "rights": "Sva prava zadržana.",
+    "copyright": "© {year} Tronoša. {rights}",
+    "home": "Početna",
+    "about": "O nama",
+    "products": "Proizvodi",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "ctaEyebrow": "POSLOVNA SARADNJA",
+    "ctaTitle": "Započnimo razgovor.",
+    "ctaLabel": "Kontaktirajte nas"
+  },
   "Common": {
     "readMore": "Pročitaj više",
     "back": "Nazad"
@@ -14,7 +32,12 @@
     "skipToContent": "Pređite na glavni sadržaj"
   },
   "NotFound": {
-    "description": "Stranica nije pronađena."
+    "eyebrow": "GREŠKA 404",
+    "title": "Stranica nije pronađena.",
+    "description": "Izgleda da stranica koju tražite ne postoji ili je promenila adresu. Vratite se na početnu ili istražite naše priče.",
+    "navigationLabel": "Navigacija sa stranice koja nije pronađena",
+    "home": "Nazad na početnu",
+    "blog": "Istražite priče"
   },
   "Header": {
     "brand": {
@@ -82,7 +105,7 @@
         "description": "Tri sveta. Bezbroj priča. Prostor za istraživanje prirode, vode i svega što nas povezuje.",
         "caption": "Prostor za radoznalost",
         "image": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": ""
         }
       },
@@ -172,5 +195,41 @@
     "unavailable": "Kontakt forma trenutno nije dostupna.",
     "required": "Proverite označena polja.",
     "privacy": "Podatke koje unesete koristićemo za odgovor na vaš upit."
+  },
+  "DistributionMap": {
+    "eyebrow": "Naša mreža",
+    "title": "Uvek blizu vas",
+    "description": "Otkrijte našu prodajnu i distributivnu mrežu.",
+    "retailer": "Prodajno mesto",
+    "distributor": "Distributer",
+    "production": "Proizvodni pogon",
+    "partner": "Partner",
+    "map": "Mapa",
+    "list": "Lokacije",
+    "view": "Način prikaza",
+    "count": "Broj lokacija",
+    "legend": "Tipovi lokacija",
+    "details": "Detalji lokacije",
+    "showOnMap": "Prikaži na mapi",
+    "directions": "Kako do nas?",
+    "close": "Zatvori",
+    "phone": "Telefon",
+    "email": "Imejl",
+    "website": "Veb-sajt",
+    "zoomIn": "Uvećaj mapu",
+    "zoomOut": "Umanji mapu",
+    "resetMap": "Vrati početni prikaz",
+    "loading": "Učitavanje mape...",
+    "unavailable": "Mapa trenutno nije dostupna.",
+    "empty": "Trenutno nema dostupnih lokacija.",
+    "attribution": "Izvori podataka mape",
+    "gestureWindows": "Koristite Ctrl + scroll za zumiranje mape",
+    "gestureMac": "Koristite ⌘ + scroll za zumiranje mape",
+    "gestureMobile": "Koristite dva prsta za pomeranje mape",
+    "activation": {
+      "title": "Istražite prodajna mesta",
+      "description": "Pronađite najbližu lokaciju na interaktivnoj mapi.",
+      "button": "Učitajte interaktivnu mapu"
+    }
   }
 }

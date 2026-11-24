@@ -25,19 +25,7 @@ const HCAPTCHA_ORIGINS = [
 
 const WEB3FORMS_ORIGIN = "https://api.web3forms.com";
 
-function getVideoOrigins(): string[] {
-  const appId = process.env.UPLOADTHING_APP_ID?.trim();
-
-  if (!appId) {
-    return [];
-  }
-
-  if (!/^[a-z0-9-]+$/i.test(appId)) {
-    throw new Error("Invalid UploadThing application ID.");
-  }
-
-  return [`https://${appId}.ufs.sh`];
-}
+const IMAGEKIT_ORIGIN = "https://ik.imagekit.io";
 
 const directives: CspDirectives = {
   "default-src": ["'self'"],
@@ -50,7 +38,7 @@ const directives: CspDirectives = {
     "'self'",
     "data:",
     "blob:",
-    "https://ik.imagekit.io",
+    IMAGEKIT_ORIGIN,
     "https://tiles.openfreemap.org",
   ],
 
@@ -63,7 +51,7 @@ const directives: CspDirectives = {
     ...HCAPTCHA_ORIGINS,
   ],
 
-  "media-src": ["'self'", ...getVideoOrigins()],
+  "media-src": ["'self'", IMAGEKIT_ORIGIN],
 
   "worker-src": ["'self'", "blob:"],
 

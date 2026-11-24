@@ -6,7 +6,7 @@ import {
 } from "@/components/sections/ArticleImage/article-image.schema";
 
 const validImage = {
-  src: "/assets/blog/natural-origin.webp",
+  src: "/assets/images/placeholder.webp",
   alt: "Natural spring water",
   width: 1200,
   height: 800,

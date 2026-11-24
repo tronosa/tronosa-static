@@ -16,7 +16,7 @@
     "title": "Voda tokom radnog dana: male pauze, bolje navike",
     "description": "Kako da unos vode uklopimo u posao, sastanke i dane provedene za računarom.",
     "image": {
-      "src": "/blog/natural-origin.webp",
+      "src": "/images/placeholder.webp",
       "alt": "Čaša vode i sveska na radnom stolu pored prozora",
       "width": 1600,
       "height": 1000
@@ -34,11 +34,7 @@
         "id": "workday-water-hero",
         "type": "article-hero",
         "content": {
-          "backgroundText": "TRONOŠA",
-          "appearance": {
-            "backgroundColor": "#234D65",
-            "accentColor": "#8CCDE3"
-          }
+          "backgroundText": "TRONOŠA"
         }
       },
       {
@@ -83,7 +79,7 @@
         "id": "workday-water-photo",
         "type": "article-image",
         "content": {
-          "src": "/blog/natural-origin.webp",
+          "src": "/images/placeholder.webp",
           "alt": "Čaša vode na urednom radnom stolu",
           "width": 1600,
           "height": 1000,

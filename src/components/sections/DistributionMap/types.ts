@@ -53,9 +53,57 @@ export type DistributionMapSection = z.infer<
 
 export type DistributionMapView = "map" | "list";
 
+export type MapActivationMessages = {
+  title: string;
+  description: string;
+  button: string;
+};
+
+export type DistributionMapMessages = {
+  eyebrow: string;
+  title: string;
+  description: string;
+
+  retailer: string;
+  distributor: string;
+  production: string;
+  partner: string;
+
+  map: string;
+  list: string;
+  view: string;
+  count: string;
+  legend: string;
+
+  details: string;
+  showOnMap: string;
+  directions: string;
+  close: string;
+
+  phone: string;
+  email: string;
+  website: string;
+
+  zoomIn: string;
+  zoomOut: string;
+  resetMap: string;
+
+  loading: string;
+  unavailable: string;
+  empty: string;
+
+  attribution: string;
+  gestureWindows: string;
+  gestureMac: string;
+  gestureMobile: string;
+
+  activation: MapActivationMessages;
+};
+
 export type DistributionMapProps = DistributionMapContent;
 
 export type DistributionMapClientProps = DistributionMapProps & {
   locale: Locale;
   locations: DistributionLocations;
+  messages: DistributionMapMessages;
 };

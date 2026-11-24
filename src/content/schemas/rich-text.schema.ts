@@ -5,6 +5,7 @@ export const richTextColorSchema = z.enum([
   "primary",
   "secondary",
   "accent",
+  "bronze",
 ]);
 
 export const richTextLeafSchema = z.object({

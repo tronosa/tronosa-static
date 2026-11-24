@@ -476,7 +476,7 @@ describe("Article preview schema", () => {
           title: "Natural spring water",
           description: "Discover the natural origin.",
           image: {
-            src: "/assets/blog/natural-origin.webp",
+            src: "/assets/images/placeholder.webp",
             alt: "Natural spring water",
             width: 1200,
             height: 630,
@@ -521,7 +521,7 @@ describe("Article preview schema", () => {
             title: "Natural spring water",
             description: "Discover the natural origin.",
             image: {
-              src: "/assets/blog/natural-origin.webp",
+              src: "/assets/images/placeholder.webp",
               alt: "Natural spring water",
               width,
               height,

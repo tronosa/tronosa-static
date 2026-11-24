@@ -2,27 +2,24 @@
   "id": "home",
   "slug": "",
   "seo": {
-    "title": "Троноша | Природна изворска вода",
-    "description": "Упознајте природну изворску воду Троноша, њено порекло и природно окружење.",
+    "title": "Троноша – Природна изворска вода са карактером",
+    "description": "Упознајте Троношу, природну изворску воду са извора Девет Југовића. Откријте наше производе, порекло, приче и могућности пословне сарадње.",
     "canonical": null,
-    "robots": {
-      "index": true,
-      "follow": true
-    },
+    "index": true,
+    "follow": true,
     "openGraph": {
-      "title": "Троноша | Природна изворска вода",
-      "description": "Откријте природу Троноше.",
+      "title": "Троноша – Природна изворска вода са карактером",
+      "description": "Упознајте Троношу, природну изворску воду са извора Девет Југовића. Откријте наше производе, порекло, приче и могућности пословне сарадње.",
       "image": {
         "src": "/assets/og/home.webp",
-        "alt": "Троноша природна изворска вода",
+        "alt": "Природна изворска вода Троноша",
         "width": 1200,
         "height": 630
       }
     },
     "twitter": {
       "card": "summary_large_image"
-    },
-    "structuredData": []
+    }
   },
   "content": {
     "sections": [
@@ -30,12 +27,20 @@
         "id": "home-video-hero",
         "type": "video-hero",
         "content": {
-          "title": "Природа у свакој капи.",
-          "description": "Откријте природну изворску воду Троноша.",
+          "title": "И бритка и питка.",
+          "description": "Вода јасног порекла и препознатљиве свежине. Директно из природе, са карактером.",
           "video": {
-            "src": "/videos/placeholder.mp4",
-            "poster": "/images/placeholder.jpg",
-            "type": "video/mp4"
+            "src": "https://ik.imagekit.io/tronosastaging/videos/tronosa-hero-balanced.mp4",
+            "poster": "/images/h-hero-thumbnail.webp",
+            "type": "video/mp4",
+            "mobile": {
+              "src": "https://ik.imagekit.io/tronosastaging/videos/tronosa-hero-mobile.mp4",
+              "type": "video/mp4"
+            },
+            "tablet": {
+              "src": "https://ik.imagekit.io/tronosastaging/videos/tronosa-hero-tablet.mp4",
+              "type": "video/mp4"
+            }
           },
           "cta": {
             "label": "Упознајте Троношу",
@@ -44,365 +49,483 @@
           "accessibility": {
             "playLabel": "Покрени видео",
             "pauseLabel": "Паузирај видео"
-          }
+          },
+          "eyebrow": "ПРИРОДНА ИЗВОРСКА ВОДА ТРОНОША"
         }
       },
       {
-        "id": "home-card-slider",
-        "type": "card-slider",
+        "id": "home-source-feeling",
+        "type": "editorial-media",
         "content": {
-          "title": "Природа чини разлику",
-          "description": "Откријте причу иза сваке капи.",
-          "cards": [
-            {
-              "kind": "text",
-              "title": "Порекло",
-              "headline": "Из срца природе",
-              "description": "Упознајте причу о нашем извору."
-            },
-            {
-              "kind": "image",
-              "title": "Извор",
-              "headline": "Троноша",
-              "description": "Прича о природној изворској води.",
-              "image": {
-                "alt": "",
-                "desktop": {
-                  "src": "/images/placeholder.jpg",
-                  "width": 1200,
-                  "height": 1200
-                }
-              }
-            },
-            {
-              "kind": "text",
-              "title": "Квалитет",
-              "headline": "Пажња у сваком кораку",
-              "description": "Сазнајте више о нашем приступу."
-            },
-            {
-              "kind": "image",
-              "title": "Традиција",
-              "headline": "Прича која траје",
-              "description": "Упознајте нас ближе.",
-              "image": {
-                "alt": "",
-                "desktop": {
-                  "src": "/images/placeholder.jpg",
-                  "width": 1200,
-                  "height": 1200
-                }
-              }
-            }
+          "eyebrow": "СВЕЖИНА КОЈА СЕ ПАМТИ",
+          "title": "Као да сте управо застали крај извора.",
+          "paragraphs": [
+            "Постоји посебна свежина коју памтимо са извора. Онај тренутак када застанемо, захватимо воду и уживамо у једноставном осећају освежења.",
+            "Управо такав доживљај инспирише Троношу. Природна изворска вода чија питкост и свежина позивају на још један гутљај."
           ],
-          "accessibility": {
-            "previousLabel": "Претходна картица",
-            "nextLabel": "Следећа картица",
-            "viewportLabel": "Картице о води Троноша"
-          }
+          "media": {
+            "kind": "gallery",
+            "images": [
+              {
+                "alt": "Извор Југ Богдан у природном окружењу",
+                "desktop": {
+                  "src": "/images/jug-bogdan-spring.webp",
+                  "width": 1200,
+                  "height": 900
+                }
+              },
+              {
+                "alt": "Шири поглед на природни предео у околини извора",
+                "desktop": {
+                  "src": "/images/tronosa-natural-landscape.webp",
+                  "width": 1200,
+                  "height": 900
+                }
+              }
+            ],
+            "accessibility": {
+              "label": "Фотографије природног окружења",
+              "playLabel": "Покрени смену фотографија",
+              "pauseLabel": "Паузирај смену фотографија",
+              "previousLabel": "Претходна фотографија",
+              "nextLabel": "Следећа фотографија"
+            }
+          },
+          "mediaPosition": "right"
         }
       },
       {
         "id": "products-showcase",
         "type": "product-showcase",
         "content": {
-          "eyebrow": "Из срца природе",
-          "title": "Чистоћа у свакој капи.",
-          "description": "Природно освежење за сваки тренутак вашег дана.",
+          "eyebrow": "НАШИ ПРОИЗВОДИ",
+          "title": "Троноша – вода за сваки дан и сваку прилику.",
+          "description": "Од малих паковања која лако стају у торбу, до оних већих које бирамо за дом, посао и заједничке тренутке. Пронађите Троношу која одговара вашем ритму.",
           "backgroundText": "ТРОНОША",
           "accessibility": {
-            "selectorLabel": "Изаберите амбалажу"
+            "categorySelectorLabel": "Изаберите врсту воде",
+            "selectorLabel": "Изаберите паковање воде"
           },
           "cta": {
-            "label": "Истражите",
+            "label": "Погледајте све производе",
             "pageId": "products"
           },
-          "products": [
+          "categories": [
             {
-              "id": "water-330ml",
-              "title": "Освежење увек уз вас",
-              "description": "Практично паковање које је увек уз вас.",
-              "volume": "0,33 L",
-              "image": {
-                "src": "/products/water-330ml.webp",
-                "alt": "Вода Троноша у амбалажи од 330 милилитара",
-                "width": 600,
-                "height": 1200
-              },
-              "appearance": {
-                "backgroundColor": "#E5EEE7",
-                "accentColor": "#244D39"
-              }
+              "id": "still",
+              "label": "Негазирана вода",
+              "products": [
+                {
+                  "id": "still-500ml",
+                  "title": "Негазирана вода",
+                  "description": "Питкост и осећај изворске свежине, у паковању по вашој мери.",
+                  "volume": "0,5 L",
+                  "image": {
+                    "src": "/products/still-water-500ml.webp",
+                    "alt": "Троноша негазирана вода у паковању од 0,5 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-750ml",
+                  "title": "Негазирана вода",
+                  "description": "Питкост и осећај изворске свежине, у паковању по вашој мери.",
+                  "volume": "0,75 L",
+                  "image": {
+                    "src": "/products/still-water-750ml.webp",
+                    "alt": "Троноша негазирана вода у паковању од 0,75 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-880ml",
+                  "title": "Негазирана вода",
+                  "description": "Питкост и осећај изворске свежине, у паковању по вашој мери.",
+                  "volume": "0,88 L",
+                  "image": {
+                    "src": "/products/still-water-880ml.webp",
+                    "alt": "Троноша негазирана вода у паковању од 0,88 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-1500ml",
+                  "title": "Негазирана вода",
+                  "description": "Питкост и осећај изворске свежине, у паковању по вашој мери.",
+                  "volume": "1,5 L",
+                  "image": {
+                    "src": "/products/still-water-1500ml.webp",
+                    "alt": "Троноша негазирана вода у паковању од 1,5 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-6000ml",
+                  "title": "Негазирана вода",
+                  "description": "Питкост и осећај изворске свежине, у паковању по вашој мери.",
+                  "volume": "6 L",
+                  "image": {
+                    "src": "/products/still-water-6000ml.webp",
+                    "alt": "Троноша негазирана вода у паковању од 6 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                },
+                {
+                  "id": "still-18900ml",
+                  "title": "Негазирана вода",
+                  "description": "Питкост и осећај изворске свежине, у паковању по вашој мери.",
+                  "volume": "18,9 L",
+                  "image": {
+                    "src": "/products/still-water-189000ml.webp",
+                    "alt": "Троноша негазирана вода у паковању од 18,9 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#E5EEE7",
+                    "accentColor": "#244D39"
+                  }
+                }
+              ]
             },
             {
-              "id": "water-500ml",
-              "title": "Ваш свакодневни пратилац",
-              "description": "Природно освежење за ваш свакодневни ритам.",
-              "volume": "0,5 L",
-              "image": {
-                "src": "/products/water-500ml.webp",
-                "alt": "Вода Троноша у амбалажи од 500 милилитара",
-                "width": 600,
-                "height": 1200
-              },
-              "appearance": {
-                "backgroundColor": "#DCEBF0",
-                "accentColor": "#214C60"
-              }
+              "id": "sparkling",
+              "label": "Газирана вода",
+              "products": [
+                {
+                  "id": "sparkling-500ml",
+                  "title": "Газирана вода",
+                  "description": "За тренутке којима прија мало више живости.",
+                  "volume": "0,5 L",
+                  "image": {
+                    "src": "/products/sparkling-water-500ml.webp",
+                    "alt": "Троноша газирана вода у паковању од 0,5 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#DCEBF0",
+                    "accentColor": "#214C60"
+                  }
+                },
+                {
+                  "id": "sparkling-750ml",
+                  "title": "Газирана вода",
+                  "description": "За тренутке којима прија мало више живости.",
+                  "volume": "0,75 L",
+                  "image": {
+                    "src": "/products/sparkling-water-750ml.webp",
+                    "alt": "Троноша газирана вода у паковању од 0,75 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#DCEBF0",
+                    "accentColor": "#214C60"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "moja-boca",
+              "label": "Моја боца",
+              "products": [
+                {
+                  "id": "moja-boca-330ml",
+                  "title": "Моја боца",
+                  "description": "Свежина и крепкост које пријају малишанима.",
+                  "volume": "0,33 L",
+                  "image": {
+                    "src": "/products/still-water-330ml.webp",
+                    "alt": "Троноша Моја боца у паковању од 0,33 литра",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#FFF0DD",
+                    "accentColor": "#79512C"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "sport",
+              "label": "Троноша Спорт",
+              "products": [
+                {
+                  "id": "sport-880ml",
+                  "title": "Троноша Спорт",
+                  "description": "Природна хидратација за одважне.",
+                  "volume": "0,88 L",
+                  "image": {
+                    "src": "/products/tronosa-sport-880ml.webp",
+                    "alt": "Троноша Спорт вода у паковању од 0,88 литара",
+                    "width": 600,
+                    "height": 1200
+                  },
+                  "appearance": {
+                    "backgroundColor": "#DDEBE7",
+                    "accentColor": "#245A50"
+                  }
+                }
+              ]
             }
           ]
         }
       },
       {
-        "id": "home-feature-mosaic",
-        "type": "feature-mosaic",
+        "id": "home-origin-story",
+        "type": "editorial-media",
         "content": {
-          "title": "Више од воде",
-          "description": "Упознајте вредности које желимо да негујемо.",
-          "image": {
-            "alt": "",
-            "desktop": {
-              "src": "/images/placeholder.jpg",
-              "width": 1200,
-              "height": 1200
+          "eyebrow": "НАША ПРИЧА",
+          "title": "Сваки извор прича своју причу.",
+          "paragraphs": [
+            "Троношина прича почиње у крају у којем се природа и наслеђе сусрећу на мистичан начин. На извору Девет Југовића, у селу Коренита у околини Лознице, жуборе речи о води која и данас, седам векова након зидања чесме, проналази пут до вашег стола.",
+            "Име извора носи одјек предања, а крај око њега чува богату културну и природну баштину. Баш овакво порекло даје Троноши посебан и снажан карактер."
+          ],
+          "mediaPosition": "left",
+          "media": {
+            "kind": "image",
+            "image": {
+              "alt": "Извор Девет Југовића у околини Лознице",
+              "desktop": {
+                "src": "/images/jug-bogdan-spring.webp",
+                "width": 1600,
+                "height": 1200
+              }
             }
           },
-          "imagePosition": "left",
-          "cards": [
+          "cta": {
+            "label": "Откријте нашу причу",
+            "pageId": "about"
+          }
+        }
+      },
+      {
+        "id": "home-quality-production",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
             {
-              "title": "Природа",
-              "description": "Поштовање природног окружења."
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "ОД ИЗВОРА ДО ВАС",
+                  "color": "bronze"
+                }
+              ]
             },
             {
-              "title": "Квалитет",
-              "description": "Пажња према сваком детаљу."
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Порекло које поштујемо. Квалитет о којем бринемо."
+                }
+              ]
             },
             {
-              "title": "Традиција",
-              "description": "Веза са нашим пореклом."
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Наш посао почиње поштовањем воде и места из којег долази. Наставља се пажњом током производње, пуњења и контроле квалитета, како би Троноша до вас стигла са својствима која одговарају прописаним стандардима, истовремено чувајући све квалитете и богатства које нам природа дарује."
+                }
+              ]
             },
             {
-              "title": "Сарадња",
-              "description": "Заједничке вредности."
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Иза сваког паковања стоје људи, процеси и одговорност према производу који носи наше име."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "text": "Сазнајте више о нашој води",
+                  "pageId": "about"
+                }
+              ]
             }
           ]
         }
       },
       {
-        "id": "stats-banner-mosaic",
-        "type": "stats-banner",
+        "id": "home-business-partners",
+        "type": "card-slider",
         "content": {
-          "theme": "mosaic",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-forest",
-        "type": "stats-banner",
-        "content": {
-          "theme": "forest",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-sage",
-        "type": "stats-banner",
-        "content": {
-          "theme": "sage",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-mineral",
-        "type": "stats-banner",
-        "content": {
-          "theme": "mineral",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-bronze",
-        "type": "stats-banner",
-        "content": {
-          "theme": "bronze",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-stone",
-        "type": "stats-banner",
-        "content": {
-          "theme": "stone",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-ivory",
-        "type": "stats-banner",
-        "content": {
-          "theme": "ivory",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-graphite",
-        "type": "stats-banner",
-        "content": {
-          "theme": "graphite",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-surface",
-        "type": "stats-banner",
-        "content": {
-          "theme": "surface",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-violet",
-        "type": "stats-banner",
-        "content": {
-          "theme": "violet",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-peach",
-        "type": "stats-banner",
-        "content": {
-          "theme": "peach",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "stats-banner-coral",
-        "type": "stats-banner",
-        "content": {
-          "theme": "coral",
-          "title": "Природа у бројевима",
-          "description": "Снага природе у свакој капи.",
-          "statistics": [
-            { "value": "100%", "label": "Природна вода" },
-            { "value": "24/7", "label": "Контрола квалитета" }
-          ]
-        }
-      },
-      {
-        "id": "home-partners-marquee",
-        "type": "partners-marquee",
-        "content": {
-          "title": "Заједно градимо поверење",
-          "description": "Сарадња заснована на заједничким вредностима и дугорочном поверењу.",
-          "partners": [
+          "eyebrow": "ЗА ПАРТНЕРЕ",
+          "title": "Добра сарадња има свој извор.",
+          "description": "Троноша је ту и за пословне прилике — од угоститељских објеката до компанија и партнера који желе воду под сопственим брендом. Упознајте могућности сарадње.",
+          "cards": [
             {
-              "name": "Партнер 01",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
+              "kind": "text",
+              "title": "HoReCa",
+              "headline": "За ресторане, хотеле и угоститељске објекте.",
+              "cta": {
+                "label": "За угоститеље",
+                "pageId": "about"
               }
             },
             {
-              "name": "Партнер 02",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
+              "kind": "text",
+              "title": "Private Label",
+              "headline": "Вода са етикетом вашег бренда, према договореним могућностима.",
+              "cta": {
+                "label": "Private Label",
+                "pageId": "about"
               }
             },
             {
-              "name": "Партнер 03",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
-              }
-            },
-            {
-              "name": "Партнер 04",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
-              }
-            },
-            {
-              "name": "Партнер 05",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
-              }
-            },
-            {
-              "name": "Партнер 06",
-              "logo": {
-                "src": "/images/placeholder.jpg",
-                "width": 1200,
-                "height": 1200
+              "kind": "text",
+              "title": "Компаније и дистрибуција",
+              "headline": "За пословне просторе, догађаје и дистрибутивне партнере.",
+              "cta": {
+                "label": "Пословна сарадња",
+                "pageId": "about"
               }
             }
           ],
           "accessibility": {
-            "pauseLabel": "Паузирај анимацију логотипа"
+            "previousLabel": "Претходна картица",
+            "nextLabel": "Следећа картица",
+            "viewportLabel": "Могућности пословне сарадње"
           }
+        }
+      },
+      {
+        "id": "home-values",
+        "type": "editorial-media",
+        "content": {
+          "eyebrow": "НАШЕ ВРЕДНОСТИ",
+          "title": "Чувамо оно што вреди.",
+          "paragraphs": [
+            "Верујемо да вредност једног краја чине његова природа, знање, култура и људи. Зато желимо да будемо део иницијатива које те вредности негују и преносе даље."
+          ],
+          "mediaPosition": "right",
+          "media": {
+            "kind": "image",
+            "image": {
+              "alt": "Иницијатива посвећена очувању природе, културе и вредности локалне заједнице",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1600,
+                "height": 1000
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "home-stories",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "ПРИЧЕ СА ИЗВОРА",
+                  "color": "bronze"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Има још много тога да се исприча."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "О води, природи, наслеђу и људима који својим идејама и делима остављају траг. Откријте приче које нас инспиришу."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "link",
+                  "text": "Прочитајте наше приче",
+                  "pageId": "blog"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "home-stats",
+        "type": "stats-banner",
+        "content": {
+          "theme": "mineral",
+          "title": "Троноша у бројкама",
+          "description": "Иза сваког гутљаја стоје порекло, искуство и посвећеност.",
+          "statistics": [
+            {
+              "value": "XX+",
+              "label": "Година искуства"
+            },
+            {
+              "value": "XX",
+              "label": "Различитих паковања"
+            },
+            {
+              "value": "XXX",
+              "label": "Производни капацитет на сат"
+            },
+            {
+              "value": "XX",
+              "label": "Градова у којима је Троноша присутна"
+            }
+          ]
+        }
+      },
+      {
+        "id": "home-where-to-buy",
+        "type": "distribution-map",
+        "content": {
+          "eyebrow": "ГДЕ КУПИТИ",
+          "title": "Троноша је ближе него што мислите.",
+          "description": "Пронађите продајна места на којима је доступна Троноша и одаберите паковање које вам одговара.",
+          "showLegend": true,
+          "showLocationList": true
         }
       },
       {

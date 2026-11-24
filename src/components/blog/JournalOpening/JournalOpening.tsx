@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 
 import { JournalOpeningClient } from "./JournalOpeningClient";
 
@@ -20,7 +21,6 @@ import {
   journalOpeningCaptionVariants,
   journalOpeningCaptionTextVariants,
 } from "./journal-opening.variants";
-import { Section } from "@/components/ui/Section";
 
 export async function JournalOpening() {
   const t = await getTranslations("Blog.index.opening");
@@ -80,7 +80,8 @@ export async function JournalOpening() {
               alt={image.alt}
               fill
               sizes="(min-width: 1440px) 1280px, 100vw"
-              loading="lazy"
+              loading="eager"
+              fetchPriority="high"
               className={journalOpeningImageVariants()}
             />
           </div>
