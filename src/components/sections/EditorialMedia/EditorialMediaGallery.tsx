@@ -12,6 +12,8 @@ import {
 } from "./editorial-media.variants";
 
 import type { EditorialMediaContent } from "./types";
+import { IMAGE_SIZES } from "@/lib/media/image-sizes";
+import { IMAGE_QUALITY } from "@/lib/media/image-quality";
 
 type GalleryMedia = Extract<
   EditorialMediaContent["media"],
@@ -23,12 +25,6 @@ type EditorialMediaGalleryProps = {
 };
 
 const INTERVAL_MS = 5000;
-
-const IMAGE_SIZES = [
-  "(min-width: 1024px) 420px",
-  "(min-width: 640px) calc(100vw - 4rem)",
-  "calc(100vw - 2.5rem)",
-].join(", ");
 
 export function EditorialMediaGallery({ media }: EditorialMediaGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -152,8 +148,8 @@ export function EditorialMediaGallery({ media }: EditorialMediaGalleryProps) {
               {...image}
               ratio="fill"
               fit="cover"
-              sizes={IMAGE_SIZES}
-              quality={75}
+              sizes={IMAGE_SIZES.editorial}
+              quality={IMAGE_QUALITY.editorial}
               loading="lazy"
             />
           </div>

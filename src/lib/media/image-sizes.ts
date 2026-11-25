@@ -5,5 +5,11 @@ export const IMAGE_SIZES = {
     "calc(100vw - 1.5rem)",
   ].join(", "),
 
+  editorial: [
+    "(min-width: 1024px) 420px",
+    "(min-width: 640px) calc(100vw - 4rem)",
+    "calc(100vw - 2.5rem)",
+  ].join(", "),
+
   fullViewport: "100vw",
 } as const;
