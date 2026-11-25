@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 
 import {
   useId,
+  useLayoutEffect,
   useRef,
   useState,
   useSyncExternalStore,
@@ -14,16 +15,10 @@ import type HCaptchaInstance from "@hcaptcha/react-hcaptcha";
 
 import { Button } from "@/components/ui/Button";
 
-import { CONTACT_HCAPTCHA_SITE_KEY } from "@/lib/contact/contact.config";
-
+import { CONTACT_HCAPTCHA_SITE_KEY } from "@/lib/contact/contact.public-config";
 import { CONTACT_LIMITS } from "@/lib/contact/contact.constants";
 
-import {
-  contactSubmissionSchema,
-  type ContactSubmission,
-} from "@/lib/contact/contact.schema";
-
-import { submitContactForm } from "@/lib/contact/contact.service";
+import type { ContactSubmission } from "@/lib/contact/contact.schema";
 
 import type {
   ContactField,
@@ -44,6 +39,7 @@ import {
 } from "./contact-form.variants";
 
 import type { ContactFormClientProps } from "./types";
+import { Typography } from "@/components/ui/Typography";
 
 const ContactCaptcha = dynamic(
   () => import("./ContactCaptcha").then((module) => module.ContactCaptcha),
@@ -78,6 +74,15 @@ const FIELDS = [
   "message",
 ] as const satisfies readonly ContactField[];
 
+type FocusTarget =
+  | {
+      type: "field";
+      field: ContactField;
+    }
+  | {
+      type: "captcha";
+    };
+
 export function ContactFormClient({
   labels,
   configured,
@@ -99,6 +104,8 @@ export function ContactFormClient({
 
   const submittingRef = useRef(false);
 
+  const focusTargetRef = useRef<FocusTarget | null>(null);
+
   const [values, setValues] = useState<ContactSubmission>(INITIAL_VALUES);
 
   const [errors, setErrors] = useState<ContactFieldErrors>({});
@@ -113,11 +120,41 @@ export function ContactFormClient({
 
   const [captchaError, setCaptchaError] = useState("");
 
+  const [isValidating, setIsValidating] = useState(false);
+
   const isSubmitting = status === "submitting";
 
-  const disabled = !isHydrated || !configured || isSubmitting;
+  const isBusy = isValidating || isSubmitting;
+
+  const disabled = !isHydrated || !configured || isBusy;
 
   const captchaId = `${formId}-captcha`;
+
+  useLayoutEffect(() => {
+    if (disabled) {
+      return;
+    }
+
+    const target = focusTargetRef.current;
+
+    if (!target) {
+      return;
+    }
+
+    focusTargetRef.current = null;
+
+    if (target.type === "captcha") {
+      captchaContainerRef.current?.focus();
+
+      return;
+    }
+
+    const control = formRef.current?.elements.namedItem(target.field);
+
+    if (control instanceof HTMLElement) {
+      control.focus();
+    }
+  });
 
   function getFieldId(field: ContactField) {
     return `${formId}-${field}`;
@@ -145,14 +182,6 @@ export function ContactFormClient({
     if (status === "success" || status === "error") {
       setStatus("idle");
       setStatusMessage("");
-    }
-  }
-
-  function focusField(field: ContactField) {
-    const control = formRef.current?.elements.namedItem(field);
-
-    if (control instanceof HTMLElement) {
-      control.focus();
     }
   }
 
@@ -192,60 +221,77 @@ export function ContactFormClient({
 
     requestCaptcha();
 
+    submittingRef.current = true;
+    focusTargetRef.current = null;
+
+    setIsValidating(true);
     setStatus("idle");
     setStatusMessage("");
 
-    const validation = contactSubmissionSchema.safeParse(values);
-
-    if (!validation.success) {
-      const fieldErrors: ContactFieldErrors = {};
-
-      for (const issue of validation.error.issues) {
-        const field = issue.path[0];
-
-        if (
-          typeof field === "string" &&
-          FIELDS.includes(field as ContactField)
-        ) {
-          const contactField = field as ContactField;
-
-          fieldErrors[contactField] ??=
-            labels.validation[issue.message] ?? labels.required;
-        }
-      }
-
-      setErrors(fieldErrors);
-
-      setStatus("error");
-      setStatusMessage(labels.required);
-
-      const firstInvalidField = FIELDS.find((field) => fieldErrors[field]);
-
-      if (firstInvalidField) {
-        focusField(firstInvalidField);
-      }
-
-      return;
-    }
-
-    setErrors({});
-
-    if (!captchaToken) {
-      setCaptchaError(labels.captcha.required);
-
-      captchaContainerRef.current?.focus();
-
-      return;
-    }
-
-    setCaptchaError("");
-
-    submittingRef.current = true;
-
-    setStatus("submitting");
-    setStatusMessage(labels.submitting);
+    let shouldResetCaptcha = false;
 
     try {
+      const { contactSubmissionSchema } =
+        await import("@/lib/contact/contact.schema");
+
+      const validation = contactSubmissionSchema.safeParse(values);
+
+      if (!validation.success) {
+        const fieldErrors: ContactFieldErrors = {};
+
+        for (const issue of validation.error.issues) {
+          const field = issue.path[0];
+
+          if (
+            typeof field === "string" &&
+            FIELDS.includes(field as ContactField)
+          ) {
+            const contactField = field as ContactField;
+
+            fieldErrors[contactField] ??=
+              labels.validation[issue.message] ?? labels.required;
+          }
+        }
+
+        setErrors(fieldErrors);
+
+        const firstInvalidField = FIELDS.find((field) => fieldErrors[field]);
+
+        if (firstInvalidField) {
+          focusTargetRef.current = {
+            type: "field",
+            field: firstInvalidField,
+          };
+        }
+
+        setStatus("error");
+        setStatusMessage(labels.required);
+
+        return;
+      }
+
+      setErrors({});
+
+      if (!captchaToken) {
+        setCaptchaError(labels.captcha.required);
+
+        focusTargetRef.current = {
+          type: "captcha",
+        };
+
+        return;
+      }
+
+      setCaptchaError("");
+
+      setStatus("submitting");
+      setStatusMessage(labels.submitting);
+
+      const { submitContactForm } =
+        await import("@/lib/contact/contact.service");
+
+      shouldResetCaptcha = true;
+
       const result = await submitContactForm(validation.data, {
         captchaToken,
       });
@@ -284,11 +330,15 @@ export function ContactFormClient({
       setStatusMessage(labels.error);
     } finally {
       try {
-        resetCaptcha();
+        if (shouldResetCaptcha) {
+          resetCaptcha();
+        }
       } catch {
         setCaptchaError(labels.captcha.error);
       } finally {
         submittingRef.current = false;
+
+        setIsValidating(false);
       }
     }
   }
@@ -416,7 +466,7 @@ export function ContactFormClient({
             {labels.captcha.label}
           </p>
 
-          <div className="min-h-36 min-w-0" inert={isSubmitting}>
+          <div className="min-h-36 min-w-0" inert={isBusy}>
             {captchaRequested && (
               <ContactCaptcha
                 captchaRef={captchaRef}
@@ -449,16 +499,17 @@ export function ContactFormClient({
           type="submit"
           variant="outline"
           size="lg"
-          arrow={!isSubmitting}
+          arrow={!isBusy}
           disabled={disabled}
-          aria-busy={isSubmitting}
+          aria-busy={isBusy}
           className="w-full sm:w-auto"
         >
-          {isSubmitting ? labels.submitting : labels.submit}
+          {isBusy ? labels.submitting : labels.submit}
         </Button>
       </div>
 
-      <p
+      <Typography
+        variant="small"
         role="status"
         aria-live="polite"
         aria-atomic="true"
@@ -467,7 +518,7 @@ export function ContactFormClient({
         })}
       >
         {configured ? statusMessage : labels.unavailable}
-      </p>
+      </Typography>
     </form>
   );
 }

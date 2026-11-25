@@ -1,13 +1,5 @@
 export { DistributionMap } from "./DistributionMap";
 
-export {
-  distributionMapSectionSchema,
-  distributionMapContentSchema,
-  distributionLocationsSchema,
-  distributionLocationSchema,
-  distributionLocationTypeSchema,
-} from "./distribution-map.schema";
-
 export type {
   DistributionLocation,
   DistributionLocations,

@@ -36,7 +36,12 @@ export function NavigationLink({
       );
 
   return (
-    <Link href={href} aria-current={current} className={className}>
+    <Link
+      href={href}
+      prefetch={false}
+      aria-current={current}
+      className={className}
+    >
       {children}
 
       {isDesktop && (

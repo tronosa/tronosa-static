@@ -3,6 +3,7 @@ import { getLocale } from "next-intl/server";
 import { Picture } from "@/components/media/Picture";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 import { Typography } from "@/components/ui/Typography";
 
 import { locales } from "@/i18n/config";
@@ -10,6 +11,7 @@ import { Link } from "@/i18n/navigation";
 
 import { getContentById } from "@/lib/content/registry";
 import { cn } from "@/lib/cn";
+import { IMAGE_SIZES } from "@/lib/media/image-sizes";
 
 import {
   imageHeroVariants,
@@ -21,7 +23,6 @@ import {
 } from "./image-hero.variants";
 
 import type { ImageHeroProps } from "./types";
-import { Section } from "@/components/ui/Section";
 
 export async function ImageHero({
   eyebrow,
@@ -68,7 +69,7 @@ export async function ImageHero({
         {...image}
         ratio="fill"
         fit="cover"
-        sizes="100vw"
+        sizes={IMAGE_SIZES.hero}
         quality={65}
         loading="eager"
         fetchPriority="high"

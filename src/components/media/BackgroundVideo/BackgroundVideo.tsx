@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/cn";
+import { IMAGE_SIZES } from "@/lib/media/image-sizes";
 
 import { BackgroundVideoControls } from "./BackgroundVideoControls";
 
@@ -15,8 +16,8 @@ import {
 
 import type { BackgroundVideoProps } from "./types";
 
-const MOBILE_QUERY = "(max-width: 639px)";
-const TABLET_QUERY = "(max-width: 1023px)";
+const MOBILE_QUERY = "(width < 640px)";
+const TABLET_QUERY = "(width < 1024px)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 type PlaybackIntent = "auto" | "play" | "pause";
@@ -239,7 +240,7 @@ export function BackgroundVideo({
         src={video.poster}
         alt=""
         fill
-        sizes="100vw"
+        sizes={IMAGE_SIZES.hero}
         quality={65}
         loading="eager"
         fetchPriority="high"
