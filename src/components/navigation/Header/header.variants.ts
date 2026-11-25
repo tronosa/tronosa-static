@@ -7,6 +7,7 @@ export const headerVariants = cva([
   "[body:has([data-video-hero],[data-image-hero],[data-article-hero])_&]:absolute",
   "[body:has([data-video-hero],[data-image-hero],[data-article-hero])_&]:top-0",
   "[body:has([data-video-hero],[data-image-hero],[data-article-hero])_&]:inset-x-0",
+
   "[--nav-fg:var(--brand-forest)]",
   "[--nav-hover:var(--brand-graphite)]",
 
@@ -21,6 +22,7 @@ export const headerInnerVariants = cva(
     "rounded-full",
     "border border-white/20",
     "bg-white/12",
+    "lg:[body:has([data-article-hero])_&]:bg-white/6",
     "backdrop-blur-sm backdrop-saturate-150",
     "shadow-[0_8px_32px_rgba(23,63,53,0.06)]",
     "transition-[background-color,box-shadow]",
