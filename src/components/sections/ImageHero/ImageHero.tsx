@@ -119,7 +119,9 @@ export async function ImageHero({
               arrow
               className={imageHeroCtaVariants()}
             >
-              <Link href={ctaHref}>{cta.label}</Link>
+              <Link href={ctaHref} prefetch={false}>
+                {cta.label}
+              </Link>
             </Button>
           )}
         </div>

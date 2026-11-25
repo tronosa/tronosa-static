@@ -9,17 +9,12 @@ import { locales } from "@/i18n/config";
 import { Link } from "@/i18n/navigation";
 import { getContentById } from "@/lib/content/registry";
 
-import { richTextInlineVariants } from "./rich-text.variants";
-import type { RichTextInlineProps } from "./types";
+import {
+  richTextInlineVariants,
+  richTextLinkVariants,
+} from "./rich-text.variants";
 
-const linkClassName = [
-  "font-medium underline underline-offset-4",
-  "decoration-current/60",
-  "transition-colors hover:decoration-current",
-  "focus-visible:rounded-sm",
-  "focus-visible:outline-2",
-  "focus-visible:outline-offset-2",
-].join(" ");
+import type { RichTextInlineProps } from "./types";
 
 function renderLeaf(leaf: RichTextLeaf): ReactNode {
   let content: ReactNode = leaf.text;
@@ -78,7 +73,12 @@ export async function RichTextInline({ content }: RichTextInlineProps) {
           const href = entry.data.slug ? `/${entry.data.slug}` : "/";
 
           return (
-            <Link key={index} href={href} className={linkClassName}>
+            <Link
+              key={index}
+              href={href}
+              prefetch={false}
+              className={richTextLinkVariants()}
+            >
               {item.text}
             </Link>
           );
@@ -91,7 +91,7 @@ export async function RichTextInline({ content }: RichTextInlineProps) {
               href={item.href}
               target={item.newTab ? "_blank" : undefined}
               rel={item.newTab ? "noopener noreferrer" : undefined}
-              className={linkClassName}
+              className={richTextLinkVariants()}
             >
               {item.text}
             </a>

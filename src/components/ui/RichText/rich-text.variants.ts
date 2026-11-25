@@ -19,3 +19,12 @@ export const richTextInlineVariants = cva("", {
     underline: false,
   },
 });
+
+export const richTextLinkVariants = cva([
+  "font-medium underline underline-offset-4",
+  "decoration-current/60",
+  "transition-colors hover:decoration-current",
+  "focus-visible:rounded-sm",
+  "focus-visible:outline-2",
+  "focus-visible:outline-offset-2",
+]);
