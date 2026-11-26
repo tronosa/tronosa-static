@@ -116,7 +116,7 @@ function createSourcePage(
     locale: "en",
     data: blogPageSchema.parse({
       id: "blog",
-      slug: "blog",
+      slug: "stories-from-the-spring",
       status,
       seo: SEO,
       content: {
@@ -182,7 +182,7 @@ describe("Page publication schema", () => {
       blogPageSchema.parse({
         ...rawPage,
         id: "blog",
-        slug: "blog",
+        slug: "stories-from-the-spring",
       }).status,
     ).toBe("published");
   });
@@ -192,7 +192,7 @@ describe("Page publication schema", () => {
       blogPageSchema.parse({
         ...rawPage,
         id: "blog",
-        slug: "blog",
+        slug: "stories-from-the-spring",
         status: "draft",
       }).status,
     ).toBe("draft");

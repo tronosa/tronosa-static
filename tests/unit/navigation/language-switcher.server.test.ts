@@ -18,24 +18,47 @@ vi.mock("@/lib/content/registry", () => ({
   getPublishedContent: getPublishedContentMock,
 }));
 
-import { pageSchema } from "@/content/schemas/page.schema";
+import {
+  standardPageSchema,
+  blogPageSchema,
+} from "@/content/schemas/page.schema";
+
 import { articleSchema } from "@/content/schemas/article.schema";
 
 import { getLanguageRoutes } from "@/components/navigation/LanguageSwitcher/language-switcher.server";
 
-const DATE = "2026-11-26T10:00:00+01:00";
+const DATE = "2026-01-01T10:00:00+01:00";
+
+const SEO = {
+  title: "Test title",
+  description: "Test description.",
+};
 
 function createPage(locale: Locale, id: string, slug: string): PageEntry {
   return {
     kind: "page",
     locale,
-    data: pageSchema.parse({
+    data: standardPageSchema.parse({
       id,
       slug,
-      seo: {
-        title: "Test page",
-        description: "Test page description.",
+      status: "published",
+      seo: SEO,
+      content: {
+        sections: [],
       },
+    }),
+  };
+}
+
+function createBlog(locale: Locale, slug: string): PageEntry {
+  return {
+    kind: "page",
+    locale,
+    data: blogPageSchema.parse({
+      id: "blog",
+      slug,
+      status: "published",
+      seo: SEO,
       content: {
         sections: [],
       },
@@ -57,16 +80,13 @@ function createArticle(locale: Locale, id: string, slug: string): ArticleEntry {
       category: "nature",
       featured: false,
       author: {
-        name: "Tronosa",
+        name: "Test author",
       },
       preview: {
         title: "Test article",
         description: "Test article description.",
       },
-      seo: {
-        title: "Test article",
-        description: "Test article SEO description.",
-      },
+      seo: SEO,
       content: {
         sections: [],
       },
@@ -112,176 +132,215 @@ describe("getLanguageRoutes", () => {
 
   it("generates alternatives for localized standard pages", () => {
     getPublishedContentMock.mockReturnValue([
-      createPage("sr-Cyrl", "products", "proizvodi"),
-      createPage("sr-Latn", "products", "proizvodi"),
-      createPage("en", "products", "products"),
+      createPage("sr-Cyrl", "test-page", "test-stranica"),
+      createPage("sr-Latn", "test-page", "test-stranica"),
+      createPage("en", "test-page", "test-page"),
     ]);
 
     const expected = {
-      "sr-Cyrl": "/proizvodi",
-      "sr-Latn": "/proizvodi",
-      en: "/products",
+      "sr-Cyrl": "/test-stranica",
+      "sr-Latn": "/test-stranica",
+      en: "/test-page",
     };
 
     expect(getLanguageRoutes()).toEqual({
-      "sr-Cyrl:/proizvodi": expected,
-      "sr-Latn:/proizvodi": expected,
-      "en:/products": expected,
+      "sr-Cyrl:/test-stranica": expected,
+      "sr-Latn:/test-stranica": expected,
+      "en:/test-page": expected,
     });
   });
 
   it("generates alternatives for localized nested pages", () => {
     getPublishedContentMock.mockReturnValue([
-      createPage("sr-Cyrl", "corporate-water", "za-partnere/voda-za-kompanije"),
-      createPage("sr-Latn", "corporate-water", "za-partnere/voda-za-kompanije"),
-      createPage("en", "corporate-water", "partners/corporate-water"),
+      createPage("sr-Cyrl", "test-child", "roditelj/dete"),
+      createPage("sr-Latn", "test-child", "roditelj/dete"),
+      createPage("en", "test-child", "parent/child"),
     ]);
 
     const expected = {
-      "sr-Cyrl": "/za-partnere/voda-za-kompanije",
-      "sr-Latn": "/za-partnere/voda-za-kompanije",
-      en: "/partners/corporate-water",
+      "sr-Cyrl": "/roditelj/dete",
+      "sr-Latn": "/roditelj/dete",
+      en: "/parent/child",
     };
 
     expect(getLanguageRoutes()).toEqual({
-      "sr-Cyrl:/za-partnere/voda-za-kompanije": expected,
-      "sr-Latn:/za-partnere/voda-za-kompanije": expected,
-      "en:/partners/corporate-water": expected,
+      "sr-Cyrl:/roditelj/dete": expected,
+      "sr-Latn:/roditelj/dete": expected,
+      "en:/parent/child": expected,
     });
   });
 
-  it("generates language alternatives for the blog listing", () => {
+  it("generates alternatives for localized journal listings", () => {
     getPublishedContentMock.mockReturnValue([
-      createPage("sr-Cyrl", "blog", "blog"),
-      createPage("sr-Latn", "blog", "blog"),
-      createPage("en", "blog", "blog"),
+      createBlog("sr-Cyrl", "price-sa-izvora"),
+      createBlog("sr-Latn", "price-sa-izvora"),
+      createBlog("en", "stories-from-the-spring"),
     ]);
 
     const expected = {
-      "sr-Cyrl": "/blog",
-      "sr-Latn": "/blog",
-      en: "/blog",
+      "sr-Cyrl": "/price-sa-izvora",
+      "sr-Latn": "/price-sa-izvora",
+      en: "/stories-from-the-spring",
     };
 
     expect(getLanguageRoutes()).toEqual({
-      "sr-Cyrl:/blog": expected,
-      "sr-Latn:/blog": expected,
-      "en:/blog": expected,
+      "sr-Cyrl:/price-sa-izvora": expected,
+      "sr-Latn:/price-sa-izvora": expected,
+      "en:/stories-from-the-spring": expected,
     });
   });
 
-  it("generates localized article routes with the blog prefix", () => {
+  it("generates alternatives for localized articles", () => {
     getPublishedContentMock.mockReturnValue([
-      createArticle("sr-Cyrl", "natural-origin", "prirodno-poreklo"),
-      createArticle("sr-Latn", "natural-origin", "prirodno-poreklo"),
-      createArticle("en", "natural-origin", "natural-origin"),
+      createArticle("sr-Cyrl", "test-article", "test-clanak"),
+      createArticle("sr-Latn", "test-article", "test-clanak"),
+      createArticle("en", "test-article", "test-article"),
     ]);
 
     const expected = {
-      "sr-Cyrl": "/blog/prirodno-poreklo",
-      "sr-Latn": "/blog/prirodno-poreklo",
-      en: "/blog/natural-origin",
+      "sr-Cyrl": "/price-sa-izvora/test-clanak",
+      "sr-Latn": "/price-sa-izvora/test-clanak",
+      en: "/stories-from-the-spring/test-article",
     };
 
     expect(getLanguageRoutes()).toEqual({
-      "sr-Cyrl:/blog/prirodno-poreklo": expected,
-      "sr-Latn:/blog/prirodno-poreklo": expected,
-      "en:/blog/natural-origin": expected,
+      "sr-Cyrl:/price-sa-izvora/test-clanak": expected,
+      "sr-Latn:/price-sa-izvora/test-clanak": expected,
+      "en:/stories-from-the-spring/test-article": expected,
     });
   });
 
   it("does not associate pages with different content IDs", () => {
     getPublishedContentMock.mockReturnValue([
-      createPage("sr-Cyrl", "products", "proizvodi"),
-      createPage("en", "contact", "contact"),
+      createPage("sr-Cyrl", "first-page", "prva-stranica"),
+      createPage("en", "second-page", "second-page"),
     ]);
 
     expect(getLanguageRoutes()).toEqual({
-      "sr-Cyrl:/proizvodi": {
-        "sr-Cyrl": "/proizvodi",
+      "sr-Cyrl:/prva-stranica": {
+        "sr-Cyrl": "/prva-stranica",
       },
-      "en:/contact": {
-        en: "/contact",
+      "en:/second-page": {
+        en: "/second-page",
       },
     });
   });
 
   it("does not associate articles with different content IDs", () => {
     getPublishedContentMock.mockReturnValue([
-      createArticle("sr-Cyrl", "natural-origin", "prirodno-poreklo"),
-      createArticle("en", "seasonal-water", "water-through-the-seasons"),
+      createArticle("sr-Cyrl", "first-article", "prvi-clanak"),
+      createArticle("en", "second-article", "second-article"),
     ]);
 
     expect(getLanguageRoutes()).toEqual({
-      "sr-Cyrl:/blog/prirodno-poreklo": {
-        "sr-Cyrl": "/blog/prirodno-poreklo",
+      "sr-Cyrl:/price-sa-izvora/prvi-clanak": {
+        "sr-Cyrl": "/price-sa-izvora/prvi-clanak",
       },
-      "en:/blog/water-through-the-seasons": {
-        en: "/blog/water-through-the-seasons",
+      "en:/stories-from-the-spring/second-article": {
+        en: "/stories-from-the-spring/second-article",
       },
     });
   });
 
   it("does not associate pages and articles with the same content ID", () => {
     getPublishedContentMock.mockReturnValue([
-      createPage("sr-Cyrl", "our-water", "nasa-voda"),
-      createArticle("en", "our-water", "our-water"),
+      createPage("sr-Cyrl", "shared-id", "test-stranica"),
+      createArticle("en", "shared-id", "test-article"),
     ]);
 
     expect(getLanguageRoutes()).toEqual({
-      "sr-Cyrl:/nasa-voda": {
-        "sr-Cyrl": "/nasa-voda",
+      "sr-Cyrl:/test-stranica": {
+        "sr-Cyrl": "/test-stranica",
       },
-      "en:/blog/our-water": {
-        en: "/blog/our-water",
+      "en:/stories-from-the-spring/test-article": {
+        en: "/stories-from-the-spring/test-article",
       },
     });
   });
 
-  it("includes only the available language alternatives", () => {
+  it("includes only available language alternatives", () => {
     getPublishedContentMock.mockReturnValue([
-      createPage("sr-Cyrl", "horeca", "za-partnere/horeca"),
-      createPage("en", "horeca", "partners/horeca"),
+      createPage("sr-Cyrl", "test-child", "roditelj/dete"),
+      createPage("en", "test-child", "parent/child"),
     ]);
 
     const expected = {
-      "sr-Cyrl": "/za-partnere/horeca",
-      en: "/partners/horeca",
+      "sr-Cyrl": "/roditelj/dete",
+      en: "/parent/child",
     };
 
     const routes = getLanguageRoutes();
 
     expect(routes).toEqual({
-      "sr-Cyrl:/za-partnere/horeca": expected,
-      "en:/partners/horeca": expected,
+      "sr-Cyrl:/roditelj/dete": expected,
+      "en:/parent/child": expected,
     });
 
-    expect(routes["en:/partners/horeca"]).not.toHaveProperty("sr-Latn");
+    expect(routes["en:/parent/child"]).not.toHaveProperty("sr-Latn");
   });
 
   it("keeps parent and nested child routes independent", () => {
     getPublishedContentMock.mockReturnValue([
-      createPage("sr-Cyrl", "partners", "za-partnere"),
-      createPage("en", "partners", "partners"),
-      createPage("sr-Cyrl", "horeca", "za-partnere/horeca"),
-      createPage("en", "horeca", "partners/horeca"),
+      createPage("sr-Cyrl", "test-parent", "roditelj"),
+      createPage("en", "test-parent", "parent"),
+      createPage("sr-Cyrl", "test-child", "roditelj/dete"),
+      createPage("en", "test-child", "parent/child"),
     ]);
 
     const parentAlternatives = {
-      "sr-Cyrl": "/za-partnere",
-      en: "/partners",
+      "sr-Cyrl": "/roditelj",
+      en: "/parent",
     };
 
     const childAlternatives = {
-      "sr-Cyrl": "/za-partnere/horeca",
-      en: "/partners/horeca",
+      "sr-Cyrl": "/roditelj/dete",
+      en: "/parent/child",
     };
 
     expect(getLanguageRoutes()).toEqual({
-      "sr-Cyrl:/za-partnere": parentAlternatives,
-      "en:/partners": parentAlternatives,
-      "sr-Cyrl:/za-partnere/horeca": childAlternatives,
-      "en:/partners/horeca": childAlternatives,
+      "sr-Cyrl:/roditelj": parentAlternatives,
+      "en:/parent": parentAlternatives,
+      "sr-Cyrl:/roditelj/dete": childAlternatives,
+      "en:/parent/child": childAlternatives,
     });
+  });
+
+  it("resolves alternatives independently of registry entry order", () => {
+    getPublishedContentMock.mockReturnValue([
+      createArticle("en", "test-article", "test-article"),
+      createPage("sr-Latn", "test-page", "test-stranica"),
+      createArticle("sr-Cyrl", "test-article", "test-clanak"),
+      createPage("en", "test-page", "test-page"),
+    ]);
+
+    const routes = getLanguageRoutes();
+
+    expect(routes["en:/stories-from-the-spring/test-article"]).toEqual({
+      en: "/stories-from-the-spring/test-article",
+      "sr-Cyrl": "/price-sa-izvora/test-clanak",
+    });
+
+    expect(routes["sr-Latn:/test-stranica"]).toEqual({
+      "sr-Latn": "/test-stranica",
+      en: "/test-page",
+    });
+  });
+
+  it("does not add locale prefixes to internal language paths", () => {
+    getPublishedContentMock.mockReturnValue([
+      createBlog("sr-Cyrl", "price-sa-izvora"),
+      createBlog("sr-Latn", "price-sa-izvora"),
+      createBlog("en", "stories-from-the-spring"),
+    ]);
+
+    const routes = getLanguageRoutes();
+
+    expect(routes["sr-Latn:/price-sa-izvora"]?.["sr-Latn"]).toBe(
+      "/price-sa-izvora",
+    );
+
+    expect(routes["en:/stories-from-the-spring"]?.en).toBe(
+      "/stories-from-the-spring",
+    );
   });
 });

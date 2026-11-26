@@ -1,3 +1,4 @@
+import { getServerLocale } from "@/i18n/get-server-locale";
 import { getArticlePath } from "@/lib/content/content-paths";
 import { Link } from "@/i18n/navigation";
 
@@ -15,12 +16,14 @@ import {
 
 import type { RelatedPostsItemProps } from "./types";
 
-export function RelatedPostsItem({
+export async function RelatedPostsItem({
   post,
   index,
   categoryLabel,
   formattedDate,
 }: RelatedPostsItemProps) {
+  const locale = await getServerLocale();
+
   const { id, preview, publishedAt, slug } = post;
 
   const titleId = `related-post-title-${id}`;
@@ -28,7 +31,7 @@ export function RelatedPostsItem({
   return (
     <li>
       <Link
-        href={getArticlePath(slug)}
+        href={getArticlePath(locale, slug)}
         prefetch={false}
         aria-labelledby={titleId}
         className={relatedPostsItemVariants()}

@@ -1,5 +1,7 @@
 import { z } from "@/lib/validation/zod";
 
+import { BLOG_SLUGS } from "@/lib/content/content-route.config";
+
 import { standardPageSectionSchema, blogSectionSchema } from "./section.schema";
 
 import { seoSchema } from "./seo.schema";
@@ -29,7 +31,8 @@ export const standardPageSchema = basePageSchema.extend({
 
 export const blogPageSchema = basePageSchema.extend({
   id: z.literal("blog"),
-  slug: z.literal("blog"),
+
+  slug: z.enum([BLOG_SLUGS["sr-Cyrl"], BLOG_SLUGS.en]),
 
   content: z.object({
     sections: z.array(blogSectionSchema),

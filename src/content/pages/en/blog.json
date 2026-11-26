@@ -1,9 +1,10 @@
 {
   "id": "blog",
-  "slug": "blog",
+  "slug": "stories-from-the-spring",
+  "status": "published",
   "seo": {
-    "title": "Blog | Tronoša",
-    "description": "News, stories and insights from Tronoša.",
+    "title": "Stories from the Spring | Tronoša",
+    "description": "Read stories about water, nature, cultural heritage, people and news from Tronoša.",
     "index": true,
     "follow": true
   },

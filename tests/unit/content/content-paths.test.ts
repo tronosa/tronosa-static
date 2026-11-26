@@ -1,20 +1,29 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  BLOG_PATH,
+  BLOG_SLUGS,
+  getBlogPath,
+  getBlogSlug,
+} from "@/lib/content/content-route.config";
+
+import {
   getArticlePath,
   getContentHref,
   getContentPublicPath,
+  getLocalizedPath,
   getPagePath,
 } from "@/lib/content/content-paths";
 
-import { standardPageSchema } from "@/content/schemas/page.schema";
+import {
+  standardPageSchema,
+  blogPageSchema,
+} from "@/content/schemas/page.schema";
 
 import { articleSchema } from "@/content/schemas/article.schema";
 
 import type { Locale } from "@/i18n/config";
 
-import type { PageEntry, ArticleEntry } from "@/lib/content/registry";
+import type { ArticleEntry, PageEntry } from "@/lib/content/registry";
 
 const SEO = {
   title: "Test title",
@@ -23,6 +32,24 @@ const SEO = {
 
 const DATE = "2026-01-01T10:00:00+01:00";
 
+const CASES = [
+  {
+    locale: "sr-Cyrl",
+    prefix: "",
+    blogSlug: "price-sa-izvora",
+  },
+  {
+    locale: "sr-Latn",
+    prefix: "/sr-Latn",
+    blogSlug: "price-sa-izvora",
+  },
+  {
+    locale: "en",
+    prefix: "/en",
+    blogSlug: "stories-from-the-spring",
+  },
+] as const;
+
 function createPage(locale: Locale, slug: string): PageEntry {
   return {
     kind: "page",
@@ -30,7 +57,21 @@ function createPage(locale: Locale, slug: string): PageEntry {
     data: standardPageSchema.parse({
       id: slug === "" ? "home" : "test-page",
       slug,
-      status: "published",
+      seo: SEO,
+      content: {
+        sections: [],
+      },
+    }),
+  };
+}
+
+function createBlog(locale: Locale, slug: string): PageEntry {
+  return {
+    kind: "page",
+    locale,
+    data: blogPageSchema.parse({
+      id: "blog",
+      slug,
       seo: SEO,
       content: {
         sections: [],
@@ -48,7 +89,6 @@ function createArticle(locale: Locale, slug: string): ArticleEntry {
       slug,
       status: "published",
       category: "nature",
-      featured: false,
       createdAt: DATE,
       modifiedAt: DATE,
       publishedAt: DATE,
@@ -67,6 +107,19 @@ function createArticle(locale: Locale, slug: string): ArticleEntry {
   };
 }
 
+describe("Journal route configuration", () => {
+  it.each(CASES)(
+    "defines the journal namespace for $locale",
+    ({ locale, blogSlug }) => {
+      expect(BLOG_SLUGS[locale]).toBe(blogSlug);
+
+      expect(getBlogSlug(locale)).toBe(blogSlug);
+
+      expect(getBlogPath(locale)).toBe(`/${blogSlug}`);
+    },
+  );
+});
+
 describe("getPagePath", () => {
   it.each([
     ["", "/"],
@@ -84,91 +137,104 @@ describe("getPagePath", () => {
 });
 
 describe("getArticlePath", () => {
-  it("uses the configured blog namespace", () => {
-    expect(BLOG_PATH).toBe("/blog");
+  it.each(CASES)(
+    "generates article paths for $locale",
+    ({ locale, blogSlug }) => {
+      expect(getArticlePath(locale, "test-article")).toBe(
+        `/${blogSlug}/test-article`,
+      );
+    },
+  );
+
+  it.each(CASES)(
+    "encodes article slugs for $locale",
+    ({ locale, blogSlug }) => {
+      expect(getArticlePath(locale, "test article")).toBe(
+        `/${blogSlug}/test%20article`,
+      );
+    },
+  );
+});
+
+describe("getLocalizedPath", () => {
+  it.each(CASES)("generates home paths for $locale", ({ locale, prefix }) => {
+    expect(getLocalizedPath(locale, "/")).toBe(prefix || "/");
   });
 
-  it.each([
-    ["test-article", "/blog/test-article"],
-    ["test article", "/blog/test%20article"],
-  ])("converts %s to %s", (slug, expected) => {
-    expect(getArticlePath(slug)).toBe(expected);
+  it.each(CASES)("preserves nested paths for $locale", ({ locale, prefix }) => {
+    expect(getLocalizedPath(locale, "/parent/child")).toBe(
+      `${prefix}/parent/child`,
+    );
   });
 });
 
 describe("getContentHref", () => {
-  it.each(["sr-Cyrl", "sr-Latn", "en"] as const)(
-    "generates a locale-relative home href for %s",
-    (locale) => {
-      expect(getContentHref(createPage(locale, ""))).toBe("/");
-    },
-  );
+  it.each(CASES)("generates internal home paths for $locale", ({ locale }) => {
+    expect(getContentHref(createPage(locale, ""))).toBe("/");
+  });
 
-  it.each(["sr-Cyrl", "sr-Latn", "en"] as const)(
-    "does not add a locale prefix to nested page hrefs for %s",
-    (locale) => {
+  it.each(CASES)(
+    "generates internal nested paths for $locale",
+    ({ locale }) => {
       expect(getContentHref(createPage(locale, "parent/child"))).toBe(
         "/parent/child",
       );
     },
   );
 
-  it.each(["sr-Cyrl", "sr-Latn", "en"] as const)(
-    "does not add a locale prefix to article hrefs for %s",
-    (locale) => {
+  it.each(CASES)(
+    "generates internal journal paths for $locale",
+    ({ locale, blogSlug }) => {
+      expect(getContentHref(createBlog(locale, blogSlug))).toBe(`/${blogSlug}`);
+    },
+  );
+
+  it.each(CASES)(
+    "generates internal article paths for $locale",
+    ({ locale, blogSlug }) => {
       expect(getContentHref(createArticle(locale, "test-article"))).toBe(
-        "/blog/test-article",
+        `/${blogSlug}/test-article`,
       );
     },
   );
 });
 
 describe("getContentPublicPath", () => {
-  it.each([
-    ["sr-Cyrl", "/"],
-    ["sr-Latn", "/sr-Latn"],
-    ["en", "/en"],
-  ] as const)("generates the public home path for %s", (locale, expected) => {
-    expect(getContentPublicPath(createPage(locale, ""))).toBe(expected);
-  });
+  it.each(CASES)(
+    "generates public home paths for $locale",
+    ({ locale, prefix }) => {
+      expect(getContentPublicPath(createPage(locale, ""))).toBe(prefix || "/");
+    },
+  );
 
-  it.each([
-    ["sr-Cyrl", "/test-page"],
-    ["sr-Latn", "/sr-Latn/test-page"],
-    ["en", "/en/test-page"],
-  ] as const)("generates the public page path for %s", (locale, expected) => {
-    expect(getContentPublicPath(createPage(locale, "test-page"))).toBe(
-      expected,
-    );
-  });
-
-  it.each([
-    ["sr-Cyrl", "/parent/child"],
-    ["sr-Latn", "/sr-Latn/parent/child"],
-    ["en", "/en/parent/child"],
-  ] as const)(
-    "generates the public nested page path for %s",
-    (locale, expected) => {
+  it.each(CASES)(
+    "generates public nested paths for $locale",
+    ({ locale, prefix }) => {
       expect(getContentPublicPath(createPage(locale, "parent/child"))).toBe(
-        expected,
+        `${prefix}/parent/child`,
       );
     },
   );
 
-  it.each([
-    ["sr-Cyrl", "/blog/test-article"],
-    ["sr-Latn", "/sr-Latn/blog/test-article"],
-    ["en", "/en/blog/test-article"],
-  ] as const)(
-    "generates the public article path for %s",
-    (locale, expected) => {
+  it.each(CASES)(
+    "generates public journal paths for $locale",
+    ({ locale, prefix, blogSlug }) => {
+      expect(getContentPublicPath(createBlog(locale, blogSlug))).toBe(
+        `${prefix}/${blogSlug}`,
+      );
+    },
+  );
+
+  it.each(CASES)(
+    "generates public article paths for $locale",
+    ({ locale, prefix, blogSlug }) => {
       expect(getContentPublicPath(createArticle(locale, "test-article"))).toBe(
-        expected,
+        `${prefix}/${blogSlug}/test-article`,
       );
     },
   );
 
-  it("preserves nested path separators during encoding", () => {
+  it("preserves nested separators during encoding", () => {
     expect(getContentPublicPath(createPage("en", "parent/test page"))).toBe(
       "/en/parent/test%20page",
     );

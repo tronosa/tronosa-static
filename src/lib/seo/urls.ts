@@ -1,9 +1,12 @@
-import { getLocalePrefix } from "@/i18n/config";
-
 import type { Locale } from "@/i18n/config";
 import type { ContentEntry } from "@/lib/content/registry";
 
-import { BLOG_PATH, getContentPublicPath } from "@/lib/content/content-paths";
+import {
+  getLocalizedPath,
+  getContentPublicPath,
+} from "@/lib/content/content-paths";
+
+import { getBlogPath } from "@/lib/content/content-route.config";
 
 import { absoluteUrl, getSeoConfig } from "./config";
 
@@ -16,11 +19,11 @@ export function getContentUrl(entry: ContentEntry): string {
 }
 
 export function getLocaleHomeUrl(locale: Locale): string {
-  return absoluteUrl(getLocalePrefix(locale) || "/");
+  return absoluteUrl(getLocalizedPath(locale, "/"));
 }
 
 export function getBlogUrl(locale: Locale): string {
-  return absoluteUrl(`${getLocalePrefix(locale)}${BLOG_PATH}`);
+  return absoluteUrl(getLocalizedPath(locale, getBlogPath(locale)));
 }
 
 export function getCanonicalUrl(entry: ContentEntry): string {

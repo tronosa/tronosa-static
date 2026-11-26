@@ -20,17 +20,34 @@ describe("page section boundaries", () => {
   });
 
   it("allows regular page IDs for standard pages", () => {
-    expect(standardPageSchema.shape.id.safeParse("about").success).toBe(true);
+    expect(standardPageSchema.shape.id.safeParse("test-page").success).toBe(
+      true,
+    );
   });
 
-  it("requires the blog ID for blog pages", () => {
-    expect(blogPageSchema.shape.id.safeParse("about").success).toBe(false);
+  it("requires the blog ID for journal pages", () => {
+    expect(blogPageSchema.shape.id.safeParse("test-page").success).toBe(false);
 
     expect(blogPageSchema.shape.id.safeParse("blog").success).toBe(true);
   });
 
-  it("requires the blog slug", () => {
-    expect(blogPageSchema.shape.slug.safeParse("stories").success).toBe(false);
+  it.each(["price-sa-izvora", "stories-from-the-spring"])(
+    "accepts the localized journal slug %s",
+    (slug) => {
+      expect(blogPageSchema.shape.slug.safeParse(slug).success).toBe(true);
+    },
+  );
+
+  it.each([
+    "",
+    "blog",
+    "stories",
+    "stories-from-the-source",
+    "unknown-page",
+    "price-sa-izvora/article",
+    "stories-from-the-spring/article",
+  ])("rejects the invalid journal slug %s", (slug) => {
+    expect(blogPageSchema.shape.slug.safeParse(slug).success).toBe(false);
   });
 
   it("rejects blog sections on standard pages", () => {
@@ -41,7 +58,7 @@ describe("page section boundaries", () => {
     ).toBe(false);
   });
 
-  it("allows blog sections on blog pages", () => {
+  it("allows blog sections on journal pages", () => {
     expect(
       blogPageSchema.shape.content.safeParse({
         sections: [journalOpening],
@@ -49,7 +66,7 @@ describe("page section boundaries", () => {
     ).toBe(true);
   });
 
-  it("rejects article sections on blog pages", () => {
+  it("rejects article sections on journal pages", () => {
     expect(
       blogPageSchema.shape.content.safeParse({
         sections: [articleMetadata],

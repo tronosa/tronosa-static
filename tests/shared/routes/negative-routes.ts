@@ -1,5 +1,7 @@
 import { getLocalePrefix, locales } from "@/i18n/config";
 
+import { getArticlePath, getLocalizedPath } from "@/lib/content/content-paths";
+
 import type { ContentTestRoute, NegativeTestRoute } from "./types";
 
 function createMissingPath(
@@ -31,7 +33,10 @@ export function getNegativeTestRoutes(
     );
 
     const missingArticle = createMissingPath(
-      `${prefix}/blog/e2e-nonexistent-article`,
+      getLocalizedPath(
+        locale,
+        getArticlePath(locale, "e2e-nonexistent-article"),
+      ),
       occupiedPaths,
     );
 

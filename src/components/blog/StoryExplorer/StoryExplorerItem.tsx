@@ -1,3 +1,4 @@
+import { getServerLocale } from "@/i18n/get-server-locale";
 import { getArticlePath } from "@/lib/content/content-paths";
 import Image from "next/image";
 
@@ -24,11 +25,13 @@ type StoryExplorerItemProps = {
   index: number;
 };
 
-export function StoryExplorerItem({
+export async function StoryExplorerItem({
   article,
   labels,
   index,
 }: StoryExplorerItemProps) {
+  const locale = await getServerLocale();
+
   const { id, slug, preview, publishedAt } = article;
 
   const image = preview.image;
@@ -40,7 +43,7 @@ export function StoryExplorerItem({
     <li data-story-explorer-item className={storyExplorerItemVariants()}>
       <article>
         <Link
-          href={getArticlePath(slug)}
+          href={getArticlePath(locale, slug)}
           prefetch={false}
           className={storyExplorerItemLinkVariants()}
         >
