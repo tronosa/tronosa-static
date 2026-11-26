@@ -20,7 +20,7 @@ import { createStructuredData } from "@/lib/seo/structured-data";
 type Props = {
   params: Promise<{
     locale: string;
-    slug: string;
+    slug: string[];
   }>;
 };
 
@@ -30,17 +30,16 @@ export function generateStaticParams() {
       (entry) =>
         entry.kind === "page" &&
         entry.data.id !== "home" &&
-        entry.data.id !== "blog" &&
-        !entry.data.slug.includes("/"),
+        entry.data.id !== "blog",
     )
     .map((entry) => ({
       locale: entry.locale,
-      slug: entry.data.slug,
+      slug: entry.data.slug.split("/"),
     }));
 }
 
-function getPage(locale: Locale, slug: string) {
-  const entry = getContentBySlug("page", locale, slug);
+function getPage(locale: Locale, slug: string[]) {
+  const entry = getContentBySlug("page", locale, slug.join("/"));
 
   if (!entry || entry.kind !== "page") {
     notFound();

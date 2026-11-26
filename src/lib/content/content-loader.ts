@@ -2,6 +2,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 import { articleSchema, type Article } from "@/content/schemas/article.schema";
+
 import { pageSchema, type Page } from "@/content/schemas/page.schema";
 
 import { locales, type Locale } from "@/i18n/config";
@@ -13,7 +14,15 @@ import {
   validateSectionReferences,
 } from "./section-validation";
 
-const RESERVED_SLUGS = new Set(["api", "blog", "_next", "_vercel"]);
+const SLUG_SEGMENT_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+const RESERVED_SLUGS = new Set([
+  "api",
+  "blog",
+  "_next",
+  "_vercel",
+  ...locales.map((locale) => locale.toLowerCase()),
+]);
 
 export type ContentKind = "page" | "article";
 
@@ -93,11 +102,24 @@ function validateSlug(entry: ContentEntry): void {
     return;
   }
 
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+  const segments = slug.split("/");
+
+  const hasInvalidSegment = segments.some(
+    (segment) => !SLUG_SEGMENT_PATTERN.test(segment),
+  );
+
+  const hasNestedArticleSlug =
+    entry.kind === "article" && segments.length !== 1;
+
+  if (hasInvalidSegment || hasNestedArticleSlug) {
     throw new Error(`Invalid slug "${slug}" in ${entry.locale}/${id}`);
   }
 
-  if (entry.kind === "page" && id !== "blog" && RESERVED_SLUGS.has(slug)) {
+  if (
+    entry.kind === "page" &&
+    id !== "blog" &&
+    RESERVED_SLUGS.has(segments[0])
+  ) {
     throw new Error(`Reserved page slug "${slug}" in ${entry.locale}/${id}`);
   }
 }
