@@ -7,6 +7,8 @@ import { seoSchema } from "./seo.schema";
 const basePageSchema = z.object({
   slug: z.string(),
 
+  status: z.enum(["draft", "published"]).default("published"),
+
   modifiedAt: z.iso.datetime({ offset: true }).optional(),
 
   seo: seoSchema,

@@ -162,7 +162,5 @@ export function loadContentRegistry(): ContentEntry[] {
 export function filterPublishedContent(
   entries: readonly ContentEntry[],
 ): ContentEntry[] {
-  return entries.filter(
-    (entry) => entry.kind === "page" || entry.data.status === "published",
-  );
+  return entries.filter((entry) => entry.data.status === "published");
 }

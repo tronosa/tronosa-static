@@ -23,6 +23,10 @@ export type {
 
 export const getContentRegistry = cache(loadContentRegistry);
 
+function isContentLookupAvailable(entry: ContentEntry): boolean {
+  return entry.kind === "article" || entry.data.status === "published";
+}
+
 export function getContentById(
   kind: ContentKind,
   locale: Locale,
@@ -30,7 +34,10 @@ export function getContentById(
 ): ContentEntry | undefined {
   return getContentRegistry().find(
     (entry) =>
-      entry.kind === kind && entry.locale === locale && entry.data.id === id,
+      entry.kind === kind &&
+      entry.locale === locale &&
+      entry.data.id === id &&
+      isContentLookupAvailable(entry),
   );
 }
 
@@ -43,7 +50,8 @@ export function getContentBySlug(
     (entry) =>
       entry.kind === kind &&
       entry.locale === locale &&
-      entry.data.slug === slug,
+      entry.data.slug === slug &&
+      isContentLookupAvailable(entry),
   );
 }
 

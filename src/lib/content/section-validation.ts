@@ -1,4 +1,5 @@
 import type { SectionType } from "@/content/schemas/section.schema";
+
 import type { ContentEntry } from "./registry";
 
 const SINGLETON_SECTION_TYPES = new Set<SectionType>([
@@ -41,10 +42,10 @@ export function validateSections(entry: ContentEntry): void {
 export function validateSectionReferences(
   entries: readonly ContentEntry[],
 ): void {
-  const pages = new Set(
+  const pages = new Map(
     entries
       .filter((entry) => entry.kind === "page")
-      .map((entry) => `${entry.locale}:${entry.data.id}`),
+      .map((entry) => [`${entry.locale}:${entry.data.id}`, entry]),
   );
 
   for (const entry of entries) {
@@ -57,9 +58,18 @@ export function validateSectionReferences(
 
       const reference = `${entry.locale}:${pageId}`;
 
-      if (!pages.has(reference)) {
+      const target = pages.get(reference);
+
+      if (!target) {
         throw new Error(
           `[Content] Invalid page reference "${pageId}" ` +
+            `in ${entry.locale}/${entry.data.id}/${section.id}.`,
+        );
+      }
+
+      if (entry.data.status === "published" && target.data.status === "draft") {
+        throw new Error(
+          `[Content] Reference to draft page "${pageId}" ` +
             `in ${entry.locale}/${entry.data.id}/${section.id}.`,
         );
       }
