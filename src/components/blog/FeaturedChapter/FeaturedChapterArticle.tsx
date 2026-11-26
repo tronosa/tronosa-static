@@ -1,3 +1,4 @@
+import { getArticlePath } from "@/lib/content/content-paths";
 import Image from "next/image";
 
 import { Link } from "@/i18n/navigation";
@@ -48,7 +49,7 @@ export function FeaturedChapterArticle({
   return (
     <article>
       <Link
-        href={`/blog/${slug}`}
+        href={getArticlePath(slug)}
         prefetch={false}
         className={featuredChapterLinkVariants({
           hasImage,

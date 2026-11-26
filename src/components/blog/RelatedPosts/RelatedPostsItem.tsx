@@ -1,3 +1,4 @@
+import { getArticlePath } from "@/lib/content/content-paths";
 import { Link } from "@/i18n/navigation";
 
 import {
@@ -27,7 +28,7 @@ export function RelatedPostsItem({
   return (
     <li>
       <Link
-        href={`/blog/${slug}`}
+        href={getArticlePath(slug)}
         prefetch={false}
         aria-labelledby={titleId}
         className={relatedPostsItemVariants()}

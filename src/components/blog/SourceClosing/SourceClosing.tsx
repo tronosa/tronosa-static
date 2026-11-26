@@ -3,11 +3,13 @@ import { getLocale, getTranslations } from "next-intl/server";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
 import { getContentById } from "@/lib/content/registry";
+import { getContentHref } from "@/lib/content/content-paths";
 
 import { SourceClosingDecoration } from "./SourceClosingDecoration";
 
@@ -21,7 +23,6 @@ import {
   sourceClosingDescriptionVariants,
   sourceClosingCtaVariants,
 } from "./source-closing.variants";
-import { Section } from "@/components/ui/Section";
 
 type SourceClosingProps = {
   pageId: string;
@@ -37,12 +38,7 @@ export async function SourceClosing({ pageId }: SourceClosingProps) {
 
   const entry = getContentById("page", locale, pageId);
 
-  const ctaHref =
-    entry?.kind === "page"
-      ? entry.data.slug
-        ? `/${entry.data.slug}`
-        : "/"
-      : null;
+  const ctaHref = entry?.kind === "page" ? getContentHref(entry) : null;
 
   return (
     <Section
@@ -81,7 +77,9 @@ export async function SourceClosing({ pageId }: SourceClosingProps) {
                 arrow
                 className={sourceClosingCtaVariants()}
               >
-                <Link href={ctaHref}>{t("cta")}</Link>
+                <Link href={ctaHref} prefetch={false}>
+                  {t("cta")}
+                </Link>
               </Button>
             )}
           </div>

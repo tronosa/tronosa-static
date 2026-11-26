@@ -1,3 +1,4 @@
+import { getContentHref } from "@/lib/content/content-paths";
 import { hasLocale } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 
@@ -96,7 +97,7 @@ export async function Footer() {
       return null;
     }
 
-    return entry.data.slug ? `/${entry.data.slug}` : "/";
+    return getContentHref(entry);
   }
 
   function renderLinks(pages: readonly FooterPageId[]) {

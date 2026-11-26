@@ -1,3 +1,4 @@
+import { getContentHref } from "@/lib/content/content-paths";
 import { getLocale } from "next-intl/server";
 
 import { locales } from "@/i18n/config";
@@ -31,7 +32,7 @@ export async function ProductShowcase({ cta, ...props }: ProductShowcaseProps) {
 
     resolvedCTA = {
       label: cta.label,
-      href: entry.data.slug ? `/${entry.data.slug}` : "/",
+      href: getContentHref(entry),
     };
   }
 

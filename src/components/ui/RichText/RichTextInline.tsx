@@ -1,3 +1,4 @@
+import { getContentHref } from "@/lib/content/content-paths";
 import { Fragment, type ReactNode } from "react";
 
 import { hasLocale } from "next-intl";
@@ -70,7 +71,7 @@ export async function RichTextInline({ content }: RichTextInlineProps) {
             );
           }
 
-          const href = entry.data.slug ? `/${entry.data.slug}` : "/";
+          const href = getContentHref(entry);
 
           return (
             <Link

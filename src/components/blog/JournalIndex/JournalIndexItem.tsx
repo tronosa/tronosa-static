@@ -1,3 +1,4 @@
+import { getArticlePath } from "@/lib/content/content-paths";
 import { Link } from "@/i18n/navigation";
 
 import type { BlogPost, BlogStoryLabels } from "../blog-listing.types";
@@ -30,7 +31,7 @@ export function JournalIndexItem({
     <li>
       <article>
         <Link
-          href={`/blog/${slug}`}
+          href={getArticlePath(slug)}
           prefetch={false}
           aria-labelledby={titleId}
           className={journalIndexItemLinkVariants()}
