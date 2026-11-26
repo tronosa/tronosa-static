@@ -1,3 +1,4 @@
+import { getContentHref } from "@/lib/content/content-paths";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/ui/Container";
@@ -36,7 +37,7 @@ export async function NotFound() {
       return null;
     }
 
-    return entry.data.slug ? `/${entry.data.slug}` : "/";
+    return getContentHref(entry);
   }
 
   const homeHref = resolveHref("home");

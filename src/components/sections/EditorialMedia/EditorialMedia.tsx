@@ -1,3 +1,4 @@
+import { getContentHref } from "@/lib/content/content-paths";
 import { getLocale } from "next-intl/server";
 
 import { Picture } from "@/components/media/Picture";
@@ -63,7 +64,7 @@ export async function EditorialMedia({
       );
     }
 
-    ctaHref = entry.data.slug ? `/${entry.data.slug}` : "/";
+    ctaHref = getContentHref(entry);
   }
 
   return (

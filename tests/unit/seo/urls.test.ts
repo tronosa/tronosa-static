@@ -95,11 +95,16 @@ describe("Absolute content URLs", () => {
     expect(getLocaleHomeUrl(locale)).toBe(expected);
   });
 
-  it.each(locales)("generates the blog listing URL for %s", (locale) => {
-    const prefix = locale === defaultLocale ? "" : `/${locale}`;
-
-    expect(getBlogUrl(locale)).toBe(`${SITE_URL}${prefix}/blog`);
-  });
+  it.each([
+    ["sr-Cyrl", "/price-sa-izvora"],
+    ["sr-Latn", "/sr-Latn/price-sa-izvora"],
+    ["en", "/en/stories-from-the-spring"],
+  ] as const)(
+    "generates the localized journal URL for %s",
+    (locale, pathname) => {
+      expect(getBlogUrl(locale)).toBe(`${SITE_URL}${pathname}`);
+    },
+  );
 });
 
 describe("Absolute URL resolution", () => {

@@ -1,27 +1,17 @@
-import { getLocalePrefix } from "@/i18n/config";
-
 import type { Locale } from "@/i18n/config";
 import type { ContentEntry } from "@/lib/content/registry";
 
+import {
+  getLocalizedPath,
+  getContentPublicPath,
+} from "@/lib/content/content-paths";
+
+import { getBlogPath } from "@/lib/content/content-route.config";
+
 import { absoluteUrl, getSeoConfig } from "./config";
 
-function encodeSlug(slug: string): string {
-  return slug.split("/").map(encodeURIComponent).join("/");
-}
-
 export function getContentPath(entry: ContentEntry): string {
-  const prefix = getLocalePrefix(entry.locale);
-  const slug = encodeSlug(entry.data.slug);
-
-  if (entry.kind === "article") {
-    return `${prefix}/blog/${slug}`;
-  }
-
-  if (entry.data.id === "home") {
-    return prefix || "/";
-  }
-
-  return `${prefix}/${slug}`;
+  return getContentPublicPath(entry);
 }
 
 export function getContentUrl(entry: ContentEntry): string {
@@ -29,11 +19,11 @@ export function getContentUrl(entry: ContentEntry): string {
 }
 
 export function getLocaleHomeUrl(locale: Locale): string {
-  return absoluteUrl(getLocalePrefix(locale) || "/");
+  return absoluteUrl(getLocalizedPath(locale, "/"));
 }
 
 export function getBlogUrl(locale: Locale): string {
-  return absoluteUrl(`${getLocalePrefix(locale)}/blog`);
+  return absoluteUrl(getLocalizedPath(locale, getBlogPath(locale)));
 }
 
 export function getCanonicalUrl(entry: ContentEntry): string {

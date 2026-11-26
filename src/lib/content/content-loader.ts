@@ -2,18 +2,31 @@ import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 import { articleSchema, type Article } from "@/content/schemas/article.schema";
+
 import { pageSchema, type Page } from "@/content/schemas/page.schema";
 
 import { locales, type Locale } from "@/i18n/config";
 
-import { getContentPath } from "@/lib/seo/urls";
+import { getContentPublicPath } from "./content-paths";
+
+import { BLOG_SLUGS, getBlogSlug } from "./content-route.config";
 
 import {
   validateSections,
   validateSectionReferences,
 } from "./section-validation";
 
-const RESERVED_SLUGS = new Set(["api", "blog", "_next", "_vercel"]);
+const SLUG_SEGMENT_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+const RESERVED_SLUGS = new Set([
+  "api",
+  "blog",
+  "trpc",
+  "_next",
+  "_vercel",
+  ...Object.values(BLOG_SLUGS),
+  ...locales.map((locale) => locale.toLowerCase()),
+]);
 
 export type ContentKind = "page" | "article";
 
@@ -93,11 +106,30 @@ function validateSlug(entry: ContentEntry): void {
     return;
   }
 
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+  if (entry.kind === "page" && id === "blog") {
+    if (slug !== getBlogSlug(entry.locale)) {
+      throw new Error(
+        `Invalid blog slug "${slug}" for locale "${entry.locale}"`,
+      );
+    }
+
+    return;
+  }
+
+  const segments = slug.split("/");
+
+  const hasInvalidSegment = segments.some(
+    (segment) => !SLUG_SEGMENT_PATTERN.test(segment),
+  );
+
+  const hasNestedArticleSlug =
+    entry.kind === "article" && segments.length !== 1;
+
+  if (hasInvalidSegment || hasNestedArticleSlug) {
     throw new Error(`Invalid slug "${slug}" in ${entry.locale}/${id}`);
   }
 
-  if (entry.kind === "page" && id !== "blog" && RESERVED_SLUGS.has(slug)) {
+  if (entry.kind === "page" && RESERVED_SLUGS.has(segments[0])) {
     throw new Error(`Reserved page slug "${slug}" in ${entry.locale}/${id}`);
   }
 }
@@ -123,7 +155,7 @@ export function loadContentRegistry(): ContentEntry[] {
 
     identities.add(identity);
 
-    const route = getContentPath(entry);
+    const route = getContentPublicPath(entry);
 
     if (paths.has(route)) {
       throw new Error(`Duplicate public URL: ${route}`);
@@ -140,7 +172,5 @@ export function loadContentRegistry(): ContentEntry[] {
 export function filterPublishedContent(
   entries: readonly ContentEntry[],
 ): ContentEntry[] {
-  return entries.filter(
-    (entry) => entry.kind === "page" || entry.data.status === "published",
-  );
+  return entries.filter((entry) => entry.data.status === "published");
 }

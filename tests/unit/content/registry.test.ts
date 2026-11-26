@@ -89,8 +89,12 @@ function addPage(filename: string, page: Page, locale: Locale = "en"): void {
   files.set(path.join(root, "pages", locale, filename), JSON.stringify(page));
 }
 
-function addRawPage(filename: string, page: unknown): void {
-  files.set(path.join(pagesDirectory, filename), JSON.stringify(page));
+function addRawPage(
+  filename: string,
+  page: unknown,
+  locale: Locale = "en",
+): void {
+  files.set(path.join(root, "pages", locale, filename), JSON.stringify(page));
 }
 
 function addArticle(
@@ -317,7 +321,15 @@ describe("Content registry validation", () => {
     },
   );
 
-  it.each(["api", "blog"])("rejects the reserved page slug %s", (slug) => {
+  it.each([
+    "api",
+    "blog",
+    "trpc",
+    "price-sa-izvora",
+    "stories-from-the-spring",
+    "price-sa-izvora/test-page",
+    "stories-from-the-spring/test-page",
+  ])("rejects the reserved page slug %s", (slug) => {
     addPage("reserved.json", createPage({ slug }));
 
     expect(() => getContentRegistry()).toThrow(`Reserved page slug "${slug}"`);
@@ -333,15 +345,60 @@ describe("Content registry validation", () => {
     expect(() => getContentRegistry()).toThrow(/Invalid content:.*blog\.json/);
   });
 
-  it("accepts a blog listing with the correct slug", () => {
-    addPage("blog.json", {
-      ...createPage(),
-      id: "blog",
-      slug: "blog",
-    });
+  it.each([
+    ["en", "stories-from-the-spring"],
+    ["sr-Cyrl", "price-sa-izvora"],
+    ["sr-Latn", "price-sa-izvora"],
+  ] as const)(
+    "accepts a blog listing with the correct slug for %s",
+    (locale, slug) => {
+      addPage(
+        "blog.json",
+        {
+          ...createPage(),
+          id: "blog",
+          slug,
+        },
+        locale,
+      );
 
-    expect(getContentRegistry()).toHaveLength(1);
-  });
+      const result = getContentRegistry();
+
+      expect(result).toHaveLength(1);
+
+      expect(result[0]).toMatchObject({
+        kind: "page",
+        locale,
+        data: {
+          id: "blog",
+          slug,
+        },
+      });
+    },
+  );
+
+  it.each([
+    ["en", "price-sa-izvora"],
+    ["sr-Cyrl", "stories-from-the-spring"],
+    ["sr-Latn", "stories-from-the-spring"],
+  ] as const)(
+    "rejects a blog listing for %s with a mismatched slug %s",
+    (locale, slug) => {
+      addPage(
+        "blog.json",
+        {
+          ...createPage(),
+          id: "blog",
+          slug,
+        },
+        locale,
+      );
+
+      expect(() => getContentRegistry()).toThrow(
+        `Invalid blog slug "${slug}" for locale "${locale}"`,
+      );
+    },
+  );
 
   it("rejects duplicate section IDs", () => {
     const page = createPage();
@@ -399,7 +456,7 @@ describe("Content registry section boundaries", () => {
     addPage("blog.json", {
       ...page,
       id: "blog",
-      slug: "blog",
+      slug: "stories-from-the-spring",
       content: {
         sections: [
           ...page.content.sections,
@@ -458,7 +515,7 @@ describe("Content registry section boundaries", () => {
     addRawPage("blog.json", {
       ...createPage(),
       id: "blog",
-      slug: "blog",
+      slug: "stories-from-the-spring",
       content: {
         sections: [
           {
@@ -476,7 +533,7 @@ describe("Content registry section boundaries", () => {
     addPage("blog.json", {
       ...createPage(),
       id: "blog",
-      slug: "blog",
+      slug: "stories-from-the-spring",
       content: {
         sections: [
           {
@@ -526,7 +583,7 @@ describe("Content registry section boundaries", () => {
     addPage("blog.json", {
       ...createPage(),
       id: "blog",
-      slug: "blog",
+      slug: "stories-from-the-spring",
       content: {
         sections: [
           {
@@ -557,7 +614,7 @@ describe("Content registry section boundaries", () => {
     addPage("blog.json", {
       ...createPage(),
       id: "blog",
-      slug: "blog",
+      slug: "stories-from-the-spring",
       content: {
         sections: [
           {

@@ -1,3 +1,5 @@
+import { getServerLocale } from "@/i18n/get-server-locale";
+import { getArticlePath } from "@/lib/content/content-paths";
 import Image from "next/image";
 
 import { Link } from "@/i18n/navigation";
@@ -32,11 +34,13 @@ type FeaturedChapterArticleProps = {
   journalLabel: string;
 };
 
-export function FeaturedChapterArticle({
+export async function FeaturedChapterArticle({
   article,
   labels,
   journalLabel,
 }: FeaturedChapterArticleProps) {
+  const locale = await getServerLocale();
+
   const { id, slug, preview, publishedAt } = article;
 
   const image = preview.image;
@@ -48,7 +52,7 @@ export function FeaturedChapterArticle({
   return (
     <article>
       <Link
-        href={`/blog/${slug}`}
+        href={getArticlePath(locale, slug)}
         prefetch={false}
         className={featuredChapterLinkVariants({
           hasImage,

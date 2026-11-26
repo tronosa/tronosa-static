@@ -1,3 +1,4 @@
+import { getContentHref } from "@/lib/content/content-paths";
 import { getLocale } from "next-intl/server";
 
 import { Container } from "@/components/ui/Container";
@@ -53,7 +54,7 @@ export async function CardSlider({
 
     return {
       card,
-      ctaHref: entry.data.slug ? `/${entry.data.slug}` : "/",
+      ctaHref: getContentHref(entry),
     };
   });
 

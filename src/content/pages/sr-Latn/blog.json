@@ -1,9 +1,10 @@
 {
   "id": "blog",
-  "slug": "blog",
+  "slug": "price-sa-izvora",
+  "status": "published",
   "seo": {
-    "title": "Blog | Tronoša",
-    "description": "Novosti, priče i zanimljivosti iz sveta Tronoše.",
+    "title": "Priče sa izvora | Tronoša",
+    "description": "Čitajte priče o vodi, prirodi, kulturnom nasleđu, ljudima i novostima iz Tronoše.",
     "index": true,
     "follow": true
   },

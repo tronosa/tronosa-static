@@ -2,7 +2,7 @@
   "Navigation": {
     "home": "Početna",
     "about": "O nama",
-    "blog": "Blog",
+    "blog": "Priče sa izvora",
     "products": "Proizvodi",
     "contact": "Kontakt"
   },
@@ -18,7 +18,7 @@
     "home": "Početna",
     "about": "O nama",
     "products": "Proizvodi",
-    "blog": "Blog",
+    "blog": "Priče sa izvora",
     "contact": "Kontakt",
     "ctaEyebrow": "POSLOVNA SARADNJA",
     "ctaTitle": "Započnimo razgovor.",

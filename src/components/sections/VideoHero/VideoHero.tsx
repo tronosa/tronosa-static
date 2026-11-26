@@ -1,3 +1,4 @@
+import { getContentHref } from "@/lib/content/content-paths";
 import { getLocale } from "next-intl/server";
 
 import { BackgroundVideo } from "@/components/media/BackgroundVideo";
@@ -54,7 +55,7 @@ export async function VideoHero({
       );
     }
 
-    ctaHref = entry.data.slug ? `/${entry.data.slug}` : "/";
+    ctaHref = getContentHref(entry);
   }
 
   return (

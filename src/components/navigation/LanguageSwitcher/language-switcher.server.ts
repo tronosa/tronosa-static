@@ -2,39 +2,36 @@ import "server-only";
 
 import { getPublishedContent } from "@/lib/content/registry";
 
-import type { LanguageRoutes } from "./types";
+import { getContentHref } from "@/lib/content/content-paths";
+
+import type { LanguageAlternates, LanguageRoutes } from "./types";
 
 export function getLanguageRoutes(): LanguageRoutes {
   const entries = getPublishedContent();
+
+  const groups = new Map<string, LanguageAlternates>();
+
   const routes: LanguageRoutes = {};
 
   for (const entry of entries) {
-    const pathname = getPathname(entry);
+    const identity = `${entry.kind}:${entry.data.id}`;
+
+    const pathname = getContentHref(entry);
+
     const key = `${entry.locale}:${pathname}`;
 
-    routes[key] = {};
+    let alternatives = groups.get(identity);
 
-    for (const alternate of entries) {
-      if (
-        alternate.kind === entry.kind &&
-        alternate.data.id === entry.data.id
-      ) {
-        routes[key][alternate.locale] = getPathname(alternate);
-      }
+    if (!alternatives) {
+      alternatives = {};
+
+      groups.set(identity, alternatives);
     }
+
+    alternatives[entry.locale] = pathname;
+
+    routes[key] = alternatives;
   }
 
   return routes;
-}
-
-function getPathname(
-  entry: ReturnType<typeof getPublishedContent>[number],
-): string {
-  const slug = entry.data.slug;
-
-  if (entry.kind === "article") {
-    return `/blog/${slug}`;
-  }
-
-  return slug ? `/${slug}` : "/";
 }

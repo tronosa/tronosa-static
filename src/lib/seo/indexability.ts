@@ -7,7 +7,7 @@ import { getEnvironment } from "@/lib/environment";
 import { getCanonicalUrl, getContentUrl } from "./urls";
 
 export function isPublished(entry: ContentEntry): boolean {
-  return entry.kind === "page" || entry.data.status === "published";
+  return entry.data.status === "published";
 }
 
 export function isSelfCanonical(entry: ContentEntry): boolean {

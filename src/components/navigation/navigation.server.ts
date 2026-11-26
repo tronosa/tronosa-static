@@ -2,27 +2,43 @@ import "server-only";
 
 import type { Locale } from "@/i18n/config";
 
-import { getContentById, getPublishedPosts } from "@/lib/content/registry";
+import { getPublishedContent } from "@/lib/content/registry";
+
+import { getContentHref } from "@/lib/content/content-paths";
 
 import { navigationItems } from "./navigation.config";
 
 export function getNavigationItems(locale: Locale) {
-  const articlePaths = getPublishedPosts(locale).map(
-    ({ data }) => `/blog/${data.slug}`,
+  const entries = getPublishedContent().filter(
+    (entry) => entry.locale === locale,
   );
 
-  return navigationItems.flatMap((item) => {
-    const entry = getContentById("page", locale, item.id);
+  const entriesWithPaths = entries.map((entry) => ({
+    entry,
+    href: getContentHref(entry),
+  }));
 
-    if (!entry) {
+  return navigationItems.flatMap((item) => {
+    const target = entriesWithPaths.find(
+      ({ entry }) => entry.kind === "page" && entry.data.id === item.id,
+    );
+
+    if (!target) {
       return [];
     }
+
+    const relatedPaths =
+      target.href === "/"
+        ? []
+        : entriesWithPaths
+            .filter(({ href }) => href.startsWith(`${target.href}/`))
+            .map(({ href }) => href);
 
     return [
       {
         ...item,
-        href: entry.data.slug ? `/${entry.data.slug}` : "/",
-        relatedPaths: item.id === "blog" ? articlePaths : [],
+        href: target.href,
+        relatedPaths,
       },
     ];
   });

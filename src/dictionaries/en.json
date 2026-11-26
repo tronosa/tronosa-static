@@ -2,7 +2,7 @@
   "Navigation": {
     "home": "Home",
     "about": "About us",
-    "blog": "Blog",
+    "blog": "Stories from the Spring",
     "products": "Products",
     "contact": "Contact"
   },
@@ -18,7 +18,7 @@
     "home": "Home",
     "about": "About us",
     "products": "Products",
-    "blog": "Blog",
+    "blog": "Stories from the Spring",
     "contact": "Contact",
     "ctaEyebrow": "BUSINESS PARTNERSHIPS",
     "ctaTitle": "Let's start a conversation.",

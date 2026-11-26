@@ -1,3 +1,5 @@
+import { getServerLocale } from "@/i18n/get-server-locale";
+import { getArticlePath } from "@/lib/content/content-paths";
 import { Link } from "@/i18n/navigation";
 
 import type { BlogPost, BlogStoryLabels } from "../blog-listing.types";
@@ -17,11 +19,13 @@ type JournalIndexItemProps = {
   index: number;
 };
 
-export function JournalIndexItem({
+export async function JournalIndexItem({
   article,
   labels,
   index,
 }: JournalIndexItemProps) {
+  const locale = await getServerLocale();
+
   const { id, slug, publishedAt, preview } = article;
 
   const titleId = `journal-index-item-${id}`;
@@ -30,7 +34,7 @@ export function JournalIndexItem({
     <li>
       <article>
         <Link
-          href={`/blog/${slug}`}
+          href={getArticlePath(locale, slug)}
           prefetch={false}
           aria-labelledby={titleId}
           className={journalIndexItemLinkVariants()}
