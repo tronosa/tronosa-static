@@ -97,14 +97,8 @@ function validateSlug(entry: ContentEntry): void {
     throw new Error(`Invalid slug "${slug}" in ${entry.locale}/${id}`);
   }
 
-  if (entry.kind === "page") {
-    if (id === "blog" && slug !== "blog") {
-      throw new Error(`Blog listing must use slug "blog": ${entry.locale}`);
-    }
-
-    if (id !== "blog" && RESERVED_SLUGS.has(slug)) {
-      throw new Error(`Reserved page slug "${slug}" in ${entry.locale}/${id}`);
-    }
+  if (entry.kind === "page" && id !== "blog" && RESERVED_SLUGS.has(slug)) {
+    throw new Error(`Reserved page slug "${slug}" in ${entry.locale}/${id}`);
   }
 }
 

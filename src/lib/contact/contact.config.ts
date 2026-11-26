@@ -1,13 +1,15 @@
 import { z } from "@/lib/validation/zod";
 
+export {
+  CONTACT_HCAPTCHA_SITE_KEY,
+  isContactCaptchaConfigured,
+} from "./contact.public-config";
+
 const accessKeySchema = z.uuid();
 
 export const CONTACT_API_URL = "https://api.web3forms.com/submit";
 
 export const CONTACT_REQUEST_TIMEOUT_MS = 15_000;
-
-export const CONTACT_HCAPTCHA_SITE_KEY =
-  process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY ?? "";
 
 export interface ContactConfig {
   accessKey: string;
@@ -25,8 +27,4 @@ export function getContactConfig(): ContactConfig | null {
   return {
     accessKey: result.data,
   };
-}
-
-export function isContactCaptchaConfigured(): boolean {
-  return CONTACT_HCAPTCHA_SITE_KEY.trim().length > 0;
 }

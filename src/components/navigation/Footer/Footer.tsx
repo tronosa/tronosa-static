@@ -109,7 +109,7 @@ export async function Footer() {
 
       return (
         <li key={pageId}>
-          <Link href={href} className={footerLinkVariants()}>
+          <Link href={href} prefetch={false} className={footerLinkVariants()}>
             <span>{t(pageId)}</span>
             <ArrowIcon className={footerLinkArrowVariants()} />
           </Link>
@@ -156,6 +156,7 @@ export async function Footer() {
 
                 <Link
                   href={contactHref}
+                  prefetch={false}
                   className={footerContactLinkVariants()}
                 >
                   <span>{t("ctaLabel")}</span>

@@ -109,7 +109,9 @@ export async function VideoHero({
               arrow
               className={videoHeroCtaVariants()}
             >
-              <Link href={ctaHref}>{cta.label}</Link>
+              <Link href={ctaHref} prefetch={false}>
+                {cta.label}
+              </Link>
             </Button>
           )}
         </div>

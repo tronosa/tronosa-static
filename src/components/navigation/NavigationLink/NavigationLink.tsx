@@ -1,10 +1,11 @@
 "use client";
 
-import { Link, usePathname } from "@/i18n/navigation";
+import { usePathname } from "@/i18n/navigation";
 
 import { cn } from "@/lib/cn";
 
 import { desktopNavigationLinkVariants } from "../DesktopNavigation/desktop-navigation.variants";
+import { IntentLink } from "../IntentLink";
 import { mobileNavigationLinkVariants } from "../MobileNavigation/mobile-navigation.variants";
 
 import { getNavigationCurrent } from "../navigation-current";
@@ -36,7 +37,7 @@ export function NavigationLink({
       );
 
   return (
-    <Link href={href} aria-current={current} className={className}>
+    <IntentLink href={href} aria-current={current} className={className}>
       {children}
 
       {isDesktop && (
@@ -51,6 +52,6 @@ export function NavigationLink({
           )}
         />
       )}
-    </Link>
+    </IntentLink>
   );
 }

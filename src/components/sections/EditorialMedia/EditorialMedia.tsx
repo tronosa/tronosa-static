@@ -12,6 +12,8 @@ import { Link } from "@/i18n/navigation";
 
 import { cn } from "@/lib/cn";
 import { getContentById } from "@/lib/content/registry";
+import { IMAGE_QUALITY } from "@/lib/media/image-quality";
+import { IMAGE_SIZES } from "@/lib/media/image-sizes";
 
 import { EditorialMediaGallery } from "./EditorialMediaGallery";
 
@@ -30,12 +32,6 @@ import {
 } from "./editorial-media.variants";
 
 import type { EditorialMediaProps } from "./types";
-
-const IMAGE_SIZES = [
-  "(min-width: 1024px) 420px",
-  "(min-width: 640px) calc(100vw - 4rem)",
-  "calc(100vw - 2.5rem)",
-].join(", ");
 
 export async function EditorialMedia({
   eyebrow,
@@ -112,7 +108,9 @@ export async function EditorialMedia({
                 arrow
                 className={editorialMediaCtaVariants()}
               >
-                <Link href={ctaHref}>{cta.label}</Link>
+                <Link href={ctaHref} prefetch={false}>
+                  {cta.label}
+                </Link>
               </Button>
             )}
           </div>
@@ -131,8 +129,8 @@ export async function EditorialMedia({
                     {...media.image}
                     ratio="fill"
                     fit="cover"
-                    sizes={IMAGE_SIZES}
-                    quality={80}
+                    sizes={IMAGE_SIZES.editorial}
+                    quality={IMAGE_QUALITY.editorial}
                     loading="lazy"
                   />
                 ) : (

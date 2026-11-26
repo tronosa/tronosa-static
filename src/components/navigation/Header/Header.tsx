@@ -29,6 +29,7 @@ export async function Header({
         <div className={headerInnerVariants({ size })}>
           <Link
             href="/"
+            prefetch={false}
             aria-label={t("brand.homeLabel")}
             className={cn(
               "relative z-10 inline-flex shrink-0 items-center",

@@ -1,5 +1,5 @@
 @media (min-width: 1024px) {
   .story-explorer-item[data-active="true"] .story-explorer-number {
-    color: var(--brand-bronze);
+    color: var(--foreground-bronze);
   }
 }

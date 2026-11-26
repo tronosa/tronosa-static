@@ -76,7 +76,7 @@ export function LocationDirectory({
 
                     <span>
                       {location.address.city}
-                      {" Â· "}
+                      {" \u00B7 "}
                       {messages[location.type]}
                     </span>
                   </span>

@@ -74,7 +74,11 @@ export function SliderCard({ card, ctaHref }: SliderCardProps) {
           )}
 
           {card.cta && ctaHref && (
-            <Link href={ctaHref} className={sliderCardCtaVariants()}>
+            <Link
+              href={ctaHref}
+              prefetch={false}
+              className={sliderCardCtaVariants()}
+            >
               {card.cta.label}
             </Link>
           )}
