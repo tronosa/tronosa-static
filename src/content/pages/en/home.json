@@ -44,7 +44,7 @@
           },
           "cta": {
             "label": "Discover Tronoša",
-            "pageId": "about"
+            "pageId": "our-story"
           },
           "accessibility": {
             "playLabel": "Play video",
@@ -322,7 +322,7 @@
           },
           "cta": {
             "label": "Discover our story",
-            "pageId": "about"
+            "pageId": "our-story"
           }
         }
       },
@@ -372,7 +372,7 @@
                 {
                   "type": "link",
                   "text": "Learn more about our water",
-                  "pageId": "about"
+                  "pageId": "our-story"
                 }
               ]
             }
@@ -393,7 +393,7 @@
               "headline": "For restaurants, hotels and hospitality establishments.",
               "cta": {
                 "label": "For Hospitality",
-                "pageId": "about"
+                "pageId": "our-story"
               }
             },
             {
@@ -402,7 +402,7 @@
               "headline": "Water with your brand's label, subject to agreed possibilities.",
               "cta": {
                 "label": "Private Label",
-                "pageId": "about"
+                "pageId": "our-story"
               }
             },
             {
@@ -411,7 +411,7 @@
               "headline": "For business premises, events and distribution partners.",
               "cta": {
                 "label": "Business Cooperation",
-                "pageId": "about"
+                "pageId": "our-story"
               }
             }
           ],

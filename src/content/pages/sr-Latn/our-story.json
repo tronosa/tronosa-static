@@ -1,0 +1,146 @@
+{
+  "id": "our-story",
+  "slug": "nasa-prica",
+  "status": "published",
+  "seo": {
+    "title": "Tronoša – priča o izvoru Devet Jugovića",
+    "description": "Otkrijte poreklo Tronoše, prirodu Korenite kod Loznice i kulturno nasleđe kraja iz kojeg dolazi.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "our-story-hero",
+        "type": "image-hero",
+        "content": {
+          "eyebrow": "Naša priča",
+          "title": "Ime koje nosi jedan kraj.",
+          "description": "Tronoša nije ime izabrano da lepo zvuči na etiketi. Ono nas vraća mestu kojem pripadamo: kraju šuma, izvora, kamenih staza i priča koje se prenose generacijama. Tu počinje i naša priča.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          }
+        }
+      },
+      {
+        "id": "our-story-origin",
+        "type": "editorial-composition",
+        "content": {
+          "eyebrow": "Poreklo",
+          "title": "Devet Jugovića",
+          "paragraphs": [
+            "U Koreniti, u okolini Loznice, nalazi se izvorište Devet Jugovića, odakle dolazi Tronoša. Njegovo ime povezuje nas sa kulturnim pamćenjem ovog kraja. U njemu se susreću stvarno geografsko poreklo vode i predanja koja su oblikovala identitet mesta."
+          ],
+          "statement": "Priroda ovde nije scenografija našeg brenda. Ona je njegovo polazište.",
+          "primaryImage": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "secondaryImage": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "appearance": {
+            "backgroundColor": "#F8F6EF",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-heritage",
+        "type": "heritage-story",
+        "content": {
+          "eyebrow": "Kulturno nasleđe",
+          "title": "Nasleđe koje nije ostalo u prošlosti",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "paragraphs": [
+            "Manastir Tronoša i predanja o Jug Bogdanu i njegovim sinovima deo su kulturnog nasleđa ovog područja. Priče o njima pripadaju svetu predanja, ali njihovo mesto u pamćenju ljudi sasvim je stvarno.",
+            "Za nas je to podsetnik da se vrednost jednog kraja ne meri samo onim što iz njega uzimamo, već i onim što umemo da sačuvamo."
+          ],
+          "appearance": {
+            "backgroundColor": "#EAE5D8",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-people",
+        "type": "people-gallery",
+        "content": {
+          "eyebrow": "Ljudi i zajednica",
+          "title": "Ljudi iza imena",
+          "paragraphs": [
+            "Tronoša danas živi kroz rad ljudi koji je proizvode, partnera koji je predstavljaju i onih koji je biraju.",
+            "Naša namera je da vodu poznatog porekla približimo novim ljudima, ne gubeći vezu sa mestom iz kojeg dolazimo."
+          ],
+          "images": [
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            },
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            },
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            }
+          ],
+          "appearance": {
+            "backgroundColor": "#F8F6EF",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-closing",
+        "type": "editorial-closing",
+        "content": {
+          "eyebrow": "Naše vrednosti",
+          "title": "Čuvamo ono što vredi.",
+          "cta": {
+            "label": "Čuvamo ono što vredi",
+            "pageId": "community"
+          },
+          "appearance": {
+            "backgroundColor": "#173F35",
+            "accentColor": "#F8F6EF"
+          }
+        }
+      }
+    ]
+  }
+}

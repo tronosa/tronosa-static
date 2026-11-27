@@ -11,6 +11,12 @@
   --brand-ivory: #f8f6ef;
   --brand-graphite: #252a28;
 
+  /* Water palette */
+  --brand-water-deep: #214c60;
+  --brand-water: #a8cdd4;
+  --brand-water-light: #dcebf0;
+  --brand-water-mist: #edf6f5;
+
   /* Semantic colors */
   --background: var(--brand-ivory);
   --foreground: var(--brand-graphite);
@@ -30,6 +36,17 @@
 
   --border: #d8d5c9;
   --focus-ring: var(--brand-forest);
+
+  /* Product colors */
+  --product-surface: var(--brand-water-light);
+  --product-surface-subtle: var(--brand-water-mist);
+  --product-foreground: var(--brand-water-deep);
+  --product-accent: var(--brand-mineral-deep);
+  --product-border: var(--brand-water);
+
+  /* Dialog colors */
+  --dialog-surface: var(--surface);
+  --dialog-overlay: var(--brand-graphite);
 
   /* Container widths */
   --container-wide: 90rem;
@@ -91,7 +108,22 @@
   --color-brand-ivory: var(--brand-ivory);
   --color-brand-graphite: var(--brand-graphite);
 
+  --color-brand-water-deep: var(--brand-water-deep);
+  --color-brand-water: var(--brand-water);
+  --color-brand-water-light: var(--brand-water-light);
+  --color-brand-water-mist: var(--brand-water-mist);
+
+  --color-product-surface: var(--product-surface);
+  --color-product-surface-subtle: var(--product-surface-subtle);
+  --color-product-foreground: var(--product-foreground);
+  --color-product-accent: var(--product-accent);
+  --color-product-border: var(--product-border);
+
+  --color-dialog-surface: var(--dialog-surface);
+  --color-dialog-overlay: var(--dialog-overlay);
+
   --animate-nav-enter: nav-enter 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+
   --animate-nav-exit: nav-exit 220ms ease-in both;
 
   @keyframes nav-enter {

@@ -1,0 +1,71 @@
+.tronosa-accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+
+  transition:
+    grid-template-rows 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 150ms ease,
+    visibility 0s linear 200ms;
+}
+
+.tronosa-accordion-content[data-state="open"] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+
+  transition:
+    grid-template-rows 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease,
+    visibility 0s;
+}
+
+.tronosa-accordion-content-inner {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tronosa-accordion-content[data-state="closed"]
+  > .tronosa-accordion-content-inner {
+  visibility: hidden;
+}
+
+.tronosa-accordion-content[data-state="open"]
+  > .tronosa-accordion-content-inner {
+  visibility: visible;
+}
+
+@media (min-width: 1024px) {
+  .tronosa-accordion-content.tronosa-accordion-content-persistent[data-state] {
+    display: block;
+    height: auto;
+    max-height: none;
+    visibility: visible;
+    opacity: 1;
+    overflow: visible;
+    transition: none;
+    animation: none;
+  }
+
+  .tronosa-accordion-content.tronosa-accordion-content-persistent[data-state]
+    > .tronosa-accordion-content-inner {
+    display: block;
+    height: auto;
+    max-height: none;
+    visibility: visible;
+    opacity: 1;
+    overflow: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tronosa-accordion-content,
+  .tronosa-accordion-content[data-state="open"],
+  .tronosa-accordion-content[data-state="closed"] {
+    transition: none;
+    animation: none;
+  }
+}

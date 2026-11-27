@@ -1,0 +1,148 @@
+{
+  "id": "our-water",
+  "slug": "nasa-voda",
+  "status": "published",
+  "seo": {
+    "title": "Tronoša – prirodna izvorska voda | Poreklo i kvalitet",
+    "description": "Upoznajte karakter prirodne izvorske vode Tronoša, njeno poreklo, sastav i način na koji brinemo o kvalitetu.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "our-water-hero",
+        "type": "image-hero",
+        "content": {
+          "title": "Svežina koja podseća na izvor.",
+          "description": "Postoje ukusi koje ne morate dugo da upoznajete da biste ih zapamtili. Tronoša je prirodna izvorska voda iz Korenite, u okolini Loznice. Pitka, nenametljiva i sa karakterom kraja iz kojeg dolazi.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            },
+            "tablet": {
+              "src": "/images/placeholder.webp",
+              "width": 1024,
+              "height": 768
+            },
+            "mobile": {
+              "src": "/images/placeholder.webp",
+              "width": 720,
+              "height": 960
+            }
+          },
+          "cta": {
+            "label": "Pogledajte proizvode",
+            "pageId": "products"
+          }
+        }
+      },
+      {
+        "id": "our-water-origin",
+        "type": "editorial-media",
+        "content": {
+          "title": "Pitkost je stvar ukusa. Poreklo nije.",
+          "paragraphs": [
+            "Ono što osetite u gutljaju pripada vašem doživljaju. Ono što znamo o vodi počinje na konkretnom mestu: izvorištu Devet Jugovića. Zato nam je važno da, osim prepoznatljivog osećaja svežine, možete da upoznate i njeno poreklo."
+          ],
+          "mediaPosition": "left",
+          "media": {
+            "kind": "image",
+            "image": {
+              "alt": "Prirodni predeo u okolini Tronoše",
+              "desktop": {
+                "src": "/images/tronosa-natural-landscape.webp",
+                "width": 1200,
+                "height": 900
+              }
+            }
+          },
+          "cta": {
+            "label": "Upoznajte naš izvor",
+            "pageId": "our-story"
+          }
+        }
+      },
+      {
+        "id": "our-water-composition",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Šta se nalazi u vašoj čaši?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Sastav vode je deo njenog prirodnog identiteta. Informacije o mineralnom sastavu Tronoše donosimo pregledno, kako biste mogli da znate šta birate."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "our-water-quality",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Pažnja se ne završava na izvoru."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Od izvorišta do zatvorenog pakovanja, kvalitet je odgovornost ljudi koji učestvuju u proizvodnji. Tehnološke i laboratorijske provere deo su načina na koji brinemo o proizvodu koji nosi naše ime."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "our-water-faq",
+        "type": "faq",
+        "content": {
+          "title": "Najčešća pitanja",
+          "items": [
+            {
+              "question": "Odakle dolazi Tronoša?",
+              "answer": "Sa izvorišta Devet Jugovića, u području Korenite kod Loznice."
+            },
+            {
+              "question": "Da li je Tronoša gazirana ili negazirana?",
+              "answer": "U ponudi su obe varijante. Pregled pakovanja nalazi se na stranici Proizvodi."
+            },
+            {
+              "question": "Gde mogu da proverim sastav?",
+              "answer": "Na deklaraciji proizvoda."
+            },
+            {
+              "question": "Kako se čuva voda?",
+              "answer": "Pratite uputstvo na deklaraciji i čuvajte pakovanje od direktnog sunca i izvora toplote."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

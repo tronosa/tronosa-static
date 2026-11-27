@@ -25,7 +25,12 @@ export type ProductExperienceSection = z.infer<
   typeof productExperienceSectionSchema
 >;
 
-export type ProductExperienceProps = ProductExperienceContent;
+export type ProductExperienceProps = Omit<
+  ProductExperienceContent,
+  "productIds" | "products"
+> & {
+  products: ExperienceProduct[];
+};
 
 export type ProductRevealProps = ProductExperienceContent["reveal"];
 

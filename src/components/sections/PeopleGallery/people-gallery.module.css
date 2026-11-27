@@ -1,0 +1,42 @@
+@keyframes gallery-parallax {
+  from {
+    transform: translateY(var(--gallery-parallax-from));
+  }
+
+  to {
+    transform: translateY(var(--gallery-parallax-to));
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .gallery[data-count="3"] {
+      view-timeline-name: --people-gallery;
+      view-timeline-axis: block;
+    }
+
+    .gallery[data-count="3"] .item {
+      animation-name: gallery-parallax;
+      animation-duration: 1ms;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --people-gallery;
+      animation-range: entry 0% exit 100%;
+    }
+
+    .item[data-position="0"] {
+      --gallery-parallax-from: -1.25rem;
+      --gallery-parallax-to: 1.25rem;
+    }
+
+    .item[data-position="1"] {
+      --gallery-parallax-from: 2.5rem;
+      --gallery-parallax-to: -2.5rem;
+    }
+
+    .item[data-position="2"] {
+      --gallery-parallax-from: -0.75rem;
+      --gallery-parallax-to: 0.75rem;
+    }
+  }
+}

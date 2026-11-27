@@ -1,28 +1,46 @@
 {
   "Navigation": {
     "home": "Home",
-    "about": "About us",
     "blog": "Stories from the Spring",
     "products": "Products",
-    "contact": "Contact"
+    "contact": "Contact",
+    "ourWater": "Our Water",
+    "partners": "For Partners",
+    "storeLocator": "Where to Buy",
+    "ourStory": "Our Story"
   },
   "Footer": {
     "brand": "TRONOŠA",
     "eyebrow": "TRONOŠA NATURAL SPRING WATER",
     "title": "Bold and refreshing.",
-    "description": "Water with a clear origin and distinctive freshness. Straight from nature, with character.",
-    "explore": "Explore",
-    "more": "More information",
+    "description": "Natural spring water with the character of the region it comes from.",
     "rights": "All rights reserved.",
     "copyright": "© {year} Tronoša. {rights}",
-    "home": "Home",
-    "about": "About us",
-    "products": "Products",
-    "blog": "Stories from the Spring",
-    "contact": "Contact",
-    "ctaEyebrow": "BUSINESS PARTNERSHIPS",
-    "ctaTitle": "Let's start a conversation.",
-    "ctaLabel": "Contact us"
+    "navigationLabel": "Footer navigation",
+    "legalNavigationLabel": "Legal information",
+    "groups": {
+      "company": "Get to Know Us",
+      "products": "Products",
+      "partners": "For Partners",
+      "information": "Information"
+    },
+    "links": {
+      "home": "Home",
+      "ourWater": "Our Water",
+      "ourStory": "Our Story",
+      "community": "Preserving What Matters",
+      "blog": "Stories from the Spring",
+      "allProducts": "All Products",
+      "partners": "Business Partnerships",
+      "horeca": "HoReCa",
+      "privateLabel": "Private Label",
+      "corporateWater": "Water for Businesses",
+      "distribution": "Distribution and Wholesale",
+      "storeLocator": "Where to Buy",
+      "contact": "Contact",
+      "privacyPolicy": "Privacy Policy",
+      "cookiePolicy": "Cookie Policy"
+    }
   },
   "Common": {
     "readMore": "Read more",
@@ -187,10 +205,10 @@
         "tooLong": "Enter no more than 3000 characters."
       }
     },
-    "submit": "Send message",
+    "submit": "Send us a message",
     "submitting": "Sending message...",
-    "success": "Your message has been submitted successfully. Thank you for contacting us.",
-    "error": "We could not confirm that your message was submitted. Please try again later.",
+    "success": "Thank you for writing to us. Your message has been sent.",
+    "error": "Your message could not be sent. Please try again or contact us by email.",
     "rateLimited": "Too many requests. Please try again later.",
     "unavailable": "The contact form is temporarily unavailable.",
     "required": "Please review the highlighted fields.",
@@ -230,6 +248,45 @@
       "title": "Explore our locations",
       "description": "Find your nearest location on the interactive map.",
       "button": "Load interactive map"
+    }
+  },
+  "Products": {
+    "facts": {
+      "volume": "Volume",
+      "waterType": "Water type",
+      "category": "Product line"
+    },
+    "waterTypes": {
+      "still": "Still",
+      "sparkling": "Sparkling"
+    },
+    "categories": {
+      "still": "Tronoša Still Water",
+      "sparkling": "Tronoša Sparkling Water",
+      "sport": "Tronoša Sport",
+      "kids": "My Bottle",
+      "large-format": "Large format"
+    },
+    "information": {
+      "declaration": "Declaration",
+      "storage": "Storage instructions",
+      "availability": "Availability"
+    },
+    "catalog": {
+      "waterType": "Water type",
+      "volume": "Volume",
+      "allWaterTypes": "All water types",
+      "allVolumes": "All volumes",
+      "reset": "Reset filters",
+      "empty": "There are currently no products matching the selected criteria.",
+      "results": "{count, plural, one {# product} other {# products}}",
+      "preview": "Preliminary catalogue preview. The product range and product information are subject to final confirmation."
+    },
+    "dialog": {
+      "eyebrow": "Product information",
+      "trigger": "More about this product",
+      "triggerAccessible": "More about this product: {product}",
+      "close": "Close"
     }
   }
 }

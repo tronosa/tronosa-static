@@ -1,28 +1,46 @@
 {
   "Navigation": {
     "home": "Početna",
-    "about": "O nama",
     "blog": "Priče sa izvora",
     "products": "Proizvodi",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "ourWater": "Naša voda",
+    "partners": "Za partnere",
+    "storeLocator": "Gde kupiti",
+    "ourStory": "Naša priča"
   },
   "Footer": {
     "brand": "TRONOŠA",
-    "eyebrow": "PRIRODNA IZVORSKA VODA TRONOŠA",
+    "eyebrow": "TRONOŠA PRIRODNA IZVORSKA VODA",
     "title": "I britka i pitka.",
-    "description": "Voda jasnog porekla i prepoznatljive svežine. Direktno iz prirode, sa karakterom.",
-    "explore": "Istražite",
-    "more": "Više informacija",
+    "description": "Prirodna izvorska voda sa karakterom kraja iz kojeg dolazi.",
     "rights": "Sva prava zadržana.",
     "copyright": "© {year} Tronoša. {rights}",
-    "home": "Početna",
-    "about": "O nama",
-    "products": "Proizvodi",
-    "blog": "Priče sa izvora",
-    "contact": "Kontakt",
-    "ctaEyebrow": "POSLOVNA SARADNJA",
-    "ctaTitle": "Započnimo razgovor.",
-    "ctaLabel": "Kontaktirajte nas"
+    "navigationLabel": "Navigacija u podnožju",
+    "legalNavigationLabel": "Pravne informacije",
+    "groups": {
+      "company": "Upoznajte nas",
+      "products": "Proizvodi",
+      "partners": "Za partnere",
+      "information": "Informacije"
+    },
+    "links": {
+      "home": "Početna",
+      "ourWater": "Naša voda",
+      "ourStory": "Naša priča",
+      "community": "Čuvamo ono što vredi",
+      "blog": "Priče sa izvora",
+      "allProducts": "Svi proizvodi",
+      "partners": "Poslovna saradnja",
+      "horeca": "HoReCa",
+      "privateLabel": "Private Label",
+      "corporateWater": "Voda za kompanije",
+      "distribution": "Distribucija i veleprodaja",
+      "storeLocator": "Gde kupiti",
+      "contact": "Kontakt",
+      "privacyPolicy": "Politika privatnosti",
+      "cookiePolicy": "Politika kolačića"
+    }
   },
   "Common": {
     "readMore": "Pročitaj više",
@@ -189,8 +207,8 @@
     },
     "submit": "Pošaljite poruku",
     "submitting": "Slanje poruke...",
-    "success": "Vaša poruka je uspešno prosleđena. Hvala što ste nas kontaktirali.",
-    "error": "Nismo mogli da potvrdimo slanje poruke. Pokušajte ponovo kasnije.",
+    "success": "Hvala što ste nam pisali. Vaša poruka je poslata.",
+    "error": "Poruka nije poslata. Pokušajte ponovo ili nas kontaktirajte putem emaila.",
     "rateLimited": "Previše zahteva. Pokušajte ponovo kasnije.",
     "unavailable": "Kontakt forma trenutno nije dostupna.",
     "required": "Proverite označena polja.",
@@ -230,6 +248,45 @@
       "title": "Istražite prodajna mesta",
       "description": "Pronađite najbližu lokaciju na interaktivnoj mapi.",
       "button": "Učitajte interaktivnu mapu"
+    }
+  },
+  "Products": {
+    "facts": {
+      "volume": "Zapremina",
+      "waterType": "Tip vode",
+      "category": "Linija proizvoda"
+    },
+    "waterTypes": {
+      "still": "Negazirana",
+      "sparkling": "Gazirana"
+    },
+    "categories": {
+      "still": "Negazirana Tronoša",
+      "sparkling": "Gazirana Tronoša",
+      "sport": "Tronoša Sport",
+      "kids": "Moja boca",
+      "large-format": "Veliko pakovanje"
+    },
+    "information": {
+      "declaration": "Deklaracija",
+      "storage": "Način čuvanja",
+      "availability": "Dostupnost"
+    },
+    "catalog": {
+      "waterType": "Tip vode",
+      "volume": "Zapremina",
+      "allWaterTypes": "Svi tipovi vode",
+      "allVolumes": "Sve zapremine",
+      "reset": "Poništi filtere",
+      "empty": "Trenutno nema proizvoda koji odgovaraju izabranim kriterijumima.",
+      "results": "{count, plural, one {# proizvod} few {# proizvoda} other {# proizvoda}}",
+      "preview": "Preliminarni prikaz kataloga. Asortiman i podaci o proizvodima podležu konačnoj potvrdi."
+    },
+    "dialog": {
+      "eyebrow": "Informacije o proizvodu",
+      "trigger": "Više o proizvodu",
+      "triggerAccessible": "Više o proizvodu: {product}",
+      "close": "Zatvori"
     }
   }
 }

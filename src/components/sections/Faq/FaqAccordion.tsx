@@ -1,61 +1,55 @@
 "use client";
 
-import * as Accordion from "@radix-ui/react-accordion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionTrigger,
+  AccordionContent,
+  AccordionIndicator,
+} from "@/components/ui/Accordion";
 
 import {
   faqAccordionVariants,
   faqItemVariants,
   faqTriggerVariants,
   faqIconContainerVariants,
-  faqIconVariants,
   faqAnswerVariants,
 } from "./faq.variants";
 
 import type { FaqAccordionProps } from "./types";
 
-import "./faq.css";
-
 export function FaqAccordion({ items }: FaqAccordionProps) {
   return (
-    <Accordion.Root
+    <Accordion
       type="single"
       collapsible
       className={faqAccordionVariants()}
+      data-faq-accordion
     >
       {items.map((item, index) => (
-        <Accordion.Item
+        <AccordionItem
           key={index}
           value={`faq-item-${index}`}
           className={faqItemVariants()}
         >
-          <Accordion.Header asChild>
+          <AccordionHeader asChild>
             <h3>
-              <Accordion.Trigger className={faqTriggerVariants()}>
+              <AccordionTrigger className={faqTriggerVariants()}>
                 <span className="min-w-0 wrap-break-word">{item.question}</span>
 
                 <span aria-hidden="true" className={faqIconContainerVariants()}>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    className={faqIconVariants()}
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
+                  <AccordionIndicator />
                 </span>
-              </Accordion.Trigger>
+              </AccordionTrigger>
             </h3>
-          </Accordion.Header>
+          </AccordionHeader>
 
-          <Accordion.Content forceMount className="tronosa-faq-content">
-            <div className="tronosa-faq-content-inner">
-              <p className={faqAnswerVariants()}>{item.answer}</p>
-            </div>
-          </Accordion.Content>
-        </Accordion.Item>
+          <AccordionContent>
+            <p className={faqAnswerVariants()}>{item.answer}</p>
+          </AccordionContent>
+        </AccordionItem>
       ))}
-    </Accordion.Root>
+    </Accordion>
   );
 }

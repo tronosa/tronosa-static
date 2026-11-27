@@ -1,0 +1,146 @@
+{
+  "id": "our-story",
+  "slug": "our-story",
+  "status": "published",
+  "seo": {
+    "title": "Tronoša – The Story of the Devet Jugovića Spring",
+    "description": "Discover the origins of Tronoša, the natural surroundings of Korenita near Loznica, and the cultural heritage of the region it comes from.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "our-story-hero",
+        "type": "image-hero",
+        "content": {
+          "eyebrow": "Our Story",
+          "title": "A name that carries the identity of a region.",
+          "description": "Tronoša is not a name chosen simply to sound good on a label. It takes us back to the place we belong: a region of forests, springs, stone paths and stories passed down through generations. This is where our story begins.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          }
+        }
+      },
+      {
+        "id": "our-story-origin",
+        "type": "editorial-composition",
+        "content": {
+          "eyebrow": "Origin",
+          "title": "Devet Jugovića",
+          "paragraphs": [
+            "In Korenita, near Loznica, lies the Devet Jugovića spring, where Tronoša comes from. Its name connects us with the cultural memory of this region. It brings together the actual geographical origin of the water and the legends that have shaped the identity of the place."
+          ],
+          "statement": "Nature is not a backdrop for our brand. It is our starting point.",
+          "primaryImage": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "secondaryImage": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "appearance": {
+            "backgroundColor": "#F8F6EF",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-heritage",
+        "type": "heritage-story",
+        "content": {
+          "eyebrow": "Cultural Heritage",
+          "title": "Heritage that lives beyond the past",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "paragraphs": [
+            "Tronoša Monastery and the legends of Jug Bogdan and his sons are part of the cultural heritage of this area. Their stories belong to the world of legend, but their place in people's collective memory is very real.",
+            "For us, this is a reminder that the value of a region is measured not only by what we take from it, but also by what we know how to preserve."
+          ],
+          "appearance": {
+            "backgroundColor": "#EAE5D8",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-people",
+        "type": "people-gallery",
+        "content": {
+          "eyebrow": "People and Community",
+          "title": "The people behind the name",
+          "paragraphs": [
+            "Today, Tronoša lives through the work of the people who produce it, the partners who represent it and those who choose it.",
+            "Our intention is to introduce water of known origin to new people, without losing our connection to the place we come from."
+          ],
+          "images": [
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            },
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            },
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            }
+          ],
+          "appearance": {
+            "backgroundColor": "#F8F6EF",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-closing",
+        "type": "editorial-closing",
+        "content": {
+          "eyebrow": "Our Values",
+          "title": "Preserving what matters.",
+          "cta": {
+            "label": "Preserving What Matters",
+            "pageId": "community"
+          },
+          "appearance": {
+            "backgroundColor": "#173F35",
+            "accentColor": "#F8F6EF"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -9,7 +9,8 @@ import {
 
 type CurrentValue = "page" | "location";
 
-type NavigationPageId = "home" | "about" | "products" | "blog" | "contact";
+type NavigationPageId =
+  "home" | "our-story" | "products" | "blog" | "contact" | "our-water";
 
 type NavigationExpectation = {
   label: string;
@@ -19,21 +20,24 @@ type NavigationExpectation = {
 const NAVIGATION_LABELS = {
   "sr-Cyrl": {
     home: "Почетна",
-    about: "О нама",
+    "our-story": "Наша прича",
+    "our-water": "Наша вода",
     products: "Производи",
     blog: "Приче са извора",
     contact: "Контакт",
   },
   "sr-Latn": {
     home: "Početna",
-    about: "O nama",
+    "our-story": "Naša priča",
+    "our-water": "Naša voda",
     products: "Proizvodi",
     blog: "Priče sa izvora",
     contact: "Kontakt",
   },
   en: {
     home: "Home",
-    about: "About us",
+    "our-story": "Our Story",
+    "our-water": "Our Water",
     products: "Products",
     blog: "Stories from the Spring",
     contact: "Contact",
@@ -62,6 +66,13 @@ function getExpectedNavigation(route: ContentRoute): NavigationExpectation {
   if (route.kind === "article") {
     return {
       label: labels.blog,
+      current: "location",
+    };
+  }
+
+  if (route.id === "community") {
+    return {
+      label: labels["our-story"],
       current: "location",
     };
   }
@@ -99,7 +110,7 @@ function getRequiredPageRoute(
 
 const englishHome = getRequiredPageRoute("home", "en");
 
-const englishAbout = getRequiredPageRoute("about", "en");
+const englishOurStory = getRequiredPageRoute("our-story", "en");
 
 const englishProducts = getRequiredPageRoute("products", "en");
 
@@ -239,16 +250,16 @@ test.describe("Navigation accessibility @a11y", () => {
 
       await navigation
         .getByRole("link", {
-          name: NAVIGATION_LABELS.en.about,
+          name: NAVIGATION_LABELS.en["our-story"],
           exact: true,
         })
         .click();
 
-      await expect(page).toHaveURL(englishAbout.pathname);
+      await expect(page).toHaveURL(englishOurStory.pathname);
 
       await expectCurrentNavigation(
         navigation,
-        NAVIGATION_LABELS.en.about,
+        NAVIGATION_LABELS.en["our-story"],
         "page",
       );
 

@@ -1,0 +1,135 @@
+{
+  "id": "community",
+  "slug": "our-story/preserving-what-matters",
+  "status": "published",
+  "seo": {
+    "title": "Preserving What Matters | Tronoša",
+    "description": "Learn more about Tronoša initiatives that support knowledge, culture, nature and the local community.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "community-hero",
+        "type": "image-hero",
+        "content": {
+          "title": "Preserving what matters.",
+          "description": "Some things belong not only to us, but also to those who come after us. Nature, knowledge, culture and community are among them. We want our relationship with them to be reflected in what we do, not just in what we say.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/tronosa-natural-landscape.webp",
+              "width": 1200,
+              "height": 900
+            }
+          }
+        }
+      },
+      {
+        "id": "community-knowledge",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Knowledge that moves forward"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Supporting education and bringing young people together gives us an opportunity to contribute to the exchange of ideas and the creation of new opportunities. Student initiatives and professional gatherings have a special place in that story."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "community-culture",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Culture that connects us"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "The heritage of our region is made up of more than landmarks. It is also shaped by the people who understand it, nurture it and pass it on. We want to support opportunities that keep culture part of a living experience."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "community-nature",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Nature we belong to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Our relationship with nature begins with understanding that the spring and its surroundings are not inexhaustible resources. That is why it matters to us that the initiatives we support have a meaningful purpose and demonstrate a responsible approach to the place where we live."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "community-people",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "The community we grow in"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "The most valuable collaborations often begin close to home. We are open to ideas that bring people together and deliver genuine benefits to the community."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

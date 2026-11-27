@@ -1,0 +1,182 @@
+[
+  {
+    "id": "still-500ml",
+    "category": "still",
+    "waterType": "still",
+    "volumeMl": 500,
+    "status": "draft",
+    "image": {
+      "src": "/products/still-water-500ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#E5EEE7",
+      "accentColor": "#244D39"
+    },
+    "featured": true,
+    "sortOrder": 10
+  },
+  {
+    "id": "still-750ml",
+    "category": "still",
+    "waterType": "still",
+    "volumeMl": 750,
+    "status": "draft",
+    "image": {
+      "src": "/products/still-water-750ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#E5EEE7",
+      "accentColor": "#244D39"
+    },
+    "featured": false,
+    "sortOrder": 20
+  },
+  {
+    "id": "still-880ml",
+    "category": "still",
+    "waterType": "still",
+    "volumeMl": 880,
+    "status": "draft",
+    "image": {
+      "src": "/products/still-water-880ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#E5EEE7",
+      "accentColor": "#244D39"
+    },
+    "featured": false,
+    "sortOrder": 30
+  },
+  {
+    "id": "still-1500ml",
+    "category": "still",
+    "waterType": "still",
+    "volumeMl": 1500,
+    "status": "draft",
+    "image": {
+      "src": "/products/still-water-1500ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#E5EEE7",
+      "accentColor": "#244D39"
+    },
+    "featured": false,
+    "sortOrder": 40
+  },
+  {
+    "id": "still-6000ml",
+    "category": "still",
+    "waterType": "still",
+    "volumeMl": 6000,
+    "status": "draft",
+    "image": {
+      "src": "/products/still-water-6000ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#E5EEE7",
+      "accentColor": "#244D39"
+    },
+    "featured": false,
+    "sortOrder": 50
+  },
+  {
+    "id": "still-18900ml",
+    "category": "large-format",
+    "waterType": "still",
+    "volumeMl": 18900,
+    "status": "draft",
+    "image": {
+      "src": "/products/still-water-189000ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#E5EEE7",
+      "accentColor": "#244D39"
+    },
+    "featured": false,
+    "sortOrder": 60
+  },
+  {
+    "id": "sparkling-500ml",
+    "category": "sparkling",
+    "waterType": "sparkling",
+    "volumeMl": 500,
+    "status": "draft",
+    "image": {
+      "src": "/products/sparkling-water-500ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#DCEBF0",
+      "accentColor": "#214C60"
+    },
+    "featured": false,
+    "sortOrder": 70
+  },
+  {
+    "id": "sparkling-750ml",
+    "category": "sparkling",
+    "waterType": "sparkling",
+    "volumeMl": 750,
+    "status": "draft",
+    "image": {
+      "src": "/products/sparkling-water-750ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#DCEBF0",
+      "accentColor": "#214C60"
+    },
+    "featured": false,
+    "sortOrder": 80
+  },
+  {
+    "id": "moja-boca-330ml",
+    "category": "kids",
+    "waterType": "still",
+    "volumeMl": 330,
+    "status": "draft",
+    "image": {
+      "src": "/products/still-water-330ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#FFF0DD",
+      "accentColor": "#79512C"
+    },
+    "featured": false,
+    "sortOrder": 90
+  },
+  {
+    "id": "sport-880ml",
+    "category": "sport",
+    "waterType": "still",
+    "volumeMl": 880,
+    "status": "draft",
+    "image": {
+      "src": "/products/tronosa-sport-880ml.webp",
+      "width": 600,
+      "height": 1200
+    },
+    "appearance": {
+      "backgroundColor": "#DDEBE7",
+      "accentColor": "#245A50"
+    },
+    "featured": false,
+    "sortOrder": 100
+  }
+]

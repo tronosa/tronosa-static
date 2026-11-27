@@ -2,26 +2,28 @@ import "server-only";
 
 import type { Locale } from "@/i18n/config";
 
-import { getPublishedContent } from "@/lib/content/registry";
-
 import { getContentHref } from "@/lib/content/content-paths";
+import { getPublishedContent } from "@/lib/content/registry";
 
 import { navigationItems } from "./navigation.config";
 
 export function getNavigationItems(locale: Locale) {
-  const entries = getPublishedContent().filter(
-    (entry) => entry.locale === locale,
+  const entries = getPublishedContent()
+    .filter((entry) => entry.locale === locale)
+    .map((entry) => ({
+      kind: entry.kind,
+      id: entry.data.id,
+      href: getContentHref(entry),
+    }));
+
+  const pages = new Map(
+    entries
+      .filter((entry) => entry.kind === "page")
+      .map((entry) => [entry.id, entry]),
   );
 
-  const entriesWithPaths = entries.map((entry) => ({
-    entry,
-    href: getContentHref(entry),
-  }));
-
   return navigationItems.flatMap((item) => {
-    const target = entriesWithPaths.find(
-      ({ entry }) => entry.kind === "page" && entry.data.id === item.id,
-    );
+    const target = pages.get(item.id);
 
     if (!target) {
       return [];
@@ -30,9 +32,9 @@ export function getNavigationItems(locale: Locale) {
     const relatedPaths =
       target.href === "/"
         ? []
-        : entriesWithPaths
-            .filter(({ href }) => href.startsWith(`${target.href}/`))
-            .map(({ href }) => href);
+        : entries
+            .filter((entry) => entry.href.startsWith(`${target.href}/`))
+            .map((entry) => entry.href);
 
     return [
       {

@@ -17,16 +17,13 @@ export const faqItemVariants = cva([
 ]);
 
 export const faqTriggerVariants = cva([
-  "group/faq flex min-h-16 w-full",
-  "items-center justify-between gap-6",
-  "cursor-pointer px-5 py-5 sm:px-7",
-  "text-left text-base font-medium text-primary",
+  "min-h-16 gap-6",
+  "px-5 py-5 sm:px-7",
+  "text-base font-medium text-primary",
   "md:text-lg",
-  "transition-colors duration-300",
+  "transition-colors duration-200",
   "data-[state=closed]:hover:bg-surface-muted/40",
-  "focus-visible:outline-2",
   "focus-visible:-outline-offset-4",
-  "focus-visible:outline-focus-ring",
   "motion-reduce:transition-none",
 ]);
 
@@ -36,18 +33,9 @@ export const faqIconContainerVariants = cva([
   "rounded-full border border-primary/20",
   "text-primary",
   "transition-[background-color,border-color,color]",
-  "duration-300 ease-out",
-  "group-hover/faq:bg-primary",
-  "group-hover/faq:text-primary-foreground",
-  "group-data-[state=closed]/faq:group-hover/faq:bg-primary",
-  "group-data-[state=closed]/faq:group-hover/faq:text-primary-foreground",
-  "motion-reduce:transition-none",
-]);
-
-export const faqIconVariants = cva([
-  "size-5 shrink-0",
-  "transition-transform duration-300 ease-out",
-  "group-data-[state=open]/faq:rotate-45",
+  "duration-200 ease-out",
+  "group-hover/accordion:bg-primary",
+  "group-hover/accordion:text-primary-foreground",
   "motion-reduce:transition-none",
 ]);
 

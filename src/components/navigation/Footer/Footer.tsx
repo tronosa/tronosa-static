@@ -1,4 +1,3 @@
-import { getContentHref } from "@/lib/content/content-paths";
 import { hasLocale } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 
@@ -8,7 +7,8 @@ import { Typography } from "@/components/ui/Typography";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
-import { getContentById } from "@/lib/content/registry";
+import { getFooterNavigation } from "./footer.server";
+import { FooterNavigation } from "./FooterNavigation";
 
 import {
   footerVariants,
@@ -21,47 +21,12 @@ import {
   footerHeroContentVariants,
   footerTitleVariants,
   footerDescriptionVariants,
-  footerContactVariants,
-  footerContactLabelVariants,
-  footerContactLinkVariants,
-  footerContactArrowVariants,
-  footerNavigationVariants,
-  footerColumnVariants,
-  footerColumnHeaderVariants,
-  footerColumnNumberVariants,
-  footerColumnTitleVariants,
-  footerLinksVariants,
   footerLinkVariants,
-  footerLinkArrowVariants,
   footerWordmarkVariants,
   footerWordmarkSvgVariants,
   footerBottomVariants,
+  footerLegalLinksVariants,
 } from "./footer.variants";
-
-const PRIMARY_PAGES = ["home", "about", "products", "blog"] as const;
-
-const SECONDARY_PAGES = ["contact"] as const;
-
-type FooterPageId =
-  (typeof PRIMARY_PAGES)[number] | (typeof SECONDARY_PAGES)[number];
-
-function ArrowIcon({ className }: { className: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      focusable="false"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M5 12h14m-6-6 6 6-6 6" />
-    </svg>
-  );
-}
 
 function WaterIcon() {
   return (
@@ -76,6 +41,7 @@ function WaterIcon() {
       strokeWidth="1.7"
     >
       <path d="M12 2C9 7 3 13 3 18a9 9 0 0 0 18 0c0-5-6-11-9-16Z" />
+
       <path d="M7.5 18a4.5 4.5 0 0 0 4.5 4.5" strokeLinecap="round" />
     </svg>
   );
@@ -90,36 +56,17 @@ export async function Footer() {
 
   const t = await getTranslations("Footer");
 
-  function resolveHref(pageId: FooterPageId) {
-    const entry = getContentById("page", locale, pageId);
+  const { groups, legalLinks } = getFooterNavigation(locale);
 
-    if (!entry || entry.kind !== "page") {
-      return null;
-    }
-
-    return getContentHref(entry);
-  }
-
-  function renderLinks(pages: readonly FooterPageId[]) {
-    return pages.map((pageId) => {
-      const href = resolveHref(pageId);
-
-      if (!href) {
-        return null;
-      }
-
-      return (
-        <li key={pageId}>
-          <Link href={href} prefetch={false} className={footerLinkVariants()}>
-            <span>{t(pageId)}</span>
-            <ArrowIcon className={footerLinkArrowVariants()} />
-          </Link>
-        </li>
-      );
-    });
-  }
-
-  const contactHref = resolveHref("contact");
+  const navigationGroups = groups.map((group) => ({
+    id: group.id,
+    label: t(`groups.${group.translationKey}`),
+    links: group.links.map((item) => ({
+      id: item.id,
+      href: item.href,
+      label: t(`links.${item.translationKey}`),
+    })),
+  }));
 
   return (
     <footer className={footerVariants()}>
@@ -130,6 +77,7 @@ export async function Footer() {
               <span className={footerBrandMarkVariants()}>
                 <WaterIcon />
               </span>
+
               <span>{t("brand")}</span>
             </div>
 
@@ -148,91 +96,25 @@ export async function Footer() {
                 {t("description")}
               </Typography>
             </div>
-
-            {contactHref && (
-              <div className={footerContactVariants()}>
-                <Typography as="p" className={footerContactLabelVariants()}>
-                  {t("ctaEyebrow")}
-                </Typography>
-
-                <Link
-                  href={contactHref}
-                  prefetch={false}
-                  className={footerContactLinkVariants()}
-                >
-                  <span>{t("ctaLabel")}</span>
-                  <ArrowIcon className={footerContactArrowVariants()} />
-                </Link>
-              </div>
-            )}
           </div>
 
-          <div className={footerNavigationVariants()}>
-            <nav
-              aria-labelledby="footer-explore-title"
-              className={footerColumnVariants()}
-            >
-              <div className={footerColumnHeaderVariants()}>
-                <span
-                  aria-hidden="true"
-                  className={footerColumnNumberVariants()}
-                >
-                  01
-                </span>
+          <FooterNavigation
+            label={t("navigationLabel")}
+            groups={navigationGroups}
+          />
 
-                <Typography
-                  as="h2"
-                  id="footer-explore-title"
-                  className={footerColumnTitleVariants()}
-                >
-                  {t("explore")}
-                </Typography>
-              </div>
-
-              <ul className={footerLinksVariants()}>
-                {renderLinks(PRIMARY_PAGES)}
-              </ul>
-            </nav>
-
-            <nav
-              aria-labelledby="footer-more-title"
-              className={footerColumnVariants()}
-            >
-              <div className={footerColumnHeaderVariants()}>
-                <span
-                  aria-hidden="true"
-                  className={footerColumnNumberVariants()}
-                >
-                  02
-                </span>
-
-                <Typography
-                  as="h2"
-                  id="footer-more-title"
-                  className={footerColumnTitleVariants()}
-                >
-                  {t("more")}
-                </Typography>
-              </div>
-
-              <ul className={footerLinksVariants()}>
-                {renderLinks(SECONDARY_PAGES)}
-              </ul>
-            </nav>
-          </div>
-
-          <div className={footerWordmarkVariants()}>
+          <div aria-hidden="true" className={footerWordmarkVariants()}>
             <svg
-              viewBox="0 0 1000 180"
-              role="presentation"
+              viewBox="0 0 1000 220"
               aria-hidden="true"
               focusable="false"
               preserveAspectRatio="xMidYMid meet"
+              overflow="visible"
               className={footerWordmarkSvgVariants()}
             >
               <text
                 x="500"
-                y="135"
+                y="180"
                 textAnchor="middle"
                 fontFamily="Arial, sans-serif"
                 fontSize="174"
@@ -253,6 +135,24 @@ export async function Footer() {
                 rights: t("rights"),
               })}
             </span>
+
+            {legalLinks.length > 0 && (
+              <nav aria-label={t("legalNavigationLabel")}>
+                <ul role="list" className={footerLegalLinksVariants()}>
+                  {legalLinks.map((item) => (
+                    <li key={item.id}>
+                      <Link
+                        href={item.href}
+                        prefetch={false}
+                        className={footerLinkVariants()}
+                      >
+                        {t(`links.${item.translationKey}`)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
           </div>
         </div>
       </Container>

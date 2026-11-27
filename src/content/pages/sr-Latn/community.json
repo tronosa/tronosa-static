@@ -1,0 +1,135 @@
+{
+  "id": "community",
+  "slug": "nasa-prica/cuvamo-ono-sto-vredi",
+  "status": "published",
+  "seo": {
+    "title": "Čuvamo ono što vredi | Tronoša",
+    "description": "Saznajte više o inicijativama Tronoše koje podržavaju znanje, kulturu, prirodu i lokalnu zajednicu.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "community-hero",
+        "type": "image-hero",
+        "content": {
+          "title": "Čuvamo ono što vredi.",
+          "description": "Neke stvari ne pripadaju samo nama, već i ljudima koji dolaze posle nas. Priroda, znanje, kultura i zajednica među njima su. Želimo da naš odnos prema njima bude vidljiv kroz ono što radimo, a ne samo kroz ono što govorimo.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/tronosa-natural-landscape.webp",
+              "width": 1200,
+              "height": 900
+            }
+          }
+        }
+      },
+      {
+        "id": "community-knowledge",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Znanje koje ide dalje"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Podrška obrazovanju i susretima mladih ljudi prilika je da doprinesemo razmeni ideja i stvaranju novih mogućnosti. Posebno mesto u toj priči imaju studentske inicijative i stručna okupljanja."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "community-culture",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Kultura koja nas povezuje"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Nasleđe našeg kraja ne čine samo znamenitosti. Čine ga i ljudi koji ga poznaju, neguju i prenose dalje. Želimo da podržimo prilike u kojima kultura ostaje deo živog iskustva."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "community-nature",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Priroda kojoj pripadamo"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Naš odnos prema prirodi počinje razumevanjem da izvor i njegovo okruženje nisu neiscrpna datost. Zato nam je važno da inicijative koje podržavamo imaju konkretan smisao i odgovoran odnos prema prostoru u kojem živimo."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "community-people",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Zajednica u kojoj rastemo"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Najvrednije saradnje često počinju blizu kuće. Otvoreni smo za ideje koje okupljaju ljude i donose stvarnu korist zajednici."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

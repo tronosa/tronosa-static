@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { Typography } from "@/components/ui/Typography";
 
 import {
   getContactConfig,
@@ -10,14 +11,21 @@ import {
 } from "@/lib/contact/contact.config";
 
 import { ContactFormClient } from "./ContactFormClient";
+import { ContactFormDecoration } from "./ContactFormDecoration";
 
 import {
   contactFormVariants,
   contactFormLayoutVariants,
   contactFormHeaderVariants,
+  contactFormHeaderContentVariants,
   contactFormEyebrowVariants,
   contactFormTitleVariants,
   contactFormDescriptionVariants,
+  contactFormTopicsVariants,
+  contactFormTopicVariants,
+  contactFormTopicMarkerVariants,
+  contactFormDecorationSpaceVariants,
+  contactFormBodyVariants,
 } from "./contact-form.variants";
 
 import type {
@@ -36,8 +44,13 @@ async function ContactFormSection({
   eyebrow,
   title,
   description,
+  layout = "default",
+  topics,
+  decoration = false,
   headingId,
-}: ContactFormProps & { headingId: string }) {
+}: ContactFormProps & {
+  headingId: string;
+}) {
   const [t, locale] = await Promise.all([
     getTranslations("ContactForm"),
     getLocale(),
@@ -45,20 +58,33 @@ async function ContactFormSection({
 
   const captchaLanguage: ContactCaptchaLanguage = locale === "en" ? "en" : "sr";
 
+  const isEditorial = layout === "editorial";
+
+  const headingTone = isEditorial ? "inverse" : "accent";
+
+  const descriptionTone = isEditorial ? "inverse" : "muted";
+
+  const showDecoration = isEditorial && decoration;
+
+  const hasTopics = Boolean(topics?.length);
+
   const labels: ContactFormLabels = {
     fields: {
       name: {
         label: t("fields.name.label"),
         placeholder: t("fields.name.placeholder"),
       },
+
       email: {
         label: t("fields.email.label"),
         placeholder: t("fields.email.placeholder"),
       },
+
       subject: {
         label: t("fields.subject.label"),
         placeholder: t("fields.subject.placeholder"),
       },
+
       message: {
         label: t("fields.message.label"),
         placeholder: t("fields.message.placeholder"),
@@ -97,34 +123,112 @@ async function ContactFormSection({
     privacy: t("privacy"),
   };
 
+  const configured =
+    getContactConfig() !== null && isContactCaptchaConfigured();
+
   return (
     <Section
-      spacingType="padding"
       aria-labelledby={headingId}
       data-contact-form
+      data-contact-layout={layout}
       className={contactFormVariants()}
     >
       <Container size="wide">
-        <div className={contactFormLayoutVariants()}>
-          <header className={contactFormHeaderVariants()}>
-            {eyebrow && (
-              <p className={contactFormEyebrowVariants()}>{eyebrow}</p>
+        <div
+          className={contactFormLayoutVariants({
+            layout,
+          })}
+        >
+          <header
+            data-contact-header
+            className={contactFormHeaderVariants({
+              layout,
+            })}
+          >
+            <div className={contactFormHeaderContentVariants()}>
+              {eyebrow && (
+                <Typography
+                  as="p"
+                  variant="caption"
+                  weight="semibold"
+                  tone={headingTone}
+                  className={contactFormEyebrowVariants()}
+                >
+                  {eyebrow}
+                </Typography>
+              )}
+
+              <Typography
+                as="h2"
+                id={headingId}
+                variant="h2"
+                weight="medium"
+                tone={headingTone}
+                className={contactFormTitleVariants()}
+              >
+                {title}
+              </Typography>
+
+              <Typography
+                as="p"
+                variant="body"
+                tone={descriptionTone}
+                className={contactFormDescriptionVariants()}
+              >
+                {description}
+              </Typography>
+            </div>
+
+            {isEditorial && hasTopics && (
+              <ul
+                role="list"
+                data-contact-topics
+                className={contactFormTopicsVariants()}
+              >
+                {topics?.map((topic) => (
+                  <li key={topic.id} className={contactFormTopicVariants()}>
+                    <span
+                      aria-hidden="true"
+                      className={contactFormTopicMarkerVariants()}
+                    />
+
+                    <Typography
+                      as="span"
+                      variant="small"
+                      weight="medium"
+                      tone="inverse"
+                    >
+                      {topic.label}
+                    </Typography>
+                  </li>
+                ))}
+              </ul>
             )}
 
-            <h2 id={headingId} className={contactFormTitleVariants()}>
-              {title}
-            </h2>
+            {showDecoration && (
+              <>
+                <div
+                  aria-hidden="true"
+                  className={contactFormDecorationSpaceVariants()}
+                />
 
-            <p className={contactFormDescriptionVariants()}>{description}</p>
+                <ContactFormDecoration />
+              </>
+            )}
           </header>
 
-          <ContactFormClient
-            labels={labels}
-            configured={
-              getContactConfig() !== null && isContactCaptchaConfigured()
-            }
-            captchaLanguage={captchaLanguage}
-          />
+          <div
+            data-contact-body
+            className={contactFormBodyVariants({
+              layout,
+            })}
+          >
+            <ContactFormClient
+              labels={labels}
+              configured={configured}
+              captchaLanguage={captchaLanguage}
+            />
+          </div>
         </div>
       </Container>
     </Section>

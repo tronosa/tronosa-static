@@ -1,0 +1,148 @@
+{
+  "id": "our-water",
+  "slug": "our-water",
+  "status": "published",
+  "seo": {
+    "title": "Tronoša – Natural Spring Water | Origin and Quality",
+    "description": "Discover the character of Tronoša natural spring water, its origin, composition and the way we care for its quality.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "our-water-hero",
+        "type": "image-hero",
+        "content": {
+          "title": "Freshness that brings the spring to mind.",
+          "description": "Some tastes are memorable from the very first sip. Tronoša is natural spring water from Korenita, near Loznica. Pleasant to drink, understated and carrying the character of the region it comes from.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            },
+            "tablet": {
+              "src": "/images/placeholder.webp",
+              "width": 1024,
+              "height": 768
+            },
+            "mobile": {
+              "src": "/images/placeholder.webp",
+              "width": 720,
+              "height": 960
+            }
+          },
+          "cta": {
+            "label": "Explore our products",
+            "pageId": "products"
+          }
+        }
+      },
+      {
+        "id": "our-water-origin",
+        "type": "editorial-media",
+        "content": {
+          "title": "Taste is subjective. Origin is not.",
+          "paragraphs": [
+            "What you experience in each sip is personal. What we know about our water begins in a specific place: the Devet Jugovića spring. That is why it matters to us that, alongside its familiar sense of freshness, you can also discover its origin."
+          ],
+          "mediaPosition": "left",
+          "media": {
+            "kind": "image",
+            "image": {
+              "alt": "Natural landscape surrounding Tronoša",
+              "desktop": {
+                "src": "/images/tronosa-natural-landscape.webp",
+                "width": 1200,
+                "height": 900
+              }
+            }
+          },
+          "cta": {
+            "label": "Discover our spring",
+            "pageId": "our-story"
+          }
+        }
+      },
+      {
+        "id": "our-water-composition",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "What is in your glass?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "The composition of water is part of its natural identity. We present information about the mineral composition of Tronoša clearly, so you can understand what you are choosing."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "our-water-quality",
+        "type": "content-section",
+        "content": {
+          "width": "medium",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "children": [
+                {
+                  "text": "Our care does not end at the spring."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "From the spring to the sealed packaging, quality is the responsibility of everyone involved in production. Technical and laboratory checks are part of the way we care for the product that carries our name."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "our-water-faq",
+        "type": "faq",
+        "content": {
+          "title": "Frequently asked questions",
+          "items": [
+            {
+              "question": "Where does Tronoša come from?",
+              "answer": "From the Devet Jugovića spring, in the Korenita area near Loznica."
+            },
+            {
+              "question": "Is Tronoša still or sparkling water?",
+              "answer": "Both varieties are available. You can explore the available packaging on the Products page."
+            },
+            {
+              "question": "Where can I check the mineral composition?",
+              "answer": "On the product label."
+            },
+            {
+              "question": "How should the water be stored?",
+              "answer": "Follow the instructions on the product label and keep the packaging away from direct sunlight and sources of heat."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -44,7 +44,7 @@
           },
           "cta": {
             "label": "Upoznajte Tronošu",
-            "pageId": "about"
+            "pageId": "our-story"
           },
           "accessibility": {
             "playLabel": "Pokreni video",
@@ -322,7 +322,7 @@
           },
           "cta": {
             "label": "Otkrijte našu priču",
-            "pageId": "about"
+            "pageId": "our-story"
           }
         }
       },
@@ -372,7 +372,7 @@
                 {
                   "type": "link",
                   "text": "Saznajte više o našoj vodi",
-                  "pageId": "about"
+                  "pageId": "our-story"
                 }
               ]
             }
@@ -393,7 +393,7 @@
               "headline": "Za restorane, hotele i ugostiteljske objekte.",
               "cta": {
                 "label": "Za ugostitelje",
-                "pageId": "about"
+                "pageId": "our-story"
               }
             },
             {
@@ -402,7 +402,7 @@
               "headline": "Voda sa etiketom vašeg brenda, prema dogovorenim mogućnostima.",
               "cta": {
                 "label": "Private Label",
-                "pageId": "about"
+                "pageId": "our-story"
               }
             },
             {
@@ -411,7 +411,7 @@
               "headline": "Za poslovne prostore, događaje i distributivne partnere.",
               "cta": {
                 "label": "Poslovna saradnja",
-                "pageId": "about"
+                "pageId": "our-story"
               }
             }
           ],

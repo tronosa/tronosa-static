@@ -1,0 +1,146 @@
+{
+  "id": "our-story",
+  "slug": "nasa-prica",
+  "status": "published",
+  "seo": {
+    "title": "Троноша – прича о извору Девет Југовића",
+    "description": "Откријте порекло Троноше, природу Корените код Лознице и културно наслеђе краја из којег долази.",
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "our-story-hero",
+        "type": "image-hero",
+        "content": {
+          "eyebrow": "Наша прича",
+          "title": "Име које носи један крај.",
+          "description": "Троноша није име изабрано да лепо звучи на етикети. Оно нас враћа месту којем припадамо: крају шума, извора, камених стаза и прича које се преносе генерацијама. Ту почиње и наша прича.",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          }
+        }
+      },
+      {
+        "id": "our-story-origin",
+        "type": "editorial-composition",
+        "content": {
+          "eyebrow": "Порекло",
+          "title": "Девет Југовића",
+          "paragraphs": [
+            "У Коренити, у околини Лознице, налази се извориште Девет Југовића, одакле долази Троноша. Његово име повезује нас са културним памћењем овог краја. У њему се сусрећу стварно географско порекло воде и предања која су обликовала идентитет места."
+          ],
+          "statement": "Природа овде није сценографија нашег бренда. Она је његово полазиште.",
+          "primaryImage": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "secondaryImage": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "appearance": {
+            "backgroundColor": "#F8F6EF",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-heritage",
+        "type": "heritage-story",
+        "content": {
+          "eyebrow": "Културно наслеђе",
+          "title": "Наслеђе које није остало у прошлости",
+          "image": {
+            "alt": "",
+            "desktop": {
+              "src": "/images/placeholder.webp",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "paragraphs": [
+            "Манастир Троноша и предања о Југ Богдану и његовим синовима део су културног наслеђа овог подручја. Приче о њима припадају свету предања, али њихово место у памћењу људи сасвим је стварно.",
+            "За нас је то подсетник да се вредност једног краја не мери само оним што из њега узимамо, већ и оним што умемо да сачувамо."
+          ],
+          "appearance": {
+            "backgroundColor": "#EAE5D8",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-people",
+        "type": "people-gallery",
+        "content": {
+          "eyebrow": "Људи и заједница",
+          "title": "Људи иза имена",
+          "paragraphs": [
+            "Троноша данас живи кроз рад људи који је производе, партнера који је представљају и оних који је бирају.",
+            "Наша намера је да воду познатог порекла приближимо новим људима, не губећи везу са местом из којег долазимо."
+          ],
+          "images": [
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            },
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            },
+            {
+              "alt": "",
+              "desktop": {
+                "src": "/images/placeholder.webp",
+                "width": 1920,
+                "height": 1080
+              }
+            }
+          ],
+          "appearance": {
+            "backgroundColor": "#F8F6EF",
+            "accentColor": "#173F35"
+          }
+        }
+      },
+      {
+        "id": "our-story-closing",
+        "type": "editorial-closing",
+        "content": {
+          "eyebrow": "Наше вредности",
+          "title": "Чувамо оно што вреди.",
+          "cta": {
+            "label": "Чувамо оно што вреди",
+            "pageId": "community"
+          },
+          "appearance": {
+            "backgroundColor": "#173F35",
+            "accentColor": "#F8F6EF"
+          }
+        }
+      }
+    ]
+  }
+}

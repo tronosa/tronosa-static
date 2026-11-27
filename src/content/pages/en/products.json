@@ -1,9 +1,10 @@
 {
   "id": "products",
   "slug": "products",
+  "status": "published",
   "seo": {
-    "title": "Products | Tronoša",
-    "description": "Discover the Tronoša natural water collection.",
+    "title": "Tronoša Products – Natural Spring Water",
+    "description": "Find Tronoša for your rhythm and explore the available natural spring water packaging formats.",
     "index": true,
     "follow": true
   },
@@ -13,9 +14,9 @@
         "id": "products-image-hero",
         "type": "image-hero",
         "content": {
-          "eyebrow": "Our story",
-          "title": "From the heart of nature.",
-          "description": "Discover the origins of Tronoša natural spring water.",
+          "eyebrow": "Tronoša Products",
+          "title": "One story. Different rhythms.",
+          "description": "Sometimes it is a sip between two commitments, sometimes a glass with lunch, and sometimes a bottle you take on the road. Tronoša comes in different packaging formats, because no two days follow exactly the same plan.",
           "image": {
             "alt": "",
             "desktop": {
@@ -37,38 +38,12 @@
         }
       },
       {
-        "id": "home-feature-mosaic",
-        "type": "feature-mosaic",
+        "id": "products-introduction",
+        "type": "product-introduction",
         "content": {
-          "title": "More than water",
-          "description": "Discover the values we aim to uphold.",
-          "image": {
-            "alt": "",
-            "desktop": {
-              "src": "/images/placeholder.webp",
-              "width": 1200,
-              "height": 1200
-            }
-          },
-          "imagePosition": "right",
-          "cards": [
-            {
-              "title": "Nature",
-              "description": "Respect for the natural environment."
-            },
-            {
-              "title": "Quality",
-              "description": "Attention to every detail."
-            },
-            {
-              "title": "Tradition",
-              "description": "A connection to our origins."
-            },
-            {
-              "title": "Collaboration",
-              "description": "Shared values."
-            }
-          ]
+          "eyebrow": "Tronoša Collection",
+          "title": "Different rhythms. One source.",
+          "description": "From everyday moments to special occasions, every packaging format has its place. Discover our featured products, then explore the complete Tronoša collection."
         }
       },
       {
@@ -76,153 +51,54 @@
         "type": "product-experience",
         "content": {
           "appearance": {
-            "backgroundColor": "#E5EEE7",
-            "secondaryBackgroundColor": "#DCEBF0",
-            "accentColor": "#244D39"
+            "backgroundColor": "#DCEBF0",
+            "secondaryBackgroundColor": "#A8CDD4",
+            "accentColor": "#214C60"
           },
           "reveal": {
-            "eyebrow": "From the heart of nature",
-            "title": "Purity in every drop.",
+            "eyebrow": "Featured from our collection",
+            "title": "Two characters. One nature.",
             "backgroundText": "TRONOŠA",
-            "scrollLabel": "Discover more"
+            "scrollLabel": "Discover the collection"
           },
           "composition": {
-            "eyebrow": "Natural balance",
-            "title": "Mineral composition.",
-            "description": "Discover the composition of Tronoša water.",
+            "eyebrow": "The Spring",
+            "title": "Natural origin.",
+            "description": "At the heart of our collection is water of known origin.",
             "minerals": []
           },
           "collection": {
-            "eyebrow": "The Tronoša collection",
-            "title": "For every moment.",
-            "description": "Choose the bottle that fits your lifestyle."
+            "eyebrow": "Tronoša Collection",
+            "title": "Find your rhythm.",
+            "description": "Explore every packaging format in the catalogue below."
           },
-          "products": [
-            {
-              "id": "water-330ml",
-              "eyebrow": "Freedom to move",
-              "title": "Refreshment on the go.",
-              "volume": "0.33 L",
-              "description": "A small bottle for life's big moments.",
-              "highlights": [
-                {
-                  "id": "compact",
-                  "title": "Compact by design",
-                  "description": "A convenient size that fits naturally into your day."
-                },
-                {
-                  "id": "accessibility",
-                  "title": "Always within reach",
-                  "description": "Natural refreshment wherever you go."
-                },
-                {
-                  "id": "movement",
-                  "title": "Made for movement",
-                  "description": "A companion for your everyday activities."
-                }
-              ],
-              "image": {
-                "src": "/products/still-water-330ml.webp",
-                "alt": "Tronoša water 330 ml",
-                "width": 600,
-                "height": 1200
-              }
-            },
-            {
-              "id": "water-500ml",
-              "eyebrow": "At your own pace",
-              "title": "Your everyday companion.",
-              "volume": "0.5 L",
-              "description": "Natural refreshment for every part of your day.",
-              "highlights": [
-                {
-                  "id": "everyday",
-                  "title": "For everyday moments",
-                  "description": "At home, at work or while travelling."
-                },
-                {
-                  "id": "practical",
-                  "title": "A practical format",
-                  "description": "A bottle designed around your daily routine."
-                },
-                {
-                  "id": "lifestyle",
-                  "title": "In tune with your lifestyle",
-                  "description": "Refreshment that naturally fits into your life."
-                }
-              ],
-              "image": {
-                "src": "/products/still-water-500ml.webp",
-                "alt": "Tronoša water 500 ml",
-                "width": 600,
-                "height": 1200
-              }
-            }
-          ]
+          "productIds": ["still-750ml", "sparkling-750ml"]
         }
       },
       {
-        "id": "products-card-slider",
-        "type": "card-slider",
+        "id": "products-catalog",
+        "type": "product-catalog",
         "content": {
-          "title": "Nature makes the difference",
-          "description": "Discover the story behind every drop.",
-          "cards": [
-            {
-              "kind": "text",
-              "title": "Origin",
-              "headline": "From the heart of nature",
-              "description": "Discover the story of our spring."
-            },
-            {
-              "kind": "image",
-              "title": "Spring",
-              "headline": "Tronoša",
-              "description": "A story of natural spring water.",
-              "image": {
-                "alt": "",
-                "desktop": {
-                  "src": "/images/placeholder.webp",
-                  "width": 1200,
-                  "height": 1200
-                }
-              }
-            },
-            {
-              "kind": "text",
-              "title": "Quality",
-              "headline": "Care at every step",
-              "description": "Learn more about our approach."
-            },
-            {
-              "kind": "image",
-              "title": "Tradition",
-              "headline": "A lasting story",
-              "description": "Get to know us better.",
-              "image": {
-                "alt": "",
-                "desktop": {
-                  "src": "/images/placeholder.webp",
-                  "width": 1200,
-                  "height": 1200
-                }
-              }
-            }
-          ],
-          "accessibility": {
-            "previousLabel": "Previous card",
-            "nextLabel": "Next card",
-            "viewportLabel": "Cards about Tronoša water"
+          "eyebrow": "Tronoša Collection",
+          "title": "Find your rhythm.",
+          "description": "Explore the packaging formats and find the one that suits your everyday needs."
+        }
+      },
+      {
+        "id": "products-closing",
+        "type": "editorial-closing",
+        "content": {
+          "eyebrow": "Origin and Quality",
+          "title": "Every drop has an origin.",
+          "description": "Discover the nature and the story behind Tronoša water.",
+          "cta": {
+            "label": "Our Water",
+            "pageId": "our-water"
+          },
+          "appearance": {
+            "backgroundColor": "#246B68",
+            "accentColor": "#F8F6EF"
           }
-        }
-      },
-      {
-        "id": "contact-form",
-        "type": "contact-form",
-        "content": {
-          "eyebrow": "Get in touch",
-          "title": "For every occasion. For every question.",
-          "description": "Interested in learning more about our products, available packaging or distribution opportunities? Get in touch with us. Our team is here to provide all the information you need."
         }
       }
     ]

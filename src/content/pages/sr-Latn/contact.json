@@ -1,0 +1,58 @@
+{
+  "id": "contact",
+  "slug": "kontakt",
+  "status": "published",
+  "seo": {
+    "title": "Kontakt | Tronoša voda",
+    "description": "Kontaktirajte Tronošu za informacije o proizvodima, dostupnosti i poslovnoj saradnji.",
+    "canonical": null,
+    "index": true,
+    "follow": true
+  },
+  "content": {
+    "sections": [
+      {
+        "id": "contact-hero",
+        "type": "text-hero",
+        "content": {
+          "eyebrow": "Kontakt",
+          "title": "Da se čujemo.",
+          "description": "Zanima vas naša voda, tražite prodajno mesto ili imate ideju za saradnju? Pišite nam.",
+          "alignment": "left"
+        }
+      },
+      {
+        "id": "contact-form",
+        "type": "contact-form",
+        "content": {
+          "title": "Pošaljite poruku",
+          "description": "Podelite sa nama svoje pitanje, predlog ili ideju.",
+          "layout": "editorial",
+          "decoration": true,
+          "topics": [
+            {
+              "id": "products-and-quality",
+              "label": "Proizvodi i kvalitet"
+            },
+            {
+              "id": "where-to-buy",
+              "label": "Gde kupiti"
+            },
+            {
+              "id": "business-partnerships",
+              "label": "Poslovna saradnja"
+            },
+            {
+              "id": "initiatives-and-events",
+              "label": "Inicijative i događaji"
+            },
+            {
+              "id": "other",
+              "label": "Ostalo"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

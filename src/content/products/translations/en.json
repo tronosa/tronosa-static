@@ -1,0 +1,146 @@
+[
+  {
+    "id": "still-500ml",
+    "slug": "still-water-500ml",
+    "title": "Still Water",
+    "description": "The refreshing taste of natural spring water, in a size that suits you.",
+    "imageAlt": "Tronoša still spring water in a 500 ml bottle",
+    "seo": {
+      "title": "Still Water | Tronoša",
+      "description": "The refreshing taste of natural spring water, in a size that suits you."
+    }
+  },
+  {
+    "id": "still-750ml",
+    "slug": "still-water-750ml",
+    "title": "Still Water",
+    "description": "The refreshing taste of natural spring water, in a size that suits you.",
+    "imageAlt": "Tronoša still spring water in a 750 ml bottle",
+    "seo": {
+      "title": "Still Water | Tronoša",
+      "description": "The refreshing taste of natural spring water, in a size that suits you."
+    },
+    "highlights": [
+      {
+        "id": "origin",
+        "title": "Natural origin",
+        "description": "Spring water from Korenita near Loznica."
+      },
+      {
+        "id": "character",
+        "title": "Naturally refreshing",
+        "description": "Still water for everyday refreshment."
+      },
+      {
+        "id": "packaging",
+        "title": "A practical format",
+        "description": "750 ml for moments at home, at work or on the move."
+      }
+    ]
+  },
+  {
+    "id": "still-880ml",
+    "slug": "still-water-880ml",
+    "title": "Still Water",
+    "description": "The refreshing taste of natural spring water, in a size that suits you.",
+    "imageAlt": "Tronoša still spring water in an 880 ml bottle",
+    "seo": {
+      "title": "Still Water | Tronoša",
+      "description": "The refreshing taste of natural spring water, in a size that suits you."
+    }
+  },
+  {
+    "id": "still-1500ml",
+    "slug": "still-water-1500ml",
+    "title": "Still Water",
+    "description": "The refreshing taste of natural spring water, in a size that suits you.",
+    "imageAlt": "Tronoša still spring water in a 1.5 litre bottle",
+    "seo": {
+      "title": "Still Water | Tronoša",
+      "description": "The refreshing taste of natural spring water, in a size that suits you."
+    }
+  },
+  {
+    "id": "still-6000ml",
+    "slug": "still-water-6000ml",
+    "title": "Still Water",
+    "description": "The refreshing taste of natural spring water, in a size that suits you.",
+    "imageAlt": "Tronoša still spring water in a 6 litre container",
+    "seo": {
+      "title": "Still Water | Tronoša",
+      "description": "The refreshing taste of natural spring water, in a size that suits you."
+    }
+  },
+  {
+    "id": "still-18900ml",
+    "slug": "still-water-18900ml",
+    "title": "Still Water",
+    "description": "The refreshing taste of natural spring water, in a size that suits you.",
+    "imageAlt": "Tronoša still spring water in an 18.9 litre container",
+    "seo": {
+      "title": "Still Water | Tronoša",
+      "description": "The refreshing taste of natural spring water, in a size that suits you."
+    }
+  },
+  {
+    "id": "sparkling-500ml",
+    "slug": "sparkling-water-500ml",
+    "title": "Sparkling Water",
+    "description": "For moments that call for a little extra sparkle.",
+    "imageAlt": "Tronoša sparkling water in a 500 ml bottle",
+    "seo": {
+      "title": "Sparkling Water | Tronoša",
+      "description": "For moments that call for a little extra sparkle."
+    }
+  },
+  {
+    "id": "sparkling-750ml",
+    "slug": "sparkling-water-750ml",
+    "title": "Sparkling Water",
+    "description": "For moments that call for a little extra sparkle.",
+    "imageAlt": "Tronoša sparkling water in a 750 ml bottle",
+    "seo": {
+      "title": "Sparkling Water | Tronoša",
+      "description": "For moments that call for a little extra sparkle."
+    },
+    "highlights": [
+      {
+        "id": "origin",
+        "title": "Natural origin",
+        "description": "Spring water from Korenita near Loznica."
+      },
+      {
+        "id": "character",
+        "title": "Refreshment with character",
+        "description": "Sparkling water with a distinctive sense of freshness."
+      },
+      {
+        "id": "packaging",
+        "title": "For different occasions",
+        "description": "750 ml for meals, gatherings and everyday moments."
+      }
+    ]
+  },
+  {
+    "id": "moja-boca-330ml",
+    "slug": "my-bottle-330ml",
+    "title": "Moja Boca",
+    "description": "A refreshing choice for little ones.",
+    "imageAlt": "Tronoša Moja Boca water in a 330 ml bottle",
+    "seo": {
+      "title": "Moja Boca | Tronoša",
+      "description": "A refreshing choice for little ones."
+    }
+  },
+  {
+    "id": "sport-880ml",
+    "slug": "sport-880ml",
+    "title": "Tronoša Sport",
+    "description": "Natural hydration for the adventurous.",
+    "imageAlt": "Tronoša Sport water in an 880 ml bottle",
+    "seo": {
+      "title": "Tronoša Sport | Tronoša",
+      "description": "Natural hydration for the adventurous."
+    }
+  }
+]

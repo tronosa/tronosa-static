@@ -13,17 +13,20 @@ const LOCALES = [
   {
     locale: "sr-Cyrl",
     homePath: "/",
-    aboutLabel: "О нама",
+    targetLabel: "Наша прича",
+    targetPath: "/nasa-prica",
   },
   {
     locale: "sr-Latn",
     homePath: "/sr-Latn",
-    aboutLabel: "O nama",
+    targetLabel: "Naša priča",
+    targetPath: "/sr-Latn/nasa-prica",
   },
   {
     locale: "en",
     homePath: "/en",
-    aboutLabel: /^About( us)?$/i,
+    targetLabel: "Our Story",
+    targetPath: "/en/our-story",
   },
 ] as const;
 
@@ -47,12 +50,23 @@ function isRoutePrefetch(request: Request, destination: URL): boolean {
   );
 }
 
-async function getDestination(link: Locator): Promise<URL> {
+async function getDestination(
+  link: Locator,
+  expectedPath: string,
+): Promise<URL> {
+  await expect(link).toHaveCount(1);
+  await expect(link).toBeVisible();
+  await expect(link).toHaveAttribute("href", expectedPath);
+
   const href = await link.evaluate(
     (element: HTMLAnchorElement) => element.href,
   );
 
-  return new URL(href);
+  const destination = new URL(href);
+
+  expect(destination.pathname).toBe(expectedPath);
+
+  return destination;
 }
 
 function observePrefetchRequests(page: Page): Request[] {
@@ -65,6 +79,20 @@ function observePrefetchRequests(page: Page): Request[] {
   });
 
   return requests;
+}
+
+function getHeaderLink(page: Page, label: string): Locator {
+  return page.getByRole("banner").getByRole("link", {
+    name: label,
+    exact: true,
+  });
+}
+
+function getFooterLink(page: Page, label: string): Locator {
+  return page.locator("footer [data-footer-navigation]").getByRole("link", {
+    name: label,
+    exact: true,
+  });
 }
 
 async function focusUsingKeyboard(page: Page, locator: Locator): Promise<void> {
@@ -85,8 +113,15 @@ async function focusUsingKeyboard(page: Page, locator: Locator): Promise<void> {
   throw new Error("Navigation link could not be reached using keyboard Tab.");
 }
 
-for (const { locale, homePath, aboutLabel } of LOCALES) {
+for (const { locale, homePath, targetLabel, targetPath } of LOCALES) {
   test.describe(`Intent prefetch - ${locale}`, () => {
+    test.use({
+      viewport: {
+        width: 1440,
+        height: 900,
+      },
+    });
+
     test("does not prefetch routes on initial page load", async ({ page }) => {
       const requests = observePrefetchRequests(page);
 
@@ -126,14 +161,9 @@ for (const { locale, homePath, aboutLabel } of LOCALES) {
         waitUntil: "load",
       });
 
-      const link = page.getByRole("banner").getByRole("link", {
-        name: aboutLabel,
-        exact: true,
-      });
+      const link = getHeaderLink(page, targetLabel);
 
-      await expect(link).toBeVisible();
-
-      const destination = await getDestination(link);
+      const destination = await getDestination(link, targetPath);
 
       const [request] = await Promise.all([
         page.waitForRequest(
@@ -147,7 +177,7 @@ for (const { locale, homePath, aboutLabel } of LOCALES) {
 
       expect(isPrefetchRequest(request)).toBe(true);
 
-      expect(new URL(request.url()).pathname).toBe(destination.pathname);
+      expect(new URL(request.url()).pathname).toBe(targetPath);
     });
 
     test("prefetches the destination on keyboard focus", async ({ page }) => {
@@ -155,12 +185,9 @@ for (const { locale, homePath, aboutLabel } of LOCALES) {
         waitUntil: "load",
       });
 
-      const link = page.getByRole("banner").getByRole("link", {
-        name: aboutLabel,
-        exact: true,
-      });
+      const link = getHeaderLink(page, targetLabel);
 
-      const destination = await getDestination(link);
+      const destination = await getDestination(link, targetPath);
 
       const [request] = await Promise.all([
         page.waitForRequest(
@@ -176,7 +203,7 @@ for (const { locale, homePath, aboutLabel } of LOCALES) {
 
       expect(isPrefetchRequest(request)).toBe(true);
 
-      expect(new URL(request.url()).pathname).toBe(destination.pathname);
+      expect(new URL(request.url()).pathname).toBe(targetPath);
     });
 
     test("preserves localized navigation after prefetch", async ({ page }) => {
@@ -184,12 +211,9 @@ for (const { locale, homePath, aboutLabel } of LOCALES) {
         waitUntil: "load",
       });
 
-      const link = page.getByRole("banner").getByRole("link", {
-        name: aboutLabel,
-        exact: true,
-      });
+      const link = getHeaderLink(page, targetLabel);
 
-      const destination = await getDestination(link);
+      const destination = await getDestination(link, targetPath);
 
       await Promise.all([
         page.waitForRequest(
@@ -217,14 +241,13 @@ for (const { locale, homePath, aboutLabel } of LOCALES) {
         waitUntil: "load",
       });
 
-      const link = page.getByRole("contentinfo").getByRole("link", {
-        name: aboutLabel,
-        exact: true,
-      });
+      const link = getFooterLink(page, targetLabel);
+
+      await expect(link).toBeVisible();
 
       await link.scrollIntoViewIfNeeded();
 
-      const destination = await getDestination(link);
+      const destination = await getDestination(link, targetPath);
 
       await link.hover();
       await link.focus();

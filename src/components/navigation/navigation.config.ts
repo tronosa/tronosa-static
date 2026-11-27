@@ -4,16 +4,28 @@ export const navigationItems = [
     translationKey: "home",
   },
   {
-    id: "about",
-    translationKey: "about",
+    id: "our-water",
+    translationKey: "ourWater",
+  },
+  {
+    id: "our-story",
+    translationKey: "ourStory",
+  },
+  {
+    id: "products",
+    translationKey: "products",
+  },
+  {
+    id: "partners",
+    translationKey: "partners",
   },
   {
     id: "blog",
     translationKey: "blog",
   },
   {
-    id: "products",
-    translationKey: "products",
+    id: "store-locator",
+    translationKey: "storeLocator",
   },
   {
     id: "contact",
